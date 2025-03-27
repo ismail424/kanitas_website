@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kanitas AB Webbplats
 
-## Getting Started
+Detta är en modern webbplats för Kanitas AB, ett byggföretag i Sverige som specialiserar sig på bygg- och städtjänster.
 
-First, run the development server:
+## Teknologier
+
+- [Next.js 15](https://nextjs.org/) - React-ramverk
+- [Ant Design](https://ant.design/) - UI-komponentbibliotek
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS-ramverk
+- [TypeScript](https://www.typescriptlang.org/) - Statisk typning
+
+## Kom igång
+
+Följ dessa steg för att köra projektet lokalt:
+
+1. **Installera beroenden**
+
+```bash
+npm install
+```
+
+2. **Starta utvecklingsmiljön**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Detta startar applikationen i utvecklingsläge med Turbopack. Öppna [http://localhost:3000](http://localhost:3000) för att se den i din webbläsare.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Mappstruktur
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/public` - Statiska resurser som bilder och ikoner
+- `/src/app` - Next.js App Router komponenter
+- `/src/components` - Återanvändbara React-komponenter
 
-## Learn More
+## Bilder
 
-To learn more about Next.js, take a look at the following resources:
+För att slutföra webbplatsen, lägg till följande bilder:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `public/hero-image.jpg` - Huvudbannerbilden (1920x1080px)
+- `public/about-image.jpg` - Bild för Om oss-sektionen (800x600px)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+För mer information se `/public/images/README.md`
 
-## Deploy on Vercel
+## Bygga för produktion
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Bygg projektet för produktion:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+Starta produktionsversionen:
+
+```bash
+npm run start
+```
+
+## Språk
+
+Webbplatsen är skriven på svenska för att passa den svenska målgruppen.
+
+## Kontaktinformation
+
+Vänligen ersätt platshållarinformationen i kontaktsektionen med faktisk företagsinformation.
