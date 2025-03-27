@@ -138,7 +138,7 @@ const Header = () => {
                 <Image 
                   src="/logo_side.png" 
                   alt="Kanitas AB Logo" 
-                  height={scrolled ? '50px' : '60px'} 
+                  height={scrolled ? '60px' : '70px'} 
                   transition="all 0.3s ease"
                 />
               </Box>
@@ -186,15 +186,19 @@ const Header = () => {
               display={{ base: 'none', md: 'block' }}
               onClick={() => scrollToSection('kontakt')}
               colorPalette="brand"
+              variant="solid"
               size="lg"
               fontWeight={500}
               px={5}
               py={6}
               height="auto"
               boxShadow="sm"
+              bg="brand.500"
+              color="white"
               _hover={{
                 transform: "translateY(-1px)",
-                boxShadow: "md"
+                boxShadow: "md",
+                bg: "brand.600"
               }}
               transition="all 0.2s"
             >
@@ -233,7 +237,7 @@ const Header = () => {
                   <Image 
                     src="/logo_side.png" 
                     alt="Kanitas AB Logo" 
-                    height="55px" 
+                    height="65px" 
                   />
                   <Drawer.CloseTrigger asChild>
                     <CloseButton colorPalette="brand" size="lg" />
@@ -287,15 +291,21 @@ const Header = () => {
                   </Box>
                   <Button
                     colorPalette="brand"
+                    variant="solid"
                     width="full"
                     mt={6}
-                    py={2}
+                    py={3}
                     height="auto"
+                    fontSize="md"
+                    bg="brand.500"
+                    color="white"
+                    fontWeight={500}
                     onClick={() => scrollToSection('kontakt')}
                     boxShadow="sm"
                     _hover={{
                       transform: "translateY(-1px)",
-                      boxShadow: "md"
+                      boxShadow: "md",
+                      bg: "brand.600"
                     }}
                     transition="all 0.2s"
                   >

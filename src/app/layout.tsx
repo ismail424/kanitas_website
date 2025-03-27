@@ -1,6 +1,44 @@
 import type { Metadata } from "next";
-import { Provider } from "@/components/ui/provider";
+import { ChakraProvider, createSystem, defaultConfig } from "@chakra-ui/react";
 import './globals.css';
+
+// Create a custom system with extended configuration for Chakra UI v3
+const system = createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      colors: {
+        brand: {
+          50: { value: "#e6edf5" },
+          100: { value: "#c1d2e8" },
+          200: { value: "#9bb6da" },
+          300: { value: "#759bcc" },
+          400: { value: "#4f7fc0" },
+          500: { value: "#124075" }, // Primary color
+          600: { value: "#10366a" },
+          700: { value: "#0d2c58" },
+          800: { value: "#0a2346" },
+          900: { value: "#071a34" }
+        }
+      },
+      fonts: {
+        body: { value: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
+        heading: { value: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }
+      }
+    },
+    semanticTokens: {
+      colors: {
+        // Map semantic tokens to our brand color palette
+        primary: { value: "{colors.brand.500}" },
+        success: { value: "#36B37E" },
+        warning: { value: "#f7a400" },
+        error: { value: "#FF5630" },
+        "text.primary": { value: "#333333" }
+      }
+    }
+  },
+  // Disable CSS cascade layers if needed for compatibility
+  disableLayers: false,
+});
 
 export const metadata: Metadata = {
   title: "Kanitas AB - Professionella Bygg & Städtjänster i Sverige",
@@ -42,9 +80,9 @@ export default function RootLayout({
         <meta name="forced-colors" content="none" />
       </head>
       <body className="min-h-screen bg-white">
-        <Provider>
+        <ChakraProvider value={system}>
           {children}
-        </Provider>
+        </ChakraProvider>
       </body>
     </html>
   );

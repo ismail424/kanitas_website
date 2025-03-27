@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 
 // Lucide icons for Chakra UI v3 (requires installation: npm install lucide-react)
-import { ChevronDown, Tool, Users } from 'lucide-react';
+import { ChevronDown, Users, Hammer } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -42,7 +42,6 @@ const HeroSection: React.FC = () => {
         overflow="hidden"
         bgImage="linear-gradient(rgba(18, 64, 117, 0.9), rgba(0, 0, 0, 0.85)), url(/hero-image.jpg)"
         bgSize="cover"
-        bgPosition="center"
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -54,13 +53,13 @@ const HeroSection: React.FC = () => {
         <Container maxW="7xl" px={{ base: 4, md: 6 }} py={{ base: 16, md: 24 }} position="relative" zIndex={10}>
           <Stack 
             direction={{ base: "column-reverse", md: "row" }}
-            spacing={{ base: 10, md: 12 }}
+            gap={{ base: 10, md: 12 }}
             align="center"
             justify="space-between"
           >
             {/* Left side - Text content */}
             <VStack 
-              spacing={6} 
+              gap={6} 
               align={{ base: "center", md: "start" }}
               maxW={{ base: "100%", md: "55%" }}
               textAlign={{ base: "center", md: "left" }}
@@ -107,12 +106,11 @@ const HeroSection: React.FC = () => {
               </Text>
               
               <HStack 
-                spacing={4} 
+                gap={4} 
                 width="full"
                 justify={{ base: "center", md: "start" }}
                 flexDir={{ base: "column", sm: "row" }}
                 alignItems={{ base: "stretch", sm: "center" }}
-                gap={{ base: 4, sm: 4 }}
               >
                 <Button
                   onClick={() => scrollToSection('tjanster')}
@@ -149,11 +147,11 @@ const HeroSection: React.FC = () => {
             
             {/* Right side - Feature badges */}
             <VStack 
-              spacing={4} 
+              gap={4} 
               align={{ base: "center", md: "end" }}
               maxW={{ base: "100%", md: "40%" }}
             >
-              <Card
+              <Card.Root
                 p={6}
                 bg="white"
                 borderRadius="lg"
@@ -163,15 +161,15 @@ const HeroSection: React.FC = () => {
                 transition="all 0.3s ease"
                 _hover={{ transform: "scale(1.05)" }}
               >
-                <HStack align="start" spacing={4}>
+                <HStack align="start" gap={4}>
                   <Center 
                     p={2} 
                     borderRadius="full" 
                     bg="rgba(18, 64, 117, 0.1)"
                   >
-                    <Icon as={Tool} boxSize={6} color="#124075" />
+                    <Icon as={Hammer} boxSize={6} color="#124075" />
                   </Center>
-                  <VStack align="start" spacing={1}>
+                  <VStack align="start" gap={1}>
                     <Heading as="h4" fontSize="lg" color="#124075">
                       Etablerat 2011
                     </Heading>
@@ -180,9 +178,9 @@ const HeroSection: React.FC = () => {
                     </Text>
                   </VStack>
                 </HStack>
-              </Card>
+              </Card.Root>
               
-              <Card
+              <Card.Root
                 p={6}
                 bg="white"
                 borderRadius="lg"
@@ -192,7 +190,7 @@ const HeroSection: React.FC = () => {
                 transition="all 0.3s ease"
                 _hover={{ transform: "scale(1.05)" }}
               >
-                <HStack align="start" spacing={4}>
+                <HStack align="start" gap={4}>
                   <Center 
                     p={2} 
                     borderRadius="full" 
@@ -200,7 +198,7 @@ const HeroSection: React.FC = () => {
                   >
                     <Icon as={Users} boxSize={6} color="#124075" />
                   </Center>
-                  <VStack align="start" spacing={1}>
+                  <VStack align="start" gap={1}>
                     <Heading as="h4" fontSize="lg" color="#124075">
                       Omfattande tjänster
                     </Heading>
@@ -209,7 +207,7 @@ const HeroSection: React.FC = () => {
                     </Text>
                   </VStack>
                 </HStack>
-              </Card>
+              </Card.Root>
             </VStack>
           </Stack>
         </Container>
@@ -224,7 +222,6 @@ const HeroSection: React.FC = () => {
         >
           <Box 
             as="a"
-            href="#om-oss" 
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('om-oss');
@@ -233,7 +230,6 @@ const HeroSection: React.FC = () => {
             bg="#124075" 
             borderRadius="full" 
             p={3}
-            bgOpacity={0.5}
             animation="bounce 2s infinite"
             _hover={{ color: "whiteAlpha.800" }}
             css={{

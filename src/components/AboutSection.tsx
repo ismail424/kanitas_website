@@ -5,6 +5,8 @@ import {
   Box,
   Card,
   Container,
+  Image,
+  Text
 } from "@chakra-ui/react"
 import { CheckCircle } from 'lucide-react'
 
@@ -27,7 +29,7 @@ const AboutSection = () => {
   return (
     <Box as="section" id="om-oss" py="16">
       <Container maxW="container.xl">
-        <Box.Text 
+        <Text 
           as="h2" 
           mb="12" 
           fontSize="3xl" 
@@ -35,7 +37,7 @@ const AboutSection = () => {
           textAlign="center"
         >
           Om oss
-        </Box.Text>
+        </Text>
         
         <Box 
           display="flex"
@@ -45,40 +47,41 @@ const AboutSection = () => {
           alignItems="center"
         >
           <Box flex="1">
-            <Box.Text mb="6" fontSize="lg" color="fg.muted">
+            <Text mb="6" fontSize="lg" color="fg.muted">
               Vi är ett etablerat byggföretag som driver byggentreprenader och specialiserar oss på 
               badrumsrenoveringar, köksrenoveringar, fönsterbyten, gipsentreprenader, nyproduktion och kontorsrenoveringar. 
               Våra kunder är privatpersoner, bostadsrättsföreningar, fastighetsägare och byggbolag.
-            </Box.Text>
-            <Box.Text mb="6" fontSize="lg" color="fg.muted">
+            </Text>
+            <Text mb="6" fontSize="lg" color="fg.muted">
               Vårt motto är att alltid ta ett helhetsansvar i de projekt vi åtar oss. Efter flera års erfarenhet av 
               entreprenadarbete har vi lärt oss att nyckeln till ett lyckat projekt alltid hänger ihop med att någon 
               knyter ihop säcken. Det är därför våra kunder är återkommande, då de verkligen tagit fasta på fördelen 
               med ett byggföretag som tar stafettpinnen från start till mål.
-            </Box.Text>
-            <Box.Text fontSize="lg" color="fg.muted" fontWeight="medium">
+            </Text>
+            <Text fontSize="lg" color="fg.muted" fontWeight="medium">
               Kanitas AB grundades 2011 och har sedan dess utvecklats till ett stabilt företag med 33 anställda. 
               Med en omsättning på 49,4 miljoner kronor (2023) och utmärkta ekonomiska nyckeltal står vi för 
               stabilitet, kvalitet och långsiktig kundrelation.
-            </Box.Text>
+            </Text>
           </Box>
           
           <Box flex="1" overflow="hidden" borderRadius="lg" boxShadow="xl">
-            <Box
-              as="img" 
-              src="/about-image.jpg" 
-              alt="Kanitas arbetsteam" 
-              w="full"
-              h="auto"
-              maxH="350px"
-              objectFit="cover"
-              transition="transform 0.5s"
-              _hover={{ transform: "scale(1.05)" }}
-            />
+            <Box position="relative">
+              <Image
+                src="//images/warehouse.jpg"
+                alt="Kanitas arbetsteam"
+                filter="brightness(0.8)"
+                w="full"
+                h="full"
+                objectFit="cover"
+                transition="transform 0.5s"
+                _hover={{ transform: "scale(1.05)" }}
+              />
+            </Box>
           </Box>
         </Box>
         
-        <Box.Text 
+        <Text 
           as="h3" 
           mb="12" 
           fontSize="2xl" 
@@ -86,7 +89,7 @@ const AboutSection = () => {
           textAlign="center"
         >
           Vi värdesätter
-        </Box.Text>
+        </Text>
         
         <Box display="grid" gridTemplateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap="9">
           {values.map((value, index) => (
@@ -107,17 +110,17 @@ const AboutSection = () => {
                     size={32}
                     color="var(--chakra-colors-blue-600)" 
                   />
-                  <Box.Text 
+                  <Text 
                     as="h4" 
                     fontSize="xl" 
                     color="blue.800"
                     fontWeight="bold"
                   >
                     {value.title}
-                  </Box.Text>
-                  <Box.Text color="fg.muted" textAlign="center">
+                  </Text>
+                  <Text color="fg.muted" textAlign="center">
                     {value.description}
-                  </Box.Text>
+                  </Text>
                 </Box>
               </Card.Body>
             </Card.Root>
