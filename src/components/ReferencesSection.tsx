@@ -1,11 +1,23 @@
 "use client"
 
-import React from 'react';
-import { Typography, Row, Col, Card } from 'antd';
+import React from 'react'
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  SimpleGrid,
+  Card,
+  Image,
+  Flex,
+  VStack,
+} from "@chakra-ui/react"
 
-const { Title, Paragraph } = Typography;
-
-const ReferencesSection: React.FC = () => {
+const ReferencesSection = () => {
+  // Modern color palette
+  const primaryColor = "#2563eb";
+  const bgColor = "#ffffff";
+  
   const references = [
     { name: 'NCC', logo: '/references/ncc.png' },
     { name: 'Implenia', logo: '/references/Implenia.jpg' },
@@ -14,76 +26,137 @@ const ReferencesSection: React.FC = () => {
     { name: 'Artega', logo: '/references/artega.png' },
     { name: 'Byggpartner', logo: '/references/byggpartner.png' },
     { name: 'DAGAB', logo: '/references/dagab.jpg' },
-    { name: 'SMD Logistics', logo: '/references/smd.png' },
-  ];
+    { name: 'SMD Logistics', logo: '/references/smd.jpg' },
+  ]
 
   return (
-    <section id="referenser" className="section-container section-alternate">
-      <Title level={2} className="section-title">Referenser</Title>
-      <Paragraph className="text-center text-lg mb-16" style={{ color: 'var(--text-light)', maxWidth: '800px', margin: '0 auto 3rem auto' }}>
-        Vi är stolta över att ha samarbetat med några av Sveriges ledande aktörer inom bygg- och fastighetsbranschen.
-      </Paragraph>
-      
-      <Row gutter={[36, 40]} justify="center" className="mb-12">
-        {references.map((company, index) => (
-          <Col key={index} xs={12} sm={8} md={6} className="flex justify-center items-center">
-            <Card 
-              className="w-full h-full card-hover flex items-center justify-center" 
-              style={{ 
-                padding: '15px', 
-                borderRadius: '8px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-                height: '100px',
-                background: 'white'
-              }}
-              bordered={false}
-              bodyStyle={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                padding: '10px',
-                width: '100%',
-                height: '100%'
-              }}
-            >
-              <img 
-                src={company.logo} 
-                alt={`${company.name} logo`}
-                className="reference-logo"
-                style={{ 
-                  maxWidth: '100%', 
-                  maxHeight: '80px', 
-                  objectFit: 'contain',
-                  filter: 'grayscale(0.1) contrast(0.95)'
-                }} 
-              />
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      
-      <Row justify="center">
-        <Col xs={24} md={16}>
-          <Card 
-            className="text-center p-8" 
-            bordered={false}
-            style={{ 
-              boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
-              borderRadius: '12px',
+    <Box 
+      as="section" 
+      id="referenser" 
+      py={{ base: "20", md: "28" }}
+      bg={bgColor}
+    >
+      <Container maxW="container.xl">
+        {/* Section Header */}
+        <VStack gap="4" mb={{ base: "12", md: "16" }}>
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "3xl", md: "4xl" }}
+            color="gray.800"
+            position="relative"
+            textAlign="center"
+            _after={{
+              content: '""',
+              position: "absolute",
+              bottom: "-10px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "60px",
+              height: "3px",
+              borderRadius: "full",
+              bg: primaryColor,
             }}
           >
-            <Title level={4} style={{ color: 'var(--secondary-color)', marginBottom: '16px' }}>
-              Våra nöjda kunder är vår bästa referens
-            </Title>
-            <Paragraph style={{ fontSize: '16px' }}>
-              Med en omsättning på 49,4 miljoner kronor (2023) och mer än 10 års erfarenhet har vi byggt starka och 
-              långsiktiga relationer med företag i olika branscher. Vårt mål är alltid att överträffa kundens förväntningar.
-            </Paragraph>
-          </Card>
-        </Col>
-      </Row>
-    </section>
-  );
-};
+            Referenser
+          </Heading>
+          
+          <Text 
+            fontSize={{ base: "lg", md: "xl" }}
+            color="gray.600"
+            maxW="3xl"
+            textAlign="center"
+            pt="6"
+            lineHeight="tall"
+          >
+            Vi är stolta över att ha samarbetat med några av Sveriges ledande aktörer inom bygg- och fastighetsbranschen.
+          </Text>
+        </VStack>
+        
+        {/* Logo Grid */}
+        <SimpleGrid 
+          columns={{ base: 2, sm: 3, md: 4 }} 
+          gap={{ base: "6", md: "8" }}
+          mb={{ base: "14", md: "20" }}
+        >
+          {references.map((company, index) => (
+            <Card.Root
+              key={index}
+              borderRadius="lg"
+              height="130px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              p="5"
+              transition="all 0.3s ease"
+              _hover={{
+                transform: "translateY(-4px)",
+                borderColor: `${primaryColor}`,
+              }}
+              bg="white"
+              borderWidth="1px"
+              borderColor="gray.200"
+            >
+              <Image
+                src={company.logo}
+                alt={`${company.name} logo`}
+                maxW="90%"
+                maxH="70px"
+                objectFit="contain"
+              />
+            </Card.Root>
+          ))}
+        </SimpleGrid>
+        
+        {/* Bottom Card */}
+        <Flex justify="center" w="full">
+          <Card.Root
+            borderRadius="xl"
+            p={{ base: "8", md: "10" }}
+            maxW="4xl"
+            w="full"
+            bg="gray.50"
+            borderWidth="1px"
+            borderColor="gray.200"
+          >
+            <VStack gap="5">
+              <Heading
+                as="h4"
+                fontSize={{ base: "xl", md: "2xl" }}
+                color="gray.800"
+                textAlign="center"
+                position="relative"
+                pb="4"
+                _after={{
+                  content: '""',
+                  position: "absolute",
+                  bottom: "0",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "60px",
+                  height: "3px",
+                  borderRadius: "full",
+                  bg: primaryColor,
+                }}
+              >
+                Långsiktiga partnerskap bygger på förtroende
+              </Heading>
+              <Text
+                fontSize={{ base: "md", md: "lg" }}
+                color="gray.600"
+                textAlign="center"
+                lineHeight="tall"
+              >
+                Sedan starten 2011 har vi byggt starka och varaktiga relationer med våra kunder. 
+                Genom att konsekvent leverera hög kvalitet, hålla tidsplaner och erbjuda transparens 
+                genom hela byggprocessen har vi blivit en betrodd partner för både små och stora 
+                projekt i hela Stockholm. Vår framgång bygger på våra kunders förtroende.
+              </Text>
+            </VStack>
+          </Card.Root>
+        </Flex>
+      </Container>
+    </Box>
+  )
+}
 
-export default ReferencesSection;
+export default ReferencesSection

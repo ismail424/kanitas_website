@@ -10,7 +10,6 @@ import {
   CloseButton,
   Drawer,
   Portal,
-  Image,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FiMenu, FiPhone, FiMail } from 'react-icons/fi';
@@ -19,6 +18,10 @@ const Header = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [activeKey, setActiveKey] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+
+  // Define colors directly
+  const primaryColor = "#124075"; // Main blue color
+  const primaryColorHover = "#0d325c"; // Darker shade for hover states
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,7 +74,7 @@ const Header = () => {
       {/* Top info bar */}
       <Box 
         display={{ base: 'none', md: 'block' }} 
-        bg="brand.500" 
+        bg={primaryColor}
         color="white"
         position="relative"
         zIndex={1001}
@@ -87,8 +90,8 @@ const Header = () => {
                 color="white" 
                 _hover={{ color: "whiteAlpha.900" }}
               >
-                <Box color="gray.900" as={FiPhone} />
-                <Text color={'gray.900'} fontSize="sm">073-994 80 47</Text>
+                <Box color="white" as={FiPhone} />
+                <Text color={'white'} fontSize="sm">073-994 80 47</Text>
               </Box>
               <Box 
                 as="a" 
@@ -98,8 +101,8 @@ const Header = () => {
                 color="white" 
                 _hover={{ color: "whiteAlpha.900" }}
               >
-                <Box color="gray.900" as={FiMail} />
-                <Text color="gray.900" fontSize="sm">info@kanitas.se</Text>
+                <Box color="white" as={FiMail} />
+                <Text color="white" fontSize="sm">info@kanitas.se</Text>
               </Box>
             </Box>
           </Box>
@@ -112,7 +115,8 @@ const Header = () => {
         position="sticky"
         top={0}
         bg="white"
-        boxShadow={scrolled ? 'md' : '0 1px 0 rgba(0,0,0,0.06)'}
+        borderBottom="1px solid"
+        borderColor={scrolled ? "gray.200" : "gray.100"}
         height={scrolled ? '70px' : '80px'}
         transition="all 0.3s ease"
         zIndex={1000}
@@ -128,19 +132,21 @@ const Header = () => {
             alignItems="center" 
             height="full"
           >
-            {/* Logo */}
+            {/* Text logo instead of image */}
             <Link href="/" passHref legacyBehavior>
               <Box 
                 as="a" 
                 display="flex" 
                 alignItems="center"
               >
-                <Image 
-                  src="/logo_side.png" 
-                  alt="Kanitas AB Logo" 
-                  height={scrolled ? '60px' : '70px'} 
+                <Text 
+                  fontSize={scrolled ? "2xl" : "3xl"} 
+                  fontWeight="bold" 
+                  color={primaryColor}
                   transition="all 0.3s ease"
-                />
+                >
+                  KanitasAB
+                </Text>
               </Box>
             </Link>
             
@@ -160,10 +166,10 @@ const Header = () => {
                   py={2}
                   position="relative"
                   fontWeight={500}
-                  color="brand.500"
+                  color={primaryColor}
                   transition="color 0.2s"
                   _hover={{ 
-                    color: "brand.600"
+                    color: primaryColorHover
                   }}
                   _after={{
                     content: '""',
@@ -172,7 +178,7 @@ const Header = () => {
                     left: 0,
                     right: 0,
                     height: '2px',
-                    bg: activeKey === item.key ? 'brand.500' : 'transparent',
+                    bg: activeKey === item.key ? primaryColor : 'transparent',
                     transition: 'background-color 0.3s'
                   }}
                 >
@@ -181,26 +187,24 @@ const Header = () => {
               ))}
             </Box>
             
-            {/* Contact button (desktop) */}
+            {/* Updated Contact button (desktop) - smaller size with color */}
             <Button
               display={{ base: 'none', md: 'block' }}
               onClick={() => scrollToSection('kontakt')}
-              colorPalette="brand"
               variant="solid"
-              size="lg"
+              size="md"
               fontWeight={500}
-              px={5}
-              py={6}
+              px={4}
+              py={2}
               height="auto"
-              boxShadow="sm"
-              bg="brand.500"
+              bg={primaryColor}
               color="white"
               _hover={{
+                bg: primaryColorHover,
                 transform: "translateY(-1px)",
-                boxShadow: "md",
-                bg: "brand.600"
               }}
               transition="all 0.2s"
+              borderRadius="md"
             >
               Kontakta oss
             </Button>
@@ -210,9 +214,9 @@ const Header = () => {
               display={{ base: 'flex', md: 'none' }}
               aria-label="Open menu"
               variant="ghost"
-              color="brand.500"
+              color={primaryColor}
               onClick={() => setDrawerVisible(true)}
-              _hover={{ bg: 'transparent' }}
+              _hover={{ bg: 'gray.50' }}
             >
               <FiMenu size={24} />
             </IconButton>
@@ -220,61 +224,75 @@ const Header = () => {
         </Container>
       </Box>
       
-      {/* Mobile navigation drawer - Updated to v3 */}
-      <Drawer.Root open={drawerVisible} onOpenChange={(details) => setDrawerVisible(details.open)}>
+      {/* Mobile navigation drawer */}
+      <Drawer.Root open={drawerVisible} onOpenChange={(details) => setDrawerVisible(details.open)} placement="end">
         <Portal>
-          <Drawer.Backdrop backdropFilter="blur(2px)" bg="blackAlpha.600" />
-          <Drawer.Positioner zIndex={1100}>
-            <Drawer.Content>
-              <Box p={6}>
-                {/* Logo and close button */}
+          <Drawer.Backdrop bg="blackAlpha.300" />
+          <Drawer.Positioner>
+            <Drawer.Content bg="white" maxW="300px" h="100vh">
+              <Box p={5}>
+                {/* Text logo and close button */}
                 <Box 
                   display="flex" 
                   justifyContent="space-between" 
                   alignItems="center" 
-                  mb={10}
+                  mb={8}
+                  borderBottom="1px solid"
+                  borderColor="gray.100"
+                  pb={4}
                 >
-                  <Image 
-                    src="/logo_side.png" 
-                    alt="Kanitas AB Logo" 
-                    height="65px" 
-                  />
+                  <Text 
+                    fontSize="2xl" 
+                    fontWeight="bold" 
+                    color={primaryColor}
+                  >
+                    KanitasAB
+                  </Text>
                   <Drawer.CloseTrigger asChild>
-                    <CloseButton colorPalette="brand" size="lg" />
+                    <CloseButton size="md" color={primaryColor} />
                   </Drawer.CloseTrigger>
                 </Box>
                 
                 {/* Navigation links */}
-                <Box display="flex" flexDirection="column" gap={0} mb={10}>
+                <Box display="flex" flexDirection="column" gap={1} mb={10}>
                   {navItems.map((item) => (
-                    <Box key={item.key}>
-                      <Box
-                        as="button"
-                        onClick={() => scrollToSection(item.section)}
-                        py={3}
-                        width="full"
-                        textAlign="left"
-                        fontSize="lg"
-                        fontWeight={500}
-                        color="brand.500"
-                        _hover={{ color: "brand.600" }}
-                        borderBottom="1px solid"
-                        borderColor="gray.100"
-                      >
-                        {item.label}
-                      </Box>
+                    <Box
+                      key={item.key}
+                      as="button"
+                      onClick={() => scrollToSection(item.section)}
+                      py={3}
+                      width="full"
+                      textAlign="left"
+                      fontSize="lg"
+                      fontWeight={activeKey === item.key ? "600" : "500"}
+                      color={activeKey === item.key ? primaryColor : "gray.700"}
+                      _hover={{ color: primaryColor, bg: "gray.50" }}
+                      borderRadius="md"
+                      px={3}
+                      transition="all 0.2s"
+                    >
+                      {item.label}
                     </Box>
                   ))}
                 </Box>
                 
                 {/* Contact information */}
-                <Box display="flex" flexDirection="column" gap={4} mt={12}>
+                <Box 
+                  display="flex" 
+                  flexDirection="column" 
+                  gap={4} 
+                  mt={8}
+                  pt={6}
+                  borderTop="1px solid"
+                  borderColor="gray.100"
+                >
                   <Box 
                     as="a"
                     display="flex" 
                     alignItems="center" 
                     gap={3}
-                    color="brand.500"
+                    color="gray.700"
+                    _hover={{ color: primaryColor }}
                   >
                     <Box as={FiPhone} />
                     <Text>073-994 80 47</Text>
@@ -284,30 +302,28 @@ const Header = () => {
                     display="flex" 
                     alignItems="center" 
                     gap={3}
-                    color="brand.500"
+                    color="gray.700"
+                    _hover={{ color: primaryColor }}
                   >
                     <Box as={FiMail} />
                     <Text>info@kanitas.se</Text>
                   </Box>
                   <Button
-                    colorPalette="brand"
                     variant="solid"
                     width="full"
-                    mt={6}
-                    py={3}
+                    mt={4}
+                    py={2.5}
                     height="auto"
                     fontSize="md"
-                    bg="brand.500"
+                    bg={primaryColor}
                     color="white"
                     fontWeight={500}
                     onClick={() => scrollToSection('kontakt')}
-                    boxShadow="sm"
                     _hover={{
-                      transform: "translateY(-1px)",
-                      boxShadow: "md",
-                      bg: "brand.600"
+                      bg: primaryColorHover,
                     }}
                     transition="all 0.2s"
+                    borderRadius="md"
                   >
                     Kontakta oss
                   </Button>

@@ -1,136 +1,271 @@
 "use client"
 
-import React from 'react';
-import { Typography, Row, Col, Card, Tabs } from 'antd';
+import React, { useState } from 'react'
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  SimpleGrid,
+  Card,
+  Flex,
+  VStack,
+  Button,
+  Icon,
+} from "@chakra-ui/react"
 import { 
-  HomeOutlined, 
-  ToolOutlined, 
-  BranchesOutlined, 
-  ClearOutlined,
-  ProjectOutlined
-} from '@ant-design/icons';
+  Home, 
+  Wrench, 
+  GitBranch,
+  Trash2, 
+  Briefcase,
+  ClipboardList,
+  Building,
+  Truck,
+  MessageCircle
+} from 'lucide-react'
 
-const { Title, Paragraph } = Typography;
+const ServicesSection = () => {
+  const [activeTab, setActiveTab] = useState("building")
+  
+  // Modern color palette
+  const primaryColor = "#2563eb";
+  const bgColor = "#f8fafc";
+  const iconBgColor = "#eff6ff";
 
-const ServicesSection: React.FC = () => {
   const buildingServices = [
     {
       title: 'Nybyggnation',
       description: 'Vi hanterar alla aspekter av byggprocessen från grunden, från planering och design till färdig byggnad.',
-      icon: <HomeOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: Home,
     },
     {
       title: 'Renovering & Ombyggnation',
       description: 'Vi moderniserar och renoverar bostäder, kontor och kommersiella utrymmen för att möta dagens standarder.',
-      icon: <ToolOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: Wrench,
     },
     {
       title: 'Anpassade lösningar',
       description: 'Skräddarsydda bygglösningar för både privatpersoner och företag baserat på specifika behov.',
-      icon: <BranchesOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: GitBranch,
     },
-  ];
+  ]
 
   const cleaningServices = [
     {
       title: 'Kontors- & Fastighetsstädning',
       description: 'Regelbunden städning för kontor och fastigheter som håller utrymmen rena och hälsosamma.',
-      icon: <ClearOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: Building,
     },
     {
       title: 'Flyttstädning',
       description: 'Grundlig städning vid flytt för att säkerställa att utrymmen lämnas i perfekt skick.',
-      icon: <ClearOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: Truck,
     },
     {
       title: 'Specialstädning',
       description: 'Specialiserad städning efter byggprojekt för att ta bort byggdamm och skräp.',
-      icon: <ClearOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: Trash2,
     },
-  ];
+  ]
 
   const otherServices = [
     {
       title: 'Projekthantering',
       description: 'Omfattande projektledning för att säkerställa att byggnads- och renoveringsprojekt genomförs effektivt.',
-      icon: <ProjectOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: ClipboardList,
     },
     {
       title: 'Rådgivning',
       description: 'Expertråd om bygglösningar, materialval och designalternativ för att hjälpa kunder att fatta informerade beslut.',
-      icon: <ProjectOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: MessageCircle,
     },
     {
       title: 'Byggstädning',
       description: 'Specialiserad städtjänst efter avslutade byggprojekt för att säkerställa att utrymmet är helt rent och redo för användning.',
-      icon: <ClearOutlined style={{ fontSize: '36px', color: '#1677ff' }} />,
+      icon: Briefcase,
     },
-  ];
+  ]
 
-  const renderServiceCards = (services: any[]) => (
-    <Row gutter={[36, 36]} className="mt-8">
-      {services.map((service, index) => (
-        <Col key={index} xs={24} md={8}>
-          <Card 
-            className="h-full card-hover text-center" 
-            bordered={false}
-            hoverable
-            style={{ 
-              borderRadius: '8px', 
-              boxShadow: '0 6px 25px rgba(0,0,0,0.06)',
-              height: '100%'
-            }}
-            bodyStyle={{ padding: '2rem' }}
-          >
-            <div className="mb-6 flex justify-center">
-              {React.cloneElement(service.icon, { style: { fontSize: '42px', color: 'var(--primary-color)' } })}
-            </div>
-            <Title level={4} style={{ color: 'var(--secondary-color)', marginBottom: '1rem' }}>
-              {service.title}
-            </Title>
-            <Paragraph style={{ color: 'var(--text-light)' }}>
-              {service.description}
-            </Paragraph>
-          </Card>
-        </Col>
-      ))}
-    </Row>
-  );
+  // Function to render service cards based on active tab
+  const getActiveServices = () => {
+    switch (activeTab) {
+      case "building":
+        return buildingServices
+      case "cleaning":
+        return cleaningServices
+      case "other":
+        return otherServices
+      default:
+        return buildingServices
+    }
+  }
 
   return (
-    <section id="tjanster" className="section-container section-alternate">
-      <Title level={2} className="section-title">Våra tjänster</Title>
-      <Paragraph className="text-center text-lg mb-12" style={{ color: 'var(--text-light)', maxWidth: '800px', margin: '0 auto 3rem auto' }}>
-        Vi erbjuder ett brett utbud av tjänster inom bygg och städning, skräddarsydda efter dina specifika behov och önskemål.
-      </Paragraph>
-      
-      <Tabs
-        defaultActiveKey="1"
-        centered
-        size="large"
-        className="service-tabs"
-        tabBarGutter={40}
-        tabBarStyle={{ marginBottom: '2.5rem', fontWeight: '500' }}
-        items={[
-          {
-            key: "1",
-            label: "Byggtjänster",
-            children: renderServiceCards(buildingServices)
-          },
-          {
-            key: "2",
-            label: "Städtjänster",
-            children: renderServiceCards(cleaningServices)
-          },
-          {
-            key: "3",
-            label: "Övriga tjänster",
-            children: renderServiceCards(otherServices)
-          }
-        ]}
-      />
-    </section>
-  );
-};
+    <Box 
+      as="section" 
+      id="tjanster" 
+      py={{ base: "20", md: "28" }}
+      bg={bgColor}
+    >
+      <Container maxW="container.xl">
+        {/* Section Header */}
+        <VStack gap="4" mb={{ base: "12", md: "16" }}>
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "3xl", md: "4xl" }}
+            color="gray.800"
+            position="relative"
+            textAlign="center"
+            _after={{
+              content: '""',
+              position: "absolute",
+              bottom: "-10px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "60px",
+              height: "3px",
+              borderRadius: "full",
+              bg: primaryColor,
+            }}
+          >
+            Våra tjänster
+          </Heading>
+          
+          <Text 
+            fontSize={{ base: "lg", md: "xl" }}
+            color="gray.600"
+            maxW="3xl"
+            textAlign="center"
+            pt="6"
+            lineHeight="tall"
+          >
+            Vi erbjuder ett brett utbud av tjänster inom bygg och städning, skräddarsydda efter dina specifika behov och önskemål.
+          </Text>
+        </VStack>
+        
+        {/* Tab Buttons */}
+        <Flex 
+          justify="center" 
+          gap={{ base: "4", md: "5" }} 
+          mb={{ base: "10", md: "12" }}
+          flexWrap={{ base: "wrap", md: "nowrap" }}
+        >
+          <Button
+            px={{ base: "6", md: "8" }}
+            py="5"
+            fontSize={{ base: "md", md: "md" }}
+            fontWeight="500"
+            bg={activeTab === "building" ? primaryColor : "white"}
+            color={activeTab === "building" ? "white" : "gray.700"}
+            borderWidth="1px"
+            borderColor={activeTab === "building" ? primaryColor : "gray.200"}
+            borderRadius="md"
+            transition="all 0.2s"
+            _hover={{
+              bg: activeTab === "building" ? primaryColor : "gray.50",
+              transform: "translateY(-1px)",
+            }}
+            onClick={() => setActiveTab("building")}
+          >
+            Byggtjänster
+          </Button>
+          
+          <Button
+            px={{ base: "6", md: "8" }}
+            py="5"
+            fontSize={{ base: "md", md: "md" }}
+            fontWeight="500"
+            bg={activeTab === "cleaning" ? primaryColor : "white"}
+            color={activeTab === "cleaning" ? "white" : "gray.700"}
+            borderWidth="1px"
+            borderColor={activeTab === "cleaning" ? primaryColor : "gray.200"}
+            borderRadius="md"
+            transition="all 0.2s"
+            _hover={{
+              bg: activeTab === "cleaning" ? primaryColor : "gray.50",
+              transform: "translateY(-1px)",
+            }}
+            onClick={() => setActiveTab("cleaning")}
+          >
+            Städtjänster
+          </Button>
+          
+          <Button
+            px={{ base: "6", md: "8" }}
+            py="5"
+            fontSize={{ base: "md", md: "md" }}
+            fontWeight="500"
+            bg={activeTab === "other" ? primaryColor : "white"}
+            color={activeTab === "other" ? "white" : "gray.700"}
+            borderWidth="1px"
+            borderColor={activeTab === "other" ? primaryColor : "gray.200"}
+            borderRadius="md"
+            transition="all 0.2s"
+            _hover={{
+              bg: activeTab === "other" ? primaryColor : "gray.50",
+              transform: "translateY(-1px)",
+            }}
+            onClick={() => setActiveTab("other")}
+          >
+            Övriga tjänster
+          </Button>
+        </Flex>
+        
+        {/* Service Cards */}
+        <SimpleGrid 
+          columns={{ base: 1, md: 3 }} 
+          gap={{ base: "6", md: "8" }}
+        >
+          {getActiveServices().map((service, index) => (
+            <Card.Root
+              key={index}
+              borderRadius="lg"
+              borderWidth="2px"
+              borderColor="gray.200"
+              bg="white"
+              p={{ base: "6", md: "7" }}
+              transition="all 0.3s ease"
+              _hover={{
+                borderColor: "blue.200"
+              }}
+              height="100%"
+            >
+              <VStack align="flex-start" gap="5" height="100%">
+                <Flex
+                  justify="center"
+                  align="center"
+                  w="14"
+                  h="14"
+                  borderRadius="lg"
+                  bg={iconBgColor}
+                >
+                  <Icon as={service.icon} color={primaryColor} boxSize="6" />
+                </Flex>
+                
+                <Heading
+                  as="h3"
+                  fontSize="xl"
+                  color="gray.800"
+                  fontWeight="600"
+                >
+                  {service.title}
+                </Heading>
+                
+                <Text
+                  color="gray.600"
+                  lineHeight="tall"
+                  flex="1"
+                >
+                  {service.description}
+                </Text>
+              </VStack>
+            </Card.Root>
+          ))}
+        </SimpleGrid>
+      </Container>
+    </Box>
+  )
+}
 
-export default ServicesSection;
+export default ServicesSection

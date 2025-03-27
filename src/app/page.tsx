@@ -8,6 +8,7 @@ import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import ReferencesSection from '../components/ReferencesSection';
 import ContactSection from '../components/ContactSection';
+import { Separator } from '@chakra-ui/react';
 
 const { Content } = Layout;
 
@@ -18,8 +19,9 @@ export default function Home() {
       <Content>
         <HeroSection />
         <AboutSection />
-        <ServicesSection />
         <ReferencesSection />
+        <ServicesSection />
+        <Separator borderColor="gray.200"  borderWidth="1px" />
         <ContactSection />
       </Content>
       <Footer />

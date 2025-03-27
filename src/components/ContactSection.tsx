@@ -1,155 +1,350 @@
 "use client"
 
-import React from 'react';
-import { Typography, Row, Col, Form, Input, Button, message } from 'antd';
-import { 
-  MailOutlined, 
-  PhoneOutlined, 
-  HomeOutlined,
-  SendOutlined 
-} from '@ant-design/icons';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  SimpleGrid,
+  Input,
+  Textarea,
+  Button,
+  Flex,
+  Stack,
+  Icon,
+  Card,
+  CardBody,
+  CardHeader,
+  Link,
+} from '@chakra-ui/react';
+import { Mail, Phone, Home, Send } from 'lucide-react';
 
-const { Title, Paragraph, Text } = Typography;
-const { TextArea } = Input;
+// Define TypeScript interfaces
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 const ContactSection: React.FC = () => {
-  const [form] = Form.useForm();
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const onFinish = (values: any) => {
-    console.log('Form values:', values);
-    message.success('Tack för ditt meddelande! Vi återkommer så snart som möjligt.');
-    form.resetFields();
+  // Color definitions - simplified and modernized
+  const primaryColor: string = "#2563eb"; // Modern blue
+  const hoverColor: string = "#1d4ed8"; // Slightly darker blue for hover states
+  const bgLight: string = "#f8fafc"; // Very light blue-gray background
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      console.log('Form values:', formData);
+      alert('Tack för ditt meddelande! Vi återkommer så snart som möjligt.');
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   return (
-    <section id="kontakt" className="section-container section-alternate">
-      <Title level={2} className="section-title">Kontakta oss</Title>
-      <Paragraph className="text-center text-lg mb-12" style={{ color: 'var(--text-light)', maxWidth: '800px', margin: '0 auto 3rem auto' }}>
-        Har du frågor eller vill du veta mer om hur vi kan hjälpa dig med ditt projekt? 
-        Tveka inte att kontakta oss - vi svarar gärna på alla dina frågor!
-      </Paragraph>
-      
-      <Row gutter={[48, 48]}>
-        <Col xs={24} lg={12}>
-          <div className="bg-white p-8 rounded-lg shadow-lg h-full" style={{ borderRadius: '12px' }}>
-            <Title level={4} className="mb-6" style={{ color: 'var(--secondary-color)' }}>Skicka meddelande</Title>
-            
-            <Form 
-              form={form}
-              layout="vertical" 
-              onFinish={onFinish}
-              requiredMark={false}
-            >
-              <Form.Item
-                name="name"
-                label="Namn"
-                rules={[{ required: true, message: 'Vänligen fyll i ditt namn' }]}
-              >
-                <Input size="large" placeholder="Ditt namn" />
-              </Form.Item>
-              
-              <Form.Item
-                name="email"
-                label="E-post"
-                rules={[
-                  { required: true, message: 'Vänligen fyll i din e-post' },
-                  { type: 'email', message: 'Vänligen ange en giltig e-postadress' }
-                ]}
-              >
-                <Input size="large" placeholder="Din e-post" />
-              </Form.Item>
-              
-              <Form.Item
-                name="phone"
-                label="Telefon"
-              >
-                <Input size="large" placeholder="Ditt telefonnummer" />
-              </Form.Item>
-              
-              <Form.Item
-                name="message"
-                label="Meddelande"
-                rules={[{ required: true, message: 'Vänligen skriv ditt meddelande' }]}
-              >
-                <TextArea rows={4} placeholder="Beskriv ditt projekt eller ställ dina frågor här" />
-              </Form.Item>
-              
-              <Form.Item>
-                <Button 
-                  type="primary" 
-                  htmlType="submit" 
-                  size="large"
-                  icon={<SendOutlined />}
-                  className="px-6 h-auto py-2"
-                  style={{ 
-                    backgroundColor: 'var(--primary-color)',
-                    borderColor: 'var(--primary-color)',
-                    fontWeight: '500'
-                  }}
-                >
-                  Skicka meddelande
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </Col>
+    <Box id="kontakt" py={{ base: 20, md: 24 }} bg={bgLight} position="relative">
+      <Container maxW="7xl" position="relative">
+        {/* Section Header */}
+        <Stack gap={4} mb={{ base: 12, md: 16 }} align="center">
+          <Heading 
+            as="h2" 
+            fontSize={{ base: "3xl", md: "4xl" }} 
+            textAlign="center"
+            color="gray.800"
+            position="relative"
+            _after={{
+              content: '""',
+              display: 'block',
+              width: '60px',
+              height: '3px',
+              bg: primaryColor,
+              mx: 'auto',
+              mt: 4,
+              borderRadius: 'full',
+            }}
+          >
+            Kontakta oss
+          </Heading>
+          <Text 
+            textAlign="center" 
+            fontSize={{ base: "lg", md: "xl" }}
+            color="gray.600" 
+            maxW="800px"
+            mt={2}
+          >
+            Har du frågor eller vill du veta mer om hur vi kan hjälpa dig med ditt projekt? 
+            Tveka inte att kontakta oss - vi svarar gärna på alla dina frågor!
+          </Text>
+        </Stack>
         
-        <Col xs={24} lg={12}>
-          <div className="bg-white p-8 rounded-lg shadow-lg h-full" style={{ borderRadius: '12px' }}>
-            <Title level={4} className="mb-6" style={{ color: 'var(--secondary-color)' }}>Kontaktinformation</Title>
+        {/* Main Content */}
+        <SimpleGrid columns={{ base: 1, lg: 2 }} gap={8}>
+          {/* Contact Form */}
+          <Card.Root 
+            bg="white"
+            borderRadius="lg"
+            overflow="hidden"
+            borderWidth="2px"
+            borderColor="gray.200"
+            _hover={{ borderColor: "blue.200" }}
+            transition="border-color 0.3s ease"
+          >
+            <CardHeader bg="white" borderBottom="1px" borderColor="gray.100" pt={6} pb={4} px={6}>
+              <Heading as="h4" fontSize="xl" color="gray.800" fontWeight="semibold">
+                Skicka meddelande
+              </Heading>
+            </CardHeader>
             
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <PhoneOutlined style={{ color: 'var(--primary-color)', fontSize: '20px' }} className="mr-4 mt-1" />
-                <div>
-                  <Text strong className="block mb-1">Telefon</Text>
-                  <Paragraph>073-994 80 47</Paragraph>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <MailOutlined style={{ color: 'var(--primary-color)', fontSize: '20px' }} className="mr-4 mt-1" />
-                <div>
-                  <Text strong className="block mb-1">E-post</Text>
-                  <Paragraph>info@kanitas.se</Paragraph>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <HomeOutlined style={{ color: 'var(--primary-color)', fontSize: '20px' }} className="mr-4 mt-1" />
-                <div>
-                  <Text strong className="block mb-1">Adress</Text>
-                  <Paragraph>
-                    Kanitas AB<br />
-                    Almarevägen 13<br />
-                    176 76 Järfälla<br />
-                    Sverige
-                  </Paragraph>
-                </div>
-              </div>
-            </div>
+            <CardBody p={6}>
+              <form onSubmit={handleSubmit}>
+                <Stack gap={5}>
+                  <Box>
+                    <Text fontWeight="medium" mb={2} color="gray.700" fontSize="sm">Namn</Text>
+                    <Input 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Ditt namn"
+                      size="md"
+                      borderColor="gray.200"
+                      borderRadius="md"
+                      _focus={{ 
+                        borderColor: primaryColor,
+                        boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      required
+                    />
+                  </Box>
+                  
+                  <Box>
+                    <Text fontWeight="medium" mb={2} color="gray.700" fontSize="sm">E-post</Text>
+                    <Input 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Din e-post"
+                      size="md"
+                      type="email"
+                      borderColor="gray.200"
+                      borderRadius="md"
+                      _focus={{ 
+                        borderColor: primaryColor,
+                        boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      required
+                    />
+                  </Box>
+                  
+                  <Box>
+                    <Text fontWeight="medium" mb={2} color="gray.700" fontSize="sm">Telefon</Text>
+                    <Input 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Ditt telefonnummer"
+                      size="md"
+                      borderColor="gray.200"
+                      borderRadius="md"
+                      _focus={{ 
+                        borderColor: primaryColor,
+                        boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                    />
+                  </Box>
+                  
+                  <Box>
+                    <Text fontWeight="medium" mb={2} color="gray.700" fontSize="sm">Meddelande</Text>
+                    <Textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Beskriv ditt projekt eller ställ dina frågor här"
+                      size="md"
+                      rows={4}
+                      borderColor="gray.200"
+                      borderRadius="md"
+                      _focus={{ 
+                        borderColor: primaryColor,
+                        boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      required
+                    />
+                  </Box>
+                  
+                  <Box pt={2}>
+                    <Button
+                      type="submit"
+                      bg={primaryColor}
+                      color="white"
+                      px={6}
+                      py={2.5}
+                      height="auto"
+                      fontWeight="500"
+                      disabled={isSubmitting}
+                      _hover={{
+                        bg: hoverColor,
+                      }}
+                      _active={{
+                        bg: hoverColor,
+                      }}
+                      transition="all 0.2s"
+                      borderRadius="md"
+                      w={{ base: 'full', sm: 'auto' }}
+                      fontSize="md"
+                    >
+                      <Icon as={Send} boxSize={4} mr={2} />
+                      {isSubmitting ? 'Skickar...' : 'Skicka meddelande'}
+                    </Button>
+                  </Box>
+                </Stack>
+              </form>
+            </CardBody>
+          </Card.Root>
+          
+          {/* Contact Information */}
+          <Card.Root 
+            bg="white"
+            borderRadius="lg"
+            overflow="hidden"
+            borderWidth="2px"
+            borderColor="gray.200"
+            _hover={{ borderColor: "blue.200" }}
+            transition="border-color 0.3s ease"
+          >
+            <CardHeader bg="white" borderBottom="1px" borderColor="gray.100" pt={6} pb={4} px={6}>
+              <Heading as="h4" fontSize="xl" color="gray.800" fontWeight="semibold">
+                Kontaktinformation
+              </Heading>
+            </CardHeader>
             
-            <Title level={4} className="mt-12 mb-6" style={{ color: 'var(--secondary-color)' }}>Organisationsinfo</Title>
-            <table className="w-full">
-              <tbody>
-                <tr className="border-b border-gray-200">
-                  <td className="py-2"><Text strong>Org.nummer</Text></td>
-                  <td className="py-2 text-right">556841-1010</td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="py-2"><Text strong>Grundat</Text></td>
-                  <td className="py-2 text-right">2011</td>
-                </tr>
-                <tr>
-                  <td className="py-2"><Text strong>Anställda</Text></td>
-                  <td className="py-2 text-right">33</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Col>
-      </Row>
-    </section>
+            <CardBody p={6}>
+              <Stack gap={6}>
+                <Flex align="center">
+                  <Flex 
+                    bg={`${primaryColor}10`} 
+                    p={3} 
+                    borderRadius="md" 
+                    mr={4}
+                    color={primaryColor}
+                  >
+                    <Icon as={Phone} boxSize={4} />
+                  </Flex>
+                  <Box>
+                    <Text fontWeight="semibold" mb={1} fontSize="sm" color="gray.600">Telefon</Text>
+                    <Link 
+                      href="tel:073-9948047" 
+                      color="gray.800" 
+                      _hover={{ color: primaryColor }}
+                      display="flex"
+                      alignItems="center"
+                      fontWeight="medium"
+                    >
+                      073-994 80 47
+                    </Link>
+                  </Box>
+                </Flex>
+                
+                <Flex align="center">
+                  <Flex 
+                    bg={`${primaryColor}10`} 
+                    p={3} 
+                    borderRadius="md" 
+                    mr={4}
+                    color={primaryColor}
+                  >
+                    <Icon as={Mail} boxSize={4} />
+                  </Flex>
+                  <Box>
+                    <Text fontWeight="semibold" mb={1} fontSize="sm" color="gray.600">E-post</Text>
+                    <Link 
+                      href="mailto:info@kanitas.se" 
+                      color="gray.800" 
+                      _hover={{ color: primaryColor }}
+                      display="flex"
+                      alignItems="center"
+                      fontWeight="medium"
+                    >
+                      info@kanitas.se
+                    </Link>
+                  </Box>
+                </Flex>
+                
+                <Flex align="center">
+                  <Flex 
+                    bg={`${primaryColor}10`} 
+                    p={3} 
+                    borderRadius="md" 
+                    mr={4}
+                    color={primaryColor}
+                  >
+                    <Icon as={Home} boxSize={4} />
+                  </Flex>
+                  <Box>
+                    <Text fontWeight="semibold" mb={1} fontSize="sm" color="gray.600">Adress</Text>
+                    <Text color="gray.800" fontWeight="medium">
+                      Kanitas AB<br />
+                      Almarevägen 13<br />
+                      176 76 Järfälla<br />
+                      Sverige
+                    </Text>
+                  </Box>
+                </Flex>
+              </Stack>
+              
+              <Box h="1px" bg="gray.100" my={8} />
+              
+              <Heading as="h4" fontSize="lg" mb={5} color="gray.800" fontWeight="semibold">
+                Organisationsinfo
+              </Heading>
+              
+              <Stack gap={3}>
+                <Flex justify="space-between" py={2} borderBottom="1px solid" borderColor="gray.100">
+                  <Text fontWeight="medium" color="gray.600" fontSize="sm">Org.nummer</Text>
+                  <Text color="gray.800">556841-1010</Text>
+                </Flex>
+                <Flex justify="space-between" py={2} borderBottom="1px solid" borderColor="gray.100">
+                  <Text fontWeight="medium" color="gray.600" fontSize="sm">Grundat</Text>
+                  <Text color="gray.800">2011</Text>
+                </Flex>
+                <Flex justify="space-between" py={2}>
+                  <Text fontWeight="medium" color="gray.600" fontSize="sm">Anställda</Text>
+                  <Text color="gray.800">33</Text>
+                </Flex>
+              </Stack>
+            </CardBody>
+          </Card.Root>
+        </SimpleGrid>
+      </Container>
+    </Box>
   );
 };
 

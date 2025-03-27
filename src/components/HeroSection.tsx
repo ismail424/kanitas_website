@@ -4,23 +4,18 @@ import React from 'react';
 import {
   Box,
   Container,
-  Flex,
   Heading,
   Text,
   Button,
-  Image,
   Stack,
   VStack,
   HStack,
   Center,
   Icon,
-  Card,
-  createSystem,
-  defaultSystem
 } from '@chakra-ui/react';
 
-// Lucide icons for Chakra UI v3 (requires installation: npm install lucide-react)
-import { ChevronDown, Users, Hammer } from 'lucide-react';
+// Lucide icons
+import { ChevronDown , Phone, HardHat, Hammer, Clock } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -40,182 +35,160 @@ const HeroSection: React.FC = () => {
         minH={{ base: "100vh", md: "90vh" }}
         position="relative"
         overflow="hidden"
-        bgImage="linear-gradient(rgba(18, 64, 117, 0.9), rgba(0, 0, 0, 0.85)), url(/hero-image.jpg)"
+        bgImage="linear-gradient(rgba(18, 64, 117, 0.8), rgba(0, 0, 0, 0.85)), url(/hero-image.jpg)"
         bgSize="cover"
         display="flex"
         alignItems="center"
         justifyContent="center"
       >
-        {/* Dark overlay */}
-        <Box position="absolute" inset="0" bg="blackAlpha.500" zIndex={0}></Box>
+        {/* Simple dark overlay */}
+        <Box 
+          position="absolute" 
+          inset="0" 
+          bg="blackAlpha.600" 
+          zIndex={0}
+        ></Box>
         
         {/* Content */}
-        <Container maxW="7xl" px={{ base: 4, md: 6 }} py={{ base: 16, md: 24 }} position="relative" zIndex={10}>
-          <Stack 
-            direction={{ base: "column-reverse", md: "row" }}
-            gap={{ base: 10, md: 12 }}
+        <Container maxW="6xl" px={{ base: 4, md: 6 }} py={{ base: 16, md: 24 }} position="relative" zIndex={10}>
+          <VStack 
+            gap={{ base: 8, md: 10 }} 
             align="center"
-            justify="space-between"
+            textAlign="center"
+            maxW={{ base: "100%", md: "85%", lg: "75%" }}
+            mx="auto"
           >
-            {/* Left side - Text content */}
-            <VStack 
-              gap={6} 
-              align={{ base: "center", md: "start" }}
-              maxW={{ base: "100%", md: "55%" }}
-              textAlign={{ base: "center", md: "left" }}
-            >
-              <Center display={{ base: "flex", md: "block" }} w="full">
-                <Image 
-                  src="/logo_top.png" 
-                  alt="Kanitas AB Logo" 
-                  h={{ base: "24", md: "32" }}
-                  mb={4}
-                  filter="drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)) brightness(1.05)"
-                />
-              </Center>
-              
+            {/* Main heading with animated underline */}
+            <VStack gap={3}>
               <Heading 
                 as="h1"
-                fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+                fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
                 lineHeight="tight"
                 color="white"
                 textShadow="0 2px 10px rgba(0, 0, 0, 0.8)"
                 fontWeight="bold"
               >
-                Professionella bygg- och städtjänster
+                Kanitas AB
               </Heading>
               
               <Box 
-                h="1px" 
-                w="24" 
-                bg="#3a85d8"
-                display={{ base: "none", md: "block" }}
-                alignSelf={{ md: "start" }}
+                h="2px" 
+                w={{ base: "32", md: "40" }}
+                bgGradient="linear(to-r, blue.400, blue.600)"
+                position="relative"
+                _after={{
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  bgGradient: "linear(to-r, transparent, white, transparent)",
+                  animation: "shimmer 2s infinite",
+                }}
+                css={{
+                  '@keyframes shimmer': {
+                    '0%': { transform: 'translateX(-100%)' },
+                    '100%': { transform: 'translateX(100%)' },
+                  }
+                }}
               />
               
-              <Text 
-                color="white"
-                textShadow="0 2px 6px rgba(0, 0, 0, 0.8)"
+              <Heading 
+                as="h2"
+                fontSize={{ base: "xl", md: "2xl" }}
                 fontWeight="medium"
-                lineHeight="1.6"
-                fontSize="lg"
+                color="blue.100"
+                textShadow="0 2px 6px rgba(0, 0, 0, 0.6)"
               >
-                Vi erbjuder ett brett utbud av tjänster inom bygg och städ, samt byggservice, 
-                sanering, rivning, och entreprenad. Kvalitet och pålitlighet för både 
-                företag och privatpersoner.
-              </Text>
-              
-              <HStack 
-                gap={4} 
-                width="full"
-                justify={{ base: "center", md: "start" }}
-                flexDir={{ base: "column", sm: "row" }}
-                alignItems={{ base: "stretch", sm: "center" }}
-              >
-                <Button
-                  onClick={() => scrollToSection('tjanster')}
-                  bg="white"
-                  color="#124075"
-                  fontWeight="semibold"
-                  boxShadow="md"
-                  py={3}
-                  px={6}
-                  borderRadius="md"
-                  size="lg"
-                  width={{ base: "full", sm: "auto" }}
-                  _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
-                >
-                  Våra tjänster
-                </Button>
-                <Button
-                  onClick={() => scrollToSection('kontakt')}
-                  variant="outline"
-                  color="white"
-                  borderColor="white"
-                  fontWeight="semibold"
-                  py={3}
-                  px={6}
-                  borderRadius="md"
-                  size="lg"
-                  width={{ base: "full", sm: "auto" }}
-                  _hover={{ bg: "whiteAlpha.100" }}
-                >
-                  Kontakta oss
-                </Button>
-              </HStack>
+                Kvalitet och pålitlighet inom bygg- och städtjänster
+              </Heading>
             </VStack>
             
-            {/* Right side - Feature badges */}
-            <VStack 
-              gap={4} 
-              align={{ base: "center", md: "end" }}
-              maxW={{ base: "100%", md: "40%" }}
+            <Text 
+              color="white"
+              textShadow="0 1px 3px rgba(0, 0, 0, 0.9)"
+              fontSize={{ base: "lg", md: "xl" }}
+              fontWeight="medium"
+              lineHeight="1.7"
+              maxW="3xl"
             >
-              <Card.Root
-                p={6}
-                bg="white"
-                borderRadius="lg"
-                boxShadow="lg"
-                width="full"
-                maxW="sm"
+              Välkommen till Kanitas AB – din pålitliga partner inom bygg- och städtjänster i Sverige. 
+              Vi erbjuder skräddarsydda lösningar för både privata och kommersiella projekt, med särskilt 
+              fokus på högkvalitativa byggtjänster och städning som överträffar dina förväntningar.
+            </Text>
+            
+            {/* Feature badges in a row */}
+            <HStack 
+              justify="center" 
+              flexWrap="wrap"
+              pt={4}
+            >
+              <Feature icon={HardHat} text="Professionalism" />
+              <Feature icon={Hammer} text="Kvalitetslösningar" />
+              <Feature icon={Clock} text="Leverans i tid" />
+            </HStack>
+            
+            {/* Call to action buttons */}
+          <Stack 
+              direction={{ base: "column", sm: "row" }}
+              pt={{ base: 6, md: 10 }}
+              width="100%"
+              justify="center"
+              gap={4}
+            >
+              <Button
+                onClick={() => scrollToSection('tjanster')}
+                bg="#124075"
+                color="white"
+                fontWeight="semibold"
+                py={6}
+                px={8}
+                borderRadius="md"
+                size="lg"
+                width={{ base: "full", sm: "auto" }}
+                fontSize="lg"
+                _hover={{ 
+                  bg: "#0d325c",
+                  transform: "translateY(-2px)", 
+                }}
                 transition="all 0.3s ease"
-                _hover={{ transform: "scale(1.05)" }}
+                borderWidth="1px"
+                borderColor="#124075"
               >
-                <HStack align="start" gap={4}>
-                  <Center 
-                    p={2} 
-                    borderRadius="full" 
-                    bg="rgba(18, 64, 117, 0.1)"
-                  >
-                    <Icon as={Hammer} boxSize={6} color="#124075" />
-                  </Center>
-                  <VStack align="start" gap={1}>
-                    <Heading as="h4" fontSize="lg" color="#124075">
-                      Etablerat 2011
-                    </Heading>
-                    <Text color="gray.700" fontWeight="medium">
-                      Över 10 års erfarenhet inom bygg- och städbranschen med 33 anställda
-                    </Text>
-                  </VStack>
-                </HStack>
-              </Card.Root>
+                Våra tjänster
+              </Button>
               
-              <Card.Root
-                p={6}
-                bg="white"
-                borderRadius="lg"
-                boxShadow="lg"
-                width="full"
-                maxW="sm"
+              <Button
+                onClick={() => scrollToSection('kontakt')}
+                variant="outline"
+                color="white"
+                borderColor="white"
+                borderWidth="1px"
+                fontWeight="semibold"
+                py={6}
+                px={8}
+                borderRadius="md"
+                size="lg"
+                width={{ base: "full", sm: "auto" }}
+                fontSize="lg"
+                _hover={{ 
+                  bg: "whiteAlpha.100",
+                  transform: "translateY(-2px)",
+                }}
                 transition="all 0.3s ease"
-                _hover={{ transform: "scale(1.05)" }}
               >
-                <HStack align="start" gap={4}>
-                  <Center 
-                    p={2} 
-                    borderRadius="full" 
-                    bg="rgba(18, 64, 117, 0.1)"
-                  >
-                    <Icon as={Users} boxSize={6} color="#124075" />
-                  </Center>
-                  <VStack align="start" gap={1}>
-                    <Heading as="h4" fontSize="lg" color="#124075">
-                      Omfattande tjänster
-                    </Heading>
-                    <Text color="gray.700" fontWeight="medium">
-                      Bygg, renovering, städning, sanering och entreprenader för både företag och privatpersoner
-                    </Text>
-                  </VStack>
-                </HStack>
-              </Card.Root>
-            </VStack>
-          </Stack>
+                <Icon as={Phone} boxSize={5} />
+                Kontakta oss
+              </Button>
+            </Stack>
+          </VStack>
         </Container>
         
-        {/* Down arrow for scrolling */}
+        {/* Pulsing scroll down indicator */}
         <Center 
           position="absolute" 
-          bottom={8} 
+          bottom={10} 
           left={0} 
           right={0} 
           zIndex={10}
@@ -230,21 +203,59 @@ const HeroSection: React.FC = () => {
             bg="#124075" 
             borderRadius="full" 
             p={3}
-            animation="bounce 2s infinite"
-            _hover={{ color: "whiteAlpha.800" }}
+            position="relative"
+            _hover={{ 
+              transform: "translateY(-3px)",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)"
+            }}
+            transition="all 0.3s ease"
+            _before={{
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: "full",
+              border: "2px solid #124075",
+              animation: "pulse 2s infinite",
+            }}
             css={{
-              '@keyframes bounce': {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
+              '@keyframes pulse': {
+                '0%': { 
+                  transform: 'scale(1)',
+                  opacity: 1
+                },
+                '100%': { 
+                  transform: 'scale(1.8)',
+                  opacity: 0
+                },
               }
             }}
           >
-            <Icon as={ChevronDown} boxSize={5} />
+            <Icon as={ChevronDown} boxSize={6} />
           </Box>
         </Center>
       </Box>
     </Box>
   );
 };
+
+// Feature badge component
+const Feature = ({ icon, text }: { icon: React.ElementType, text: string }) => (
+  <HStack
+    bg="rgba(255, 255, 255, 0.1)"
+    backdropFilter="blur(4px)"
+    borderRadius="full"
+    px={4}
+    py={2}
+    borderWidth="1px"
+    borderColor="whiteAlpha.200"
+    my={1}
+  >
+    <Icon as={icon} color="blue.200" boxSize={5} />
+    <Text color="white" fontWeight="medium">{text}</Text>
+  </HStack>
+);
 
 export default HeroSection;
