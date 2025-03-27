@@ -3,6 +3,7 @@
 import React from 'react';
 import { Layout, Typography, Row, Col, Space } from 'antd';
 import { PhoneOutlined, MailOutlined, HomeOutlined } from '@ant-design/icons';
+import Image from 'next/image';
 
 const { Footer: AntFooter } = Layout;
 const { Text, Link: AntLink, Title } = Typography;
@@ -20,10 +21,12 @@ const Footer: React.FC = () => {
         <Row gutter={[48, 48]}>
           <Col xs={24} sm={12} lg={8}>
             <div className="mb-6">
-              <img 
-                src="/logo_circle.png" 
+              <Image 
+                src="/images/logo_circle.png" 
                 alt="Kanitas AB Logo" 
-                className="h-16 mb-4" 
+                width={'70'}
+                height={'70'}
+                className="rounded-full"
               />
             </div>
             <Text 

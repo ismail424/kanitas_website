@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 // Lucide icons
-import { ChevronDown , Phone, HardHat, Hammer, Clock } from 'lucide-react';
+import { ChevronDown, Phone, HardHat, Hammer, Clock } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -32,11 +32,12 @@ const HeroSection: React.FC = () => {
   return (
     <Box id="top" position="relative">
       <Box
-        minH={{ base: "100vh", md: "90vh" }}
+        minH={{ base: "95vh", md: "90vh" }}
         position="relative"
         overflow="hidden"
         bgImage="linear-gradient(rgba(18, 64, 117, 0.8), rgba(0, 0, 0, 0.85)), url(/hero-image.jpg)"
         bgSize="cover"
+        backgroundPosition={{ base: "center", md: "center" }}
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -50,19 +51,25 @@ const HeroSection: React.FC = () => {
         ></Box>
         
         {/* Content */}
-        <Container maxW="6xl" px={{ base: 4, md: 6 }} py={{ base: 16, md: 24 }} position="relative" zIndex={10}>
+        <Container 
+          maxW="6xl" 
+          px={{ base: 5, md: 6 }} 
+          py={{ base: 10, md: 24 }} 
+          position="relative" 
+          zIndex={10}
+        >
           <VStack 
-            gap={{ base: 8, md: 10 }} 
+            gap={{ base: 6, md: 10 }} 
             align="center"
             textAlign="center"
             maxW={{ base: "100%", md: "85%", lg: "75%" }}
             mx="auto"
           >
             {/* Main heading with animated underline */}
-            <VStack gap={3}>
+            <VStack gap={{ base: 2, md: 3 }}>
               <Heading 
                 as="h1"
-                fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+                fontSize={{ base: "5xl", md: "5xl", lg: "6xl" }}
                 lineHeight="tight"
                 color="white"
                 textShadow="0 2px 10px rgba(0, 0, 0, 0.8)"
@@ -73,7 +80,7 @@ const HeroSection: React.FC = () => {
               
               <Box 
                 h="2px" 
-                w={{ base: "32", md: "40" }}
+                w={{ base: "28", md: "40" }}
                 bgGradient="linear(to-r, blue.400, blue.600)"
                 position="relative"
                 _after={{
@@ -96,10 +103,11 @@ const HeroSection: React.FC = () => {
               
               <Heading 
                 as="h2"
-                fontSize={{ base: "xl", md: "2xl" }}
+                fontSize={{ base: "lg", md: "2xl" }}
                 fontWeight="medium"
                 color="blue.100"
                 textShadow="0 2px 6px rgba(0, 0, 0, 0.6)"
+                mt={{ base: 1, md: 2 }}
               >
                 Kvalitet och pålitlighet inom bygg- och städtjänster
               </Heading>
@@ -108,9 +116,9 @@ const HeroSection: React.FC = () => {
             <Text 
               color="white"
               textShadow="0 1px 3px rgba(0, 0, 0, 0.9)"
-              fontSize={{ base: "lg", md: "xl" }}
+              fontSize={{ base: "md", md: "xl" }}
               fontWeight="medium"
-              lineHeight="1.7"
+              lineHeight={{ base: "1.6", md: "1.7" }}
               maxW="3xl"
             >
               Välkommen till Kanitas AB – din pålitliga partner inom bygg- och städtjänster i Sverige. 
@@ -118,19 +126,23 @@ const HeroSection: React.FC = () => {
               fokus på högkvalitativa byggtjänster och städning som överträffar dina förväntningar.
             </Text>
             
-            {/* Feature badges in a row */}
-            <HStack 
-              justify="center" 
-              flexWrap="wrap"
-              pt={4}
+            {/* Feature badges in a row - stack vertically on very small screens */}
+            <Box 
+              w="full" 
+              pt={{ base: 2, md: 4 }}
+              display="flex"
+              flexDirection={{ base: "column", sm: "row" }}
+              justifyContent="center"
+              alignItems="center"
+              gap={{ base: 2, sm: 3 }}
             >
               <Feature icon={HardHat} text="Professionalism" />
               <Feature icon={Hammer} text="Kvalitetslösningar" />
               <Feature icon={Clock} text="Leverans i tid" />
-            </HStack>
+            </Box>
             
             {/* Call to action buttons */}
-          <Stack 
+            <Stack 
               direction={{ base: "column", sm: "row" }}
               pt={{ base: 6, md: 10 }}
               width="100%"
@@ -142,12 +154,12 @@ const HeroSection: React.FC = () => {
                 bg="#124075"
                 color="white"
                 fontWeight="semibold"
-                py={6}
-                px={8}
+                py={{ base: 5, md: 6 }}
+                px={{ base: 6, md: 8 }}
                 borderRadius="md"
-                size="lg"
+                size={{ base: "md", md: "lg" }}
                 width={{ base: "full", sm: "auto" }}
-                fontSize="lg"
+                fontSize={{ base: "md", md: "lg" }}
                 _hover={{ 
                   bg: "#0d325c",
                   transform: "translateY(-2px)", 
@@ -166,29 +178,29 @@ const HeroSection: React.FC = () => {
                 borderColor="white"
                 borderWidth="1px"
                 fontWeight="semibold"
-                py={6}
-                px={8}
+                py={{ base: 5, md: 6 }}
+                px={{ base: 6, md: 8 }}
                 borderRadius="md"
-                size="lg"
+                size={{ base: "md", md: "lg" }}
                 width={{ base: "full", sm: "auto" }}
-                fontSize="lg"
+                fontSize={{ base: "md", md: "lg" }}
                 _hover={{ 
                   bg: "whiteAlpha.100",
                   transform: "translateY(-2px)",
                 }}
                 transition="all 0.3s ease"
               >
-                <Icon as={Phone} boxSize={5} />
+                <Icon as={Phone} boxSize={{ base: 4, md: 5 }} />
                 Kontakta oss
               </Button>
             </Stack>
           </VStack>
         </Container>
         
-        {/* Pulsing scroll down indicator */}
+        {/* Pulsing scroll down indicator - adjusted for mobile */}
         <Center 
           position="absolute" 
-          bottom={10} 
+          bottom={{ base: 6, md: 10 }}
           left={0} 
           right={0} 
           zIndex={10}
@@ -202,8 +214,9 @@ const HeroSection: React.FC = () => {
             color="white" 
             bg="#124075" 
             borderRadius="full" 
-            p={3}
+            p={{ base: 2.5, md: 3 }}
             position="relative"
+            cursor="pointer"
             _hover={{ 
               transform: "translateY(-3px)",
               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)"
@@ -233,7 +246,7 @@ const HeroSection: React.FC = () => {
               }
             }}
           >
-            <Icon as={ChevronDown} boxSize={6} />
+            <Icon as={ChevronDown} boxSize={{ base: 5, md: 6 }} />
           </Box>
         </Center>
       </Box>
@@ -241,20 +254,25 @@ const HeroSection: React.FC = () => {
   );
 };
 
-// Feature badge component
+// Feature badge component - improved for mobile
 const Feature = ({ icon, text }: { icon: React.ElementType, text: string }) => (
   <HStack
     bg="rgba(255, 255, 255, 0.1)"
     backdropFilter="blur(4px)"
     borderRadius="full"
-    px={4}
-    py={2}
+    px={{ base: 3, md: 4 }}
+    py={{ base: 1.5, md: 2 }}
     borderWidth="1px"
     borderColor="whiteAlpha.200"
     my={1}
+    minW={{ base: "auto", sm: "auto" }}
+    maxW={{ base: "80%", sm: "auto" }}
+    justifyContent={{ base: "center", sm: "flex-start" }}
   >
-    <Icon as={icon} color="blue.200" boxSize={5} />
-    <Text color="white" fontWeight="medium">{text}</Text>
+    <Icon as={icon} color="blue.200" boxSize={{ base: 4, md: 5 }} />
+    <Text color="white" fontWeight="medium" fontSize={{ base: "sm", md: "md" }}>
+      {text}
+    </Text>
   </HStack>
 );
 
