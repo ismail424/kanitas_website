@@ -261,14 +261,14 @@ const ContactSection: React.FC = () => {
                   <Box>
                     <Text fontWeight="semibold" mb={1} fontSize="sm" color="gray.600">Telefon</Text>
                     <Link 
-                      href="tel:073-9948047" 
+                      href="tel:070-6653248" 
                       color="gray.800" 
                       _hover={{ color: primaryColor }}
                       display="flex"
                       alignItems="center"
                       fontWeight="medium"
                     >
-                      073-994 80 47
+                      070-665 32 48
                     </Link>
                   </Box>
                 </Flex>
