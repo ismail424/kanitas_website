@@ -273,7 +273,7 @@ const ContactSection: React.FC = () => {
                       py={2.5}
                       height="auto"
                       fontWeight="500"
-                      isLoading={isSubmitting}
+                      loading={isSubmitting}
                       loadingText="Skickar..."
                       _hover={{
                         bg: hoverColor,
