@@ -51,6 +51,7 @@ const ContactSection: React.FC = () => {
   const primaryColor: string = "#2563eb"; // Modern blue
   const hoverColor: string = "#1d4ed8"; // Slightly darker blue for hover states
   const bgLight: string = "#f8fafc"; // Very light blue-gray background
+  const textColor: string = "#4B5563"; // Medium gray for text
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = e.target;
@@ -182,11 +183,15 @@ const ContactSection: React.FC = () => {
                       onChange={handleChange}
                       placeholder="Ditt namn"
                       size="md"
+                      color={textColor}
                       borderColor="gray.200"
                       borderRadius="md"
                       _focus={{ 
                         borderColor: primaryColor,
                         boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      _placeholder={{
+                        color: "gray.400"
                       }}
                       required
                     />
@@ -201,11 +206,15 @@ const ContactSection: React.FC = () => {
                       placeholder="Din e-post"
                       size="md"
                       type="email"
+                      color={textColor}
                       borderColor="gray.200"
                       borderRadius="md"
                       _focus={{ 
                         borderColor: primaryColor,
                         boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      _placeholder={{
+                        color: "gray.400"
                       }}
                       required
                     />
@@ -219,11 +228,15 @@ const ContactSection: React.FC = () => {
                       onChange={handleChange}
                       placeholder="Ditt telefonnummer"
                       size="md"
+                      color={textColor}
                       borderColor="gray.200"
                       borderRadius="md"
                       _focus={{ 
                         borderColor: primaryColor,
                         boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      _placeholder={{
+                        color: "gray.400"
                       }}
                     />
                   </Box>
@@ -237,11 +250,15 @@ const ContactSection: React.FC = () => {
                       placeholder="Beskriv ditt projekt eller ställ dina frågor här"
                       size="md"
                       rows={4}
+                      color={textColor}
                       borderColor="gray.200"
                       borderRadius="md"
                       _focus={{ 
                         borderColor: primaryColor,
                         boxShadow: `0 0 0 1px ${primaryColor}`
+                      }}
+                      _placeholder={{
+                        color: "gray.400"
                       }}
                       required
                     />
@@ -256,7 +273,7 @@ const ContactSection: React.FC = () => {
                       py={2.5}
                       height="auto"
                       fontWeight="500"
-                      loading={isSubmitting}
+                      isLoading={isSubmitting}
                       loadingText="Skickar..."
                       _hover={{
                         bg: hoverColor,
