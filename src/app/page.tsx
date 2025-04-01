@@ -9,6 +9,8 @@ import ServicesSection from '../components/ServicesSection';
 import ReferencesSection from '../components/ReferencesSection';
 import ContactSection from '../components/ContactSection';
 import { Separator } from '@chakra-ui/react';
+import { Toaster } from "@/components/ui/toaster"
+import { Analytics } from "@vercel/analytics/react"
 
 const { Content } = Layout;
 
@@ -25,6 +27,8 @@ export default function Home() {
         <ContactSection />
       </Content>
       <Footer />
+      <Toaster />
+      <Analytics />
     </Layout>
   );
 }

@@ -19,6 +19,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { Mail, Phone, Home, Send } from 'lucide-react';
+import { toaster } from "@/components/ui/toaster"
 
 // Define TypeScript interfaces
 interface FormData {
@@ -26,6 +27,15 @@ interface FormData {
   email: string;
   phone: string;
   message: string;
+}
+
+interface EmailPayload {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  recipient: string;
+  subject: string;
 }
 
 const ContactSection: React.FC = () => {
@@ -50,15 +60,40 @@ const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Form values:', formData);
-      alert('Tack för ditt meddelande! Vi återkommer så snart som möjligt.');
+    try {
+      // Prepare the email payload with strict typing
+      const emailPayload: EmailPayload = {
+        ...formData,
+        recipient: 'info@kanitas.se',
+        subject: 'Nytt kontaktformulär från Kanitas hemsida',
+      };
       
+      // Send the form data to your server-side API endpoint
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailPayload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Det gick inte att skicka meddelandet');
+      }
+      
+      // Show success message
+      toaster.create({
+        title: 'Meddelande skickat!',
+        description: 'Tack för ditt meddelande! Vi återkommer så snart som möjligt.',
+        type: 'success',
+        duration: 5000,
+      });
+
       // Reset form
       setFormData({
         name: '',
@@ -66,8 +101,20 @@ const ContactSection: React.FC = () => {
         phone: '',
         message: ''
       });
+    } catch (error: unknown) {
+      // Show error message with proper type handling
+      const errorMessage = error instanceof Error ? error.message : 'Okänt fel';
+      
+      toaster.create({
+        title: 'Ett fel uppstod',
+        description: 'Det gick inte att skicka meddelandet. Försök igen senare eller kontakta oss via telefon.',
+        type: 'error',
+        duration: 5000,
+      });
+      console.error('Error sending email:', errorMessage);
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -109,7 +156,7 @@ const ContactSection: React.FC = () => {
         {/* Main Content */}
         <SimpleGrid columns={{ base: 1, lg: 2 }} gap={8}>
           {/* Contact Form */}
-          <Card.Root 
+          <Card.Root
             bg="white"
             borderRadius="lg"
             overflow="hidden"
@@ -209,7 +256,8 @@ const ContactSection: React.FC = () => {
                       py={2.5}
                       height="auto"
                       fontWeight="500"
-                      disabled={isSubmitting}
+                      loading={isSubmitting}
+                      loadingText="Skickar..."
                       _hover={{
                         bg: hoverColor,
                       }}
@@ -222,7 +270,7 @@ const ContactSection: React.FC = () => {
                       fontSize="md"
                     >
                       <Icon as={Send} boxSize={4} mr={2} />
-                      {isSubmitting ? 'Skickar...' : 'Skicka meddelande'}
+                      Skicka meddelande
                     </Button>
                   </Box>
                 </Stack>
@@ -231,7 +279,7 @@ const ContactSection: React.FC = () => {
           </Card.Root>
           
           {/* Contact Information */}
-          <Card.Root 
+          <Card.Root
             bg="white"
             borderRadius="lg"
             overflow="hidden"

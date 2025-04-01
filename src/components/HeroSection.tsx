@@ -234,6 +234,7 @@ const HeroSection: React.FC = () => {
               border: "2px solid #124075",
               animation: "pulse 2s infinite",
             }}
+            display={{ base: "none", md: "flex" }}
             css={{
               '@keyframes pulse': {
                 '0%': { 
@@ -247,7 +248,7 @@ const HeroSection: React.FC = () => {
               }
             }}
           >
-            <Icon as={ChevronDown} boxSize={{ base: 6, md: 6 }} />
+            <Icon as={ChevronDown} boxSize={{ base: 6, md: 6 }} color="white" />
           </Box>
         </Center>
       </Box>
