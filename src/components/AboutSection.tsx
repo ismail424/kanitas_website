@@ -50,12 +50,12 @@ const AboutSection = () => {
   ]
 
   const specializations = [
-    { name: 'Fönsterbyten', icon: Home },
-    { name: 'Gipsentreprenader', icon: Columns },
+    { name: 'Bro- och vägkonstruktion', icon: Building },
+    { name: 'Markarbeten & grundläggning', icon: Home },
+    { name: 'Infrastrukturprojekt', icon: Columns },
     { name: 'Nyproduktion', icon: Building },
-    { name: 'Kontorsrenoveringar', icon: Briefcase },
-    { name: 'Badrumsrenoveringar', icon: Bath },
-    { name: 'Köksrenoveringar', icon: ChefHat }
+    { name: 'Anläggningsprojekt', icon: Target },
+    { name: 'Kommersiella byggnader', icon: Briefcase }
   ]
 
   return (
@@ -117,10 +117,7 @@ const AboutSection = () => {
                 lineHeight="tall" 
                 textAlign={{ base: "center", md: "left" }}
                 >
-                Kanitas AB startade 2011 och har med åren kommit att specialisera sig inom 
-                entreprenadarbeten såsom fönsterbyten, gipsentreprenader, nyproduktion och 
-                kontorsrenoveringar. Våra kunder är privatpersoner, bostadsrättsföreningar, 
-                fastighetsägare och byggbolag.
+                Kanitas AB grundades år 2011 och har sedan dess etablerat sig som en pålitlig aktör inom bygg- och anläggningsbranschen. Med över två decenniers erfarenhet har vi utvecklat en bred kompetens inom både infrastrukturprojekt och husbyggnation.
                 </Text>
               
               <Text fontSize={{ base: "md", md: "lg" }} color="gray.700" lineHeight="tall"
@@ -132,11 +129,40 @@ const AboutSection = () => {
                 kunder är återkommande, då de verkligen tagit fasta på fördelen med ett byggföretag 
                 som tar stafettpinnen från start till mål.
               </Text>
+                
+              {/* Vi har avtal med Byggnads, och alla våra medarbetare har ID06, vilket säkerställer att vi arbetar enligt branschens krav och standarder. */}
+              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700" lineHeight="tall"
+                textAlign={{ base: "center", md: "left" }}
+              >
+                Vi har avtal med Byggnads, och alla våra medarbetare har ID06, vilket säkerställer att vi arbetar enligt branschens krav och standarder.
+              </Text>
               
+              {/* New section about infrastructure */}
+              <Box pt="2">
+                <Text 
+                  fontSize={{ base: "lg", md: "xl" }}
+                  fontWeight="semibold"
+                  color={primaryColor}
+                  mb="2"
+                >
+                  Infrastruktur & anläggning
+                </Text>
+                <Text 
+                  fontSize={{ base: "md", md: "lg" }}
+                  color="gray.700"
+                  lineHeight="tall"
+                  textAlign={{ base: "center", md: "left" }}
+                >
+                  Vi har lång erfarenhet av att arbeta i komplexa anläggningsprojekt, såsom bro- och vägkonstruktion. Vi kan bistå med 
+                  projektering, genomförande och kvalitetssäkring av infrastrukturprojekt. Vår expertis omfattar markarbeten, 
+                  grundläggning, dränering och andra kritiska moment som krävs för välfungerande och hållbara infrastrukturlösningar.
+                </Text>
+              </Box>
+
               {/* Specializations */}
               <Box w="full" pt="4">
                 <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="semibold" color={primaryColor} mb="4">
-                  Våra specialområden:
+                Våra expertområden:
                 </Text>
                 
                 <Flex flexWrap="wrap" gap="4">
