@@ -91,7 +91,7 @@ const Header = () => {
                 _hover={{ color: "whiteAlpha.900" }}
               >
                 <Box color="white" as={FiPhone} />
-                <Text color={'white'} fontSize="sm">073-994 80 47</Text>
+                <Text color={'white'} fontSize="sm">070-665 32 48</Text>
               </Box>
               <Box 
                 as="a" 
@@ -295,7 +295,7 @@ const Header = () => {
                     _hover={{ color: primaryColor }}
                   >
                     <Box as={FiPhone} />
-                    <Text>073-994 80 47</Text>
+                    <Text>070-665 32 48</Text>
                   </Box>
                   <Box 
                     as="a"
