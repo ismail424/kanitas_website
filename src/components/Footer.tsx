@@ -18,6 +18,41 @@ const Footer: React.FC = () => {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Certificate Images Row - Further Improved Styling */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 32, // reduced from 48
+            marginTop: 4, // reduced from 12
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 16, // reduced from 48
+              background: 'rgba(255,255,255,0.18)',
+              borderRadius: 22,
+              boxShadow: '0 4px 32px 0 rgba(18,64,117,0.13)',
+              padding: '20px 24px', // reduced from 28px 40px
+              flexWrap: 'wrap',
+              border: '1.5px solid #3a85d844',
+              maxWidth: 900,
+              width: '100%',
+              minHeight: 90, // reduced from 110
+              transition: 'box-shadow 0.3s',
+            }}
+          >
+            <Image src="/images/cert/aaa_120.png" alt="AAA certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
+            <Image src="/images/cert/byggnads_140.png" alt="Byggnads certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
+            <Image src="/images/cert/fastighets_120.png" alt="Fastighets certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
+            <Image src="/images/cert/SafeTrade_120.png" alt="SafeTrade certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
+            <Image src="/images/cert/svnaring_B.png" alt="Svensk Näring certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
+          </div>
+        </div>
         <Row gutter={[48, 48]}>
           <Col xs={24} sm={12} lg={8}>
             <div className="mb-6">
