@@ -66,7 +66,7 @@ const HeroSection: React.FC = () => {
             mx="auto"
           >
             {/* Main heading with animated underline */}
-            <VStack gap={{ base: 3, md: 3 }}> // Increased gap on mobile
+            <VStack gap={{ base: 3, md: 3 }}> {/* Increased gap on mobile */}
               <Heading 
                 as="h1"
                 fontSize={{ base: "5xl", md: "5xl", lg: "6xl" }}
@@ -270,7 +270,7 @@ const Feature = ({ icon, text }: { icon: React.ElementType, text: string }) => (
     maxW={{ base: "85%", sm: "auto" }} // Increased max width on mobile
     justifyContent={{ base: "center", sm: "flex-start" }}
   >
-    <Icon as={icon} color="blue.200" boxSize={{ base: 5, md: 5 }} /> // Increased icon size on mobile
+    <Icon as={icon} color="blue.200" boxSize={{ base: 5, md: 5 }} /> 
     <Text color="white" fontWeight="medium" fontSize={{ base: "sm", md: "md" }}>
       {text}
     </Text>
