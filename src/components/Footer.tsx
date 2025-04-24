@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
             <Space direction="vertical" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
               <Space>
                 <PhoneOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>073-994 80 47</Text>
+                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>070-665 32 48</Text>
               </Space>
               <Space>
                 <MailOutlined style={{ color: '#3a85d8' }} />
