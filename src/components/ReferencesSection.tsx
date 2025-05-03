@@ -27,6 +27,7 @@ const ReferencesSection = () => {
     { name: 'Byggpartner', logo: '/references/byggpartner.png' },
     { name: 'DAGAB', logo: '/references/dagab.jpg' },
     { name: 'SMD Logistics', logo: '/references/smd.jpg' },
+    { name: 'Catena', logo: '/references/catena.png' },
   ]
 
   return (

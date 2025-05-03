@@ -22,8 +22,6 @@ import {
   Columns, 
   Building, 
   Briefcase, 
-  Bath, 
-  ChefHat 
 } from 'lucide-react'
 
 const AboutSection = () => {
