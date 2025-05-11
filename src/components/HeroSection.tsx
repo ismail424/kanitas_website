@@ -66,6 +66,7 @@ const HeroSection: React.FC = () => {
             mx="auto"
           >
             {/* Main heading with animated underline */}
+
             <VStack gap={{ base: 3, md: 3 }}>
               <Heading 
                 as="h1"
