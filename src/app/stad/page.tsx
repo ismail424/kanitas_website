@@ -16,12 +16,12 @@ export default function StadPage() {
     <AreaPage
       area={area}
       whyTitle="Städning med byggarens öga för detaljer"
-      whyLead="Vi kommer från byggbranschen och vet exakt vad en besiktning kräver. Därför blir det rätt första gången – oavsett om det gäller ett byggprojekt eller ett kontor."
+      whyLead="Vi kommer från byggbranschen och vet exakt vad en besiktning kräver. Därför blir det rätt första gången, oavsett om det gäller ett byggprojekt eller ett kontor."
       whyPoints={[
         "Specialister på byggstädning och slutstädning inför besiktning",
         "Kollektivavtal och försäkrad personal",
         "Dokumenterad kvalitetsuppföljning på varje uppdrag",
-        "Flexibla avtal – engångsuppdrag eller löpande städning",
+        "Flexibla avtal för engångsuppdrag eller löpande städning",
         "Snabb inställelse i hela Storstockholm",
       ]}
       whyImage={{

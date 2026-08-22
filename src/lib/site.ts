@@ -21,7 +21,7 @@ export const site = {
     country: "SE",
   },
   geo: { lat: 59.4253, lng: 17.8345 },
-  openingHours: "Mån–fre 08.00–17.00",
+  openingHours: "Vardagar 08.00 till 17.00",
   directionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=Almarev%C3%A4gen+13%2C+176+76+J%C3%A4rf%C3%A4lla",
 } as const;
@@ -108,22 +108,22 @@ export const areas: Area[] = [
     nav: "Bygg",
     name: "Kanitas Bygg",
     tagline: "Från grund till nyckelfärdigt",
-    h1: "Byggföretag i Stockholm – från grund till nyckelfärdigt",
+    h1: "Byggföretag i Stockholm. Från grund till nyckelfärdigt.",
     servicesH2: "Byggtjänster i Stockholm",
     serviceType: "Byggentreprenad och byggservice",
     tone: "#c9a86a",
     toneDeep: "#1e4d3b",
     ctaLabel: "Begär offert",
     teaser:
-      "Nybyggnation, renovering och byggservice för företag och privatpersoner – vår kärnverksamhet sedan 2011.",
+      "Nybyggnation, renovering och byggservice för företag och privatpersoner. Vår kärnverksamhet sedan 2011.",
     intro:
-      "Bygg är hjärtat i Kanitas. Vi tar totalansvar för projekt i alla storlekar – från löpande byggservice till kompletta entreprenader – åt byggbolag, fastighetsägare och privatpersoner. Bland våra uppdragsgivare finns flera av Sveriges ledande bygg- och fastighetsaktörer, och vi hjälper lika gärna dig som ska renovera hemma.",
+      "Bygg är hjärtat i Kanitas. Vi tar totalansvar för projekt i alla storlekar, från löpande byggservice till kompletta entreprenader, åt byggbolag, fastighetsägare och privatpersoner. Bland våra uppdragsgivare finns flera av Sveriges ledande bygg- och fastighetsaktörer, och vi hjälper lika gärna dig som ska renovera hemma.",
     heroImage: "/images/photos/bygg-hero.jpg",
     heroAlt: "Byggarbetare i arbete på byggarbetsplats",
     services: [
       {
         title: "Nybyggnation",
-        text: "Kompletta entreprenader från markarbete till färdig byggnad – för företag, fastighetsägare och privatpersoner.",
+        text: "Kompletta entreprenader från markarbete till färdig byggnad, för företag, fastighetsägare och privatpersoner.",
         icon: "building",
       },
       {
@@ -133,12 +133,12 @@ export const areas: Area[] = [
       },
       {
         title: "Byggservice",
-        text: "Löpande underhåll, reparationer och anpassningar med snabb inställelse – ett tryggt avtal för fastighetsägare.",
+        text: "Löpande underhåll, reparationer och anpassningar med snabb inställelse. Ett tryggt avtal för fastighetsägare.",
         icon: "wrench",
       },
       {
         title: "Rivning & sanering",
-        text: "Selektiv rivning samt bygg-, brand- och fuktsanering – säkert, miljöriktigt och med full dokumentation.",
+        text: "Selektiv rivning samt bygg-, brand- och fuktsanering. Säkert, miljöriktigt och med full dokumentation.",
         icon: "shield",
       },
       {
@@ -154,8 +154,8 @@ export const areas: Area[] = [
     ],
     related: {
       href: "/stad",
-      label: "Byggstädning & slutstädning – Kanitas Städ",
-      text: "Efter bygget tar systerbolaget hand om",
+      label: "Kanitas Städ hand om byggstädning och slutstädning",
+      text: "Efter bygget tar",
     },
     process: [
       {
@@ -171,7 +171,7 @@ export const areas: Area[] = [
       {
         step: "03",
         title: "Uppföljning",
-        text: "Vi går igenom resultatet tillsammans och lämnar inte förrän allt är godkänt – och vi finns kvar efteråt.",
+        text: "Vi går igenom resultatet tillsammans och lämnar inte förrän allt är godkänt. Vi finns kvar även efteråt.",
       },
     ],
     faq: [
@@ -181,7 +181,7 @@ export const areas: Area[] = [
       },
       {
         q: "Vad kostar en offert?",
-        a: "Ingenting. Offerter är alltid kostnadsfria och utan förpliktelser – beskriv ditt projekt så återkommer vi, oftast samma dag.",
+        a: "Ingenting. Offerter är alltid kostnadsfria och utan förpliktelser. Beskriv ditt projekt så återkommer vi, oftast samma dag.",
       },
       {
         q: "Tar ni både små och stora uppdrag?",
@@ -193,7 +193,7 @@ export const areas: Area[] = [
       },
     ],
     seo: {
-      title: "Byggföretag i Stockholm – renovering & byggservice",
+      title: "Byggföretag i Stockholm: renovering & byggservice",
       description:
         "Kanitas Bygg utför nybyggnation, renovering, byggservice och rivning i Stockholm. AAA-kreditvärdighet och kollektivavtal. Begär kostnadsfri offert!",
     },
@@ -211,9 +211,9 @@ export const areas: Area[] = [
     toneDeep: "#1e4d3b",
     ctaLabel: "Begär offert",
     teaser:
-      "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet – för företag, BRF:er och byggprojekt.",
+      "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet för företag, BRF:er och byggprojekt.",
     intro:
-      "Kanitas Städ levererar professionell städning där kraven är som högst. Vi är specialiserade på byggstädning och slutstädning inför besiktning, och tar även hand om den löpande städningen av kontor och fastigheter. Rätt utfört, i rätt tid – varje gång.",
+      "Kanitas Städ levererar professionell städning där kraven är som högst. Vi är specialiserade på byggstädning och slutstädning inför besiktning, och tar även hand om den löpande städningen av kontor och fastigheter. Rätt utfört och i rätt tid, varje gång.",
     heroImage: "/images/photos/stad-hero.jpg",
     heroAlt: "Städare moppar entrégolv i kontorsbyggnad",
     services: [
@@ -224,7 +224,7 @@ export const areas: Area[] = [
       },
       {
         title: "Kontors- & fastighetsstädning",
-        text: "Regelbunden städning av kontor, trapphus och gemensamma ytor – med fasta kontaktpersoner och tydliga kvalitetsuppföljningar.",
+        text: "Regelbunden städning av kontor, trapphus och gemensamma ytor, med fasta kontaktpersoner och tydliga kvalitetsuppföljningar.",
         icon: "briefcase",
       },
       {
@@ -234,7 +234,7 @@ export const areas: Area[] = [
       },
       {
         title: "Storstädning & specialstädning",
-        text: "Djuprengöring av golv, fönsterputs och specialuppdrag – när det behövs mer än det vanliga.",
+        text: "Djuprengöring av golv, fönsterputs och specialuppdrag när det behövs mer än det vanliga.",
         icon: "sparkle",
       },
     ],
@@ -252,18 +252,18 @@ export const areas: Area[] = [
       {
         step: "02",
         title: "Städning enligt plan",
-        text: "Vårt team städar på avtalad tid med rätt utrustning och metoder – utan att störa pågående verksamhet eller byggarbete.",
+        text: "Vårt team städar på avtalad tid med rätt utrustning och metoder, utan att störa pågående verksamhet eller byggarbete.",
       },
       {
         step: "03",
         title: "Kvalitetskontroll",
-        text: "Vi går igenom resultatet mot checklistan tillsammans med dig – och vid slutstädning står vi bakom resultatet hela vägen till godkänd besiktning.",
+        text: "Vi går igenom resultatet mot checklistan tillsammans med dig. Vid slutstädning står vi bakom resultatet hela vägen till godkänd besiktning.",
       },
     ],
     extraSection: {
       eyebrow: "Byggstädning",
       title: "Det här ingår i en byggstädning",
-      lead: "Byggstädning sker i etapper i takt med projektet – från grovstädning under byggtiden till finstädning inför besiktning och inflytt.",
+      lead: "Byggstädning sker i etapper i takt med projektet, från grovstädning under byggtiden till finstädning inför besiktning och inflytt.",
       items: [
         {
           title: "Grovstädning",
@@ -271,7 +271,7 @@ export const areas: Area[] = [
         },
         {
           title: "Finstädning",
-          text: "Samtliga ytor dammbekämpas och rengörs – snickerier, ventilationsdon, elcentraler, fönsterkarmar och golv.",
+          text: "Samtliga ytor dammbekämpas och rengörs: snickerier, ventilationsdon, elcentraler, fönsterkarmar och golv.",
         },
         {
           title: "Fönsterputs",
@@ -279,7 +279,7 @@ export const areas: Area[] = [
         },
         {
           title: "Slutstädning inför besiktning",
-          text: "Sista genomgången innan överlämning – vi städar tills lokalen eller bostaden håller för besiktning och inflytt.",
+          text: "Sista genomgången innan överlämning. Vi städar tills lokalen eller bostaden håller för besiktning och inflytt.",
         },
       ],
     },
@@ -303,7 +303,7 @@ export const areas: Area[] = [
     toneDeep: "#5f4c37",
     ctaLabel: "Anmäl intresse",
     teaser:
-      "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm – med egen drift och skötsel.",
+      "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm, med egen drift och skötsel.",
     intro:
       "Kanitas Fastigheter äger och förvaltar fastigheter och kommersiella lokaler i Storstockholm. Med byggkompetensen i samma koncern håller vi våra fastigheter i toppskick och kan snabbt anpassa lokaler efter hyresgästens behov.",
     heroImage: "/images/photos/fastigheter-hero.jpg",
@@ -321,12 +321,12 @@ export const areas: Area[] = [
       },
       {
         title: "Fastighetsservice & skötsel",
-        text: "Tillsyn, underhåll, snöröjning och markskötsel – allt utfört av koncernens egna team.",
+        text: "Tillsyn, underhåll, snöröjning och markskötsel, allt utfört av koncernens egna team.",
         icon: "cog",
       },
       {
         title: "Lokalanpassning",
-        text: "Vi bygger om och anpassar lokalen efter din verksamhet – snabbt, eftersom bygg och fastighet sitter i samma hus.",
+        text: "Vi bygger om och anpassar lokalen efter din verksamhet, snabbt, eftersom bygg och fastighet sitter i samma hus.",
         icon: "layout",
       },
     ],
@@ -339,7 +339,7 @@ export const areas: Area[] = [
       {
         step: "01",
         title: "Intresseanmälan",
-        text: "Berätta vilken typ av lokal du söker – yta, användning och önskat område – så hör vi av oss när något passar.",
+        text: "Berätta vilken typ av lokal du söker, yta, användning och önskat område, så hör vi av oss när något passar.",
       },
       {
         step: "02",
@@ -349,13 +349,13 @@ export const areas: Area[] = [
       {
         step: "03",
         title: "Inflytt & anpassning",
-        text: "Behöver lokalen anpassas bygger koncernens eget byggteam om den innan eller efter inflytt – en kontakt för allt.",
+        text: "Behöver lokalen anpassas bygger koncernens eget byggteam om den innan eller efter inflytt, en kontakt för allt.",
       },
     ],
     extraSection: {
       eyebrow: "Lediga lokaler",
       title: "Söker du lokal i Järfälla eller Storstockholm?",
-      lead: "Vårt bestånd består främst av industri-, lager- och verksamhetslokaler. Utbudet förändras löpande och alla objekt publiceras inte här – anmäl intresse så kontaktar vi dig när en lokal som matchar dina behov blir ledig.",
+      lead: "Vårt bestånd består främst av industri-, lager- och verksamhetslokaler. Utbudet förändras löpande och alla objekt publiceras inte här, anmäl intresse så kontaktar vi dig när en lokal som matchar dina behov blir ledig.",
       items: [
         {
           title: "Industri- & lagerlokaler",
@@ -367,12 +367,12 @@ export const areas: Area[] = [
         },
         {
           title: "Anpassning ingår i dialogen",
-          text: "Berätta vad din verksamhet kräver – koncernens byggteam kan anpassa lokalen innan du flyttar in.",
+          text: "Berätta vad din verksamhet kräver, koncernens byggteam kan anpassa lokalen innan du flyttar in.",
         },
       ],
     },
     seo: {
-      title: "Lediga lokaler i Järfälla – lager & industri",
+      title: "Lediga lokaler i Järfälla: lager & industri",
       description:
         "Kanitas Fastigheter hyr ut industri- och lagerlokaler i Järfälla och Storstockholm och förvaltar egna fastigheter. Anmäl intresse för lediga lokaler!",
     },
@@ -383,28 +383,28 @@ export const areas: Area[] = [
     nav: "Bil",
     name: "Kanitas Bil",
     tagline: "Trygg bilaffär, utan krångel",
-    h1: "Köp och sälj bil i Järfälla – trygg bilaffär utan krångel",
+    h1: "Köp och sälj bil i Järfälla. Trygg bilaffär utan krångel.",
     servicesH2: "Köp och försäljning av bilar och maskiner",
-    serviceType: "Bilhandel – köp och försäljning av fordon",
+    serviceType: "Bilhandel, köp och försäljning av fordon",
     businessType: "AutoDealer",
     tone: "#de7562",
     toneDeep: "#9c2e1f",
     ctaLabel: "Få en värdering",
     teaser:
-      "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner – alltid genomgångna och rätt prissatta.",
+      "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner, alltid genomgångna och rätt prissatta.",
     intro:
-      "Kanitas Bil köper och säljer personbilar, transportbilar, lastbilar och arbetsmaskiner. Som del av en etablerad koncern med AAA-kreditvärdighet gör du affären med en trygg motpart – snabbt, transparent och till rätt pris.",
+      "Kanitas Bil köper och säljer personbilar, transportbilar, lastbilar och arbetsmaskiner. Som del av en etablerad koncern med AAA-kreditvärdighet gör du affären med en trygg motpart, snabbt, transparent och till rätt pris.",
     heroImage: "/images/photos/bil-hero.jpg",
     heroAlt: "Bilar i showroom",
     services: [
       {
         title: "Försäljning av bilar",
-        text: "Noggrant utvalda personbilar och transportbilar, genomgångna och redo för leverans. Lagret förändras snabbt – ring så berättar vi vad som finns inne just nu.",
+        text: "Noggrant utvalda personbilar och transportbilar, genomgångna och redo för leverans. Lagret förändras snabbt, ring så berättar vi vad som finns inne just nu.",
         icon: "car",
       },
       {
         title: "Vi köper din bil",
-        text: "Snabb värdering och betalning samma dag – vi köper personbilar och transportbilar i alla prisklasser.",
+        text: "Snabb värdering och betalning samma dag, vi köper personbilar och transportbilar i alla prisklasser.",
         icon: "handshake",
       },
       {
@@ -427,21 +427,21 @@ export const areas: Area[] = [
       {
         step: "01",
         title: "Värdering",
-        text: "Skicka registreringsnummer och några bilder, eller kom förbi – vi värderar din bil snabbt och kostnadsfritt.",
+        text: "Skicka registreringsnummer och några bilder, eller kom förbi, vi värderar din bil snabbt och kostnadsfritt.",
       },
       {
         step: "02",
         title: "Prisförslag",
-        text: "Du får ett tydligt bud utan förpliktelser. Jämför gärna – vi står för vårt pris.",
+        text: "Du får ett tydligt bud utan förpliktelser. Jämför gärna, vi står för vårt pris.",
       },
       {
         step: "03",
         title: "Affär & betalning",
-        text: "Accepterar du budet sköter vi ägarbyte och betalning direkt – oftast samma dag.",
+        text: "Accepterar du budet sköter vi ägarbyte och betalning direkt, oftast samma dag.",
       },
     ],
     seo: {
-      title: "Sälj din bil i Järfälla – snabb värdering",
+      title: "Sälj din bil i Järfälla: snabb värdering",
       description:
         "Kanitas Bil köper och säljer personbilar, transportbilar, lastbilar och arbetsmaskiner i Stockholm. Snabb värdering, betalning samma dag. Trygg affär!",
     },
@@ -470,7 +470,7 @@ export const groupCompanies = [
   {
     name: "Kanitas AB",
     orgnr: "556841-1010",
-    role: "Moderbolag – bygg, städ och service sedan 2011",
+    role: "Moderbolag för bygg, städ och service sedan 2011",
     area: "/bygg",
     areaLabel: "Kanitas Bygg",
   },
@@ -508,15 +508,21 @@ export const groupCompanies = [
 export const values = [
   {
     title: "Kvalitet",
-    text: "Vi använder beprövade metoder och rätt material, och lämnar aldrig ett arbete innan det håller vår egen standard – den är högre än de flesta andras.",
+    icon: "award",
+    blurb: "Rätt metoder, rätt material och egenkontroll innan vi lämnar.",
+    text: "Vi använder beprövade metoder och rätt material, och lämnar aldrig ett arbete innan det håller vår egen standard. Den är högre än de flesta andras.",
   },
   {
     title: "Pålitlighet",
+    icon: "handshake",
+    blurb: "Vi håller tider, budgetar och det vi har lovat.",
     text: "Vi håller tider, budgetar och löften. Därför har vi kunder som stannat hos oss i över ett decennium.",
   },
   {
     title: "Kundfokus",
-    text: "Varje uppdrag anpassas efter dina behov – med en fast kontaktperson som svarar när du ringer.",
+    icon: "users",
+    blurb: "En fast kontaktperson som svarar när du ringer.",
+    text: "Varje uppdrag anpassas efter dina behov, med en fast kontaktperson som svarar när du ringer.",
   },
 ];
 
@@ -534,7 +540,7 @@ export const references = [
 ];
 
 export const certifications = [
-  { name: "AAA – Högsta kreditvärdighet", image: "/images/cert/aaa_120.png" },
+  { name: "AAA, Högsta kreditvärdighet", image: "/images/cert/aaa_120.png" },
   { name: "Kollektivavtal Byggnads", image: "/images/cert/byggnads_140.png" },
   {
     name: "Kollektivavtal Fastighets",

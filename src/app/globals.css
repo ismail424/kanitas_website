@@ -93,6 +93,15 @@ body {
   pointer-events: none;
 }
 
+/* Subtle dot grid so light surfaces are not flat white */
+.bg-dotgrid {
+  background-image: radial-gradient(
+    rgba(35, 29, 22, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+}
+
 /* Eyebrow kicker with rule — used above every section heading */
 .eyebrow {
   display: inline-flex;

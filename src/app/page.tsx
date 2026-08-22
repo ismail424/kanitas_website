@@ -5,11 +5,12 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import ValueIcon from "@/components/ValueIcon";
 import { activeAreas, ogMeta, references, site, stats, values } from "@/lib/site";
 
-const pageTitle = "Kanitas – Byggföretag & städfirma i Stockholm";
+const pageTitle = "Byggföretag & städfirma i Stockholm";
 const pageDescription =
-  "Kanitas är ett familjeägt bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i Storstockholm. AAA-kreditvärdighet. Begär offert!";
+  "Kanitas är ett bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i Storstockholm. AAA-kreditvärdighet. Begär offert!";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -49,20 +50,20 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — light, airy, big type left, architecture right */}
-      <section className="relative isolate overflow-hidden bg-paper">
+      <section className="relative isolate overflow-hidden bg-paper bg-dotgrid">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:min-h-[78svh] lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-24">
           <div className="lg:col-span-6">
             <p className="eyebrow text-copper">
-              Bygg & Städ – Storstockholm
+              Bygg & Städ i Storstockholm
             </p>
             <h1 className="mt-7 display-1 text-ink">
-              Vi bygger tryggt – och lämnar{" "}
+              Vi bygger tryggt och lämnar{" "}
               <em className="not-italic text-copper">rent</em> efter oss.
             </h1>
             <p className="mt-7 max-w-xl lead-lg text-muted">
-              Familjeägt byggföretag i Järfälla med egen städverksamhet –
-              sedan {site.founded} anlitade av allt från privatpersoner till
-              Sveriges största byggbolag.
+              Kanitas är ett bygg- och städföretag i Järfälla som sedan{" "}
+              {site.founded} anlitas av allt från privatpersoner till Sveriges
+              största byggbolag.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
@@ -133,7 +134,7 @@ export default function HomePage() {
       </div>
 
       {/* Business areas — bygg first and dominant */}
-      <section id="verksamheter" className="scroll-mt-24">
+      <section id="verksamheter" className="scroll-mt-24 bg-dotgrid">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="space-y-24 sm:space-y-32">
             {activeAreas.map((area, index) => (
@@ -203,22 +204,21 @@ export default function HomePage() {
             <SectionHeading
               on="dark"
               eyebrow="Om Kanitas"
-              title="Familjeägt, med kollektivavtal och byggt på förtroende"
-              lead={`Bygg- och städfirman som startade i Järfälla ${site.founded} är i dag en koncern med sex bolag och 35 medarbetare – byggd på en enda princip: leverera det vi lovat.`}
+              title="Kollektivavtal, AAA och kunder som stannar kvar"
+              lead={`Bygg- och städfirman som startade i Järfälla ${site.founded} är i dag en koncern med sex bolag och 35 medarbetare. Allt bygger på en enkel princip: vi levererar det vi lovar.`}
             />
-            <ul className="mt-8 flex flex-wrap gap-3">
+            <ul className="mt-9 space-y-5">
               {values.map((value) => (
-                <li
-                  key={value.title}
-                  className="inline-flex items-center gap-2.5 rounded-full border border-line-umbra bg-umbra-soft px-5 py-2.5"
-                >
-                  <span
-                    className="h-1.5 w-4 rounded-full bg-sand"
-                    aria-hidden="true"
-                  />
-                  <span className="font-display font-semibold text-white">
-                    {value.title}
+                <li key={value.title} className="flex items-start gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line-umbra bg-umbra-soft text-sand">
+                    <ValueIcon name={value.icon} className="h-5 w-5" />
                   </span>
+                  <div>
+                    <p className="font-display font-semibold text-white">
+                      {value.title}
+                    </p>
+                    <p className="mt-0.5 text-white/65">{value.blurb}</p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -265,6 +265,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Stockholm band — local anchoring */}
+      <section className="relative isolate overflow-hidden bg-umbra-deep">
+        <Image
+          src="/images/photos/sthlm-panorama.jpg"
+          alt="Vy över Riddarholmen i Stockholm i skymningen"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-umbra-deep/85 via-umbra-deep/50 to-umbra-deep/15"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8">
+          <Reveal>
+            <p className="eyebrow text-sand">Storstockholm</p>
+            <h2 className="mt-4 max-w-2xl display-2 text-white">
+              Järfälla är basen. Hela Storstockholm är arbetsplatsen.
+            </h2>
+            <p className="mt-4 max-w-xl lead text-white/80">
+              Från Almarevägen i Järfälla når vi snabbt byggarbetsplatser,
+              kontor och lager i hela Stockholmsområdet.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* CTA banner */}
       <section className="border-y border-line bg-sand-pale">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
@@ -273,7 +300,7 @@ export default function HomePage() {
               Har du ett projekt på gång?
             </h2>
             <p className="mt-3 max-w-xl text-lg text-muted">
-              Ring oss direkt eller skicka en offertförfrågan – vi återkommer
+              Ring oss direkt eller skicka en offertförfrågan. Vi återkommer
               oftast samma dag.
             </p>
           </div>

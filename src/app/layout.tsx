@@ -27,11 +27,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Kanitas – Byggföretag & städfirma i Stockholm",
+    default: "Kanitas | Byggföretag & städfirma i Stockholm",
     template: "%s | Kanitas",
   },
   description:
-    "Kanitas är ett familjeägt bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i Storstockholm sedan 2011.",
+    "Kanitas är ett bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i hela Storstockholm sedan 2011.",
   keywords: [
     "byggföretag Stockholm",
     "byggservice Järfälla",
@@ -48,16 +48,16 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: site.url,
     siteName: site.legalName,
-    title: "Kanitas – Byggföretag & städfirma i Stockholm",
+    title: "Kanitas | Byggföretag & städfirma i Stockholm",
     description:
-      "Familjeägt bygg- och städföretag i Järfälla. Kvalitet i hela Storstockholm sedan 2011.",
+      "Bygg- och städföretag i Järfälla. Byggentreprenader, byggservice och städning i Storstockholm sedan 2011.",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Kanitas" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanitas – Byggföretag & städfirma i Stockholm",
+    title: "Kanitas | Byggföretag & städfirma i Stockholm",
     description:
-      "Familjeägt bygg- och städföretag i Järfälla. Kvalitet i hela Storstockholm sedan 2011.",
+      "Bygg- och städföretag i Järfälla. Byggentreprenader, byggservice och städning i Storstockholm sedan 2011.",
     images: ["/og.jpg"],
   },
   robots: {

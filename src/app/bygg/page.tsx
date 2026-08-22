@@ -16,11 +16,11 @@ export default function ByggPage() {
     <AreaPage
       area={area}
       whyTitle="Byggpartnern som de stora aktörerna litar på"
-      whyLead="NCC, Implenia, Jiben och ByggPartner är några av företagen som anlitar oss – ett förtroende vi byggt upp genom att leverera, år efter år."
+      whyLead="NCC, Implenia, Jiben och ByggPartner är några av företagen som anlitar oss. Det förtroendet har vi byggt upp genom att leverera, år efter år."
       whyPoints={[
-        "AAA – högsta kreditvärdighet och stabil ekonomi",
+        "AAA, högsta kreditvärdighet och stabil ekonomi",
         "Kollektivavtal med Byggnads och Fastighets",
-        "Egen personal med lång erfarenhet – inte bara inhyrda team",
+        "Egen personal med lång erfarenhet i stället för inhyrda team",
         "Totalansvar: bygg, mark, sanering och byggstädning i samma koncern",
         "Fast kontaktperson och tydlig kommunikation genom hela projektet",
       ]}

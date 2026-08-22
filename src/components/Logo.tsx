@@ -31,9 +31,12 @@ function LockupSvg({
 }) {
   const suffixEntry = suffix ? SUFFIXES[suffix] : undefined;
   const width = suffixEntry ? suffixEntry.totalW : LOCKUP_W;
+  // Diacritics (Ä in STÄD) extend above cap height; grow the viewBox so
+  // they are never clipped and all lockups share one baseline.
+  const top = suffixEntry?.top ?? 0;
   return (
     <svg
-      viewBox={`0 0 ${width} ${LOCKUP_H}`}
+      viewBox={`0 ${top} ${width} ${LOCKUP_H - top}`}
       className={className}
       role="img"
       aria-label={label}
@@ -86,7 +89,7 @@ export default function Logo({ on = "light" }: { on?: "light" | "dark" }) {
     <Link
       href="/"
       className="inline-flex items-center"
-      aria-label="Kanitas – till startsidan"
+      aria-label="Kanitas, till startsidan"
     >
       <LockupSvg
         fg={on === "dark" ? "fill-white" : "fill-ink"}

@@ -37,8 +37,9 @@ export default function Footer() {
           <div>
             <Logo on="dark" />
             <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-white/60">
-              Familjeägt bygg- och städföretag i Järfälla. Kvalitet och
-              pålitlighet i hela Storstockholm sedan {site.founded}.
+              Kanitas är ett bygg- och städföretag i Järfälla. Sedan{" "}
+              {site.founded} utför vi byggentreprenader, byggservice och
+              städuppdrag i hela Storstockholm.
             </p>
           </div>
 
@@ -130,9 +131,8 @@ export default function Footer() {
 
         <div className="border-t border-line-umbra">
           <p className="mx-auto max-w-7xl px-4 py-6 text-center text-xs font-medium tracking-wide text-white/40 sm:px-6 lg:px-8">
-            © {new Date().getFullYear()} {site.legalName} · Org.nr {site.orgnr}{" "}
-            · {site.address.street}, {site.address.postalCode}{" "}
-            {site.address.city}
+            © {new Date().getFullYear()} {site.legalName} · Org.nr{" "}
+            {site.orgnr}
           </p>
         </div>
       </footer>

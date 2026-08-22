@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import ValueIcon from "@/components/ValueIcon";
 import {
   groupCompanies,
   ogMeta,
@@ -13,7 +14,7 @@ import {
   values,
 } from "@/lib/site";
 
-const pageTitle = "Om oss – familjeägd koncern i Järfälla sedan 2011";
+const pageTitle = "Om Kanitas: bygg och städ i Järfälla sedan 2011";
 const pageDescription =
   "Kanitas grundades 2011 i Järfälla och är i dag en koncern med sex bolag inom bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
 
@@ -48,8 +49,8 @@ export default function OmOssPage() {
             Byggt på förtroende sedan {site.founded}
           </h1>
           <p className="mt-6 max-w-2xl lead text-white/75">
-            Familjeägt bygg- och städföretag i Järfälla – i dag en koncern med
-            sex bolag och 35 medarbetare.
+            Bygg- och städföretag i Järfälla, i dag en koncern med sex bolag
+            och 35 medarbetare.
           </p>
         </div>
       </section>
@@ -69,7 +70,7 @@ export default function OmOssPage() {
                   idé: gör jobbet ordentligt, håll det du lovar och behandla
                   varje kund som den viktigaste. Det som började med bygg- och
                   städtjänster växte snabbt när några av Sveriges största
-                  byggbolag upptäckte att vi levererade – varje gång.
+                  byggbolag upptäckte att vi levererade, varje gång.
                 </p>
                 <p>
                   I dag är vi en familjeägd koncern med sex bolag och 35
@@ -80,8 +81,8 @@ export default function OmOssPage() {
                 </p>
                 <p>
                   Men storleken har aldrig varit målet. Målet är detsamma som{" "}
-                  {site.founded}: nöjda kunder som gärna kommer tillbaka – och
-                  som vågar rekommendera oss vidare.
+                  {site.founded}: nöjda kunder som gärna kommer tillbaka och gärna
+                  rekommenderar oss vidare.
                 </p>
               </div>
             </Reveal>
@@ -89,8 +90,8 @@ export default function OmOssPage() {
               <div className="grid gap-4">
                 <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                   <Image
-                    src="/images/photos/om-oss-hantverk.jpg"
-                    alt="Hantverkare i arbetskläder på byggarbetsplats"
+                    src="/images/photos/sthlm-gamla-stan.jpg"
+                    alt="Stockholms silhuett med Riddarholmen i kvällsljus"
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover"
@@ -131,10 +132,9 @@ export default function OmOssPage() {
             {values.map((value, index) => (
               <Reveal key={value.title} delay={index * 80}>
                 <div className="h-full rounded-2xl border border-line-umbra bg-umbra-soft p-8">
-                  <span
-                    className="block h-2 w-10 rounded-full bg-sand"
-                    aria-hidden="true"
-                  />
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line-umbra bg-umbra text-sand">
+                    <ValueIcon name={value.icon} className="h-6 w-6" />
+                  </span>
                   <h3 className="mt-5 title text-white">
                     {value.title}
                   </h3>
@@ -154,7 +154,7 @@ export default function OmOssPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Koncernen"
-              title="Sex bolag – en helhet"
+              title="Sex bolag, en helhet"
               lead="Kanitas AB är moderbolag i en koncern där varje bolag är specialiserat på sitt område. Tillsammans täcker vi hela kedjan."
             />
           </Reveal>
@@ -194,7 +194,7 @@ export default function OmOssPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Referenser"
-              title="Kunder som ställer krav – och kommer tillbaka"
+              title="Kunder som ställer krav och kommer tillbaka"
               lead="Vi arbetar som partner och underentreprenör åt några av Sveriges ledande bygg-, fastighets- och logistikföretag."
             />
           </Reveal>
@@ -228,8 +228,8 @@ export default function OmOssPage() {
               Vad kan vi hjälpa dig med?
             </h2>
             <p className="mt-3 max-w-xl text-lg text-muted">
-              Oavsett om du behöver en byggpartner, en städfirma, en lokal
-              eller en bil – hör av dig så hittar vi rätt lösning.
+              Oavsett om du behöver en byggpartner eller en städfirma, hör
+              av dig så hittar vi rätt lösning.
             </p>
           </div>
           <Link

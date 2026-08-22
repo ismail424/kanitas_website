@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactSection from "@/components/ContactSection";
 import { ogMeta, site } from "@/lib/site";
 
-const pageTitle = "Kontakt – begär offert eller ring oss";
+const pageTitle = "Kontakta oss för offert och rådgivning";
 const pageDescription = `Kontakta Kanitas i Järfälla: ring ${site.phone}, mejla ${site.email} eller skicka en offertförfrågan via formuläret. Vi återkommer oftast samma dag.`;
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function KontaktPage() {
             Vi återkommer oftast samma dag
           </h1>
           <p className="mt-6 max-w-2xl lead text-white/75">
-            Ring, mejla eller använd formuläret nedan – oavsett om det gäller
+            Ring, mejla eller använd formuläret nedan. Vi hjälper dig snabbt vidare, oavsett om det gäller
             bygg, städ, lokaler eller bil hjälper vi dig snabbt vidare.
           </p>
         </div>

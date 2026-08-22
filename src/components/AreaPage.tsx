@@ -117,7 +117,7 @@ export default function AreaPage({
       </section>
 
       {/* Services */}
-      <section>
+      <section className="bg-dotgrid">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
@@ -317,7 +317,7 @@ export default function AreaPage({
 
       <ContactSection
         title={`Behöver du hjälp av ${area.name}?`}
-        lead="Skicka en förfrågan så återkommer vi med ett förslag – kostnadsfritt och utan förpliktelser."
+        lead="Skicka en förfrågan så återkommer vi med ett förslag, kostnadsfritt och utan förpliktelser."
         topic={area.nav}
       />
     </>
