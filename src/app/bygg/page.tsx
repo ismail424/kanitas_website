@@ -25,12 +25,12 @@ export default function ByggPage() {
         "Fast kontaktperson och tydlig kommunikation genom hela projektet",
       ]}
       whyImage={{
-        src: "/images/photos/bygg-nybyggnation.jpg",
-        alt: "Nybyggd modern villa i skymning",
+        src: "/images/photos/bygg-renovering.jpg",
+        alt: "Pågående renovering och ombyggnation av lokal",
       }}
       secondaryImage={{
-        src: "/images/photos/bygg-renovering.jpg",
-        alt: "Nyrenoverat modernt kök och vardagsrum",
+        src: "/images/photos/bygg-lager.jpg",
+        alt: "Stor logistikhall med pallställ",
       }}
     />
   );

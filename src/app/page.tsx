@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Check, Phone } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { areas, ogMeta, references, site, stats, values } from "@/lib/site";
+import { activeAreas, ogMeta, references, site, stats, values } from "@/lib/site";
 
-const pageTitle = "Kanitas – Bygg, städ, fastigheter & bil i Stockholm";
+const pageTitle = "Kanitas – Byggföretag & städfirma i Stockholm";
 const pageDescription =
-  "Kanitas är en familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia. Begär offert!";
+  "Kanitas är ett familjeägt bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i Storstockholm. AAA-kreditvärdighet. Begär offert!";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -18,14 +18,41 @@ export const metadata: Metadata = {
   ...ogMeta(pageTitle, pageDescription, "/"),
 };
 
+/** Content for the home page feature sections, per area. */
+const features: Record<
+  string,
+  { image: string; alt: string; highlights: string[] }
+> = {
+  bygg: {
+    image: "/images/photos/bygg-nybyggnation.jpg",
+    alt: "Nybyggd modern villa i skymning",
+    highlights: [
+      "Nybyggnation & entreprenad",
+      "Renovering & ombyggnation",
+      "Byggservice med snabb inställelse",
+      "Mark, rivning & sanering",
+    ],
+  },
+  stad: {
+    image: "/images/photos/stad-detalj.jpg",
+    alt: "Professionell städvagn i fastighetskorridor",
+    highlights: [
+      "Byggstädning & slutstädning",
+      "Kontors- & fastighetsstädning",
+      "Flyttstädning med garanti",
+      "Storstädning & specialuppdrag",
+    ],
+  },
+};
+
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero — bygg-led */}
       <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-dark-deep">
         <Image
           src="/images/photos/home-hero.jpg"
-          alt="Stockholms stadssilhuett i skymning"
+          alt="Byggkranar över stomme i skymning"
           fill
           priority
           sizes="100vw"
@@ -36,23 +63,22 @@ export default function HomePage() {
           aria-hidden="true"
         />
         <div className="relative mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-          <p className="eyebrow text-amber">
-            Bygg · Städ · Fastigheter · Bil – Stockholm
-          </p>
+          <p className="eyebrow text-amber">Bygg & Städ – Storstockholm</p>
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
-            Vi bygger och tar hand om{" "}
-            <em className="not-italic text-amber">hela kedjan</em>
+            Vi bygger tryggt – och lämnar{" "}
+            <em className="not-italic text-amber">rent</em> efter oss
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
-            En familjeägd koncern i Järfälla – fyra verksamheter under ett tak
-            sedan {site.founded}.
+            Familjeägt byggföretag i Järfälla med egen städverksamhet – sedan{" "}
+            {site.founded} anlitade av allt från privatpersoner till Sveriges
+            största byggbolag.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="#verksamheter"
+              href="/bygg"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-7 py-3.5 text-lg font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
             >
-              Våra verksamheter
+              Våra byggtjänster
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Link>
             <Link
@@ -85,70 +111,61 @@ export default function HomePage() {
         </dl>
       </div>
 
-      {/* Business areas */}
+      {/* Business areas — bygg first and dominant */}
       <section id="verksamheter" className="scroll-mt-24">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Våra verksamheter"
-              title="En koncern. Fyra verksamheter."
-              lead="Bygg är kärnan – städ, fastigheter och bil gör helheten."
-            />
-          </Reveal>
-
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {areas.map((area, index) => (
-              <Reveal
-                key={area.slug}
-                delay={index * 80}
-                className={index === 0 ? "lg:col-span-3" : ""}
-              >
-                <Link
-                  href={`/${area.slug}`}
-                  className={`group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-[0_4px_24px_rgba(26,25,21,0.05)] transition-all hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(26,25,21,0.12)] ${
-                    index === 0 ? "lg:flex-row" : ""
-                  }`}
-                >
+          <div className="space-y-20 sm:space-y-24">
+            {activeAreas.map((area, index) => (
+              <Reveal key={area.slug}>
+                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                   <div
-                    className={`relative overflow-hidden ${
-                      index === 0 ? "aspect-[16/9] lg:aspect-auto lg:w-3/5" : "aspect-[16/9]"
+                    className={`relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_16px_48px_rgba(26,25,21,0.12)] ${
+                      index % 2 === 1 ? "lg:order-2" : ""
                     }`}
                   >
                     <Image
-                      src={area.heroImage}
-                      alt={area.heroAlt}
+                      src={features[area.slug]?.image ?? area.heroImage}
+                      alt={features[area.slug]?.alt ?? area.heroAlt}
                       fill
-                      sizes={index === 0 ? "(min-width: 1024px) 60vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
                     />
                   </div>
-                  <div
-                    className={`flex flex-1 flex-col p-6 sm:p-8 ${
-                      index === 0 ? "lg:justify-center lg:p-12" : ""
-                    }`}
-                  >
+                  <div>
                     <p className="eyebrow" style={{ color: area.toneDeep }}>
-                      {area.tagline}
-                    </p>
-                    <h3
-                      className={`mt-3 font-display font-bold tracking-tight text-ink ${
-                        index === 0 ? "text-2xl sm:text-3xl" : "text-xl"
-                      }`}
-                    >
                       {area.name}
-                    </h3>
-                    <p className="mt-3 leading-relaxed text-muted">
+                    </p>
+                    <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                      {area.servicesH2}
+                    </h2>
+                    <p className="mt-5 text-lg leading-relaxed text-muted">
                       {area.teaser}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-2 font-semibold text-amber-deep">
-                      Läs mer
-                      <ArrowRight
-                        className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                        aria-hidden="true"
-                      />
-                    </span>
+                    <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                      {(features[area.slug]?.highlights ?? []).map((item) => (
+                        <li key={item} className="flex items-start gap-2.5">
+                          <span
+                            className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                            style={{
+                              backgroundColor: `${area.tone}26`,
+                              color: area.toneDeep,
+                            }}
+                          >
+                            <Check className="h-4 w-4" aria-hidden="true" />
+                          </span>
+                          <span className="text-ink-soft">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={`/${area.slug}`}
+                      className="mt-8 inline-flex items-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+                    >
+                      Mer om {area.name}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </Reveal>
             ))}
           </div>

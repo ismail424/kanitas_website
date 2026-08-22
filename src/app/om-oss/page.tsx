@@ -181,13 +181,15 @@ export default function OmOssPage() {
                     Org.nr {company.orgnr}
                   </p>
                   <p className="mt-3 text-ink-soft">{company.role}</p>
-                  <Link
-                    href={company.area}
-                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-deep hover:text-ink"
-                  >
-                    {company.areaLabel}
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
+                  {"area" in company && company.area ? (
+                    <Link
+                      href={company.area}
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-deep hover:text-ink"
+                    >
+                      {company.areaLabel}
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </Link>
+                  ) : null}
                 </li>
               ))}
             </ul>

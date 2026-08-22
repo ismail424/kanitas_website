@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { areas, site } from "@/lib/site";
+import { activeAreas, site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static site: lastModified reflects the latest deploy, which is when
@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: site.url, lastModified, changeFrequency: "monthly", priority: 1 },
-    ...areas.map((area) => ({
+    ...activeAreas.map((area) => ({
       url: `${site.url}/${area.slug}`,
       lastModified,
       changeFrequency: "monthly" as const,

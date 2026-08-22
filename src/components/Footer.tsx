@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
-import { areas, certifications, site } from "@/lib/site";
+import { activeAreas, certifications, site } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -32,8 +32,8 @@ export default function Footer() {
         <div>
           <Logo on="dark" />
           <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
-            Familjeägd koncern i Järfälla med verksamhet inom bygg, städ,
-            fastigheter och bil. Kvalitet och pålitlighet sedan {site.founded}.
+            Familjeägt bygg- och städföretag i Järfälla. Kvalitet och
+            pålitlighet i hela Storstockholm sedan {site.founded}.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
             Verksamheter
           </p>
           <ul className="mt-5 space-y-3">
-            {areas.map((area) => (
+            {activeAreas.map((area) => (
               <li key={area.slug}>
                 <Link
                   href={`/${area.slug}`}

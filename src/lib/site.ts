@@ -59,6 +59,8 @@ export function ogMeta(
 
 export type Area = {
   slug: string;
+  /** Whether the area is shown on the site (nav, home, sitemap, routes) */
+  active: boolean;
   /** Short name used in navigation, e.g. "Bygg" */
   nav: string;
   /** Full brand name, e.g. "Kanitas Bygg" */
@@ -102,6 +104,7 @@ export type Area = {
 export const areas: Area[] = [
   {
     slug: "bygg",
+    active: true,
     nav: "Bygg",
     name: "Kanitas Bygg",
     tagline: "Från grund till nyckelfärdigt",
@@ -197,6 +200,7 @@ export const areas: Area[] = [
   },
   {
     slug: "stad",
+    active: true,
     nav: "Städ",
     name: "Kanitas Städ",
     tagline: "Rent, klart och redo",
@@ -211,7 +215,7 @@ export const areas: Area[] = [
     intro:
       "Kanitas Städ levererar professionell städning där kraven är som högst. Vi är specialiserade på byggstädning och slutstädning inför besiktning, och tar även hand om den löpande städningen av kontor och fastigheter. Rätt utfört, i rätt tid – varje gång.",
     heroImage: "/images/photos/stad-hero.jpg",
-    heroAlt: "Professionell fönsterputsning och städning",
+    heroAlt: "Städare moppar entrégolv i kontorsbyggnad",
     services: [
       {
         title: "Byggstädning & slutstädning",
@@ -287,6 +291,7 @@ export const areas: Area[] = [
   },
   {
     slug: "fastigheter",
+    active: false,
     nav: "Fastigheter",
     name: "Kanitas Fastigheter",
     tagline: "Lokaler som fungerar",
@@ -374,6 +379,7 @@ export const areas: Area[] = [
   },
   {
     slug: "bil",
+    active: false,
     nav: "Bil",
     name: "Kanitas Bil",
     tagline: "Trygg bilaffär, utan krångel",
@@ -442,8 +448,12 @@ export const areas: Area[] = [
   },
 ];
 
+/** Areas currently presented on the site. Bil and Fastigheter are parked
+ * for now — flip `active` and restore their route folders to re-enable. */
+export const activeAreas = areas.filter((a) => a.active);
+
 export const nav = [
-  ...areas.map((a) => ({ href: `/${a.slug}`, label: a.nav })),
+  ...activeAreas.map((a) => ({ href: `/${a.slug}`, label: a.nav })),
   { href: "/om-oss", label: "Om oss" },
   { href: "/kontakt", label: "Kontakt" },
 ];
@@ -482,22 +492,16 @@ export const groupCompanies = [
     name: "Kanitas Fastigheter AB",
     orgnr: "559553-4305",
     role: "Byggverksamhet och fastighetsförvaltning",
-    area: "/fastigheter",
-    areaLabel: "Kanitas Fastigheter",
   },
   {
     name: "Kanitas Fastigheter 1 AB",
     orgnr: "556994-3961",
     role: "Fastighetsägande och förvaltning",
-    area: "/fastigheter",
-    areaLabel: "Kanitas Fastigheter",
   },
   {
     name: "Kanitas Trading AB",
     orgnr: "559553-4263",
     role: "Köp, försäljning och uthyrning av fordon och maskiner",
-    area: "/bil",
-    areaLabel: "Kanitas Bil",
   },
 ];
 
@@ -541,10 +545,4 @@ export const certifications = [
 ];
 
 /** Topics for the contact form's ärende selector. */
-export const contactTopics = [
-  "Bygg",
-  "Städ",
-  "Fastigheter",
-  "Bil",
-  "Annat",
-] as const;
+export const contactTopics = ["Bygg", "Städ", "Annat"] as const;

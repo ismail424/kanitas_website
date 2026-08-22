@@ -25,12 +25,12 @@ export default function StadPage() {
         "Snabb inställelse i hela Storstockholm",
       ]}
       whyImage={{
-        src: "/images/photos/stad-resultat.jpg",
-        alt: "Skinande rent modernt kök efter städning",
+        src: "/images/photos/stad-lager.jpg",
+        alt: "Höglagergång i stor lagerlokal",
       }}
       secondaryImage={{
-        src: "/images/photos/stad-detalj.jpg",
-        alt: "Noggrann rengöring av ytor",
+        src: "/images/photos/stad-resultat.jpg",
+        alt: "Skinande rent modernt kök efter städning",
       }}
     />
   );

@@ -27,20 +27,18 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
+    default: "Kanitas – Byggföretag & städfirma i Stockholm",
     template: "%s | Kanitas",
   },
   description:
-    "Kanitas är en familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. Sedan 2011 levererar vi kvalitet åt företag och privatpersoner i Storstockholm.",
+    "Kanitas är ett familjeägt bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i Storstockholm sedan 2011.",
   keywords: [
     "byggföretag Stockholm",
     "byggservice Järfälla",
     "renovering Stockholm",
     "byggstädning Stockholm",
     "kontorsstädning Stockholm",
-    "lokaler Järfälla",
-    "fastighetsförvaltning Stockholm",
-    "köpa bil Järfälla",
+    "flyttstädning Stockholm",
     "mark och anläggning Stockholm",
     "rivning sanering Stockholm",
   ],
@@ -50,16 +48,16 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: site.url,
     siteName: site.legalName,
-    title: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
+    title: "Kanitas – Byggföretag & städfirma i Stockholm",
     description:
-      "Familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. Kvalitet sedan 2011.",
+      "Familjeägt bygg- och städföretag i Järfälla. Kvalitet i hela Storstockholm sedan 2011.",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Kanitas" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
+    title: "Kanitas – Byggföretag & städfirma i Stockholm",
     description:
-      "Familjeägd koncern i Järfälla: bygg, städ, fastigheter och bil. Kvalitet sedan 2011.",
+      "Familjeägt bygg- och städföretag i Järfälla. Kvalitet i hela Storstockholm sedan 2011.",
     images: ["/og.jpg"],
   },
   robots: {
