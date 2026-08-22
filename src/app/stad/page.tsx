@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AreaPage from "@/components/AreaPage";
-import { areas } from "@/lib/site";
+import { areas, ogMeta } from "@/lib/site";
 
 const area = areas.find((a) => a.slug === "stad")!;
 
@@ -8,17 +8,7 @@ export const metadata: Metadata = {
   title: area.seo.title,
   description: area.seo.description,
   alternates: { canonical: "/stad" },
-  openGraph: {
-    title: area.seo.title,
-    description: area.seo.description,
-    url: "/stad",
-    images: [{ url: "/og-stad.jpg", width: 1200, height: 630 }],
-  },
-  twitter: {
-    title: area.seo.title,
-    description: area.seo.description,
-    images: ["/og-stad.jpg"],
-  },
+  ...ogMeta(area.seo.title, area.seo.description, "/stad", "/og-stad.jpg"),
 };
 
 export default function StadPage() {

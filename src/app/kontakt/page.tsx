@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactSection from "@/components/ContactSection";
-import { site } from "@/lib/site";
+import { ogMeta, site } from "@/lib/site";
 
 const pageTitle = "Kontakt – begär offert eller ring oss";
 const pageDescription = `Kontakta Kanitas i Järfälla: ring ${site.phone}, mejla ${site.email} eller skicka en offertförfrågan via formuläret. Vi återkommer oftast samma dag.`;
@@ -9,12 +9,7 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   alternates: { canonical: "/kontakt" },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    url: "/kontakt",
-  },
-  twitter: { title: pageTitle, description: pageDescription },
+  ...ogMeta(pageTitle, pageDescription, "/kontakt"),
 };
 
 export default function KontaktPage() {

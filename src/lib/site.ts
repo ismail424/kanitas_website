@@ -109,8 +109,8 @@ export const areas: Area[] = [
     tagline: "Rent, klart och redo",
     h1: "Byggstädning och kontorsstädning i Stockholm",
     serviceType: "Byggstädning och kontorsstädning",
-    tone: "#a3b467",
-    toneDeep: "#5a6b2f",
+    tone: "#5cb57e",
+    toneDeep: "#296941",
     teaser:
       "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet – för företag, BRF:er och byggprojekt.",
     intro:
@@ -152,8 +152,8 @@ export const areas: Area[] = [
     tagline: "Lokaler som fungerar",
     h1: "Lokaler att hyra i Storstockholm – fastigheter som fungerar",
     serviceType: "Fastighetsförvaltning och lokaluthyrning",
-    tone: "#c2955c",
-    toneDeep: "#7a5a28",
+    tone: "#9c8265",
+    toneDeep: "#5f4c37",
     teaser:
       "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm – med egen drift och skötsel.",
     intro:
@@ -195,8 +195,8 @@ export const areas: Area[] = [
     tagline: "Trygg bilaffär, utan krångel",
     h1: "Köp och sälj bil i Järfälla – trygg bilaffär utan krångel",
     serviceType: "Bilhandel – köp och försäljning av fordon",
-    tone: "#cd6a50",
-    toneDeep: "#99331d",
+    tone: "#de7562",
+    toneDeep: "#9c2e1f",
     teaser:
       "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner – alltid genomgångna och rätt prissatta.",
     intro:
@@ -232,6 +232,37 @@ export const areas: Area[] = [
     },
   },
 ];
+
+/**
+ * Complete OpenGraph + Twitter metadata for a page. Next.js replaces nested
+ * metadata objects instead of merging them, so every page must ship the full
+ * set — this helper keeps og:image, og:type, siteName and twitter:card from
+ * silently disappearing.
+ */
+export function ogMeta(
+  title: string,
+  description: string,
+  path: string,
+  image = "/og.jpg",
+) {
+  return {
+    openGraph: {
+      type: "website" as const,
+      locale: "sv_SE",
+      siteName: site.legalName,
+      title,
+      description,
+      url: path,
+      images: [{ url: image, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export const nav = [
   ...areas.map((a) => ({ href: `/${a.slug}`, label: a.nav })),

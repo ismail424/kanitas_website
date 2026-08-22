@@ -5,7 +5,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { areas, references, site, stats, values } from "@/lib/site";
+import { areas, ogMeta, references, site, stats, values } from "@/lib/site";
 
 const pageTitle = "Kanitas – Bygg, städ, fastigheter & bil i Stockholm";
 const pageDescription =
@@ -15,8 +15,7 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   alternates: { canonical: "/" },
-  openGraph: { title: pageTitle, description: pageDescription, url: "/" },
-  twitter: { title: pageTitle, description: pageDescription },
+  ...ogMeta(pageTitle, pageDescription, "/"),
 };
 
 export default function HomePage() {

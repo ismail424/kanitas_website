@@ -7,6 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 import {
   certifications,
   groupCompanies,
+  ogMeta,
   references,
   site,
   stats,
@@ -21,8 +22,7 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   alternates: { canonical: "/om-oss" },
-  openGraph: { title: pageTitle, description: pageDescription, url: "/om-oss" },
-  twitter: { title: pageTitle, description: pageDescription },
+  ...ogMeta(pageTitle, pageDescription, "/om-oss"),
 };
 
 export default function OmOssPage() {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AreaPage from "@/components/AreaPage";
-import { areas } from "@/lib/site";
+import { areas, ogMeta } from "@/lib/site";
 
 const area = areas.find((a) => a.slug === "fastigheter")!;
 
@@ -8,17 +8,12 @@ export const metadata: Metadata = {
   title: area.seo.title,
   description: area.seo.description,
   alternates: { canonical: "/fastigheter" },
-  openGraph: {
-    title: area.seo.title,
-    description: area.seo.description,
-    url: "/fastigheter",
-    images: [{ url: "/og-fastigheter.jpg", width: 1200, height: 630 }],
-  },
-  twitter: {
-    title: area.seo.title,
-    description: area.seo.description,
-    images: ["/og-fastigheter.jpg"],
-  },
+  ...ogMeta(
+    area.seo.title,
+    area.seo.description,
+    "/fastigheter",
+    "/og-fastigheter.jpg",
+  ),
 };
 
 export default function FastigheterPage() {
