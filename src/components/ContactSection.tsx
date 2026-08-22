@@ -7,9 +7,12 @@ import { site } from "@/lib/site";
 export default function ContactSection({
   title = "Låt oss prata om ditt projekt",
   lead = "Beskriv vad du behöver hjälp med så återkommer vi med ett förslag – kostnadsfritt och utan förpliktelser.",
+  topic,
 }: {
   title?: string;
   lead?: string;
+  /** Pre-selected ärende in the form, e.g. "Bygg" on the bygg page */
+  topic?: string;
 }) {
   return (
     <section id="kontakt" className="bg-cream-dark">
@@ -65,6 +68,14 @@ export default function ContactSection({
                     {site.address.street}, {site.address.postalCode}{" "}
                     {site.address.city}
                   </p>
+                  <a
+                    href={site.directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-block text-sm font-semibold text-amber-deep underline decoration-amber/50 underline-offset-4 hover:text-ink"
+                  >
+                    Vägbeskrivning
+                  </a>
                 </div>
               </li>
               <li className="flex gap-4">
@@ -85,7 +96,7 @@ export default function ContactSection({
 
           <Reveal delay={100} className="lg:col-span-3">
             <div className="rounded-2xl border border-line bg-card p-6 shadow-[0_8px_40px_rgba(26,25,21,0.06)] sm:p-8">
-              <ContactForm />
+              <ContactForm defaultTopic={topic} />
             </div>
           </Reveal>
         </div>

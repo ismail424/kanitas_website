@@ -25,9 +25,22 @@ export const metadata: Metadata = {
   ...ogMeta(pageTitle, pageDescription, "/om-oss"),
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Hem", item: site.url },
+    { "@type": "ListItem", position: 2, name: "Om oss", item: `${site.url}/om-oss` },
+  ],
+};
+
 export default function OmOssPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative isolate flex min-h-[55svh] items-end overflow-hidden bg-dark-deep">
         <Image
@@ -168,6 +181,13 @@ export default function OmOssPage() {
                     Org.nr {company.orgnr}
                   </p>
                   <p className="mt-3 text-ink-soft">{company.role}</p>
+                  <Link
+                    href={company.area}
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-deep hover:text-ink"
+                  >
+                    {company.areaLabel}
+                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
                 </li>
               ))}
             </ul>

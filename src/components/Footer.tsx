@@ -38,9 +38,9 @@ export default function Footer() {
         </div>
 
         <nav aria-label="Verksamheter">
-          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
             Verksamheter
-          </h2>
+          </p>
           <ul className="mt-5 space-y-3">
             {areas.map((area) => (
               <li key={area.slug}>
@@ -56,9 +56,9 @@ export default function Footer() {
         </nav>
 
         <nav aria-label="Företaget">
-          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
             Företaget
-          </h2>
+          </p>
           <ul className="mt-5 space-y-3">
             <li>
               <Link
@@ -88,9 +88,9 @@ export default function Footer() {
         </nav>
 
         <div>
-          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
             Kontakt
-          </h2>
+          </p>
           <ul className="mt-5 space-y-3 text-white/75">
             <li>
               <a

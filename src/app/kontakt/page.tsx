@@ -12,9 +12,22 @@ export const metadata: Metadata = {
   ...ogMeta(pageTitle, pageDescription, "/kontakt"),
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Hem", item: site.url },
+    { "@type": "ListItem", position: 2, name: "Kontakt", item: `${site.url}/kontakt` },
+  ],
+};
+
 export default function KontaktPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <section className="bg-dark">
         <div className="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
           <p className="eyebrow text-amber">Kontakt</p>

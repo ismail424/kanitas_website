@@ -24,37 +24,62 @@ export default function AreaPage({
   whyImage,
   secondaryImage,
 }: AreaPageProps) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        name: area.name,
-        serviceType: area.serviceType,
-        description: area.seo.description,
-        provider: { "@id": `${site.url}/#organization` },
-        areaServed: "Storstockholm",
-        url: `${site.url}/${area.slug}`,
+  const pageUrl = `${site.url}/${area.slug}`;
+  const businessId = `${pageUrl}#business`;
+
+  const graph: object[] = [
+    {
+      "@type": "Service",
+      "@id": `${pageUrl}#service`,
+      name: area.name,
+      serviceType: area.serviceType,
+      description: area.seo.description,
+      provider: area.businessType
+        ? { "@id": businessId }
+        : { "@id": `${site.url}/#organization` },
+      areaServed: "Storstockholm",
+      url: pageUrl,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Hem", item: site.url },
+        { "@type": "ListItem", position: 2, name: area.name, item: pageUrl },
+      ],
+    },
+  ];
+
+  // Vertical-specific business entity (e.g. AutoDealer for /bil)
+  if (area.businessType) {
+    graph.push({
+      "@type": area.businessType,
+      "@id": businessId,
+      name: area.name,
+      url: pageUrl,
+      telephone: "+46706653248",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.address.street,
+        postalCode: site.address.postalCode,
+        addressLocality: site.address.city,
+        addressCountry: site.address.country,
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Hem",
-            item: site.url,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: area.name,
-            item: `${site.url}/${area.slug}`,
-          },
-        ],
-      },
-    ],
-  };
+      parentOrganization: { "@id": `${site.url}/#organization` },
+    });
+  }
+
+  if (area.faq) {
+    graph.push({
+      "@type": "FAQPage",
+      mainEntity: area.faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }
+
+  const jsonLd = { "@context": "https://schema.org", "@graph": graph };
 
   return (
     <>
@@ -90,7 +115,7 @@ export default function AreaPage({
               href="#kontakt"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
             >
-              Begär offert
+              {area.ctaLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <a
@@ -113,7 +138,7 @@ export default function AreaPage({
                 Tjänster
               </p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
-                Det här gör {area.name}
+                {area.servicesH2}
               </h2>
             </div>
           </Reveal>
@@ -144,8 +169,70 @@ export default function AreaPage({
               </Reveal>
             ))}
           </div>
+          {area.related ? (
+            <Reveal delay={100}>
+              <p className="mt-10 text-lg text-ink-soft">
+                {area.related.text}{" "}
+                <Link
+                  href={area.related.href}
+                  className="font-semibold text-amber-deep underline decoration-amber/50 underline-offset-4 transition-colors hover:text-ink"
+                >
+                  {area.related.label}
+                </Link>
+                .
+              </p>
+            </Reveal>
+          ) : null}
         </div>
       </section>
+
+      {/* Extra content section (checklist / inventory) */}
+      {area.extraSection ? (
+        <section className="border-y border-line bg-card">
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+            <Reveal>
+              <div className="max-w-2xl">
+                <p className="eyebrow" style={{ color: area.toneDeep }}>
+                  {area.extraSection.eyebrow}
+                </p>
+                <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                  {area.extraSection.title}
+                </h2>
+                {area.extraSection.lead ? (
+                  <p className="mt-5 text-lg leading-relaxed text-muted">
+                    {area.extraSection.lead}
+                  </p>
+                ) : null}
+              </div>
+            </Reveal>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              {area.extraSection.items.map((item, index) => (
+                <Reveal key={item.title} delay={index * 60}>
+                  <div className="flex gap-4">
+                    <span
+                      className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                      style={{
+                        backgroundColor: `${area.tone}26`,
+                        color: area.toneDeep,
+                      }}
+                    >
+                      <Check className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3 className="font-display text-lg font-bold text-ink">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1.5 leading-relaxed text-muted">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* Why us */}
       <section className="bg-cream-dark">
@@ -213,28 +300,12 @@ export default function AreaPage({
                 Så går det till
               </p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl">
-                Från förfrågan till färdigt resultat
+                Så arbetar {area.name}
               </h2>
             </div>
           </Reveal>
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                step: "01",
-                title: "Kontakt & offert",
-                text: "Beskriv ditt behov via formuläret eller ring oss. Vi återkommer snabbt med en tydlig offert utan dolda kostnader.",
-              },
-              {
-                step: "02",
-                title: "Genomförande",
-                text: "Vi planerar, bemannar och genomför uppdraget med en fast kontaktperson som håller dig uppdaterad hela vägen.",
-              },
-              {
-                step: "03",
-                title: "Uppföljning",
-                text: "Vi går igenom resultatet tillsammans och lämnar inte förrän allt är godkänt – och vi finns kvar efteråt.",
-              },
-            ].map((item, index) => (
+            {area.process.map((item, index) => (
               <li key={item.step}>
                 <Reveal delay={index * 80} className="h-full">
                   <div className="h-full rounded-2xl border border-line-dark bg-dark-soft p-8">
@@ -258,9 +329,42 @@ export default function AreaPage({
         </div>
       </section>
 
+      {/* FAQ */}
+      {area.faq ? (
+        <section>
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+            <Reveal>
+              <div className="max-w-2xl">
+                <p className="eyebrow" style={{ color: area.toneDeep }}>
+                  Vanliga frågor
+                </p>
+                <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                  Frågor och svar om {area.nav.toLowerCase()}
+                </h2>
+              </div>
+            </Reveal>
+            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+              {area.faq.map((item, index) => (
+                <Reveal key={item.q} delay={index * 60}>
+                  <div className="h-full rounded-2xl border border-line bg-card p-7">
+                    <h3 className="font-display text-lg font-bold text-ink">
+                      {item.q}
+                    </h3>
+                    <p className="mt-2.5 leading-relaxed text-muted">
+                      {item.a}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <ContactSection
         title={`Behöver du hjälp av ${area.name}?`}
         lead="Skicka en förfrågan så återkommer vi med ett förslag – kostnadsfritt och utan förpliktelser."
+        topic={area.nav}
       />
     </>
   );

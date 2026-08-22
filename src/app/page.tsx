@@ -90,7 +90,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <Reveal>
             <SectionHeading
-              eyebrow="Våra bolag"
+              eyebrow="Våra verksamheter"
               title="En koncern. Fyra verksamheter."
               lead="Bygg är kärnan – städ, fastigheter och bil gör helheten."
             />

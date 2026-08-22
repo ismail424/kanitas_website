@@ -2,13 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Send } from "lucide-react";
+import { contactTopics } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 const inputClasses =
   "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-amber-deep focus:ring-2 focus:ring-amber-deep";
 
-export default function ContactForm() {
+export default function ContactForm({
+  defaultTopic,
+}: {
+  defaultTopic?: string;
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const successRef = useRef<HTMLDivElement>(null);
 
@@ -86,7 +91,7 @@ export default function ContactForm() {
           placeholder="din@epost.se"
         />
       </div>
-      <div className="sm:col-span-2">
+      <div>
         <label htmlFor="phone" className="mb-1.5 block text-sm font-semibold text-ink">
           Telefon
         </label>
@@ -99,6 +104,26 @@ export default function ContactForm() {
           className={inputClasses}
           placeholder="070-123 45 67"
         />
+      </div>
+      <div>
+        <label htmlFor="topic" className="mb-1.5 block text-sm font-semibold text-ink">
+          Vad gäller ditt ärende?
+        </label>
+        <select
+          id="topic"
+          name="topic"
+          defaultValue={defaultTopic ?? ""}
+          className={inputClasses}
+        >
+          <option value="" disabled>
+            Välj område
+          </option>
+          {contactTopics.map((topic) => (
+            <option key={topic} value={topic}>
+              {topic}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-ink">

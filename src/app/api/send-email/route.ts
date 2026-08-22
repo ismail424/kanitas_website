@@ -13,6 +13,7 @@ const ContactSchema = z.object({
   name: z.string().trim().min(1).max(200),
   email: z.string().trim().email().max(200),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
+  topic: z.string().trim().max(40).optional().or(z.literal("")),
   message: z.string().trim().min(1).max(5000),
 });
 // Honeypot: the hidden "company" field is checked on the raw body before
@@ -78,7 +79,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: "Validation failed" }, { status: 400 });
     }
 
-    const { name, email, phone, message } = result.data;
+    const { name, email, phone, topic, message } = result.data;
 
     if (!process.env.EMAIL_PASSWORD) {
       console.error("EMAIL_PASSWORD environment variable is not set");
@@ -99,6 +100,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       name: escapeHtml(name),
       email: escapeHtml(email),
       phone: phone ? escapeHtml(phone) : "Ej angivet",
+      topic: topic ? escapeHtml(topic) : "Ej angivet",
       message: escapeHtml(message),
     };
 
@@ -106,13 +108,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       from: `"Kanitas webbplats" <${SMTP_USER}>`,
       to: RECIPIENT,
       replyTo: email,
-      subject: `Kontaktformulär: ${name}`,
+      subject: `Kontaktformulär${topic ? ` [${topic}]` : ""}: ${name}`,
       text: [
         `Nytt meddelande via kanitas.se (${timestamp})`,
         "",
         `Namn: ${name}`,
         `E-post: ${email}`,
         `Telefon: ${phone || "Ej angivet"}`,
+        `Ärende: ${topic || "Ej angivet"}`,
         "",
         "Meddelande:",
         message,
@@ -125,6 +128,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             <p><strong>Namn:</strong> ${safe.name}</p>
             <p><strong>E-post:</strong> <a href="mailto:${safe.email}" style="color: #b45f0d;">${safe.email}</a></p>
             <p><strong>Telefon:</strong> ${safe.phone}</p>
+            <p><strong>Ärende:</strong> ${safe.topic}</p>
           </div>
           <div style="background-color: #f7f5f1; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p style="white-space: pre-wrap;">${safe.message}</p>
