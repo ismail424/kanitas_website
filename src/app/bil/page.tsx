@@ -12,8 +12,13 @@ export const metadata: Metadata = {
     title: area.seo.title,
     description: area.seo.description,
     url: "/bil",
+    images: [{ url: "/og-bil.jpg", width: 1200, height: 630 }],
   },
-  twitter: { title: area.seo.title, description: area.seo.description },
+  twitter: {
+    title: area.seo.title,
+    description: area.seo.description,
+    images: ["/og-bil.jpg"],
+  },
 };
 
 export default function BilPage() {

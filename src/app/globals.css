@@ -82,7 +82,8 @@ body {
   content: "";
   width: 2.25rem;
   height: 2px;
-  background-color: var(--color-amber);
+  /* Follows the text color so sub-brand tones carry through automatically */
+  background-color: currentColor;
 }
 
 /* Scroll reveal (activated by Reveal component; no-JS users see content) */

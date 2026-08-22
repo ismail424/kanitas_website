@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
+import { BrandLockup } from "@/components/Logo";
 import Reveal from "@/components/Reveal";
-import SectionHeading from "@/components/SectionHeading";
 import ServiceIcon from "@/components/ServiceIcon";
 import { site, type Area } from "@/lib/site";
 
@@ -24,25 +24,46 @@ export default function AreaPage({
   whyImage,
   secondaryImage,
 }: AreaPageProps) {
-  const serviceJsonLd = {
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: area.name,
-    serviceType: area.serviceType,
-    description: area.seo.description,
-    provider: { "@id": `${site.url}/#organization` },
-    areaServed: "Storstockholm",
-    url: `${site.url}/${area.slug}`,
+    "@graph": [
+      {
+        "@type": "Service",
+        name: area.name,
+        serviceType: area.serviceType,
+        description: area.seo.description,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: "Storstockholm",
+        url: `${site.url}/${area.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Hem",
+            item: site.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: area.name,
+            item: `${site.url}/${area.slug}`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero */}
+      {/* Hero with sub-brand lockup */}
       <section className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-dark-deep">
         <Image
           src={area.heroImage}
@@ -57,8 +78,8 @@ export default function AreaPage({
           aria-hidden="true"
         />
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-36 sm:px-6 lg:px-8">
-          <p className="eyebrow text-amber">{area.name}</p>
-          <h1 className="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+          <BrandLockup suffix={area.slug} tone={area.tone} />
+          <h1 className="mt-7 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
             {area.h1}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
@@ -87,10 +108,14 @@ export default function AreaPage({
       <section>
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <Reveal>
-            <SectionHeading
-              eyebrow="Tjänster"
-              title={`Det här gör ${area.name}`}
-            />
+            <div className="max-w-2xl">
+              <p className="eyebrow" style={{ color: area.toneDeep }}>
+                Tjänster
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                Det här gör {area.name}
+              </h2>
+            </div>
           </Reveal>
           <div
             className={`mt-12 grid gap-6 sm:grid-cols-2 ${
@@ -100,7 +125,13 @@ export default function AreaPage({
             {area.services.map((service, index) => (
               <Reveal key={service.title} delay={index * 60}>
                 <div className="h-full rounded-2xl border border-line bg-card p-7 shadow-[0_4px_24px_rgba(26,25,21,0.04)] transition-shadow hover:shadow-[0_10px_36px_rgba(26,25,21,0.09)]">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber/15 text-amber-deep">
+                  <span
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                    style={{
+                      backgroundColor: `${area.tone}26`,
+                      color: area.toneDeep,
+                    }}
+                  >
                     <ServiceIcon name={service.icon} />
                   </span>
                   <h3 className="mt-5 font-display text-lg font-bold text-ink">
@@ -120,11 +151,27 @@ export default function AreaPage({
       <section className="bg-cream-dark">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:px-8">
           <Reveal>
-            <SectionHeading eyebrow="Varför Kanitas" title={whyTitle} lead={whyLead} />
+            <div className="max-w-2xl">
+              <p className="eyebrow" style={{ color: area.toneDeep }}>
+                Varför Kanitas
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                {whyTitle}
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted">
+                {whyLead}
+              </p>
+            </div>
             <ul className="mt-8 space-y-4">
               {whyPoints.map((point) => (
                 <li key={point} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber/20 text-amber-deep">
+                  <span
+                    className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                    style={{
+                      backgroundColor: `${area.tone}33`,
+                      color: area.toneDeep,
+                    }}
+                  >
                     <Check className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <span className="text-ink-soft">{point}</span>
@@ -161,11 +208,14 @@ export default function AreaPage({
       <section className="bg-dark">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <Reveal>
-            <SectionHeading
-              on="dark"
-              eyebrow="Så går det till"
-              title="Från förfrågan till färdigt resultat"
-            />
+            <div className="max-w-2xl">
+              <p className="eyebrow" style={{ color: area.tone }}>
+                Så går det till
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl">
+                Från förfrågan till färdigt resultat
+              </h2>
+            </div>
           </Reveal>
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {[
@@ -188,7 +238,10 @@ export default function AreaPage({
               <li key={item.step}>
                 <Reveal delay={index * 80} className="h-full">
                   <div className="h-full rounded-2xl border border-line-dark bg-dark-soft p-8">
-                    <span className="font-display text-4xl font-bold text-amber">
+                    <span
+                      className="font-display text-4xl font-bold"
+                      style={{ color: area.tone }}
+                    >
                       {item.step}
                     </span>
                     <h3 className="mt-4 font-display text-lg font-bold text-white">

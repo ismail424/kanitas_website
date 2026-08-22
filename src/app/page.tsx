@@ -26,7 +26,7 @@ export default function HomePage() {
       <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-dark-deep">
         <Image
           src="/images/photos/home-hero.jpg"
-          alt="Byggkranar över stomme i skymning"
+          alt="Stockholms stadssilhuett i skymning"
           fill
           priority
           sizes="100vw"
@@ -45,10 +45,8 @@ export default function HomePage() {
             <em className="not-italic text-amber">hela kedjan</em>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
-            Kanitas är en familjeägd koncern i Järfälla med fyra
-            verksamhetsområden – bygg, städ, fastigheter och bil. Sedan{" "}
-            {site.founded} levererar vi projekt i tid, inom budget och med
-            hantverksstolthet.
+            En familjeägd koncern i Järfälla – fyra verksamheter under ett tak
+            sedan {site.founded}.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
@@ -93,9 +91,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <Reveal>
             <SectionHeading
-              eyebrow="Verksamheter"
-              title="En koncern. Fyra sätt att hjälpa dig."
-              lead="Bygg är vår kärna – och med städ, fastigheter och bilaffärer i samma koncern kan vi ta ansvar för helheten."
+              eyebrow="Våra bolag"
+              title="En koncern. Fyra verksamheter."
+              lead="Bygg är kärnan – städ, fastigheter och bil gör helheten."
             />
           </Reveal>
 
@@ -130,7 +128,9 @@ export default function HomePage() {
                       index === 0 ? "lg:justify-center lg:p-12" : ""
                     }`}
                   >
-                    <p className="eyebrow text-amber-deep">{area.tagline}</p>
+                    <p className="eyebrow" style={{ color: area.toneDeep }}>
+                      {area.tagline}
+                    </p>
                     <h3
                       className={`mt-3 font-display font-bold tracking-tight text-ink ${
                         index === 0 ? "text-2xl sm:text-3xl" : "text-xl"
@@ -175,21 +175,21 @@ export default function HomePage() {
               on="dark"
               eyebrow="Om Kanitas"
               title="Familjeägt, med kollektivavtal och byggt på förtroende"
-              lead={`Det som började som en bygg- och städfirma i Järfälla ${site.founded} är i dag en koncern med sex bolag och 35 medarbetare. Vägen hit har gått genom en sak: att alltid leverera det vi lovat.`}
+              lead={`Bygg- och städfirman som startade i Järfälla ${site.founded} är i dag en koncern med sex bolag och 35 medarbetare – byggd på en enda princip: leverera det vi lovat.`}
             />
-            <ul className="mt-8 space-y-5">
+            <ul className="mt-8 flex flex-wrap gap-3">
               {values.map((value) => (
-                <li key={value.title} className="flex gap-4">
+                <li
+                  key={value.title}
+                  className="inline-flex items-center gap-2.5 rounded-full border border-line-dark bg-dark-soft px-5 py-2.5"
+                >
                   <span
-                    className="mt-2.5 h-2 w-6 shrink-0 rounded-full bg-amber"
+                    className="h-1.5 w-4 rounded-full bg-amber"
                     aria-hidden="true"
                   />
-                  <div>
-                    <h3 className="font-display font-semibold text-white">
-                      {value.title}
-                    </h3>
-                    <p className="mt-1 text-white/65">{value.text}</p>
-                  </div>
+                  <span className="font-display font-semibold text-white">
+                    {value.title}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -212,7 +212,7 @@ export default function HomePage() {
               align="center"
               eyebrow="Referenser"
               title="Förtroende från Sveriges ledande aktörer"
-              lead="Vi arbetar sedan många år som partner och underentreprenör åt några av landets största bygg-, fastighets- och logistikföretag."
+              lead="Mångåriga uppdrag åt några av landets största bygg-, fastighets- och logistikföretag."
             />
           </Reveal>
           <Reveal delay={100}>

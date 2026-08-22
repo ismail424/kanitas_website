@@ -35,6 +35,10 @@ export type Area = {
   h1: string;
   /** schema.org serviceType for the area's Service JSON-LD */
   serviceType: string;
+  /** Sub-brand accent for dark surfaces (hero, process numbers) */
+  tone: string;
+  /** Sub-brand accent for light surfaces (icons, eyebrows) — AA on cream */
+  toneDeep: string;
   /** One-liner used on home page cards */
   teaser: string;
   intro: string;
@@ -52,6 +56,8 @@ export const areas: Area[] = [
     tagline: "Från grund till nyckelfärdigt",
     h1: "Byggföretag i Stockholm – från grund till nyckelfärdigt",
     serviceType: "Byggentreprenad och byggservice",
+    tone: "#e8892b",
+    toneDeep: "#9a530b",
     teaser:
       "Nybyggnation, renovering och byggservice för företag och privatpersoner – vår kärnverksamhet sedan 2011.",
     intro:
@@ -103,6 +109,8 @@ export const areas: Area[] = [
     tagline: "Rent, klart och redo",
     h1: "Byggstädning och kontorsstädning i Stockholm",
     serviceType: "Byggstädning och kontorsstädning",
+    tone: "#a3b467",
+    toneDeep: "#5a6b2f",
     teaser:
       "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet – för företag, BRF:er och byggprojekt.",
     intro:
@@ -144,6 +152,8 @@ export const areas: Area[] = [
     tagline: "Lokaler som fungerar",
     h1: "Lokaler att hyra i Storstockholm – fastigheter som fungerar",
     serviceType: "Fastighetsförvaltning och lokaluthyrning",
+    tone: "#c2955c",
+    toneDeep: "#7a5a28",
     teaser:
       "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm – med egen drift och skötsel.",
     intro:
@@ -185,6 +195,8 @@ export const areas: Area[] = [
     tagline: "Trygg bilaffär, utan krångel",
     h1: "Köp och sälj bil i Järfälla – trygg bilaffär utan krångel",
     serviceType: "Bilhandel – köp och försäljning av fordon",
+    tone: "#cd6a50",
+    toneDeep: "#99331d",
     teaser:
       "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner – alltid genomgångna och rätt prissatta.",
     intro:

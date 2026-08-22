@@ -1,71 +1,95 @@
 import Link from "next/link";
 import {
-  LOCKUP_VIEWBOX,
-  MARK_BEAMS_D,
-  MARK_COLUMN,
-  MARK_SCALE,
-  MARK_VIEWBOX,
-  WORDMARK_D,
-  WORDMARK_TRANSFORM,
+  ANITAS_D,
+  ANITAS_TRANSFORM,
+  BEAMS_D,
+  COLUMN,
+  LOCKUP_H,
+  LOCKUP_W,
+  SUFFIXES,
 } from "@/components/logo-paths";
 
 /**
- * Kanitas brand mark: an amber load-bearing column and two beams forming a K,
- * cut with the precision gap of prefab steel. Wordmark is Archivo Black
- * converted to outlines so the logo renders identically everywhere.
+ * Kanitas lockup v3: the structural K — an amber load-bearing column and two
+ * beams with vertical end cuts — IS the letter K, followed by "ANITAS" in
+ * Archivo Black outlines. One vector, identical everywhere.
  */
-export function LogoMark({
-  className = "h-9 w-9",
-  beams = "fill-ink",
+function LockupSvg({
+  fg,
+  suffix,
+  tone,
+  className,
+  label,
 }: {
-  className?: string;
-  beams?: string;
+  fg: string;
+  suffix?: string;
+  tone?: string;
+  className: string;
+  label: string;
 }) {
+  const suffixEntry = suffix ? SUFFIXES[suffix] : undefined;
+  const width = suffixEntry ? suffixEntry.totalW : LOCKUP_W;
   return (
     <svg
-      viewBox={MARK_VIEWBOX}
+      viewBox={`0 0 ${width} ${LOCKUP_H}`}
       className={className}
-      aria-hidden="true"
-      focusable="false"
+      role="img"
+      aria-label={label}
     >
       <rect
-        x={MARK_COLUMN.x}
-        y={MARK_COLUMN.y}
-        width={MARK_COLUMN.width}
-        height={MARK_COLUMN.height}
+        x={COLUMN.x}
+        y={COLUMN.y}
+        width={COLUMN.width}
+        height={COLUMN.height}
         className="fill-amber"
       />
-      <path d={MARK_BEAMS_D} className={beams} />
+      <path d={BEAMS_D} className={fg} />
+      <path transform={ANITAS_TRANSFORM} d={ANITAS_D} className={fg} />
+      {suffixEntry ? (
+        <path
+          transform={suffixEntry.transform}
+          d={suffixEntry.d}
+          fill={tone}
+        />
+      ) : null}
     </svg>
   );
 }
 
+/** Sub-brand lockup, e.g. KANITAS BYGG — used on area page heroes. */
+export function BrandLockup({
+  suffix,
+  tone,
+  className = "h-7 w-auto sm:h-9",
+}: {
+  suffix: string;
+  tone: string;
+  className?: string;
+}) {
+  const name = `Kanitas ${suffix.charAt(0).toUpperCase()}${suffix.slice(1)}`;
+  return (
+    <LockupSvg
+      fg="fill-white"
+      suffix={suffix}
+      tone={tone}
+      className={className}
+      label={name}
+    />
+  );
+}
+
 export default function Logo({ on = "light" }: { on?: "light" | "dark" }) {
-  const fg = on === "dark" ? "fill-white" : "fill-ink";
   return (
     <Link
       href="/"
       className="inline-flex items-center"
       aria-label="Kanitas – till startsidan"
     >
-      <svg
-        viewBox={LOCKUP_VIEWBOX}
-        className="h-6 w-auto sm:h-7"
-        role="img"
-        aria-label="Kanitas"
-      >
-        <g transform={`scale(${MARK_SCALE})`}>
-          <rect
-            x={MARK_COLUMN.x}
-            y={MARK_COLUMN.y}
-            width={MARK_COLUMN.width}
-            height={MARK_COLUMN.height}
-            className="fill-amber"
-          />
-          <path d={MARK_BEAMS_D} className={fg} />
-        </g>
-        <path transform={WORDMARK_TRANSFORM} d={WORDMARK_D} className={fg} />
-      </svg>
+      <LockupSvg
+        fg={on === "dark" ? "fill-white" : "fill-ink"}
+        className="h-5 w-auto sm:h-6"
+        label="Kanitas"
+      />
     </Link>
   );
 }
