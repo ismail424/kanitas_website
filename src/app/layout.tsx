@@ -1,50 +1,69 @@
-import type { Metadata } from "next";
-import { Provider } from "@/components/ui/provider"
-import './globals.css';
+import type { Metadata, Viewport } from "next";
+import { Archivo, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { site } from "@/lib/site";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#1e1c18",
+};
+
 export const metadata: Metadata = {
-  title: "Kanitas AB - Professionella Bygg & Städtjänster i Stockholm",
-  description: "Sveriges ledande företag inom bygg- och städtjänster i Stockholm. Expertis inom byggarbeten, renovering, byggservice, brandsanering och städtjänster för både privatpersoner och företag sedan 2011.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
+    template: "%s | Kanitas",
+  },
+  description:
+    "Kanitas är en familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. Sedan 2011 levererar vi kvalitet åt företag och privatpersoner i Storstockholm.",
   keywords: [
-    "byggföretag Stockholm", 
-    "byggservice Stockholm",
-    "renovering Stockholm", 
-    "professionell renovering",
-    "byggstädning Stockholm", 
-    "kontorsstädning Stockholm", 
-    "brandsanering Stockholm", 
-    "fuktsanering Stockholm", 
-    "byggentreprenad Järfälla", 
-    "mark- och anläggningsarbeten Stockholm"
+    "byggföretag Stockholm",
+    "byggservice Järfälla",
+    "renovering Stockholm",
+    "byggstädning Stockholm",
+    "kontorsstädning Stockholm",
+    "lokaler Järfälla",
+    "fastighetsförvaltning Stockholm",
+    "köpa bil Järfälla",
+    "mark och anläggning Stockholm",
+    "rivning sanering Stockholm",
   ],
-  authors: [{ name: "Kanitas AB", url: "https://kanitas.se" }],
+  authors: [{ name: site.legalName, url: site.url }],
   openGraph: {
-    title: "Kanitas AB - Professionella Bygg & Städtjänster i Stockholm",
-    description: "Sveriges ledande byggföretag och städbolag i Stockholm. Specialister på nybyggnation, renovering, byggservice och städning sedan 2011. Kontakta oss för en kostnadsfri offert!",
-    url: "https://kanitas.se",
-    siteName: "Kanitas AB",
-    images: [
-      {
-        url: "/images/logo_side.png",  // Using the wider image for better link previews
-        width: 1200,
-        height: 630,
-        alt: "Kanitas AB - Professionella Bygg & Städtjänster i Stockholm",
-      },
-    ],
-    locale: "sv_SE",
     type: "website",
+    locale: "sv_SE",
+    url: site.url,
+    siteName: site.legalName,
+    title: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
+    description:
+      "Familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. Kvalitet sedan 2011.",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Kanitas" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanitas AB - Professionella Bygg & Städtjänster i Stockholm",
-    description: "Sveriges ledande byggföretag och städbolag i Stockholm sedan 2011. Specialister på byggarbeten, renovering, och städtjänster. Kontakta oss för en kostnadsfri offert!",
-    images: ["/images/logo_side.png"],  // Using the wider image here too
-    creator: "@KanitasAB",
+    title: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
+    description:
+      "Familjeägd koncern i Järfälla: bygg, städ, fastigheter och bil. Kvalitet sedan 2011.",
+    images: ["/og.jpg"],
   },
   alternates: {
-    canonical: "https://kanitas.se",
-    languages: {
-      'sv-SE': 'https://kanitas.se',
-    },
+    canonical: "/",
   },
   robots: {
     index: true,
@@ -52,34 +71,68 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  category: "business",
   manifest: "/manifest.json",
-  metadataBase: new URL('https://kanitas.se'),
-  verification: {
-    google: "verification_token", // Replace with actual Google verification token if available
-  },
-  other: {
-    "geo.region": "SE-AB",
-    "geo.placename": "Järfälla",
-    "geo.position": "59.4253;17.8345", // Add approximate coordinates for Järfälla
-    "ICBM": "59.4253, 17.8345", // Same coordinates in ICBM format
-    "og:phone_number": "+46739948047", // Formatted with country code and no spaces
-    "og:street-address": "Almarevägen 13, 176 76 Järfälla",
-    "business:contact_data:street_address": "Almarevägen 13",
-    "business:contact_data:locality": "Järfälla",
-    "business:contact_data:postal_code": "176 76",
-    "business:contact_data:region": "Stockholm",
-    "business:contact_data:country_name": "Sweden",
-    "business:contact_data:email": "info@kanitas.se",
-    "business:contact_data:phone_number": "+46739948047",
-    "business:hours:day": "mon,tue,wed,thu,fri", // Adding business hours
-    "business:hours:start": "08:00",
-    "business:hours:end": "17:00",
-  },
+  category: "business",
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.legalName,
+      url: site.url,
+      logo: `${site.url}/icon.svg`,
+      foundingDate: String(site.founded),
+      taxID: site.orgnr,
+      telephone: "+46706653248",
+      email: site.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.address.street,
+        postalCode: site.address.postalCode,
+        addressLocality: site.address.city,
+        addressRegion: site.address.region,
+        addressCountry: site.address.country,
+      },
+    },
+    {
+      "@type": "GeneralContractor",
+      "@id": `${site.url}/#localbusiness`,
+      name: site.legalName,
+      image: `${site.url}/og.jpg`,
+      url: site.url,
+      telephone: "+46706653248",
+      email: site.email,
+      priceRange: "$$",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.address.street,
+        postalCode: site.address.postalCode,
+        addressLocality: site.address.city,
+        addressRegion: site.address.region,
+        addressCountry: site.address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: site.geo.lat,
+        longitude: site.geo.lng,
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "17:00",
+      },
+      areaServed: "Storstockholm",
+      parentOrganization: { "@id": `${site.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -88,15 +141,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sv">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/logo_circle.png" sizes="any" />
-      </head>
-      <body className="min-h-screen bg-white">
-        <Provider>
-          {children}
-        </Provider>
+    <html lang="sv" className={`${inter.variable} ${archivo.variable}`}>
+      <body className="min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <Analytics />
       </body>
     </html>
   );

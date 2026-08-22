@@ -1,65 +1,50 @@
-# Kanitas AB Webbplats
+# Kanitas – kanitas.se
 
-Detta är en modern webbplats för Kanitas AB, ett byggföretag i Sverige som specialiserar sig på bygg- och städtjänster.
+Webbplats för Kanitas, en familjeägd koncern i Järfälla med fyra
+verksamhetsområden: bygg, städ, fastigheter och bil.
 
 ## Teknologier
 
-- [Next.js 15](https://nextjs.org/) - React-ramverk
-- [Ant Design](https://ant.design/) - UI-komponentbibliotek
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS-ramverk
-- [TypeScript](https://www.typescriptlang.org/) - Statisk typning
+- [Next.js 15](https://nextjs.org/) – React-ramverk (App Router, server components)
+- [Tailwind CSS v4](https://tailwindcss.com/) – styling med designtokens i `src/app/globals.css`
+- [TypeScript](https://www.typescriptlang.org/) – statisk typning
+- [lucide-react](https://lucide.dev/) – ikoner
+- [nodemailer](https://nodemailer.com/) + [zod](https://zod.dev/) – kontaktformulärets API
 
 ## Kom igång
 
-Följ dessa steg för att köra projektet lokalt:
-
-1. **Installera beroenden**
-
 ```bash
 npm install
-```
-
-2. **Starta utvecklingsmiljön**
-
-```bash
 npm run dev
 ```
 
-Detta startar applikationen i utvecklingsläge med Turbopack. Öppna [http://localhost:3000](http://localhost:3000) för att se den i din webbläsare.
+Öppna [http://localhost:3000](http://localhost:3000).
 
-## Mappstruktur
-
-- `/public` - Statiska resurser som bilder och ikoner
-- `/src/app` - Next.js App Router komponenter
-- `/src/components` - Återanvändbara React-komponenter
-
-## Bilder
-
-För att slutföra webbplatsen, lägg till följande bilder:
-
-- `public/hero-image.jpg` - Huvudbannerbilden (1920x1080px)
-- `public/about-image.jpg` - Bild för Om oss-sektionen (800x600px)
-
-För mer information se `/public/images/README.md`
-
-## Bygga för produktion
-
-Bygg projektet för produktion:
+### Produktion
 
 ```bash
 npm run build
-```
-
-Starta produktionsversionen:
-
-```bash
 npm run start
 ```
 
-## Språk
+### Miljövariabler
 
-Webbplatsen är skriven på svenska för att passa den svenska målgruppen.
+Kontaktformuläret skickar e-post via SMTP och behöver:
 
-## Kontaktinformation
+| Variabel | Beskrivning | Standard |
+| --- | --- | --- |
+| `EMAIL_PASSWORD` | SMTP-lösenord (krävs) | – |
+| `SMTP_HOST` | SMTP-server | `send.one.com` |
+| `SMTP_PORT` | SMTP-port | `465` |
+| `SMTP_USER` | SMTP-användare/avsändare | `info@kanitas.se` |
+| `CONTACT_RECIPIENT` | Mottagare av formulärmejl | `info@kanitas.se` |
 
-Vänligen ersätt platshållarinformationen i kontaktsektionen med faktisk företagsinformation.
+## Struktur
+
+- `src/app` – sidor (startsida, /bygg, /stad, /fastigheter, /bil, /om-oss, /kontakt), layout, API, sitemap/robots
+- `src/components` – återanvändbara komponenter
+- `src/lib/site.ts` – all webbplatsdata: kontaktuppgifter, verksamhetsområden, referenser, koncernbolag
+- `public/images/photos` – optimerade foton (Unsplash)
+- `public/references`, `public/images/cert` – kundlogotyper och certifikat
+
+Företagsfakta och kontaktuppgifter ändras endast i `src/lib/site.ts`.

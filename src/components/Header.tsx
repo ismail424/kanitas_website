@@ -1,340 +1,133 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Text,
-  IconButton,
-  Container,
-  CloseButton,
-  Drawer,
-  Portal,
-} from '@chakra-ui/react';
-import Link from 'next/link';
-import { FiMenu, FiPhone, FiMail } from 'react-icons/fi';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, Phone, X } from "lucide-react";
+import Logo from "@/components/Logo";
+import { nav, site } from "@/lib/site";
 
-const Header = () => {
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [activeKey, setActiveKey] = useState('home');
+export default function Header() {
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  // Define colors directly
-  const primaryColor = "#124075"; // Main blue color
-  const primaryColorHover = "#0d325c"; // Darker shade for hover states
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Handle scroll state for header styling
-      setScrolled(window.scrollY > 80);
-      
-      // Update active nav item based on scroll position
-      const sections = ['kontakt', 'referenser', 'tjanster', 'om-oss'];
-      let current = 'home';
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element && window.scrollY >= element.offsetTop - 200) {
-          current = section === 'om-oss' ? 'about' : 
-                   section === 'tjanster' ? 'services' : 
-                   section === 'referenser' ? 'references' : 'contact';
-          break;
-        }
-      }
-      
-      setActiveKey(current);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string): void => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop;
-      window.scrollTo({
-        top: offsetTop - 90,
-        behavior: 'smooth'
-      });
-    }
-    setDrawerVisible(false);
-  };
-
-  const navItems = [
-    { key: 'home', label: 'Hem', section: 'top' },
-    { key: 'about', label: 'Om oss', section: 'om-oss' },
-    { key: 'services', label: 'Tjänster', section: 'tjanster' },
-    { key: 'references', label: 'Referenser', section: 'referenser' },
-    { key: 'contact', label: 'Kontakt', section: 'kontakt' },
-  ];
+  // Close the mobile menu on navigation
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <>
-      {/* Top info bar */}
-      <Box 
-        display={{ base: 'none', md: 'block' }} 
-        bg={primaryColor}
-        color="white"
-        position="relative"
-        zIndex={1001}
-      >
-        <Container maxW="7xl" py={2} px={{ base: 4, sm: 6, lg: 8 }}>
-          <Box display="flex" justifyContent="flex-end" alignItems="center">
-            <Box display="flex" gap={6}>
-              <Box 
-                as="a" 
-                display="flex" 
-                alignItems="center" 
-                gap={2} 
-                color="white" 
-                _hover={{ color: "whiteAlpha.900" }}
-              >
-                <Box color="white" as={FiPhone} />
-                <Text color={'white'} fontSize="sm">070-665 32 48</Text>
-              </Box>
-              <Box 
-                as="a" 
-                display="flex" 
-                alignItems="center" 
-                gap={2} 
-                color="white" 
-                _hover={{ color: "whiteAlpha.900" }}
-              >
-                <Box color="white" as={FiMail} />
-                <Text color="white" fontSize="sm">info@kanitas.se</Text>
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-      </Box>
-      
-      {/* Main header with navigation */}
-      <Box 
-        as="header"
-        position="sticky"
-        top={0}
-        bg="white"
-        borderBottom="1px solid"
-        borderColor={scrolled ? "gray.200" : "gray.100"}
-        height={scrolled ? '70px' : '80px'}
-        transition="all 0.3s ease"
-        zIndex={1000}
-      >
-        <Container 
-          maxW="7xl" 
-          height="full" 
-          px={{ base: 4, sm: 6, lg: 8 }}
-        >
-          <Box 
-            display="flex"
-            justifyContent="space-between" 
-            alignItems="center" 
-            height="full"
-          >
-            {/* Text logo instead of image */}
-            <Link href="/" passHref legacyBehavior>
-              <Box 
-                as="a" 
-                display="flex" 
-                alignItems="center"
-              >
-                <Text 
-                  fontSize={scrolled ? "2xl" : "3xl"} 
-                  fontWeight="bold" 
-                  color={primaryColor}
-                  transition="all 0.3s ease"
-                >
-                  KanitasAB
-                </Text>
-              </Box>
-            </Link>
-            
-            {/* Desktop navigation */}
-            <Box 
-              display={{ base: 'none', md: 'flex' }}
-              gap={2}
-              height="full"
-              alignItems="center"
-            >
-              {navItems.map((item) => (
-                <Box 
-                  key={item.key}
-                  as="button"
-                  onClick={() => scrollToSection(item.section)}
-                  px={4}
-                  py={2}
-                  position="relative"
-                  fontWeight={500}
-                  color={primaryColor}
-                  transition="color 0.2s"
-                  _hover={{ 
-                    color: primaryColorHover
-                  }}
-                  _after={{
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-2px',
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    bg: activeKey === item.key ? primaryColor : 'transparent',
-                    transition: 'background-color 0.3s'
-                  }}
-                >
-                  {item.label}
-                </Box>
-              ))}
-            </Box>
-            
-            {/* Updated Contact button (desktop) - smaller size with color */}
-            <Button
-              display={{ base: 'none', md: 'block' }}
-              onClick={() => scrollToSection('kontakt')}
-              variant="solid"
-              size="md"
-              fontWeight={500}
-              px={4}
-              py={2}
-              height="auto"
-              bg={primaryColor}
-              color="white"
-              _hover={{
-                bg: primaryColorHover,
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.2s"
-              borderRadius="md"
-            >
-              Kontakta oss
-            </Button>
-            
-            {/* Mobile menu button */}
-            <IconButton
-              display={{ base: 'flex', md: 'none' }}
-              aria-label="Open menu"
-              variant="ghost"
-              color={primaryColor}
-              onClick={() => setDrawerVisible(true)}
-              _hover={{ bg: 'gray.50' }}
-            >
-              <FiMenu size={24} />
-            </IconButton>
-          </Box>
-        </Container>
-      </Box>
-      
-      {/* Mobile navigation drawer */}
-      <Drawer.Root open={drawerVisible} onOpenChange={(details) => setDrawerVisible(details.open)} placement="end">
-        <Portal>
-          <Drawer.Backdrop bg="blackAlpha.300" />
-          <Drawer.Positioner>
-            <Drawer.Content bg="white" maxW="300px" h="100vh">
-              <Box p={5}>
-                {/* Text logo and close button */}
-                <Box 
-                  display="flex" 
-                  justifyContent="space-between" 
-                  alignItems="center" 
-                  mb={8}
-                  borderBottom="1px solid"
-                  borderColor="gray.100"
-                  pb={4}
-                >
-                  <Text 
-                    fontSize="2xl" 
-                    fontWeight="bold" 
-                    color={primaryColor}
-                  >
-                    KanitasAB
-                  </Text>
-                  <Drawer.CloseTrigger asChild>
-                    <CloseButton size="md" color={primaryColor} />
-                  </Drawer.CloseTrigger>
-                </Box>
-                
-                {/* Navigation links */}
-                <Box display="flex" flexDirection="column" gap={1} mb={10}>
-                  {navItems.map((item) => (
-                    <Box
-                      key={item.key}
-                      as="button"
-                      onClick={() => scrollToSection(item.section)}
-                      py={3}
-                      width="full"
-                      textAlign="left"
-                      fontSize="lg"
-                      fontWeight={activeKey === item.key ? "600" : "500"}
-                      color={activeKey === item.key ? primaryColor : "gray.700"}
-                      _hover={{ color: primaryColor, bg: "gray.50" }}
-                      borderRadius="md"
-                      px={3}
-                      transition="all 0.2s"
-                    >
-                      {item.label}
-                    </Box>
-                  ))}
-                </Box>
-                
-                {/* Contact information */}
-                <Box 
-                  display="flex" 
-                  flexDirection="column" 
-                  gap={4} 
-                  mt={8}
-                  pt={6}
-                  borderTop="1px solid"
-                  borderColor="gray.100"
-                >
-                  <Box 
-                    as="a"
-                    display="flex" 
-                    alignItems="center" 
-                    gap={3}
-                    color="gray.700"
-                    _hover={{ color: primaryColor }}
-                  >
-                    <Box as={FiPhone} />
-                    <Text>070-665 32 48</Text>
-                  </Box>
-                  <Box 
-                    as="a"
-                    display="flex" 
-                    alignItems="center" 
-                    gap={3}
-                    color="gray.700"
-                    _hover={{ color: primaryColor }}
-                  >
-                    <Box as={FiMail} />
-                    <Text>info@kanitas.se</Text>
-                  </Box>
-                  <Button
-                    variant="solid"
-                    width="full"
-                    mt={4}
-                    py={2.5}
-                    height="auto"
-                    fontSize="md"
-                    bg={primaryColor}
-                    color="white"
-                    fontWeight={500}
-                    onClick={() => scrollToSection('kontakt')}
-                    _hover={{
-                      bg: primaryColorHover,
-                    }}
-                    transition="all 0.2s"
-                    borderRadius="md"
-                  >
-                    Kontakta oss
-                  </Button>
-                </Box>
-              </Box>
-            </Drawer.Content>
-          </Drawer.Positioner>
-        </Portal>
-      </Drawer.Root>
-    </>
-  );
-};
+    <header
+      className={`sticky top-0 z-50 border-b transition-shadow ${
+        scrolled
+          ? "border-line bg-cream/95 shadow-[0_1px_24px_rgba(26,25,21,0.08)] backdrop-blur"
+          : "border-transparent bg-cream"
+      }`}
+    >
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Logo />
 
-export default Header;
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Huvudmeny">
+          {nav.map((item) => {
+            const active =
+              item.href === pathname ||
+              (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`rounded-lg px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
+                  active
+                    ? "bg-cream-dark text-ink"
+                    : "text-ink-soft hover:bg-cream-dark hover:text-ink"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href={site.phoneHref}
+            className="inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ink transition-colors hover:text-amber-deep"
+          >
+            <Phone className="h-4 w-4 text-amber-deep" aria-hidden="true" />
+            {site.phone}
+          </a>
+          <Link
+            href="/kontakt"
+            className="rounded-lg bg-amber px-4.5 py-2.5 text-[0.95rem] font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+          >
+            Begär offert
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          className="rounded-lg p-2 text-ink hover:bg-cream-dark lg:hidden"
+          aria-expanded={open}
+          aria-controls="mobilmeny"
+          aria-label={open ? "Stäng menyn" : "Öppna menyn"}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {open ? (
+        <nav
+          id="mobilmeny"
+          aria-label="Mobilmeny"
+          className="border-t border-line bg-cream px-4 pb-6 pt-2 lg:hidden"
+        >
+          <ul className="flex flex-col">
+            {nav.map((item) => {
+              const active =
+                item.href === pathname ||
+                (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`block rounded-lg px-3 py-3 text-lg font-medium ${
+                      active ? "bg-cream-dark text-ink" : "text-ink-soft"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="mt-4 flex flex-col gap-3 border-t border-line pt-4">
+            <a
+              href={site.phoneHref}
+              className="inline-flex items-center gap-2 px-3 font-semibold text-ink"
+            >
+              <Phone className="h-4 w-4 text-amber-deep" aria-hidden="true" />
+              {site.phone}
+            </a>
+            <Link
+              href="/kontakt"
+              className="rounded-lg bg-amber px-4 py-3 text-center font-semibold text-dark-deep"
+            >
+              Begär offert
+            </Link>
+          </div>
+        </nav>
+      ) : null}
+    </header>
+  );
+}

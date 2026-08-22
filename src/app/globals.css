@@ -1,143 +1,96 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --primary-color: #124075;
-  --secondary-color: #0e3261;
-  --accent-color: #3a85d8;
-  --bg-light: #f8f8f8;
-  --bg-white: #ffffff;
-  --text-dark: #333333;
-  --text-light: #666666;
+/*
+ * Kanitas design tokens — warm graphite + cream + construction amber.
+ * Single source of truth for the whole site; no hardcoded hex in components.
+ */
+@theme {
+  /* Surfaces */
+  --color-cream: #f7f5f1;
+  --color-cream-dark: #eeebe4;
+  --color-card: #ffffff;
+
+  /* Text on light */
+  --color-ink: #1a1915;
+  --color-ink-soft: #45413a;
+  --color-muted: #6e6759;
+
+  /* Borders */
+  --color-line: #e3dfd6;
+  --color-line-dark: #38342c;
+
+  /* Dark sections */
+  --color-dark: #1e1c18;
+  --color-dark-deep: #141310;
+  --color-dark-soft: #2a2721;
+
+  /* Accent */
+  --color-amber: #e8892b;
+  --color-amber-deep: #b45f0d;
+  --color-amber-pale: #fbefdf;
+
+  /* Feedback */
+  --color-ok: #2f7d4f;
+  --color-error: #b23a2e;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px; /* For fixed header */
-  color-scheme: light only;
+  scroll-padding-top: 96px;
 }
 
 body {
-  color: var(--text-dark);
-  background-color: var(--bg-white);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  overflow-x: hidden;
-  forced-color-adjust: none;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Force light mode */
-:root {
-  color-scheme: light only;
+::selection {
+  background-color: var(--color-amber);
+  color: var(--color-dark-deep);
 }
 
-@media (max-width: 768px) {
-  html {
-    scroll-padding-top: 70px;
-  }
+/* Eyebrow kicker with amber rule — used above every section heading */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-@layer components {
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
-  }
-  
-  .section-title {
-    @apply text-3xl font-bold mb-12 text-center relative;
-    color: var(--secondary-color);
-  }
-  
-  .section-title::after {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent-color);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-  
-  .btn-primary {
-    @apply px-6 py-2 font-medium rounded-md transition-all duration-300;
-    background-color: var(--primary-color);
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  .btn-secondary {
-    @apply px-6 py-2 font-medium rounded-md transition-all duration-300;
-    background-color: white;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-  }
-  
-  .btn-secondary:hover {
-    background-color: var(--bg-light);
+.eyebrow::before {
+  content: "";
+  width: 2.25rem;
+  height: 2px;
+  background-color: var(--color-amber);
+}
+
+/* Scroll reveal (activated by Reveal component; no-JS users see content) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
   }
 
-  /* Hero button hover states */
-  .hero-btn-primary {
-    transition: all 0.3s ease !important;
-  }
-  
-  .hero-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
-  }
-
-  .hero-btn-secondary {
-    transition: all 0.3s ease !important;
-  }
-
-  .hero-btn-secondary:hover {
-    background-color: rgba(255,255,255,0.15) !important;
-    transform: translateY(-2px);
-  }
-  
-  /* Mobile optimizations */
-  @media (max-width: 640px) {
-    .hero-btn-primary, .hero-btn-secondary {
-      width: 100%;
-      margin-bottom: 10px;
-      display: block;
-    }
-  }
-  
-  /* Reference logos */
-  .reference-logo {
-    transition: all 0.3s ease;
-  }
-  
-  .reference-logo:hover {
-    transform: scale(1.05);
-    filter: grayscale(0) contrast(1.05) !important;
-  }
-  
-  .section-alternate {
-    background-color: #f5f8fb;
-  }
-  
-  /* Header menu styling */
-  .ant-menu-horizontal > .ant-menu-item::after, 
-  .ant-menu-horizontal > .ant-menu-submenu::after {
-    border-bottom: none !important;
-  }
-  
-  .ant-menu-horizontal > .ant-menu-item-selected, 
-  .ant-menu-horizontal > .ant-menu-item:hover {
-    color: #124075 !important;
-    border-bottom: 2px solid #124075 !important;
-  }
-  
-  .ant-menu-horizontal > .ant-menu-item > a:hover {
-    color: #124075 !important;
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
 }

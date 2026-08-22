@@ -1,148 +1,138 @@
-"use client"
+import Link from "next/link";
+import Image from "next/image";
+import { Mail, MapPin, Phone } from "lucide-react";
+import Logo from "@/components/Logo";
+import { areas, certifications, site } from "@/lib/site";
 
-import React from 'react';
-import { Layout, Typography, Row, Col, Space } from 'antd';
-import { PhoneOutlined, MailOutlined, HomeOutlined } from '@ant-design/icons';
-import Image from 'next/image';
-
-const { Footer: AntFooter } = Layout;
-const { Text, Link: AntLink, Title } = Typography;
-
-const Footer: React.FC = () => {
+export default function Footer() {
   return (
-    <AntFooter 
-      className="pt-16 pb-6"
-      style={{ 
-        background: '#0e3261',
-        color: 'white'
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Certificate Images Row - Further Improved Styling */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 32, // reduced from 48
-            marginTop: 4, // reduced from 12
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: 16, // reduced from 48
-              background: 'rgba(255,255,255,0.18)',
-              borderRadius: 22,
-              boxShadow: '0 4px 32px 0 rgba(18,64,117,0.13)',
-              padding: '20px 24px', // reduced from 28px 40px
-              flexWrap: 'wrap',
-              border: '1.5px solid #3a85d844',
-              maxWidth: 900,
-              width: '100%',
-              minHeight: 90, // reduced from 110
-              transition: 'box-shadow 0.3s',
-            }}
-          >
-            <Image src="/images/cert/aaa_120.png" alt="AAA certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/byggnads_140.png" alt="Byggnads certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/fastighets_120.png" alt="Fastighets certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/SafeTrade_120.png" alt="SafeTrade certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/svnaring_B.png" alt="Svensk Näring certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-          </div>
-        </div>
-        <Row gutter={[48, 48]}>
-          <Col xs={24} sm={12} lg={8}>
-            <div className="mb-6">
-              <Image 
-                src="/images/logo_circle.png" 
-                alt="Kanitas AB Logo" 
-                width={'70'}
-                height={'70'}
-                className="rounded-full"
+    <footer className="bg-dark text-white">
+      {/* Certification strip */}
+      <div className="border-b border-line-dark">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-6 px-4 py-10 sm:px-6 lg:px-8">
+          {certifications.map((cert) => (
+            <div
+              key={cert.name}
+              className="flex items-center rounded-xl bg-white px-4 py-2"
+              title={cert.name}
+            >
+              <Image
+                src={cert.image}
+                alt={cert.name}
+                width={110}
+                height={56}
+                className="h-12 w-auto object-contain"
               />
             </div>
-            <Text 
-              className="block mb-4"
-              style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-            >
-              Etablerat 2011. Vi bedriver verksamhet inom bygg- och städbranschen, 
-              byggstädning, byggservice, byggsanering, brandsanering, fuktsanering, 
-              snöröjning, rivning, och mark- och anläggningsentreprenader.
-            </Text>
-          </Col>
-          
-          <Col xs={24} sm={12} lg={8}>
-            <Title 
-              level={4} 
-              className="mb-6"
-              style={{ color: 'white', fontSize: '18px', position: 'relative' }}
-            >
-              <span 
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '-10px', 
-                  left: '0', 
-                  width: '30px', 
-                  height: '2px', 
-                  background: '#3a85d8' 
-                }}
-              ></span>
-              Kontakta oss
-            </Title>
-            <Space direction="vertical" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-              <Space>
-                <PhoneOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>070-665 32 48</Text>
-              </Space>
-              <Space>
-                <MailOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>info@kanitas.se</Text>
-              </Space>
-              <Space>
-                <HomeOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Almarevägen 13, 176 76 Järfälla</Text>
-              </Space>
-            </Space>
-          </Col>
-          
-          <Col xs={24} sm={12} lg={8}>
-            <Title 
-              level={4} 
-              className="mb-6"
-              style={{ color: 'white', fontSize: '18px', position: 'relative' }}
-            >
-              <span 
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '-10px', 
-                  left: '0', 
-                  width: '30px', 
-                  height: '2px', 
-                  background: '#3a85d8' 
-                }}
-              ></span>
-              Snabblänkar
-            </Title>
-            <Space direction="vertical" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-              <AntLink href="/#om-oss" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Om oss</AntLink>
-              <AntLink href="/#tjanster" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Våra tjänster</AntLink>
-              <AntLink href="/#referenser" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Referenser</AntLink>
-              <AntLink href="/#kontakt" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Kontakt</AntLink>
-            </Space>
-          </Col>
-        </Row>
-        
-        <div className="border-t border-opacity-20 border-white mt-12 pt-6 text-center">
-          <Text style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-            © {new Date().getFullYear()} Kanitas AB · Org.nr: 556841-1010 · Alla rättigheter förbehållna
-          </Text>
+          ))}
         </div>
       </div>
-    </AntFooter>
-  );
-};
 
-export default Footer;
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div>
+          <Logo on="dark" />
+          <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
+            Familjeägd koncern i Järfälla med verksamhet inom bygg, städ,
+            fastigheter och bil. Kvalitet och pålitlighet sedan {site.founded}.
+          </p>
+        </div>
+
+        <nav aria-label="Verksamheter">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
+            Verksamheter
+          </h2>
+          <ul className="mt-5 space-y-3">
+            {areas.map((area) => (
+              <li key={area.slug}>
+                <Link
+                  href={`/${area.slug}`}
+                  className="text-white/75 transition-colors hover:text-white"
+                >
+                  {area.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label="Företaget">
+          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
+            Företaget
+          </h2>
+          <ul className="mt-5 space-y-3">
+            <li>
+              <Link
+                href="/om-oss"
+                className="text-white/75 transition-colors hover:text-white"
+              >
+                Om oss
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/om-oss#referenser"
+                className="text-white/75 transition-colors hover:text-white"
+              >
+                Referenser
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/kontakt"
+                className="text-white/75 transition-colors hover:text-white"
+              >
+                Kontakt
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
+            Kontakt
+          </h2>
+          <ul className="mt-5 space-y-3 text-white/75">
+            <li>
+              <a
+                href={site.phoneHref}
+                className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
+              >
+                <Phone className="h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
+                {site.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
+                {site.email}
+              </a>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
+              <span>
+                {site.address.street}
+                <br />
+                {site.address.postalCode} {site.address.city}
+              </span>
+            </li>
+            <li className="pt-1 text-sm text-white/55">{site.openingHours}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-line-dark">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-white/50 sm:flex-row sm:px-6 lg:px-8">
+          <p>
+            © {new Date().getFullYear()} {site.legalName} · Org.nr {site.orgnr}
+          </p>
+          <p>
+            {site.address.street}, {site.address.postalCode} {site.address.city}
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
