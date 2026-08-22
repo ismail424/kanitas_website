@@ -14,9 +14,9 @@ const ContactSchema = z.object({
   email: z.string().trim().email().max(200),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
   message: z.string().trim().min(1).max(5000),
-  // Honeypot: humans never see this field, bots fill it in.
-  company: z.string().max(200).optional().or(z.literal("")),
 });
+// Honeypot: the hidden "company" field is checked on the raw body before
+// validation, so it never needs to be part of the schema.
 
 function escapeHtml(value: string): string {
   return value
@@ -31,9 +31,16 @@ function escapeHtml(value: string): string {
 const hits = new Map<string, { count: number; reset: number }>();
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
+const MAX_TRACKED_IPS = 10_000;
 
 function rateLimited(ip: string): boolean {
   const now = Date.now();
+  // Keep the map bounded: evict expired entries once it grows large.
+  if (hits.size > MAX_TRACKED_IPS) {
+    for (const [key, value] of hits) {
+      if (now > value.reset) hits.delete(key);
+    }
+  }
   const entry = hits.get(ip);
   if (!entry || now > entry.reset) {
     hits.set(ip, { count: 1, reset: now + WINDOW_MS });
@@ -50,17 +57,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
-    const result = ContactSchema.safeParse(await request.json());
+    const body = await request.json().catch(() => null);
+    if (body === null || typeof body !== "object") {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+    // Honeypot triggered: pretend success, send nothing. Checked before
+    // schema validation so oversized bot payloads also get the fake success.
+    if ((body as Record<string, unknown>).company) {
+      return NextResponse.json({ success: true });
+    }
+
+    const result = ContactSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json({ error: "Validation failed" }, { status: 400 });
     }
 
-    const { name, email, phone, message, company } = result.data;
-
-    // Honeypot triggered: pretend success, send nothing.
-    if (company) {
-      return NextResponse.json({ success: true });
-    }
+    const { name, email, phone, message } = result.data;
 
     if (!process.env.EMAIL_PASSWORD) {
       console.error("EMAIL_PASSWORD environment variable is not set");

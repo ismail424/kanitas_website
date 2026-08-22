@@ -26,7 +26,8 @@
 
   /* Accent */
   --color-amber: #e8892b;
-  --color-amber-deep: #b45f0d;
+  /* Dark enough for AA-contrast small text on cream surfaces (5.0:1) */
+  --color-amber-deep: #9a530b;
   --color-amber-pale: #fbefdf;
 
   /* Feedback */
@@ -44,8 +45,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

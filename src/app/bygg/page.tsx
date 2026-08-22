@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: area.seo.title,
   description: area.seo.description,
   alternates: { canonical: "/bygg" },
+  openGraph: {
+    title: area.seo.title,
+    description: area.seo.description,
+    url: "/bygg",
+  },
+  twitter: { title: area.seo.title, description: area.seo.description },
 };
 
 export default function ByggPage() {

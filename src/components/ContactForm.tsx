@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader2, Send } from "lucide-react";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-amber focus:ring-2 focus:ring-amber/30";
+  "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-amber-deep focus:ring-2 focus:ring-amber-deep";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Move focus to the confirmation when the form is replaced by it
+  useEffect(() => {
+    if (status === "sent") successRef.current?.focus();
+  }, [status]);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,7 +40,9 @@ export default function ContactForm() {
   if (status === "sent") {
     return (
       <div
-        className="rounded-2xl border border-ok/30 bg-ok/10 p-8 text-center"
+        ref={successRef}
+        tabIndex={-1}
+        className="rounded-2xl border border-ok/30 bg-ok/10 p-8 text-center outline-none"
         role="status"
       >
         <p className="font-display text-xl font-bold text-ink">

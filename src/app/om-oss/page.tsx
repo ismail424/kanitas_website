@@ -13,11 +13,16 @@ import {
   values,
 } from "@/lib/site";
 
+const pageTitle = "Om oss – familjeägd koncern i Järfälla sedan 2011";
+const pageDescription =
+  "Kanitas grundades 2011 i Järfälla och är i dag en koncern med sex bolag inom bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
+
 export const metadata: Metadata = {
-  title: "Om oss – familjeägd koncern i Järfälla sedan 2011",
-  description:
-    "Kanitas grundades 2011 i Järfälla och är i dag en koncern med sex bolag inom bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/om-oss" },
+  openGraph: { title: pageTitle, description: pageDescription, url: "/om-oss" },
+  twitter: { title: pageTitle, description: pageDescription },
 };
 
 export default function OmOssPage() {
@@ -52,15 +57,15 @@ export default function OmOssPage() {
             <Reveal>
               <SectionHeading
                 eyebrow="Vår historia"
-                title="Från städfirma i Järfälla till koncern med fyra verksamheter"
+                title="Från bygg- och städfirma i Järfälla till koncern med fyra verksamheter"
               />
               <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink-soft">
                 <p>
                   Kanitas AB grundades {site.founded} i Järfälla med en enkel
                   idé: gör jobbet ordentligt, håll det du lovar och behandla
                   varje kund som den viktigaste. Det som började med bygg- och
-                  städtjänster växte snabbt när Sveriges största byggbolag
-                  upptäckte att vi levererade – varje gång.
+                  städtjänster växte snabbt när några av Sveriges största
+                  byggbolag upptäckte att vi levererade – varje gång.
                 </p>
                 <p>
                   I dag är vi en familjeägd koncern med sex bolag och 35
@@ -91,14 +96,14 @@ export default function OmOssPage() {
                   {stats.map((stat) => (
                     <div
                       key={stat.label}
-                      className="rounded-2xl border border-line bg-card p-6 text-center"
+                      className="flex flex-col-reverse rounded-2xl border border-line bg-card p-6 text-center"
                     >
-                      <dd className="font-display text-3xl font-bold text-ink">
-                        {stat.value}
-                      </dd>
                       <dt className="mt-1 text-sm font-medium text-muted">
                         {stat.label}
                       </dt>
+                      <dd className="font-display text-3xl font-bold text-ink">
+                        {stat.value}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -229,7 +234,7 @@ export default function OmOssPage() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
             <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Vill du arbeta med oss?
+              Vad kan vi hjälpa dig med?
             </h2>
             <p className="mt-3 max-w-xl text-lg text-muted">
               Oavsett om du behöver en byggpartner, en städfirma, en lokal

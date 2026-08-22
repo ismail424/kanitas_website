@@ -8,13 +8,19 @@ export const metadata: Metadata = {
   title: area.seo.title,
   description: area.seo.description,
   alternates: { canonical: "/stad" },
+  openGraph: {
+    title: area.seo.title,
+    description: area.seo.description,
+    url: "/stad",
+  },
+  twitter: { title: area.seo.title, description: area.seo.description },
 };
 
 export default function StadPage() {
   return (
     <AreaPage
       area={area}
-      whyTitle="Städning med byggarens ögon för detaljer"
+      whyTitle="Städning med byggarens öga för detaljer"
       whyLead="Vi kommer från byggbranschen och vet exakt vad en besiktning kräver. Därför blir det rätt första gången – oavsett om det gäller ett byggprojekt eller ett kontor."
       whyPoints={[
         "Specialister på byggstädning och slutstädning inför besiktning",

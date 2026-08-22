@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Phone, X } from "lucide-react";
@@ -11,6 +11,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,6 +24,19 @@ export default function Header() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // Close the mobile menu on Escape and return focus to the toggle
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <header
@@ -74,6 +88,7 @@ export default function Header() {
         </div>
 
         <button
+          ref={menuButtonRef}
           type="button"
           className="rounded-lg p-2 text-ink hover:bg-cream-dark lg:hidden"
           aria-expanded={open}

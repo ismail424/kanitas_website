@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: area.seo.title,
   description: area.seo.description,
   alternates: { canonical: "/bil" },
+  openGraph: {
+    title: area.seo.title,
+    description: area.seo.description,
+    url: "/bil",
+  },
+  twitter: { title: area.seo.title, description: area.seo.description },
 };
 
 export default function BilPage() {
@@ -15,7 +21,7 @@ export default function BilPage() {
     <AreaPage
       area={area}
       whyTitle="En bilaffär du kan känna dig trygg i"
-      whyLead="Kanitas Bil drivs av samma koncern som byggt förtroende hos Sveriges största byggbolag sedan 2011. Samma ordning och reda gäller i varje bilaffär."
+      whyLead="Kanitas Bil drivs av samma koncern som sedan 2011 byggt förtroende hos några av Sveriges största byggbolag. Samma ordning och reda gäller i varje bilaffär."
       whyPoints={[
         "Etablerad koncern med AAA-kreditvärdighet – ingen anonym handlare",
         "Genomgångna fordon med dokumenterad historik",

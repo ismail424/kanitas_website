@@ -31,6 +31,10 @@ export type Area = {
   /** Full brand name, e.g. "Kanitas Bygg" */
   name: string;
   tagline: string;
+  /** Keyword-bearing page heading (h1) for the area page */
+  h1: string;
+  /** schema.org serviceType for the area's Service JSON-LD */
+  serviceType: string;
   /** One-liner used on home page cards */
   teaser: string;
   intro: string;
@@ -46,6 +50,8 @@ export const areas: Area[] = [
     nav: "Bygg",
     name: "Kanitas Bygg",
     tagline: "Från grund till nyckelfärdigt",
+    h1: "Byggföretag i Stockholm – från grund till nyckelfärdigt",
+    serviceType: "Byggentreprenad och byggservice",
     teaser:
       "Nybyggnation, renovering och byggservice för företag och privatpersoner – vår kärnverksamhet sedan 2011.",
     intro:
@@ -95,6 +101,8 @@ export const areas: Area[] = [
     nav: "Städ",
     name: "Kanitas Städ",
     tagline: "Rent, klart och redo",
+    h1: "Byggstädning och kontorsstädning i Stockholm",
+    serviceType: "Byggstädning och kontorsstädning",
     teaser:
       "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet – för företag, BRF:er och byggprojekt.",
     intro:
@@ -134,10 +142,12 @@ export const areas: Area[] = [
     nav: "Fastigheter",
     name: "Kanitas Fastigheter",
     tagline: "Lokaler som fungerar",
+    h1: "Lokaler att hyra i Storstockholm – fastigheter som fungerar",
+    serviceType: "Fastighetsförvaltning och lokaluthyrning",
     teaser:
       "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm – med egen drift och skötsel.",
     intro:
-      "Kanitas Fastigheter äger och förvaltar kommersiella lokaler i Storstockholm. Med byggkompetensen i samma koncern håller vi våra fastigheter i toppskick och kan snabbt anpassa lokaler efter hyresgästens behov.",
+      "Kanitas Fastigheter äger och förvaltar fastigheter och kommersiella lokaler i Storstockholm. Med byggkompetensen i samma koncern håller vi våra fastigheter i toppskick och kan snabbt anpassa lokaler efter hyresgästens behov.",
     heroImage: "/images/photos/fastigheter-hero.jpg",
     heroAlt: "Modernt flerbostadshus i skymning",
     services: [
@@ -173,8 +183,10 @@ export const areas: Area[] = [
     nav: "Bil",
     name: "Kanitas Bil",
     tagline: "Trygg bilaffär, utan krångel",
+    h1: "Köp och sälj bil i Järfälla – trygg bilaffär utan krångel",
+    serviceType: "Bilhandel – köp och försäljning av fordon",
     teaser:
-      "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner – alltid genomgångna och prissatta rätt.",
+      "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner – alltid genomgångna och rätt prissatta.",
     intro:
       "Kanitas Bil köper och säljer personbilar, transportbilar, lastbilar och arbetsmaskiner. Som del av en etablerad koncern med AAA-kreditvärdighet gör du affären med en trygg motpart – snabbt, transparent och till rätt pris.",
     heroImage: "/images/photos/bil-hero.jpg",

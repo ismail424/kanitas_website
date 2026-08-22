@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: area.seo.title,
   description: area.seo.description,
   alternates: { canonical: "/fastigheter" },
+  openGraph: {
+    title: area.seo.title,
+    description: area.seo.description,
+    url: "/fastigheter",
+  },
+  twitter: { title: area.seo.title, description: area.seo.description },
 };
 
 export default function FastigheterPage() {
@@ -15,7 +21,7 @@ export default function FastigheterPage() {
     <AreaPage
       area={area}
       whyTitle="Fastighetsägare med egen byggorganisation"
-      whyLead="När förvaltare, byggare och städbolag sitter i samma koncern blir lokalerna omhändertagna på riktigt – och anpassningar går snabbt från idé till färdigt."
+      whyLead="När förvaltare, byggare och städbolag sitter i samma koncern blir lokalerna omhändertagna på riktigt – och anpassningar går snabbt från idé till färdig lokal."
       whyPoints={[
         "Egna fastigheter i Järfälla och Storstockholm",
         "Lokalanpassningar utförda av koncernens byggteam",

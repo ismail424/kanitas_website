@@ -28,13 +28,9 @@ export default function AreaPage({
     "@context": "https://schema.org",
     "@type": "Service",
     name: area.name,
+    serviceType: area.serviceType,
     description: area.seo.description,
-    provider: {
-      "@type": "Organization",
-      name: site.legalName,
-      url: site.url,
-      telephone: "+46706653248",
-    },
+    provider: { "@id": `${site.url}/#organization` },
     areaServed: "Storstockholm",
     url: `${site.url}/${area.slug}`,
   };
@@ -63,7 +59,7 @@ export default function AreaPage({
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-36 sm:px-6 lg:px-8">
           <p className="eyebrow text-amber">{area.name}</p>
           <h1 className="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
-            {area.tagline}
+            {area.h1}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
             {area.intro}
@@ -189,19 +185,21 @@ export default function AreaPage({
                 text: "Vi går igenom resultatet tillsammans och lämnar inte förrän allt är godkänt – och vi finns kvar efteråt.",
               },
             ].map((item, index) => (
-              <Reveal key={item.step} delay={index * 80}>
-                <li className="h-full rounded-2xl border border-line-dark bg-dark-soft p-8">
-                  <span className="font-display text-4xl font-bold text-amber">
-                    {item.step}
-                  </span>
-                  <h3 className="mt-4 font-display text-lg font-bold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2.5 leading-relaxed text-white/65">
-                    {item.text}
-                  </p>
-                </li>
-              </Reveal>
+              <li key={item.step}>
+                <Reveal delay={index * 80} className="h-full">
+                  <div className="h-full rounded-2xl border border-line-dark bg-dark-soft p-8">
+                    <span className="font-display text-4xl font-bold text-amber">
+                      {item.step}
+                    </span>
+                    <h3 className="mt-4 font-display text-lg font-bold text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2.5 leading-relaxed text-white/65">
+                      {item.text}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>

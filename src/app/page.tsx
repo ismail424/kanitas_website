@@ -7,11 +7,16 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { areas, references, site, stats, values } from "@/lib/site";
 
+const pageTitle = "Kanitas – Bygg, städ, fastigheter & bil i Stockholm";
+const pageDescription =
+  "Kanitas är en familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia. Begär offert!";
+
 export const metadata: Metadata = {
-  title: "Kanitas – Bygg, städ, fastigheter & bil i Stockholm",
-  description:
-    "Kanitas är en familjeägd koncern i Järfälla med fyra verksamhetsområden: bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia. Begär offert!",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/" },
+  openGraph: { title: pageTitle, description: pageDescription, url: "/" },
+  twitter: { title: pageTitle, description: pageDescription },
 };
 
 export default function HomePage() {
@@ -33,7 +38,7 @@ export default function HomePage() {
         />
         <div className="relative mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
           <p className="eyebrow text-amber">
-            Bygg · Städ · Fastigheter · Bil — Stockholm
+            Bygg · Städ · Fastigheter · Bil – Stockholm
           </p>
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
             Vi bygger och tar hand om{" "}
@@ -68,13 +73,16 @@ export default function HomePage() {
       <div className="relative z-10 mx-auto -mt-14 max-w-5xl px-4 sm:px-6 lg:px-8">
         <dl className="grid grid-cols-2 divide-line overflow-hidden rounded-2xl border border-line bg-card shadow-[0_16px_60px_rgba(26,25,21,0.12)] sm:grid-cols-4 sm:divide-x">
           {stats.map((stat) => (
-            <div key={stat.label} className="px-6 py-7 text-center">
-              <dd className="font-display text-3xl font-bold text-ink sm:text-4xl">
-                {stat.value}
-              </dd>
+            <div
+              key={stat.label}
+              className="flex flex-col-reverse px-6 py-7 text-center"
+            >
               <dt className="mt-1.5 text-sm font-medium text-muted">
                 {stat.label}
               </dt>
+              <dd className="font-display text-3xl font-bold text-ink sm:text-4xl">
+                {stat.value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -166,7 +174,7 @@ export default function HomePage() {
             <SectionHeading
               on="dark"
               eyebrow="Om Kanitas"
-              title="Familjeägt, kollektivavtalat och byggt på förtroende"
+              title="Familjeägt, med kollektivavtal och byggt på förtroende"
               lead={`Det som började som en bygg- och städfirma i Järfälla ${site.founded} är i dag en koncern med sex bolag och 35 medarbetare. Vägen hit har gått genom en sak: att alltid leverera det vi lovat.`}
             />
             <ul className="mt-8 space-y-5">

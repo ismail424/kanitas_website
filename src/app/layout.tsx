@@ -62,9 +62,6 @@ export const metadata: Metadata = {
       "Familjeägd koncern i Järfälla: bygg, städ, fastigheter och bil. Kvalitet sedan 2011.",
     images: ["/og.jpg"],
   },
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,
@@ -81,58 +78,37 @@ export const metadata: Metadata = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${site.url}/#organization`,
-      name: site.legalName,
-      url: site.url,
-      logo: `${site.url}/icon.svg`,
-      foundingDate: String(site.founded),
-      taxID: site.orgnr,
-      telephone: "+46706653248",
-      email: site.email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: site.address.street,
-        postalCode: site.address.postalCode,
-        addressLocality: site.address.city,
-        addressRegion: site.address.region,
-        addressCountry: site.address.country,
-      },
-    },
-    {
-      "@type": "GeneralContractor",
-      "@id": `${site.url}/#localbusiness`,
-      name: site.legalName,
-      image: `${site.url}/og.jpg`,
-      url: site.url,
-      telephone: "+46706653248",
-      email: site.email,
-      priceRange: "$$",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: site.address.street,
-        postalCode: site.address.postalCode,
-        addressLocality: site.address.city,
-        addressRegion: site.address.region,
-        addressCountry: site.address.country,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: site.geo.lat,
-        longitude: site.geo.lng,
-      },
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "17:00",
-      },
-      areaServed: "Storstockholm",
-      parentOrganization: { "@id": `${site.url}/#organization` },
-    },
-  ],
+  "@type": ["GeneralContractor", "Organization"],
+  "@id": `${site.url}/#organization`,
+  name: site.legalName,
+  url: site.url,
+  logo: `${site.url}/icon.svg`,
+  image: `${site.url}/og.jpg`,
+  foundingDate: String(site.founded),
+  taxID: site.orgnr,
+  telephone: "+46706653248",
+  email: site.email,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: site.geo.lat,
+    longitude: site.geo.lng,
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "17:00",
+  },
+  areaServed: "Storstockholm",
 };
 
 export default function RootLayout({
@@ -149,8 +125,14 @@ export default function RootLayout({
             __html: JSON.stringify(organizationJsonLd),
           }}
         />
+        <a
+          href="#innehall"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-amber focus:px-4 focus:py-2 focus:font-semibold focus:text-dark-deep"
+        >
+          Hoppa till innehållet
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="innehall">{children}</main>
         <Footer />
         <Analytics />
       </body>
