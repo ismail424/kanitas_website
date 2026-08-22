@@ -15,8 +15,8 @@ export default function ContactSection({
   topic?: string;
 }) {
   return (
-    <section id="kontakt" className="bg-cream-dark">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="kontakt" className="border-t border-line bg-paper-2">
+      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
         <Reveal>
           <SectionHeading eyebrow="Kontakt" title={title} lead={lead} />
         </Reveal>
@@ -25,7 +25,7 @@ export default function ContactSection({
           <Reveal className="lg:col-span-2">
             <ul className="space-y-6">
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber-deep">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
                   <Phone className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -34,14 +34,14 @@ export default function ContactSection({
                   </p>
                   <a
                     href={site.phoneHref}
-                    className="text-lg font-semibold text-ink hover:text-amber-deep"
+                    className="text-lg font-semibold text-ink hover:text-pine"
                   >
                     {site.phone}
                   </a>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber-deep">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
                   <Mail className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -50,14 +50,14 @@ export default function ContactSection({
                   </p>
                   <a
                     href={`mailto:${site.email}`}
-                    className="text-lg font-semibold text-ink hover:text-amber-deep"
+                    className="text-lg font-semibold text-ink hover:text-pine"
                   >
                     {site.email}
                   </a>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber-deep">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -72,14 +72,14 @@ export default function ContactSection({
                     href={site.directionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-1 inline-block text-sm font-semibold text-amber-deep underline decoration-amber/50 underline-offset-4 hover:text-ink"
+                    className="mt-1 inline-block text-sm font-semibold text-pine underline decoration-pine/30 underline-offset-4 hover:text-ink"
                   >
                     Vägbeskrivning
                   </a>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber-deep">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
                   <Clock className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -95,7 +95,7 @@ export default function ContactSection({
           </Reveal>
 
           <Reveal delay={100} className="lg:col-span-3">
-            <div className="rounded-2xl border border-line bg-card p-6 shadow-[0_8px_40px_rgba(26,25,21,0.06)] sm:p-8">
+            <div className="rounded-2xl border border-line bg-card p-6 shadow-[0_8px_40px_rgba(19,23,21,0.06)] sm:p-8">
               <ContactForm defaultTopic={topic} />
             </div>
           </Reveal>

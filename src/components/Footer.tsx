@@ -6,133 +6,136 @@ import { activeAreas, certifications, site } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
-      {/* Certification strip */}
-      <div className="border-b border-line-dark">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-6 px-4 py-10 sm:px-6 lg:px-8">
-          {certifications.map((cert) => (
-            <div
-              key={cert.name}
-              className="flex items-center rounded-xl bg-white px-4 py-2"
-              title={cert.name}
-            >
+    <>
+      {/* Certification band — light, calm, evenly sized */}
+      <section
+        aria-label="Certifikat och medlemskap"
+        className="border-t border-line bg-paper-2"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-muted">
+            Trygghet, avtal & certifikat
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+            {certifications.map((cert) => (
               <Image
+                key={cert.name}
                 src={cert.image}
                 alt={cert.name}
-                width={110}
-                height={56}
-                className="h-12 w-auto object-contain"
+                width={120}
+                height={48}
+                title={cert.name}
+                className="h-10 w-auto object-contain"
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        <div>
-          <Logo on="dark" />
-          <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
-            Familjeägt bygg- och städföretag i Järfälla. Kvalitet och
-            pålitlighet i hela Storstockholm sedan {site.founded}.
-          </p>
-        </div>
+      <footer className="bg-pine-dark text-white">
+        <div className="mx-auto grid max-w-7xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+          <div>
+            <Logo on="dark" />
+            <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-white/60">
+              Familjeägt bygg- och städföretag i Järfälla. Kvalitet och
+              pålitlighet i hela Storstockholm sedan {site.founded}.
+            </p>
+          </div>
 
-        <nav aria-label="Verksamheter">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
-            Verksamheter
-          </p>
-          <ul className="mt-5 space-y-3">
-            {activeAreas.map((area) => (
-              <li key={area.slug}>
+          <nav aria-label="Verksamheter">
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-sand">
+              Verksamheter
+            </p>
+            <ul className="mt-6 space-y-3.5">
+              {activeAreas.map((area) => (
+                <li key={area.slug}>
+                  <Link
+                    href={`/${area.slug}`}
+                    className="text-white/70 transition-colors hover:text-white"
+                  >
+                    {area.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Företaget">
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-sand">
+              Företaget
+            </p>
+            <ul className="mt-6 space-y-3.5">
+              <li>
                 <Link
-                  href={`/${area.slug}`}
-                  className="text-white/75 transition-colors hover:text-white"
+                  href="/om-oss"
+                  className="text-white/70 transition-colors hover:text-white"
                 >
-                  {area.name}
+                  Om oss
                 </Link>
               </li>
-            ))}
-          </ul>
-        </nav>
+              <li>
+                <Link
+                  href="/om-oss#referenser"
+                  className="text-white/70 transition-colors hover:text-white"
+                >
+                  Referenser
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/kontakt"
+                  className="text-white/70 transition-colors hover:text-white"
+                >
+                  Kontakt
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
-        <nav aria-label="Företaget">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
-            Företaget
-          </p>
-          <ul className="mt-5 space-y-3">
-            <li>
-              <Link
-                href="/om-oss"
-                className="text-white/75 transition-colors hover:text-white"
-              >
-                Om oss
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/om-oss#referenser"
-                className="text-white/75 transition-colors hover:text-white"
-              >
-                Referenser
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/kontakt"
-                className="text-white/75 transition-colors hover:text-white"
-              >
-                Kontakt
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <div>
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-amber">
-            Kontakt
-          </p>
-          <ul className="mt-5 space-y-3 text-white/75">
-            <li>
-              <a
-                href={site.phoneHref}
-                className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
-              >
-                <Phone className="h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
-                {site.phone}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
-              >
-                <Mail className="h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
-                {site.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <MapPin className="mt-1 h-4 w-4 shrink-0 text-amber" aria-hidden="true" />
-              <span>
-                {site.address.street}
-                <br />
-                {site.address.postalCode} {site.address.city}
-              </span>
-            </li>
-            <li className="pt-1 text-sm text-white/55">{site.openingHours}</li>
-          </ul>
+          <div>
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-sand">
+              Kontakt
+            </p>
+            <ul className="mt-6 space-y-3.5 text-white/70">
+              <li>
+                <a
+                  href={site.phoneHref}
+                  className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-sand" aria-hidden="true" />
+                  {site.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
+                >
+                  <Mail className="h-4 w-4 shrink-0 text-sand" aria-hidden="true" />
+                  {site.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-1 h-4 w-4 shrink-0 text-sand" aria-hidden="true" />
+                <span>
+                  {site.address.street}
+                  <br />
+                  {site.address.postalCode} {site.address.city}
+                </span>
+              </li>
+              <li className="pt-1 text-sm text-white/45">{site.openingHours}</li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div className="border-t border-line-dark">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-white/50 sm:flex-row sm:px-6 lg:px-8">
-          <p>
-            © {new Date().getFullYear()} {site.legalName} · Org.nr {site.orgnr}
-          </p>
-          <p>
-            {site.address.street}, {site.address.postalCode} {site.address.city}
+        <div className="border-t border-line-pine">
+          <p className="mx-auto max-w-7xl px-4 py-6 text-center text-xs font-medium tracking-wide text-white/40 sm:px-6 lg:px-8">
+            © {new Date().getFullYear()} {site.legalName} · Org.nr {site.orgnr}{" "}
+            · {site.address.street}, {site.address.postalCode}{" "}
+            {site.address.city}
           </p>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }

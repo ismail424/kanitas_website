@@ -49,7 +49,6 @@ export default function AreaPage({
     },
   ];
 
-  // Vertical-specific business entity (e.g. AutoDealer for /bil)
   if (area.businessType) {
     graph.push({
       "@type": area.businessType,
@@ -88,39 +87,27 @@ export default function AreaPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero with sub-brand lockup */}
-      <section className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-dark-deep">
-        <Image
-          src={area.heroImage}
-          alt={area.heroAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-50"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-dark-deep via-dark-deep/45 to-transparent"
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-36 sm:px-6 lg:px-8">
-          <BrandLockup suffix={area.slug} tone={area.tone} />
-          <h1 className="mt-7 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+      {/* Hero — clean pine gradient with sub-brand lockup */}
+      <section className="hero-pine relative isolate overflow-hidden">
+        <div className="relative mx-auto w-full max-w-7xl px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-44 lg:px-8">
+          <BrandLockup suffix={area.slug} tone="#bda366" />
+          <h1 className="mt-8 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
             {area.h1}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
             {area.intro}
           </p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="#kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-7 py-3 font-semibold text-pine transition-colors hover:bg-sand hover:text-pine-black"
             >
               {area.ctaLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <a
               href={site.phoneHref}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               {site.phone}
@@ -131,32 +118,24 @@ export default function AreaPage({
 
       {/* Services */}
       <section>
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow" style={{ color: area.toneDeep }}>
-                Tjänster
-              </p>
+              <p className="eyebrow text-pine">Tjänster</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
                 {area.servicesH2}
               </h2>
             </div>
           </Reveal>
           <div
-            className={`mt-12 grid gap-6 sm:grid-cols-2 ${
+            className={`mt-14 grid gap-6 sm:grid-cols-2 ${
               area.services.length % 3 === 0 ? "lg:grid-cols-3" : ""
             }`}
           >
             {area.services.map((service, index) => (
-              <Reveal key={service.title} delay={index * 60}>
-                <div className="h-full rounded-2xl border border-line bg-card p-7 shadow-[0_4px_24px_rgba(26,25,21,0.04)] transition-shadow hover:shadow-[0_10px_36px_rgba(26,25,21,0.09)]">
-                  <span
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{
-                      backgroundColor: `${area.tone}26`,
-                      color: area.toneDeep,
-                    }}
-                  >
+              <Reveal key={service.title} delay={index * 50}>
+                <div className="h-full rounded-2xl border border-line bg-card p-8 transition-shadow hover:shadow-[0_10px_36px_rgba(19,23,21,0.08)]">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-pine/10 text-pine">
                     <ServiceIcon name={service.icon} />
                   </span>
                   <h3 className="mt-5 font-display text-lg font-bold text-ink">
@@ -171,11 +150,11 @@ export default function AreaPage({
           </div>
           {area.related ? (
             <Reveal delay={100}>
-              <p className="mt-10 text-lg text-ink-soft">
+              <p className="mt-12 text-lg text-ink-soft">
                 {area.related.text}{" "}
                 <Link
                   href={area.related.href}
-                  className="font-semibold text-amber-deep underline decoration-amber/50 underline-offset-4 transition-colors hover:text-ink"
+                  className="font-semibold text-pine underline decoration-pine/30 underline-offset-4 transition-colors hover:text-ink"
                 >
                   {area.related.label}
                 </Link>
@@ -188,13 +167,11 @@ export default function AreaPage({
 
       {/* Extra content section (checklist / inventory) */}
       {area.extraSection ? (
-        <section className="border-y border-line bg-card">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <section className="border-y border-line bg-paper-2">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow" style={{ color: area.toneDeep }}>
-                  {area.extraSection.eyebrow}
-                </p>
+                <p className="eyebrow text-pine">{area.extraSection.eyebrow}</p>
                 <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
                   {area.extraSection.title}
                 </h2>
@@ -205,17 +182,11 @@ export default function AreaPage({
                 ) : null}
               </div>
             </Reveal>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+            <div className="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2">
               {area.extraSection.items.map((item, index) => (
-                <Reveal key={item.title} delay={index * 60}>
+                <Reveal key={item.title} delay={index * 50}>
                   <div className="flex gap-4">
-                    <span
-                      className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
-                      style={{
-                        backgroundColor: `${area.tone}26`,
-                        color: area.toneDeep,
-                      }}
-                    >
+                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pine/10 text-pine">
                       <Check className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <div>
@@ -235,13 +206,11 @@ export default function AreaPage({
       ) : null}
 
       {/* Why us */}
-      <section className="bg-cream-dark">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:px-8">
+      <section>
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-2 lg:gap-20 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow" style={{ color: area.toneDeep }}>
-                Varför Kanitas
-              </p>
+              <p className="eyebrow text-pine">Varför Kanitas</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
                 {whyTitle}
               </h2>
@@ -249,16 +218,10 @@ export default function AreaPage({
                 {whyLead}
               </p>
             </div>
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-9 space-y-4">
               {whyPoints.map((point) => (
                 <li key={point} className="flex items-start gap-3">
-                  <span
-                    className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
-                    style={{
-                      backgroundColor: `${area.tone}33`,
-                      color: area.toneDeep,
-                    }}
-                  >
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-pine/10 text-pine">
                     <Check className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <span className="text-ink-soft">{point}</span>
@@ -267,7 +230,7 @@ export default function AreaPage({
             </ul>
           </Reveal>
           <Reveal delay={100}>
-            <div className="grid gap-4">
+            <div className="grid gap-5">
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                 <Image
                   src={whyImage.src}
@@ -292,27 +255,22 @@ export default function AreaPage({
       </section>
 
       {/* Process */}
-      <section className="bg-dark">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section className="bg-pine-dark">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow" style={{ color: area.tone }}>
-                Så går det till
-              </p>
+              <p className="eyebrow text-sand">Så går det till</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl">
                 Så arbetar {area.name}
               </h2>
             </div>
           </Reveal>
-          <ol className="mt-12 grid gap-6 md:grid-cols-3">
+          <ol className="mt-14 grid gap-6 md:grid-cols-3">
             {area.process.map((item, index) => (
               <li key={item.step}>
-                <Reveal delay={index * 80} className="h-full">
-                  <div className="h-full rounded-2xl border border-line-dark bg-dark-soft p-8">
-                    <span
-                      className="font-display text-4xl font-bold"
-                      style={{ color: area.tone }}
-                    >
+                <Reveal delay={index * 70} className="h-full">
+                  <div className="h-full rounded-2xl border border-line-pine bg-pine-soft p-8">
+                    <span className="font-display text-4xl font-bold text-sand">
                       {item.step}
                     </span>
                     <h3 className="mt-4 font-display text-lg font-bold text-white">
@@ -332,21 +290,19 @@ export default function AreaPage({
       {/* FAQ */}
       {area.faq ? (
         <section>
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow" style={{ color: area.toneDeep }}>
-                  Vanliga frågor
-                </p>
+                <p className="eyebrow text-pine">Vanliga frågor</p>
                 <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
                   Frågor och svar om {area.nav.toLowerCase()}
                 </h2>
               </div>
             </Reveal>
-            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <div className="mt-14 grid gap-6 lg:grid-cols-2">
               {area.faq.map((item, index) => (
-                <Reveal key={item.q} delay={index * 60}>
-                  <div className="h-full rounded-2xl border border-line bg-card p-7">
+                <Reveal key={item.q} delay={index * 50}>
+                  <div className="h-full rounded-2xl border border-line bg-card p-8">
                     <h3 className="font-display text-lg font-bold text-ink">
                       {item.q}
                     </h3>

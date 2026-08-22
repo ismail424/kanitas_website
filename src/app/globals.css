@@ -1,34 +1,35 @@
 @import "tailwindcss";
 
 /*
- * Kanitas design tokens — warm graphite + cream + construction amber.
+ * Kanitas design tokens v2 — clean white base, deep pine green brand,
+ * warm sand detail. One accent, generous whitespace.
  * Single source of truth for the whole site; no hardcoded hex in components.
  */
 @theme {
   /* Surfaces */
-  --color-cream: #f7f5f1;
-  --color-cream-dark: #eeebe4;
+  --color-paper: #f7f5ef;
+  --color-paper-2: #efebe0;
   --color-card: #ffffff;
+  --color-sand-pale: #ece5d2;
 
   /* Text on light */
-  --color-ink: #1a1915;
-  --color-ink-soft: #45413a;
-  --color-muted: #6e6759;
+  --color-ink: #1c2420;
+  --color-ink-soft: #404c45;
+  --color-muted: #5b665f;
 
   /* Borders */
-  --color-line: #e3dfd6;
-  --color-line-dark: #38342c;
+  --color-line: #e2ddd0;
+  --color-line-pine: #35594a;
 
-  /* Dark sections */
-  --color-dark: #1e1c18;
-  --color-dark-deep: #141310;
-  --color-dark-soft: #2a2721;
+  /* Brand green */
+  --color-pine: #24523f;
+  --color-pine-deep: #1a3d2f;
+  --color-pine-dark: #1e3d2f;
+  --color-pine-black: #152b21;
+  --color-pine-soft: #27493a;
 
-  /* Accent */
-  --color-amber: #e8892b;
-  /* Dark enough for AA-contrast small text on cream surfaces (5.0:1) */
-  --color-amber-deep: #9a530b;
-  --color-amber-pale: #fbefdf;
+  /* Warm detail on dark surfaces */
+  --color-sand: #bda366;
 
   /* Feedback */
   --color-ok: #2f7d4f;
@@ -55,7 +56,7 @@ html {
 }
 
 body {
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -63,11 +64,36 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-amber);
-  color: var(--color-dark-deep);
+  background-color: var(--color-pine);
+  color: #ffffff;
 }
 
-/* Eyebrow kicker with amber rule — used above every section heading */
+/* Deep pine hero surface with a faint construction grid */
+.hero-pine {
+  background-color: var(--color-pine-black);
+  background-image:
+    radial-gradient(
+      90rem 40rem at 85% -10%,
+      rgba(189, 163, 102, 0.16),
+      transparent 60%
+    ),
+    linear-gradient(160deg, #152b21 0%, #1e3d2f 55%, #2a5240 100%);
+  position: relative;
+}
+
+.hero-pine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
+  pointer-events: none;
+}
+
+/* Eyebrow kicker with rule — used above every section heading */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -82,7 +108,7 @@ body {
   content: "";
   width: 2.25rem;
   height: 2px;
-  /* Follows the text color so sub-brand tones carry through automatically */
+  /* Follows the text color so surface variants carry through automatically */
   background-color: currentColor;
 }
 
@@ -90,10 +116,10 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(14px);
     transition:
-      opacity 0.7s var(--ease-out-soft),
-      transform 0.7s var(--ease-out-soft);
+      opacity 0.55s var(--ease-out-soft),
+      transform 0.55s var(--ease-out-soft);
   }
 
   .reveal.is-visible {

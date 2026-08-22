@@ -30,9 +30,9 @@ export default function Reveal({
           }
         }
       },
-      // Fire as soon as any part of the element clears the bottom 8% of
-      // the viewport — tall elements never reach high visibility ratios.
-      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
+      // Trigger slightly before the element scrolls into view so content
+      // never visibly "pops in" mid-viewport.
+      { threshold: 0, rootMargin: "0px 0px 12% 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();

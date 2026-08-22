@@ -24,8 +24,8 @@ const features: Record<
   { image: string; alt: string; highlights: string[] }
 > = {
   bygg: {
-    image: "/images/photos/bygg-nybyggnation.jpg",
-    alt: "Nybyggd modern villa i skymning",
+    image: "/images/photos/bygg-stockholm.jpg",
+    alt: "Modern kontorsbyggnad i Stockholm",
     highlights: [
       "Nybyggnation & entreprenad",
       "Renovering & ombyggnation",
@@ -34,8 +34,8 @@ const features: Record<
     ],
   },
   stad: {
-    image: "/images/photos/stad-detalj.jpg",
-    alt: "Professionell städvagn i fastighetskorridor",
+    image: "/images/photos/stad-kontor.jpg",
+    alt: "Ljust och rent kontorslandskap",
     highlights: [
       "Byggstädning & slutstädning",
       "Kontors- & fastighetsstädning",
@@ -48,27 +48,15 @@ const features: Record<
 export default function HomePage() {
   return (
     <>
-      {/* Hero — bygg-led */}
-      <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-dark-deep">
-        <Image
-          src="/images/photos/home-hero.jpg"
-          alt="Byggkranar över stomme i skymning"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-45"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-dark-deep via-dark-deep/40 to-dark-deep/20"
-          aria-hidden="true"
-        />
+      {/* Hero — bygg-led, clean pine gradient */}
+      <section className="hero-pine relative isolate flex min-h-[86svh] items-center overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-          <p className="eyebrow text-amber">Bygg & Städ – Storstockholm</p>
+          <p className="eyebrow text-sand">Bygg & Städ – Storstockholm</p>
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
             Vi bygger tryggt – och lämnar{" "}
-            <em className="not-italic text-amber">rent</em> efter oss
+            <em className="not-italic text-sand">rent</em> efter oss
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
+          <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-white/80 sm:text-xl">
             Familjeägt byggföretag i Järfälla med egen städverksamhet – sedan{" "}
             {site.founded} anlitade av allt från privatpersoner till Sveriges
             största byggbolag.
@@ -76,14 +64,14 @@ export default function HomePage() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/bygg"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-7 py-3.5 text-lg font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-8 py-3.5 text-lg font-semibold text-pine transition-colors hover:bg-sand hover:text-pine-black"
             >
               Våra byggtjänster
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Link>
             <Link
               href="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 px-7 py-3.5 text-lg font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
               Kontakta oss
@@ -94,7 +82,7 @@ export default function HomePage() {
 
       {/* Stats bar overlapping the hero */}
       <div className="relative z-10 mx-auto -mt-14 max-w-5xl px-4 sm:px-6 lg:px-8">
-        <dl className="grid grid-cols-2 divide-line overflow-hidden rounded-2xl border border-line bg-card shadow-[0_16px_60px_rgba(26,25,21,0.12)] sm:grid-cols-4 sm:divide-x">
+        <dl className="grid grid-cols-2 divide-line overflow-hidden rounded-2xl border border-line bg-card shadow-[0_16px_60px_rgba(19,23,21,0.10)] sm:grid-cols-4 sm:divide-x">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -113,13 +101,13 @@ export default function HomePage() {
 
       {/* Business areas — bygg first and dominant */}
       <section id="verksamheter" className="scroll-mt-24">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-          <div className="space-y-20 sm:space-y-24">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+          <div className="space-y-24 sm:space-y-32">
             {activeAreas.map((area, index) => (
               <Reveal key={area.slug}>
                 <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                   <div
-                    className={`relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_16px_48px_rgba(26,25,21,0.12)] ${
+                    className={`relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_16px_48px_rgba(19,23,21,0.10)] ${
                       index % 2 === 1 ? "lg:order-2" : ""
                     }`}
                   >
@@ -132,9 +120,7 @@ export default function HomePage() {
                     />
                   </div>
                   <div>
-                    <p className="eyebrow" style={{ color: area.toneDeep }}>
-                      {area.name}
-                    </p>
+                    <p className="eyebrow text-pine">{area.name}</p>
                     <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
                       {area.servicesH2}
                     </h2>
@@ -144,13 +130,7 @@ export default function HomePage() {
                     <ul className="mt-7 grid gap-3 sm:grid-cols-2">
                       {(features[area.slug]?.highlights ?? []).map((item) => (
                         <li key={item} className="flex items-start gap-2.5">
-                          <span
-                            className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
-                            style={{
-                              backgroundColor: `${area.tone}26`,
-                              color: area.toneDeep,
-                            }}
-                          >
+                          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-pine/10 text-pine">
                             <Check className="h-4 w-4" aria-hidden="true" />
                           </span>
                           <span className="text-ink-soft">{item}</span>
@@ -159,7 +139,7 @@ export default function HomePage() {
                     </ul>
                     <Link
                       href={`/${area.slug}`}
-                      className="mt-8 inline-flex items-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+                      className="mt-8 inline-flex items-center gap-2 rounded-full bg-pine px-7 py-3 font-semibold text-white transition-colors hover:bg-pine-deep"
                     >
                       Mer om {area.name}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -173,7 +153,7 @@ export default function HomePage() {
       </section>
 
       {/* About teaser + values */}
-      <section className="bg-dark">
+      <section className="bg-pine-dark">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:px-8">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
@@ -197,10 +177,10 @@ export default function HomePage() {
               {values.map((value) => (
                 <li
                   key={value.title}
-                  className="inline-flex items-center gap-2.5 rounded-full border border-line-dark bg-dark-soft px-5 py-2.5"
+                  className="inline-flex items-center gap-2.5 rounded-full border border-line-pine bg-pine-soft px-5 py-2.5"
                 >
                   <span
-                    className="h-1.5 w-4 rounded-full bg-amber"
+                    className="h-1.5 w-4 rounded-full bg-sand"
                     aria-hidden="true"
                   />
                   <span className="font-display font-semibold text-white">
@@ -211,7 +191,7 @@ export default function HomePage() {
             </ul>
             <Link
               href="/om-oss"
-              className="mt-9 inline-flex items-center gap-2 rounded-lg border border-white/25 px-6 py-3 font-semibold text-white transition-colors hover:border-amber hover:text-amber"
+              className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-3 font-semibold text-white transition-colors hover:border-sand hover:text-sand"
             >
               Mer om oss
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -222,7 +202,7 @@ export default function HomePage() {
 
       {/* References */}
       <section id="referenser">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
               align="center"
@@ -236,14 +216,14 @@ export default function HomePage() {
               {references.map((ref) => (
                 <li
                   key={ref.name}
-                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-card px-6 transition-colors hover:border-amber/50"
+                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-card px-6 transition-colors hover:border-pine/40"
                 >
                   <Image
                     src={ref.logo}
                     alt={ref.name}
                     width={140}
                     height={56}
-                    className="max-h-12 w-auto object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    className="max-h-11 w-auto object-contain"
                   />
                 </li>
               ))}
@@ -253,7 +233,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA banner */}
-      <section className="border-y border-line bg-amber-pale">
+      <section className="border-y border-line bg-sand-pale">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
             <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -267,14 +247,14 @@ export default function HomePage() {
           <div className="flex flex-col gap-4 sm:flex-row">
             <a
               href={site.phoneHref}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-ink/20 px-7 py-3.5 text-lg font-semibold text-ink transition-colors hover:border-ink"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-3.5 text-lg font-semibold text-ink transition-colors hover:border-ink"
             >
-              <Phone className="h-5 w-5 text-amber-deep" aria-hidden="true" />
+              <Phone className="h-5 w-5 text-pine" aria-hidden="true" />
               {site.phone}
             </a>
             <Link
               href="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-7 py-3.5 text-lg font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-pine px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-pine-deep"
             >
               Begär offert
               <ArrowRight className="h-5 w-5" aria-hidden="true" />

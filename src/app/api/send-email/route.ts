@@ -121,19 +121,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         message,
       ].join("\n"),
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e3dfd6; border-radius: 12px;">
-          <h2 style="color: #1a1915; border-bottom: 3px solid #e8892b; padding-bottom: 10px;">Nytt meddelande via kanitas.se</h2>
-          <p style="color: #6e6759;">Mottaget: <strong>${timestamp}</strong></p>
-          <div style="background-color: #f7f5f1; padding: 16px; border-radius: 8px; margin: 16px 0;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e8e4; border-radius: 12px;">
+          <h2 style="color: #131715; border-bottom: 3px solid #1e4d3b; padding-bottom: 10px;">Nytt meddelande via kanitas.se</h2>
+          <p style="color: #5b6660;">Mottaget: <strong>${timestamp}</strong></p>
+          <div style="background-color: #f4f6f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p><strong>Namn:</strong> ${safe.name}</p>
-            <p><strong>E-post:</strong> <a href="mailto:${safe.email}" style="color: #b45f0d;">${safe.email}</a></p>
+            <p><strong>E-post:</strong> <a href="mailto:${safe.email}" style="color: #1e4d3b;">${safe.email}</a></p>
             <p><strong>Telefon:</strong> ${safe.phone}</p>
             <p><strong>Ärende:</strong> ${safe.topic}</p>
           </div>
-          <div style="background-color: #f7f5f1; padding: 16px; border-radius: 8px; margin: 16px 0;">
+          <div style="background-color: #f4f6f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p style="white-space: pre-wrap;">${safe.message}</p>
           </div>
-          <p style="font-size: 12px; color: #6e6759; border-top: 1px solid #e3dfd6; margin-top: 20px; padding-top: 12px;">
+          <p style="font-size: 12px; color: #5b6660; border-top: 1px solid #e5e8e4; margin-top: 20px; padding-top: 12px;">
             Svara direkt på detta mejl för att nå avsändaren.
           </p>
         </div>

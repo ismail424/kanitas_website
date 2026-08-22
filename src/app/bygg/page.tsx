@@ -25,12 +25,12 @@ export default function ByggPage() {
         "Fast kontaktperson och tydlig kommunikation genom hela projektet",
       ]}
       whyImage={{
-        src: "/images/photos/bygg-renovering.jpg",
-        alt: "Pågående renovering och ombyggnation av lokal",
+        src: "/images/photos/bygg-hero.jpg",
+        alt: "Byggarbetare armerar på byggarbetsplats",
       }}
       secondaryImage={{
-        src: "/images/photos/bygg-lager.jpg",
-        alt: "Stor logistikhall med pallställ",
+        src: "/images/photos/bygg-stockholm.jpg",
+        alt: "Modern kontorsbyggnad i Stockholm",
       }}
     />
   );

@@ -76,7 +76,7 @@ export type Area = {
   businessType?: string;
   /** Sub-brand accent for dark surfaces (hero, process numbers) */
   tone: string;
-  /** Sub-brand accent for light surfaces (icons, eyebrows) — AA on cream */
+  /** Sub-brand accent for light surfaces (icons, eyebrows) — AA on paper */
   toneDeep: string;
   /** Label for the primary CTA — matches what the visitor actually wants */
   ctaLabel: string;
@@ -111,8 +111,8 @@ export const areas: Area[] = [
     h1: "Byggföretag i Stockholm – från grund till nyckelfärdigt",
     servicesH2: "Byggtjänster i Stockholm",
     serviceType: "Byggentreprenad och byggservice",
-    tone: "#e8892b",
-    toneDeep: "#9a530b",
+    tone: "#c9a86a",
+    toneDeep: "#1e4d3b",
     ctaLabel: "Begär offert",
     teaser:
       "Nybyggnation, renovering och byggservice för företag och privatpersoner – vår kärnverksamhet sedan 2011.",
@@ -207,8 +207,8 @@ export const areas: Area[] = [
     h1: "Byggstädning och kontorsstädning i Stockholm",
     servicesH2: "Städtjänster för företag och byggprojekt",
     serviceType: "Byggstädning och kontorsstädning",
-    tone: "#5cb57e",
-    toneDeep: "#296941",
+    tone: "#c9a86a",
+    toneDeep: "#1e4d3b",
     ctaLabel: "Begär offert",
     teaser:
       "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet – för företag, BRF:er och byggprojekt.",
@@ -527,7 +527,7 @@ export const references = [
   { name: "Oljibe", logo: "/references/oljibe.png" },
   { name: "Artega", logo: "/references/artega.png" },
   { name: "ByggPartner", logo: "/references/byggpartner.png" },
-  { name: "Dagab", logo: "/references/dagab.svg" },
+  { name: "Dagab", logo: "/references/dagab.jpg" },
   { name: "SMD Logistics", logo: "/references/smd.jpg" },
   { name: "Ranova", logo: "/references/ranova.jpg" },
   { name: "Catena", logo: "/references/catena.png" },

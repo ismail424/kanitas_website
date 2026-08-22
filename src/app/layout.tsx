@@ -125,7 +125,7 @@ export default function RootLayout({
         />
         <a
           href="#innehall"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-amber focus:px-4 focus:py-2 focus:font-semibold focus:text-dark-deep"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-pine focus:px-4 focus:py-2 focus:font-semibold focus:text-pine-black"
         >
           Hoppa till innehållet
         </a>

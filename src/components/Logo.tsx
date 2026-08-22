@@ -10,18 +10,20 @@ import {
 } from "@/components/logo-paths";
 
 /**
- * Kanitas lockup v3: the structural K — an amber load-bearing column and two
- * beams with vertical end cuts — IS the letter K, followed by "ANITAS" in
- * Archivo Black outlines. One vector, identical everywhere.
+ * Kanitas lockup: the structural K — a load-bearing column and two beams
+ * with vertical end cuts — IS the letter K, followed by "ANITAS" in Archivo
+ * Black outlines. Pine column on light surfaces, sand column on dark.
  */
 function LockupSvg({
   fg,
+  column,
   suffix,
   tone,
   className,
   label,
 }: {
   fg: string;
+  column: string;
   suffix?: string;
   tone?: string;
   className: string;
@@ -41,7 +43,7 @@ function LockupSvg({
         y={COLUMN.y}
         width={COLUMN.width}
         height={COLUMN.height}
-        className="fill-amber"
+        className={column}
       />
       <path d={BEAMS_D} className={fg} />
       <path transform={ANITAS_TRANSFORM} d={ANITAS_D} className={fg} />
@@ -70,6 +72,7 @@ export function BrandLockup({
   return (
     <LockupSvg
       fg="fill-white"
+      column="fill-sand"
       suffix={suffix}
       tone={tone}
       className={className}
@@ -87,6 +90,7 @@ export default function Logo({ on = "light" }: { on?: "light" | "dark" }) {
     >
       <LockupSvg
         fg={on === "dark" ? "fill-white" : "fill-ink"}
+        column={on === "dark" ? "fill-sand" : "fill-pine"}
         className="h-5 w-auto sm:h-6"
         label="Kanitas"
       />

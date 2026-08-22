@@ -25,12 +25,12 @@ export default function StadPage() {
         "Snabb inställelse i hela Storstockholm",
       ]}
       whyImage={{
-        src: "/images/photos/stad-lager.jpg",
-        alt: "Höglagergång i stor lagerlokal",
+        src: "/images/photos/stad-lounge.jpg",
+        alt: "Rent och modernt kontorslandskap",
       }}
       secondaryImage={{
-        src: "/images/photos/stad-resultat.jpg",
-        alt: "Skinande rent modernt kök efter städning",
+        src: "/images/photos/stad-lager.jpg",
+        alt: "Lagerlokal med pallställ",
       }}
     />
   );

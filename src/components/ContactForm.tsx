@@ -7,7 +7,7 @@ import { contactTopics } from "@/lib/site";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-amber-deep focus:ring-2 focus:ring-amber-deep";
+  "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-pine focus:ring-2 focus:ring-pine";
 
 export default function ContactForm({
   defaultTopic,
@@ -150,7 +150,7 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber px-6 py-3.5 font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-pine px-8 py-3.5 font-semibold text-white transition-colors hover:bg-pine-deep disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {status === "sending" ? (
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />

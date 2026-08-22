@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import {
-  certifications,
   groupCompanies,
   ogMeta,
   references,
@@ -42,30 +41,22 @@ export default function OmOssPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Hero */}
-      <section className="relative isolate flex min-h-[55svh] items-end overflow-hidden bg-dark-deep">
-        <Image
-          src="/images/photos/om-oss-team.jpg"
-          alt="Arbetslag samlat på byggarbetsplats"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-50"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-dark-deep via-dark-deep/45 to-transparent"
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-36 sm:px-6 lg:px-8">
-          <p className="eyebrow text-amber">Om Kanitas</p>
+      <section className="hero-pine relative isolate overflow-hidden">
+        <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pb-24 sm:pt-44 lg:px-8">
+          <p className="eyebrow text-sand">Om Kanitas</p>
           <h1 className="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
             Byggt på förtroende sedan {site.founded}
           </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
+            Familjeägt bygg- och städföretag i Järfälla – i dag en koncern med
+            sex bolag och 35 medarbetare.
+          </p>
         </div>
       </section>
 
       {/* Story */}
       <section>
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             <Reveal>
               <SectionHeading
@@ -127,8 +118,8 @@ export default function OmOssPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-dark">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section className="bg-pine-dark">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
               on="dark"
@@ -139,9 +130,9 @@ export default function OmOssPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {values.map((value, index) => (
               <Reveal key={value.title} delay={index * 80}>
-                <div className="h-full rounded-2xl border border-line-dark bg-dark-soft p-8">
+                <div className="h-full rounded-2xl border border-line-pine bg-pine-soft p-8">
                   <span
-                    className="block h-2 w-10 rounded-full bg-amber"
+                    className="block h-2 w-10 rounded-full bg-sand"
                     aria-hidden="true"
                   />
                   <h3 className="mt-5 font-display text-xl font-bold text-white">
@@ -159,7 +150,7 @@ export default function OmOssPage() {
 
       {/* Group companies */}
       <section>
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
               eyebrow="Koncernen"
@@ -184,7 +175,7 @@ export default function OmOssPage() {
                   {"area" in company && company.area ? (
                     <Link
                       href={company.area}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-deep hover:text-ink"
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:text-ink"
                     >
                       {company.areaLabel}
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -198,8 +189,8 @@ export default function OmOssPage() {
       </section>
 
       {/* References */}
-      <section id="referenser" className="scroll-mt-24 bg-cream-dark">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section id="referenser" className="scroll-mt-24 bg-paper-2">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
               eyebrow="Referenser"
@@ -226,33 +217,11 @@ export default function OmOssPage() {
             </ul>
           </Reveal>
 
-          <Reveal delay={150}>
-            <div className="mt-16">
-              <h3 className="eyebrow text-amber-deep">Trygghet & avtal</h3>
-              <div className="mt-6 flex flex-wrap items-center gap-4">
-                {certifications.map((cert) => (
-                  <div
-                    key={cert.name}
-                    className="flex items-center rounded-xl border border-line bg-card px-5 py-3"
-                    title={cert.name}
-                  >
-                    <Image
-                      src={cert.image}
-                      alt={cert.name}
-                      width={110}
-                      height={56}
-                      className="h-11 w-auto object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="border-y border-line bg-amber-pale">
+      <section className="border-y border-line bg-sand-pale">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
             <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
@@ -265,7 +234,7 @@ export default function OmOssPage() {
           </div>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-7 py-3.5 text-lg font-semibold text-dark-deep transition-colors hover:bg-amber-deep hover:text-white"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-pine px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-pine-deep"
           >
             Kontakta oss
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
