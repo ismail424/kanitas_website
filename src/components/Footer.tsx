@@ -32,7 +32,7 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer className="bg-pine-dark text-white">
+      <footer className="bg-umbra text-white">
         <div className="mx-auto grid max-w-7xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
           <div>
             <Logo on="dark" />
@@ -128,7 +128,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-line-pine">
+        <div className="border-t border-line-umbra">
           <p className="mx-auto max-w-7xl px-4 py-6 text-center text-xs font-medium tracking-wide text-white/40 sm:px-6 lg:px-8">
             © {new Date().getFullYear()} {site.legalName} · Org.nr {site.orgnr}{" "}
             · {site.address.street}, {site.address.postalCode}{" "}

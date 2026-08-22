@@ -24,8 +24,8 @@ const features: Record<
   { image: string; alt: string; highlights: string[] }
 > = {
   bygg: {
-    image: "/images/photos/bygg-stockholm.jpg",
-    alt: "Modern kontorsbyggnad i Stockholm",
+    image: "/images/photos/bygg-hero.jpg",
+    alt: "Byggarbetare armerar på byggarbetsplats",
     highlights: [
       "Nybyggnation & entreprenad",
       "Renovering & ombyggnation",
@@ -48,45 +48,78 @@ const features: Record<
 export default function HomePage() {
   return (
     <>
-      {/* Hero — bygg-led, clean pine gradient */}
-      <section className="hero-pine relative isolate flex min-h-[86svh] items-center overflow-hidden">
-        <div className="relative mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-          <p className="eyebrow text-sand">Bygg & Städ – Storstockholm</p>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
-            Vi bygger tryggt – och lämnar{" "}
-            <em className="not-italic text-sand">rent</em> efter oss
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-white/80 sm:text-xl">
-            Familjeägt byggföretag i Järfälla med egen städverksamhet – sedan{" "}
-            {site.founded} anlitade av allt från privatpersoner till Sveriges
-            största byggbolag.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/bygg"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-8 py-3.5 text-lg font-semibold text-pine transition-colors hover:bg-sand hover:text-pine-black"
-            >
-              Våra byggtjänster
-              <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </Link>
-            <Link
-              href="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
-            >
-              <Phone className="h-5 w-5" aria-hidden="true" />
-              Kontakta oss
-            </Link>
+      {/* Hero — light, airy, big type left, architecture right */}
+      <section className="relative isolate overflow-hidden bg-paper">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:min-h-[78svh] lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-24">
+          <div className="lg:col-span-6">
+            <p className="eyebrow text-copper">
+              Bygg & Städ – Storstockholm
+            </p>
+            <h1 className="mt-7 display-1 text-ink">
+              Vi bygger tryggt – och lämnar{" "}
+              <em className="not-italic text-copper">rent</em> efter oss.
+            </h1>
+            <p className="mt-7 max-w-xl lead-lg text-muted">
+              Familjeägt byggföretag i Järfälla med egen städverksamhet –
+              sedan {site.founded} anlitade av allt från privatpersoner till
+              Sveriges största byggbolag.
+            </p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/bygg"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-copper-deep"
+              >
+                Våra byggtjänster
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
+              <Link
+                href="/kontakt"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-3.5 text-lg font-semibold text-ink transition-colors hover:border-ink"
+              >
+                <Phone className="h-5 w-5 text-copper" aria-hidden="true" />
+                Kontakta oss
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative lg:col-span-6">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl lg:aspect-[5/6]">
+              <Image
+                src="/images/photos/bygg-stockholm.jpg"
+                alt="Modern kontorsbyggnad i Stockholm"
+                fill
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            {/* Overlapping feature card */}
+            <div className="absolute -bottom-6 left-4 max-w-xs rounded-2xl bg-umbra p-6 shadow-[0_20px_50px_rgba(19,23,21,0.25)] sm:left-0 lg:-left-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sand">
+                Utvalda uppdragsgivare
+              </p>
+              <p className="mt-2.5 title text-white">
+                NCC · Implenia · ByggPartner · Dagab
+              </p>
+              <Link
+                href="/om-oss#referenser"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-sand transition-colors hover:text-white"
+              >
+                Se våra referenser
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats bar overlapping the hero */}
-      <div className="relative z-10 mx-auto -mt-14 max-w-5xl px-4 sm:px-6 lg:px-8">
-        <dl className="grid grid-cols-2 divide-line overflow-hidden rounded-2xl border border-line bg-card shadow-[0_16px_60px_rgba(19,23,21,0.10)] sm:grid-cols-4 sm:divide-x">
+      {/* Stats band */}
+      <div className="border-y border-line bg-card">
+        <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-line px-4 sm:grid-cols-4 sm:divide-x sm:px-6 lg:px-8">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col-reverse px-6 py-7 text-center"
+              className="flex flex-col-reverse px-6 py-9 text-center"
             >
               <dt className="mt-1.5 text-sm font-medium text-muted">
                 {stat.label}
@@ -120,17 +153,17 @@ export default function HomePage() {
                     />
                   </div>
                   <div>
-                    <p className="eyebrow text-pine">{area.name}</p>
-                    <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                    <p className="eyebrow text-copper">{area.name}</p>
+                    <h2 className="mt-4 display-2 text-ink">
                       {area.servicesH2}
                     </h2>
-                    <p className="mt-5 text-lg leading-relaxed text-muted">
+                    <p className="mt-5 lead text-muted">
                       {area.teaser}
                     </p>
                     <ul className="mt-7 grid gap-3 sm:grid-cols-2">
                       {(features[area.slug]?.highlights ?? []).map((item) => (
                         <li key={item} className="flex items-start gap-2.5">
-                          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-pine/10 text-pine">
+                          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
                             <Check className="h-4 w-4" aria-hidden="true" />
                           </span>
                           <span className="text-ink-soft">{item}</span>
@@ -139,7 +172,7 @@ export default function HomePage() {
                     </ul>
                     <Link
                       href={`/${area.slug}`}
-                      className="mt-8 inline-flex items-center gap-2 rounded-full bg-pine px-7 py-3 font-semibold text-white transition-colors hover:bg-pine-deep"
+                      className="mt-8 inline-flex items-center gap-2 rounded-full bg-copper px-7 py-3 font-semibold text-white transition-colors hover:bg-copper-deep"
                     >
                       Mer om {area.name}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -153,7 +186,7 @@ export default function HomePage() {
       </section>
 
       {/* About teaser + values */}
-      <section className="bg-pine-dark">
+      <section className="bg-umbra">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:px-8">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
@@ -177,7 +210,7 @@ export default function HomePage() {
               {values.map((value) => (
                 <li
                   key={value.title}
-                  className="inline-flex items-center gap-2.5 rounded-full border border-line-pine bg-pine-soft px-5 py-2.5"
+                  className="inline-flex items-center gap-2.5 rounded-full border border-line-umbra bg-umbra-soft px-5 py-2.5"
                 >
                   <span
                     className="h-1.5 w-4 rounded-full bg-sand"
@@ -216,7 +249,7 @@ export default function HomePage() {
               {references.map((ref) => (
                 <li
                   key={ref.name}
-                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-card px-6 transition-colors hover:border-pine/40"
+                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-card px-6 transition-colors hover:border-copper/40"
                 >
                   <Image
                     src={ref.logo}
@@ -236,7 +269,7 @@ export default function HomePage() {
       <section className="border-y border-line bg-sand-pale">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
-            <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="display-2 text-ink">
               Har du ett projekt på gång?
             </h2>
             <p className="mt-3 max-w-xl text-lg text-muted">
@@ -249,12 +282,12 @@ export default function HomePage() {
               href={site.phoneHref}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-3.5 text-lg font-semibold text-ink transition-colors hover:border-ink"
             >
-              <Phone className="h-5 w-5 text-pine" aria-hidden="true" />
+              <Phone className="h-5 w-5 text-copper" aria-hidden="true" />
               {site.phone}
             </a>
             <Link
               href="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-pine px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-pine-deep"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-copper-deep"
             >
               Begär offert
               <ArrowRight className="h-5 w-5" aria-hidden="true" />

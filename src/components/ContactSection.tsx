@@ -25,7 +25,7 @@ export default function ContactSection({
           <Reveal className="lg:col-span-2">
             <ul className="space-y-6">
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-copper/10 text-copper">
                   <Phone className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -34,14 +34,14 @@ export default function ContactSection({
                   </p>
                   <a
                     href={site.phoneHref}
-                    className="text-lg font-semibold text-ink hover:text-pine"
+                    className="text-lg font-semibold text-ink hover:text-copper"
                   >
                     {site.phone}
                   </a>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-copper/10 text-copper">
                   <Mail className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -50,14 +50,14 @@ export default function ContactSection({
                   </p>
                   <a
                     href={`mailto:${site.email}`}
-                    className="text-lg font-semibold text-ink hover:text-pine"
+                    className="text-lg font-semibold text-ink hover:text-copper"
                   >
                     {site.email}
                   </a>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-copper/10 text-copper">
                   <MapPin className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -72,14 +72,14 @@ export default function ContactSection({
                     href={site.directionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-1 inline-block text-sm font-semibold text-pine underline decoration-pine/30 underline-offset-4 hover:text-ink"
+                    className="mt-1 inline-block text-sm font-semibold text-copper underline decoration-copper/30 underline-offset-4 hover:text-ink"
                   >
                     Vägbeskrivning
                   </a>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine/10 text-pine">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-copper/10 text-copper">
                   <Clock className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>

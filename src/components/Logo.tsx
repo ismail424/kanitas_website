@@ -90,7 +90,7 @@ export default function Logo({ on = "light" }: { on?: "light" | "dark" }) {
     >
       <LockupSvg
         fg={on === "dark" ? "fill-white" : "fill-ink"}
-        column={on === "dark" ? "fill-sand" : "fill-pine"}
+        column={on === "dark" ? "fill-sand" : "fill-copper"}
         className="h-5 w-auto sm:h-6"
         label="Kanitas"
       />

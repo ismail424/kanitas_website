@@ -87,20 +87,20 @@ export default function AreaPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero — clean pine gradient with sub-brand lockup */}
-      <section className="hero-pine relative isolate overflow-hidden">
+      {/* Hero — clean copper gradient with sub-brand lockup */}
+      <section className="hero-umbra relative isolate overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-44 lg:px-8">
-          <BrandLockup suffix={area.slug} tone="#bda366" />
-          <h1 className="mt-8 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+          <BrandLockup suffix={area.slug} tone="#c7a263" />
+          <h1 className="mt-8 max-w-3xl display-1 text-white">
             {area.h1}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
+          <p className="mt-6 max-w-2xl lead text-white/75">
             {area.intro}
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="#kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-7 py-3 font-semibold text-pine transition-colors hover:bg-sand hover:text-pine-black"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-7 py-3 font-semibold text-copper transition-colors hover:bg-sand hover:text-umbra-deep"
             >
               {area.ctaLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -121,8 +121,8 @@ export default function AreaPage({
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow text-pine">Tjänster</p>
-              <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+              <p className="eyebrow text-copper">Tjänster</p>
+              <h2 className="mt-4 display-2 text-ink">
                 {area.servicesH2}
               </h2>
             </div>
@@ -135,10 +135,8 @@ export default function AreaPage({
             {area.services.map((service, index) => (
               <Reveal key={service.title} delay={index * 50}>
                 <div className="h-full rounded-2xl border border-line bg-card p-8 transition-shadow hover:shadow-[0_10px_36px_rgba(19,23,21,0.08)]">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-pine/10 text-pine">
-                    <ServiceIcon name={service.icon} />
-                  </span>
-                  <h3 className="mt-5 font-display text-lg font-bold text-ink">
+                  <ServiceIcon name={service.icon} />
+                  <h3 className="mt-5 title text-ink">
                     {service.title}
                   </h3>
                   <p className="mt-2.5 leading-relaxed text-muted">
@@ -154,7 +152,7 @@ export default function AreaPage({
                 {area.related.text}{" "}
                 <Link
                   href={area.related.href}
-                  className="font-semibold text-pine underline decoration-pine/30 underline-offset-4 transition-colors hover:text-ink"
+                  className="font-semibold text-copper underline decoration-copper/30 underline-offset-4 transition-colors hover:text-ink"
                 >
                   {area.related.label}
                 </Link>
@@ -171,12 +169,12 @@ export default function AreaPage({
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow text-pine">{area.extraSection.eyebrow}</p>
-                <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                <p className="eyebrow text-copper">{area.extraSection.eyebrow}</p>
+                <h2 className="mt-4 display-2 text-ink">
                   {area.extraSection.title}
                 </h2>
                 {area.extraSection.lead ? (
-                  <p className="mt-5 text-lg leading-relaxed text-muted">
+                  <p className="mt-5 lead text-muted">
                     {area.extraSection.lead}
                   </p>
                 ) : null}
@@ -186,11 +184,11 @@ export default function AreaPage({
               {area.extraSection.items.map((item, index) => (
                 <Reveal key={item.title} delay={index * 50}>
                   <div className="flex gap-4">
-                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pine/10 text-pine">
+                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
                       <Check className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <div>
-                      <h3 className="font-display text-lg font-bold text-ink">
+                      <h3 className="title text-ink">
                         {item.title}
                       </h3>
                       <p className="mt-1.5 leading-relaxed text-muted">
@@ -210,18 +208,18 @@ export default function AreaPage({
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-2 lg:gap-20 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow text-pine">Varför Kanitas</p>
-              <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+              <p className="eyebrow text-copper">Varför Kanitas</p>
+              <h2 className="mt-4 display-2 text-ink">
                 {whyTitle}
               </h2>
-              <p className="mt-5 text-lg leading-relaxed text-muted">
+              <p className="mt-5 lead text-muted">
                 {whyLead}
               </p>
             </div>
             <ul className="mt-9 space-y-4">
               {whyPoints.map((point) => (
                 <li key={point} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-pine/10 text-pine">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
                     <Check className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <span className="text-ink-soft">{point}</span>
@@ -255,12 +253,12 @@ export default function AreaPage({
       </section>
 
       {/* Process */}
-      <section className="bg-pine-dark">
+      <section className="bg-umbra">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
               <p className="eyebrow text-sand">Så går det till</p>
-              <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl">
+              <h2 className="mt-4 display-2 text-white">
                 Så arbetar {area.name}
               </h2>
             </div>
@@ -269,11 +267,11 @@ export default function AreaPage({
             {area.process.map((item, index) => (
               <li key={item.step}>
                 <Reveal delay={index * 70} className="h-full">
-                  <div className="h-full rounded-2xl border border-line-pine bg-pine-soft p-8">
+                  <div className="h-full rounded-2xl border border-line-umbra bg-umbra-soft p-8">
                     <span className="font-display text-4xl font-bold text-sand">
                       {item.step}
                     </span>
-                    <h3 className="mt-4 font-display text-lg font-bold text-white">
+                    <h3 className="mt-4 title text-white">
                       {item.title}
                     </h3>
                     <p className="mt-2.5 leading-relaxed text-white/65">
@@ -293,8 +291,8 @@ export default function AreaPage({
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow text-pine">Vanliga frågor</p>
-                <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+                <p className="eyebrow text-copper">Vanliga frågor</p>
+                <h2 className="mt-4 display-2 text-ink">
                   Frågor och svar om {area.nav.toLowerCase()}
                 </h2>
               </div>
@@ -303,7 +301,7 @@ export default function AreaPage({
               {area.faq.map((item, index) => (
                 <Reveal key={item.q} delay={index * 50}>
                   <div className="h-full rounded-2xl border border-line bg-card p-8">
-                    <h3 className="font-display text-lg font-bold text-ink">
+                    <h3 className="title text-ink">
                       {item.q}
                     </h3>
                     <p className="mt-2.5 leading-relaxed text-muted">

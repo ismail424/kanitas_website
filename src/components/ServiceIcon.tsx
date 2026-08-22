@@ -1,52 +1,40 @@
-import {
-  Boxes,
-  Briefcase,
-  Building2,
-  Car,
-  Cog,
-  Handshake,
-  Hammer,
-  KeyRound,
-  LayoutPanelLeft,
-  Mountain,
-  RefreshCw,
-  ShieldCheck,
-  Snowflake,
-  Sparkles,
-  Truck,
-  Warehouse,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import Image from "next/image";
 
-const icons: Record<string, LucideIcon> = {
-  building: Building2,
-  hammer: Hammer,
-  wrench: Wrench,
-  shield: ShieldCheck,
-  mountain: Mountain,
-  snowflake: Snowflake,
-  sparkles: Sparkles,
-  sparkle: Sparkles,
-  briefcase: Briefcase,
-  boxes: Boxes,
-  warehouse: Warehouse,
-  key: KeyRound,
-  cog: Cog,
-  layout: LayoutPanelLeft,
-  car: Car,
-  handshake: Handshake,
-  truck: Truck,
-  refresh: RefreshCw,
+/**
+ * Warm 3D construction icons (uploaded brand asset pack) keyed by the
+ * service icon names in src/lib/site.ts. One visual system for all areas.
+ */
+const icons: Record<string, string> = {
+  building: "crane",
+  hammer: "scaffolding",
+  wrench: "ladder",
+  shield: "barrer",
+  mountain: "buldozer",
+  snowflake: "loader",
+  sparkles: "wheelbarrow",
+  briefcase: "vest",
+  boxes: "box",
+  sparkle: "cone",
+  truck: "truck",
+  warehouse: "bricks",
 };
 
 export default function ServiceIcon({
   name,
-  className = "h-6 w-6",
+  className = "h-14 w-14",
 }: {
   name: string;
   className?: string;
 }) {
-  const Icon = icons[name] ?? Building2;
-  return <Icon className={className} aria-hidden="true" />;
+  const icon = icons[name] ?? "crane";
+  return (
+    <Image
+      src={`/images/icons3d/${icon}.png`}
+      alt=""
+      width={56}
+      height={56}
+      className={`${className} object-contain`}
+      aria-hidden="true"
+    />
+  );
 }

@@ -41,13 +41,13 @@ export default function OmOssPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Hero */}
-      <section className="hero-pine relative isolate overflow-hidden">
+      <section className="hero-umbra relative isolate overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pb-24 sm:pt-44 lg:px-8">
           <p className="eyebrow text-sand">Om Kanitas</p>
-          <h1 className="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-5 max-w-3xl display-1 text-white">
             Byggt på förtroende sedan {site.founded}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
+          <p className="mt-6 max-w-2xl lead text-white/75">
             Familjeägt bygg- och städföretag i Järfälla – i dag en koncern med
             sex bolag och 35 medarbetare.
           </p>
@@ -118,7 +118,7 @@ export default function OmOssPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-pine-dark">
+      <section className="bg-umbra">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
@@ -130,12 +130,12 @@ export default function OmOssPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {values.map((value, index) => (
               <Reveal key={value.title} delay={index * 80}>
-                <div className="h-full rounded-2xl border border-line-pine bg-pine-soft p-8">
+                <div className="h-full rounded-2xl border border-line-umbra bg-umbra-soft p-8">
                   <span
                     className="block h-2 w-10 rounded-full bg-sand"
                     aria-hidden="true"
                   />
-                  <h3 className="mt-5 font-display text-xl font-bold text-white">
+                  <h3 className="mt-5 title text-white">
                     {value.title}
                   </h3>
                   <p className="mt-3 leading-relaxed text-white/65">
@@ -175,7 +175,7 @@ export default function OmOssPage() {
                   {"area" in company && company.area ? (
                     <Link
                       href={company.area}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-pine hover:text-ink"
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-copper hover:text-ink"
                     >
                       {company.areaLabel}
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -224,7 +224,7 @@ export default function OmOssPage() {
       <section className="border-y border-line bg-sand-pale">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
-            <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="display-2 text-ink">
               Vad kan vi hjälpa dig med?
             </h2>
             <p className="mt-3 max-w-xl text-lg text-muted">
@@ -234,7 +234,7 @@ export default function OmOssPage() {
           </div>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-pine px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-pine-deep"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-copper-deep"
           >
             Kontakta oss
             <ArrowRight className="h-5 w-5" aria-hidden="true" />

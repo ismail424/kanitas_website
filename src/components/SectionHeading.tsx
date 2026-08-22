@@ -22,13 +22,13 @@ export default function SectionHeading({
     <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
       <p
         className={`eyebrow ${centered ? "justify-center" : ""} ${
-          on === "dark" ? "text-sand" : "text-pine"
+          on === "dark" ? "text-sand" : "text-copper"
         }`}
       >
         {eyebrow}
       </p>
       <Tag
-        className={`mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl ${
+        className={`mt-4 display-2 ${
           on === "dark" ? "text-white" : "text-ink"
         }`}
       >

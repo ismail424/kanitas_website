@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
 /*
- * Kanitas design tokens v2 — clean white base, deep pine green brand,
- * warm sand detail. One accent, generous whitespace.
- * Single source of truth for the whole site; no hardcoded hex in components.
+ * Kanitas design tokens v3 — warm ivory base, espresso dark surfaces,
+ * copper as the single action color, brass detail on dark.
+ * One palette for every business area. No hardcoded hex in components.
  */
 @theme {
   /* Surfaces */
-  --color-paper: #f7f5ef;
-  --color-paper-2: #efebe0;
+  --color-paper: #f8f5f0;
+  --color-paper-2: #efeae1;
   --color-card: #ffffff;
-  --color-sand-pale: #ece5d2;
+  --color-sand-pale: #ece3d0;
 
   /* Text on light */
-  --color-ink: #1c2420;
-  --color-ink-soft: #404c45;
-  --color-muted: #5b665f;
+  --color-ink: #231d16;
+  --color-ink-soft: #4a4138;
+  --color-muted: #6b6157;
 
   /* Borders */
-  --color-line: #e2ddd0;
-  --color-line-pine: #35594a;
+  --color-line: #e4ded2;
+  --color-line-umbra: #493b2c;
 
   /* Brand green */
-  --color-pine: #24523f;
-  --color-pine-deep: #1a3d2f;
-  --color-pine-dark: #1e3d2f;
-  --color-pine-black: #152b21;
-  --color-pine-soft: #27493a;
+  --color-copper: #8a5a2e;
+  --color-copper-deep: #6e4620;
+  --color-umbra: #261e16;
+  --color-umbra-deep: #181209;
+  --color-umbra-soft: #362b20;
 
   /* Warm detail on dark surfaces */
-  --color-sand: #bda366;
+  --color-sand: #c7a263;
 
   /* Feedback */
   --color-ok: #2f7d4f;
@@ -64,24 +64,24 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-pine);
+  background-color: var(--color-copper);
   color: #ffffff;
 }
 
-/* Deep pine hero surface with a faint construction grid */
-.hero-pine {
-  background-color: var(--color-pine-black);
+/* Deep espresso hero surface with a faint construction grid */
+.hero-umbra {
+  background-color: var(--color-umbra-deep);
   background-image:
     radial-gradient(
       90rem 40rem at 85% -10%,
-      rgba(189, 163, 102, 0.16),
+      rgba(199, 162, 99, 0.16),
       transparent 60%
     ),
-    linear-gradient(160deg, #152b21 0%, #1e3d2f 55%, #2a5240 100%);
+    linear-gradient(160deg, #181209 0%, #2a2117 55%, #3e2f1f 100%);
   position: relative;
 }
 
-.hero-pine::before {
+.hero-umbra::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -110,6 +110,46 @@ body {
   height: 2px;
   /* Follows the text color so surface variants carry through automatically */
   background-color: currentColor;
+}
+
+/*
+ * Global type system — every heading and lead on the site uses one of
+ * these classes so scale, weight and rhythm are identical everywhere.
+ */
+.display-1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.2vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.display-2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.2vw, 2.65rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+.lead {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.lead-lg {
+  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.65;
 }
 
 /* Scroll reveal (activated by Reveal component; no-JS users see content) */

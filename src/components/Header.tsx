@@ -74,14 +74,14 @@ export default function Header() {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ink transition-colors hover:text-pine"
+            className="inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ink transition-colors hover:text-copper"
           >
-            <Phone className="h-4 w-4 text-pine" aria-hidden="true" />
+            <Phone className="h-4 w-4 text-copper" aria-hidden="true" />
             {site.phone}
           </a>
           <Link
             href="/kontakt"
-            className="rounded-full bg-pine px-5 py-2.5 text-[0.95rem] font-semibold text-white transition-colors hover:bg-pine-deep"
+            className="rounded-full bg-copper px-5 py-2.5 text-[0.95rem] font-semibold text-white transition-colors hover:bg-copper-deep"
           >
             Begär offert
           </Link>
@@ -131,12 +131,12 @@ export default function Header() {
               href={site.phoneHref}
               className="inline-flex items-center gap-2 px-3 font-semibold text-ink"
             >
-              <Phone className="h-4 w-4 text-pine" aria-hidden="true" />
+              <Phone className="h-4 w-4 text-copper" aria-hidden="true" />
               {site.phone}
             </a>
             <Link
               href="/kontakt"
-              className="rounded-full bg-pine px-4 py-3 text-center font-semibold text-white"
+              className="rounded-full bg-copper px-4 py-3 text-center font-semibold text-white"
             >
               Begär offert
             </Link>

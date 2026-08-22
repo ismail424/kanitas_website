@@ -28,13 +28,13 @@ export default function KontaktPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <section className="hero-pine relative isolate overflow-hidden">
+      <section className="hero-umbra relative isolate overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pt-44 lg:px-8">
           <p className="eyebrow text-sand">Kontakt</p>
-          <h1 className="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-5 max-w-3xl display-1 text-white">
             Vi återkommer oftast samma dag
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
+          <p className="mt-6 max-w-2xl lead text-white/75">
             Ring, mejla eller använd formuläret nedan – oavsett om det gäller
             bygg, städ, lokaler eller bil hjälper vi dig snabbt vidare.
           </p>
