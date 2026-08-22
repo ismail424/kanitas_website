@@ -52,8 +52,13 @@ function rateLimited(ip: string): boolean {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
-    if (rateLimited(ip)) {
+    // Best-effort limiter: only rate-limit when a client IP is identifiable.
+    // Pooling unidentified clients under one bucket would let 5 submissions
+    // block the form for everyone.
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-real-ip");
+    if (ip && rateLimited(ip)) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
