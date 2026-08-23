@@ -40,14 +40,16 @@ export default function HomePage() {
 
         <div className="mx-auto flex min-h-[62svh] max-w-7xl items-center px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="max-w-2xl">
-            <p className="eyebrow text-petrol">Stockholm sedan {site.founded}</p>
+            <p className="eyebrow text-petrol">
+              Byggföretag i Järfälla sedan {site.founded}
+            </p>
             <h1 className="mt-7 max-w-xl display-1 text-ink">
               Vi bygger, renoverar och sköter Stockholm.
             </h1>
             <p className="mt-7 max-w-xl lead-lg text-ink-soft">
-              Kanitas utför entreprenader, byggservice, bemanning och städ åt
-              Sveriges ledande byggbolag, fastighetsägare och bostadsrätts&shy;föreningar.
-              Egen personal, egna maskiner, hela Storstockholm.
+              Vi utför byggentreprenader och byggservice, hyr ut yrkesarbetare
+              och tar byggstädningen efteråt. Egen personal på kollektivavtal,
+              i hela Storstockholm.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
@@ -84,11 +86,14 @@ export default function HomePage() {
                       className="transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
-                  <h2 className="mt-7 font-display text-3xl font-bold text-ink sm:text-4xl">
+                  <p className="mt-7 text-sm font-semibold uppercase tracking-[0.18em] text-copper">
                     {business.name}
+                  </p>
+                  <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">
+                    {business.heading}
                   </h2>
                   <p className="mt-3 max-w-md lead text-muted">
-                    {business.tagline}. {business.highlights.slice(0, 3).join(", ")}.
+                    {business.highlights.slice(0, 3).join(", ")}.
                   </p>
                   <span className="mt-5 inline-flex items-center gap-2 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
                     Till {business.name}
@@ -108,9 +113,9 @@ export default function HomePage() {
                   className="group flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-6"
                 >
                   <span className="font-display text-xl font-bold text-ink">
-                    {business.name}
+                    {business.heading}
                   </span>
-                  <span className="flex-1 text-muted">{business.tagline}</span>
+                  <span className="flex-1 text-muted">{business.name}</span>
                   <span className="inline-flex items-center gap-2 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
                     Kontakta oss
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -90,6 +90,12 @@ export default function AreaPage({
       <section className="hero-deep relative isolate overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-44 lg:px-8">
           <BrandLockup suffix={area.name.replace(/^Kanitas\s+/, "")} />
+          <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
+            {area.tagline}
+          </p>
+          <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
+            {area.tagline}
+          </p>
           <h1 className="mt-8 max-w-3xl display-1 text-white">
             {area.h1}
           </h1>

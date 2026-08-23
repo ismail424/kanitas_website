@@ -238,7 +238,7 @@ export const areas: Area[] = [
       },
       {
         q: "Var arbetar ni?",
-        a: "Vi har vår bas i Järfälla och arbetar i hela Storstockholm. Vid större uppdrag åtar vi oss projekt i hela Sverige.",
+        a: "Vi utgår från Almarevägen 13 i Järfälla och arbetar i hela Storstockholm. Till de flesta arbetsplatser i länet är vi framme inom en timme.",
       },
       {
         q: "Hur snabbt kan ni börja?",
@@ -273,9 +273,9 @@ export const areas: Area[] = [
     ctaLabel: "Begär offert",
     contactTopic: "Bemanning",
     teaser:
-      "Yrkesarbetare med korta inställelsetider och byggstädning som håller för besiktning, åt entreprenörer, fastighetsägare och BRF:er.",
+      "Yrkesarbetare på plats normalt inom ett dygn, och byggstädning som håller för besiktning. Åt entreprenörer, fastighetsägare och BRF:er.",
     intro:
-      "Kanitas ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal med Byggnads och Fastighets, utan led av underleverantörer, vilket ger spårbarhet och en jämn kvalitetsnivå över tid.",
+      "Kanitas ENT hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer, och utför byggstädning inför besiktning. Vid frånvaro eller forcerad etapp löser vi bemanning normalt inom ett dygn, eftersom vi kan omfördela personal från koncernens egna byggprojekt. All personal är anställd hos oss i Kanitas ENT AB, org.nr 559146-9183, på kollektivavtal med Byggnads eller Fastighets, aldrig inhyrd i andra led.",
     services: [
       {
         title: "Yrkesarbetare till bygg",
@@ -375,7 +375,7 @@ export const areas: Area[] = [
     faq: [
       {
         q: "Är personalen anställd hos er eller inhyrd?",
-        a: "Anställd hos oss i Kanitas ENT AB på kollektivavtal med Byggnads eller Fastighets. Vi arbetar inte med led av underentreprenörer, vilket ger full spårbarhet på vem som befinner sig på arbetsplatsen.",
+        a: "Anställd hos oss i Kanitas ENT AB, org.nr 559146-9183, på kollektivavtal med Byggnads eller Fastighets. Vi hyr aldrig in bemanning i andra led, så du vet alltid vem som befinner sig på arbetsplatsen. Installationsentreprenader inom el, VVS och ventilation är en annan sak och upphandlas hos våra fasta samarbetspartners.",
       },
       {
         q: "Hur snabbt kan ni bemanna?",
@@ -651,6 +651,9 @@ export type Business = {
   name: string;
   /** Short label for nav and cards, e.g. "Bygg" */
   short: string;
+  /** What the verksamheten actually does, used as the headline when routing.
+   *  The brand name means nothing to a first-time visitor; this does. */
+  heading: string;
   tagline: string;
   /** Where the switchboard sends the visitor. */
   href: string;
@@ -670,6 +673,7 @@ export const businesses: Business[] = [
     slug: "bygg",
     name: "Kanitas Bygg",
     short: "Bygg",
+    heading: "Bygg & entreprenad",
     tagline: "Från grund till nyckelfärdigt",
     href: "/bygg",
     external: false,
@@ -688,6 +692,7 @@ export const businesses: Business[] = [
     slug: "stad",
     name: "Kanitas ENT",
     short: "Bemanning & städ",
+    heading: "Bemanning & byggstädning",
     tagline: "Bemanning och byggstädning",
     href: "/stad",
     external: false,
@@ -706,6 +711,7 @@ export const businesses: Business[] = [
     slug: "trading",
     name: "Kanitas Trading",
     short: "Trading",
+    heading: "Maskiner & fordon",
     tagline: "Verktyg, maskiner och fordon",
     href: "/kontakt",
     external: false,
@@ -723,6 +729,7 @@ export const businesses: Business[] = [
     slug: "fastigheter",
     name: "Kanitas Fastigheter",
     short: "Fastigheter",
+    heading: "Lokaler & förvaltning",
     tagline: "Lokaler och förvaltning",
     href: "/kontakt",
     external: false,
