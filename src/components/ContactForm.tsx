@@ -7,7 +7,7 @@ import { contactTopics } from "@/lib/site";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-copper focus:ring-2 focus:ring-copper";
+  "w-full rounded-lg border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 outline-none transition focus:border-petrol focus:ring-2 focus:ring-petrol";
 
 export default function ContactForm({
   defaultTopic,
@@ -54,7 +54,7 @@ export default function ContactForm({
           Tack för ditt meddelande!
         </p>
         <p className="mt-2 text-muted">
-          Vi återkommer till dig så snart som möjligt – oftast samma dag.
+          Vi återkommer till dig så snart som möjligt, oftast samma dag.
         </p>
       </div>
     );
@@ -150,7 +150,7 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 font-semibold text-white transition-colors hover:bg-copper-deep disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-petrol px-8 py-3.5 font-semibold text-white transition-colors hover:bg-petrol-deep disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {status === "sending" ? (
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />

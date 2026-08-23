@@ -1,35 +1,37 @@
 @import "tailwindcss";
 
 /*
- * Kanitas design tokens v3 — warm ivory base, espresso dark surfaces,
- * copper as the single action color, brass detail on dark.
- * One palette for every business area. No hardcoded hex in components.
+ * Kanitas design tokens v4 — the palette is taken straight from the logo:
+ * petrol green carries the weight (surfaces, actions, headings) and copper is
+ * the detail, exactly as the mark uses it for its two rules. One palette for
+ * every business area. No hardcoded hex in components.
  */
 @theme {
   /* Surfaces */
-  --color-paper: #f8f5f0;
-  --color-paper-2: #efeae1;
+  --color-paper: #f4f6f6;
+  --color-paper-2: #e7ecec;
   --color-card: #ffffff;
-  --color-sand-pale: #ece3d0;
+  --color-petrol-pale: #dbe8ea;
 
   /* Text on light */
-  --color-ink: #231d16;
-  --color-ink-soft: #4a4138;
-  --color-muted: #6b6157;
+  --color-ink: #0f2229;
+  --color-ink-soft: #33474f;
+  --color-muted: #5d6d73;
 
   /* Borders */
-  --color-line: #e4ded2;
-  --color-line-umbra: #493b2c;
+  --color-line: #dde4e4;
+  --color-line-deep: #1a5766;
 
-  /* Brand green */
-  --color-copper: #8a5a2e;
-  --color-copper-deep: #6e4620;
-  --color-umbra: #261e16;
-  --color-umbra-deep: #181209;
-  --color-umbra-soft: #362b20;
+  /* Brand petrol — logo mark, primary action, dark surfaces */
+  --color-petrol: #134b58;
+  --color-petrol-deep: #0c3945;
+  --color-petrol-dark: #0e3d49;
+  --color-petrol-darker: #082a33;
+  --color-petrol-raised: #15586a;
 
-  /* Warm detail on dark surfaces */
-  --color-sand: #c7a263;
+  /* Copper — the logo rule; accent detail only */
+  --color-copper: #c76245;
+  --color-copper-soft: #e08e6d;
 
   /* Feedback */
   --color-ok: #2f7d4f;
@@ -64,24 +66,24 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-copper);
+  background-color: var(--color-petrol);
   color: #ffffff;
 }
 
-/* Deep espresso hero surface with a faint construction grid */
-.hero-umbra {
-  background-color: var(--color-umbra-deep);
+/* Deep petrol hero surface with a faint construction grid */
+.hero-deep {
+  background-color: var(--color-petrol-darker);
   background-image:
     radial-gradient(
       90rem 40rem at 85% -10%,
-      rgba(199, 162, 99, 0.16),
+      rgba(224, 142, 109, 0.18),
       transparent 60%
     ),
-    linear-gradient(160deg, #181209 0%, #2a2117 55%, #3e2f1f 100%);
+    linear-gradient(160deg, #082a33 0%, #0e3d49 55%, #15586a 100%);
   position: relative;
 }
 
-.hero-umbra::before {
+.hero-deep::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -96,7 +98,7 @@ body {
 /* Subtle dot grid so light surfaces are not flat white */
 .bg-dotgrid {
   background-image: radial-gradient(
-    rgba(35, 29, 22, 0.06) 1px,
+    rgba(15, 34, 41, 0.07) 1px,
     transparent 1px
   );
   background-size: 26px 26px;

@@ -1,19 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
+import Photo from "@/components/Photo";
 import { BrandLockup } from "@/components/Logo";
 import Reveal from "@/components/Reveal";
 import ServiceIcon from "@/components/ServiceIcon";
-import { site, type Area } from "@/lib/site";
+import { site, type Area, type PhotoName } from "@/lib/site";
 
 export type AreaPageProps = {
   area: Area;
   whyTitle: string;
   whyLead: string;
   whyPoints: string[];
-  whyImage: { src: string; alt: string };
-  secondaryImage: { src: string; alt: string };
+  whyPhoto: PhotoName;
+  secondaryPhoto: PhotoName;
 };
 
 export default function AreaPage({
@@ -21,8 +21,8 @@ export default function AreaPage({
   whyTitle,
   whyLead,
   whyPoints,
-  whyImage,
-  secondaryImage,
+  whyPhoto,
+  secondaryPhoto,
 }: AreaPageProps) {
   const pageUrl = `${site.url}/${area.slug}`;
   const businessId = `${pageUrl}#business`;
@@ -87,10 +87,10 @@ export default function AreaPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero — clean copper gradient with sub-brand lockup */}
-      <section className="hero-umbra relative isolate overflow-hidden">
+      {/* Hero — clean petrol gradient with sub-brand lockup */}
+      <section className="hero-deep relative isolate overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-44 lg:px-8">
-          <BrandLockup suffix={area.slug} tone="#c7a263" />
+          <BrandLockup suffix={area.slug} />
           <h1 className="mt-8 max-w-3xl display-1 text-white">
             {area.h1}
           </h1>
@@ -100,7 +100,7 @@ export default function AreaPage({
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="#kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-7 py-3 font-semibold text-copper transition-colors hover:bg-sand hover:text-umbra-deep"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-7 py-3 font-semibold text-petrol transition-colors hover:bg-copper-soft hover:text-petrol-darker"
             >
               {area.ctaLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -121,7 +121,7 @@ export default function AreaPage({
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow text-copper">Tjänster</p>
+              <p className="eyebrow text-petrol">Tjänster</p>
               <h2 className="mt-4 display-2 text-ink">
                 {area.servicesH2}
               </h2>
@@ -152,7 +152,7 @@ export default function AreaPage({
                 {area.related.text}{" "}
                 <Link
                   href={area.related.href}
-                  className="font-semibold text-copper underline decoration-copper/30 underline-offset-4 transition-colors hover:text-ink"
+                  className="font-semibold text-petrol underline decoration-petrol/30 underline-offset-4 transition-colors hover:text-ink"
                 >
                   {area.related.label}
                 </Link>
@@ -169,7 +169,7 @@ export default function AreaPage({
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow text-copper">{area.extraSection.eyebrow}</p>
+                <p className="eyebrow text-petrol">{area.extraSection.eyebrow}</p>
                 <h2 className="mt-4 display-2 text-ink">
                   {area.extraSection.title}
                 </h2>
@@ -184,7 +184,7 @@ export default function AreaPage({
               {area.extraSection.items.map((item, index) => (
                 <Reveal key={item.title} delay={index * 50}>
                   <div className="flex gap-4">
-                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
+                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-petrol/10 text-petrol">
                       <Check className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <div>
@@ -208,7 +208,7 @@ export default function AreaPage({
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-2 lg:gap-20 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow text-copper">Varför Kanitas</p>
+              <p className="eyebrow text-petrol">Varför Kanitas</p>
               <h2 className="mt-4 display-2 text-ink">
                 {whyTitle}
               </h2>
@@ -219,7 +219,7 @@ export default function AreaPage({
             <ul className="mt-9 space-y-4">
               {whyPoints.map((point) => (
                 <li key={point} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-petrol/10 text-petrol">
                     <Check className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <span className="text-ink-soft">{point}</span>
@@ -230,21 +230,15 @@ export default function AreaPage({
           <Reveal delay={100}>
             <div className="grid gap-5">
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                <Image
-                  src={whyImage.src}
-                  alt={whyImage.alt}
-                  fill
+                <Photo
+                  name={whyPhoto}
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
                 />
               </div>
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                <Image
-                  src={secondaryImage.src}
-                  alt={secondaryImage.alt}
-                  fill
+                <Photo
+                  name={secondaryPhoto}
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
                 />
               </div>
             </div>
@@ -253,11 +247,11 @@ export default function AreaPage({
       </section>
 
       {/* Process */}
-      <section className="bg-umbra">
+      <section className="bg-petrol-dark">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <p className="eyebrow text-sand">Så går det till</p>
+              <p className="eyebrow text-copper-soft">Så går det till</p>
               <h2 className="mt-4 display-2 text-white">
                 Så arbetar {area.name}
               </h2>
@@ -267,8 +261,8 @@ export default function AreaPage({
             {area.process.map((item, index) => (
               <li key={item.step}>
                 <Reveal delay={index * 70} className="h-full">
-                  <div className="h-full rounded-2xl border border-line-umbra bg-umbra-soft p-8">
-                    <span className="font-display text-4xl font-bold text-sand">
+                  <div className="h-full rounded-2xl border border-line-deep bg-petrol-raised p-8">
+                    <span className="font-display text-4xl font-bold text-copper-soft">
                       {item.step}
                     </span>
                     <h3 className="mt-4 title text-white">
@@ -291,7 +285,7 @@ export default function AreaPage({
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow text-copper">Vanliga frågor</p>
+                <p className="eyebrow text-petrol">Vanliga frågor</p>
                 <h2 className="mt-4 display-2 text-ink">
                   Frågor och svar om {area.nav.toLowerCase()}
                 </h2>

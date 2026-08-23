@@ -1,40 +1,56 @@
-import Image from "next/image";
+import {
+  Boxes,
+  Briefcase,
+  Building2,
+  Car,
+  Cog,
+  Hammer,
+  HardHat,
+  KeyRound,
+  LayoutGrid,
+  Mountain,
+  RefreshCw,
+  ShieldCheck,
+  Snowflake,
+  Sparkle,
+  Sparkles,
+  Truck,
+  Warehouse,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
 
 /**
- * Warm 3D construction icons (uploaded brand asset pack) keyed by the
- * service icon names in src/lib/site.ts. One visual system for all areas.
+ * Service icons keyed by the icon names in src/lib/site.ts. Line icons in a
+ * petrol tile, the same treatment as the verksamhet and value icons, so every
+ * icon on the site reads as one system.
  */
-const icons: Record<string, string> = {
-  building: "crane",
-  hammer: "scaffolding",
-  wrench: "ladder",
-  shield: "barrer",
-  mountain: "buldozer",
-  snowflake: "loader",
-  sparkles: "wheelbarrow",
-  briefcase: "vest",
-  boxes: "box",
-  sparkle: "cone",
-  truck: "truck",
-  warehouse: "bricks",
+const icons: Record<string, LucideIcon> = {
+  boxes: Boxes,
+  briefcase: Briefcase,
+  building: Building2,
+  car: Car,
+  cog: Cog,
+  hammer: Hammer,
+  hardhat: HardHat,
+  key: KeyRound,
+  layout: LayoutGrid,
+  mountain: Mountain,
+  refresh: RefreshCw,
+  shield: ShieldCheck,
+  snowflake: Snowflake,
+  sparkle: Sparkle,
+  sparkles: Sparkles,
+  truck: Truck,
+  warehouse: Warehouse,
+  wrench: Wrench,
 };
 
-export default function ServiceIcon({
-  name,
-  className = "h-14 w-14",
-}: {
-  name: string;
-  className?: string;
-}) {
-  const icon = icons[name] ?? "crane";
+export default function ServiceIcon({ name }: { name: string }) {
+  const Icon = icons[name] ?? Hammer;
   return (
-    <Image
-      src={`/images/icons3d/${icon}.png`}
-      alt=""
-      width={56}
-      height={56}
-      className={`${className} object-contain`}
-      aria-hidden="true"
-    />
+    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-petrol/10 text-petrol">
+      <Icon className="h-6 w-6" aria-hidden="true" />
+    </span>
   );
 }

@@ -24,14 +24,8 @@ export default function StadPage() {
         "Flexibla avtal för engångsuppdrag eller löpande städning",
         "Snabb inställelse i hela Storstockholm",
       ]}
-      whyImage={{
-        src: "/images/photos/stad-lounge.jpg",
-        alt: "Rent och modernt kontorslandskap",
-      }}
-      secondaryImage={{
-        src: "/images/photos/stad-lager.jpg",
-        alt: "Lagerlokal med pallställ",
-      }}
+      whyPhoto="stad-varfor"
+      secondaryPhoto="stad-projekt"
     />
   );
 }

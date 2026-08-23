@@ -28,9 +28,9 @@ export default function KontaktPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <section className="hero-umbra relative isolate overflow-hidden">
+      <section className="hero-deep relative isolate overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pt-44 lg:px-8">
-          <p className="eyebrow text-sand">Kontakt</p>
+          <p className="eyebrow text-copper-soft">Kontakt</p>
           <h1 className="mt-5 max-w-3xl display-1 text-white">
             Vi återkommer oftast samma dag
           </h1>

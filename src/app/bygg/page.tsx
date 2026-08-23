@@ -24,14 +24,8 @@ export default function ByggPage() {
         "Totalansvar: bygg, mark, sanering och byggstädning i samma koncern",
         "Fast kontaktperson och tydlig kommunikation genom hela projektet",
       ]}
-      whyImage={{
-        src: "/images/photos/bygg-hero.jpg",
-        alt: "Byggarbetare armerar på byggarbetsplats",
-      }}
-      secondaryImage={{
-        src: "/images/photos/bygg-stockholm.jpg",
-        alt: "Modern kontorsbyggnad i Stockholm",
-      }}
+      whyPhoto="bygg-varfor"
+      secondaryPhoto="bygg-projekt"
     />
   );
 }

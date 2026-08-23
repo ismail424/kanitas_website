@@ -4,8 +4,8 @@
   "description": "Byggföretag och städfirma i Stockholm – familjeägt företag i Järfälla sedan 2011.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f5f1",
-  "theme_color": "#1e1c18",
+  "background_color": "#f4f6f6",
+  "theme_color": "#134b58",
   "icons": [
     {
       "src": "/icon.svg",

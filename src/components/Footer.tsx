@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
-import Logo from "@/components/Logo";
-import { activeAreas, certifications, site } from "@/lib/site";
+import { LogoLockup } from "@/components/Logo";
+import { businesses, certifications, site } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -32,29 +32,29 @@ export default function Footer() {
         </div>
       </section>
 
-      <footer className="bg-umbra text-white">
+      <footer className="bg-petrol-dark text-white">
         <div className="mx-auto grid max-w-7xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
           <div>
-            <Logo on="dark" />
+            <LogoLockup on="dark" className="h-16 w-auto" />
             <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-white/60">
-              Kanitas är ett bygg- och städföretag i Järfälla. Sedan{" "}
-              {site.founded} utför vi byggentreprenader, byggservice och
-              städuppdrag i hela Storstockholm.
+              Kanitas är en familjeägd koncern i Järfälla. Sedan{" "}
+              {site.founded} bygger, städar, bemannar och förvaltar vi åt
+              företag och privatpersoner i hela Storstockholm.
             </p>
           </div>
 
           <nav aria-label="Verksamheter">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-sand">
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-copper-soft">
               Verksamheter
             </p>
             <ul className="mt-6 space-y-3.5">
-              {activeAreas.map((area) => (
-                <li key={area.slug}>
+              {businesses.map((business) => (
+                <li key={business.slug}>
                   <Link
-                    href={`/${area.slug}`}
+                    href={business.href}
                     className="text-white/70 transition-colors hover:text-white"
                   >
-                    {area.name}
+                    {business.name}
                   </Link>
                 </li>
               ))}
@@ -62,7 +62,7 @@ export default function Footer() {
           </nav>
 
           <nav aria-label="Företaget">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-sand">
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-copper-soft">
               Företaget
             </p>
             <ul className="mt-6 space-y-3.5">
@@ -94,7 +94,7 @@ export default function Footer() {
           </nav>
 
           <div>
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-sand">
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-copper-soft">
               Kontakt
             </p>
             <ul className="mt-6 space-y-3.5 text-white/70">
@@ -103,7 +103,7 @@ export default function Footer() {
                   href={site.phoneHref}
                   className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
                 >
-                  <Phone className="h-4 w-4 shrink-0 text-sand" aria-hidden="true" />
+                  <Phone className="h-4 w-4 shrink-0 text-copper-soft" aria-hidden="true" />
                   {site.phone}
                 </a>
               </li>
@@ -112,12 +112,12 @@ export default function Footer() {
                   href={`mailto:${site.email}`}
                   className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
                 >
-                  <Mail className="h-4 w-4 shrink-0 text-sand" aria-hidden="true" />
+                  <Mail className="h-4 w-4 shrink-0 text-copper-soft" aria-hidden="true" />
                   {site.email}
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin className="mt-1 h-4 w-4 shrink-0 text-sand" aria-hidden="true" />
+                <MapPin className="mt-1 h-4 w-4 shrink-0 text-copper-soft" aria-hidden="true" />
                 <span>
                   {site.address.street}
                   <br />
@@ -129,7 +129,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-line-umbra">
+        <div className="border-t border-line-deep">
           <p className="mx-auto max-w-7xl px-4 py-6 text-center text-xs font-medium tracking-wide text-white/40 sm:px-6 lg:px-8">
             © {new Date().getFullYear()} {site.legalName} · Org.nr{" "}
             {site.orgnr}

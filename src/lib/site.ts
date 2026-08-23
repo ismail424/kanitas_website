@@ -82,8 +82,6 @@ export type Area = {
   ctaLabel: string;
   teaser: string;
   intro: string;
-  heroImage: string;
-  heroAlt: string;
   services: { title: string; text: string; icon: string }[];
   /** Contextual cross-link rendered after the services grid */
   related?: { href: string; label: string; text: string };
@@ -118,8 +116,6 @@ export const areas: Area[] = [
       "Nybyggnation, renovering och byggservice för företag och privatpersoner. Vår kärnverksamhet sedan 2011.",
     intro:
       "Bygg är hjärtat i Kanitas. Vi tar totalansvar för projekt i alla storlekar, från löpande byggservice till kompletta entreprenader, åt byggbolag, fastighetsägare och privatpersoner. Bland våra uppdragsgivare finns flera av Sveriges ledande bygg- och fastighetsaktörer, och vi hjälper lika gärna dig som ska renovera hemma.",
-    heroImage: "/images/photos/bygg-hero.jpg",
-    heroAlt: "Byggarbetare i arbete på byggarbetsplats",
     services: [
       {
         title: "Nybyggnation",
@@ -214,8 +210,6 @@ export const areas: Area[] = [
       "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet för företag, BRF:er och byggprojekt.",
     intro:
       "Kanitas Städ levererar professionell städning där kraven är som högst. Vi är specialiserade på byggstädning och slutstädning inför besiktning, och tar även hand om den löpande städningen av kontor och fastigheter. Rätt utfört och i rätt tid, varje gång.",
-    heroImage: "/images/photos/stad-hero.jpg",
-    heroAlt: "Städare moppar entrégolv i kontorsbyggnad",
     services: [
       {
         title: "Byggstädning & slutstädning",
@@ -306,8 +300,6 @@ export const areas: Area[] = [
       "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm, med egen drift och skötsel.",
     intro:
       "Kanitas Fastigheter äger och förvaltar fastigheter och kommersiella lokaler i Storstockholm. Med byggkompetensen i samma koncern håller vi våra fastigheter i toppskick och kan snabbt anpassa lokaler efter hyresgästens behov.",
-    heroImage: "/images/photos/fastigheter-hero.jpg",
-    heroAlt: "Modernt flerbostadshus i skymning",
     services: [
       {
         title: "Uthyrning av lokaler",
@@ -394,8 +386,6 @@ export const areas: Area[] = [
       "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner, alltid genomgångna och rätt prissatta.",
     intro:
       "Kanitas Bil köper och säljer personbilar, transportbilar, lastbilar och arbetsmaskiner. Som del av en etablerad koncern med AAA-kreditvärdighet gör du affären med en trygg motpart, snabbt, transparent och till rätt pris.",
-    heroImage: "/images/photos/bil-hero.jpg",
-    heroAlt: "Bilar i showroom",
     services: [
       {
         title: "Försäljning av bilar",
@@ -453,6 +443,7 @@ export const areas: Area[] = [
 export const activeAreas = areas.filter((a) => a.active);
 
 export const nav = [
+  { href: "/#verksamheter", label: "Verksamheter" },
   ...activeAreas.map((a) => ({ href: `/${a.slug}`, label: a.nav })),
   { href: "/om-oss", label: "Om oss" },
   { href: "/kontakt", label: "Kontakt" },
@@ -461,9 +452,192 @@ export const nav = [
 export const stats = [
   { value: "2011", label: "Grundat i Järfälla" },
   { value: "35", label: "Medarbetare i koncernen" },
-  { value: "6", label: "Bolag i koncernen" },
+  { value: "5", label: "Bolag i koncernen" },
   { value: "AAA", label: "Högsta kreditvärdighet" },
 ];
+
+/**
+ * Photography slots. Every photograph on the site is registered here; a slot
+ * with `ready: false` renders a labelled placeholder instead, so the layout is
+ * finished before the photography is. To go live with a photo: drop the file
+ * at `src` and flip `ready` to true. Nothing else changes.
+ */
+export type PhotoSlot = {
+  src: string;
+  alt: string;
+  /** What the photograph needs to show, for whoever shoots or picks it. */
+  brief: string;
+  /** Roughly the shape the slot renders at. */
+  shape: string;
+  ready: boolean;
+};
+
+export const photos = {
+  "hem-hero": {
+    src: "/images/photos/hem-hero.jpg",
+    alt: "Byggarbetsplats i Storstockholm",
+    brief: "Eget bygge i Storstockholm, gärna med personal i Kanitas-kläder",
+    shape: "5:6 stående på desktop, 4:3 på mobil",
+    ready: false,
+  },
+  "hem-koncern": {
+    src: "/images/photos/hem-koncern.jpg",
+    alt: "Arbetslag från Kanitas på plats",
+    brief: "Arbetslaget på plats, ansikten och arbetskläder",
+    shape: "4:3 liggande",
+    ready: false,
+  },
+  "hem-stockholm": {
+    src: "/images/photos/hem-stockholm.jpg",
+    alt: "Vy över Storstockholm",
+    brief: "Stockholmsvy i skymning, tål mörk överlagring och text",
+    shape: "Full bredd, minst 2000 px",
+    ready: false,
+  },
+  "bygg-varfor": {
+    src: "/images/photos/bygg-varfor.jpg",
+    alt: "Byggarbetare i arbete",
+    brief: "Hantverk nära på: armering, stomme eller inredningssnickeri",
+    shape: "16:10 liggande",
+    ready: false,
+  },
+  "bygg-projekt": {
+    src: "/images/photos/bygg-projekt.jpg",
+    alt: "Färdigställt byggprojekt",
+    brief: "Färdigt projekt, gärna en fasad eller ett rum vi byggt",
+    shape: "16:10 liggande",
+    ready: false,
+  },
+  "stad-varfor": {
+    src: "/images/photos/stad-varfor.jpg",
+    alt: "Nystädat kontorslandskap",
+    brief: "Nystädad yta efter bygg, tydlig kontrast mot damm och spill",
+    shape: "16:10 liggande",
+    ready: false,
+  },
+  "stad-projekt": {
+    src: "/images/photos/stad-projekt.jpg",
+    alt: "Städuppdrag i lokal",
+    brief: "Städpersonal i arbete i en lokal eller ett trapphus",
+    shape: "16:10 liggande",
+    ready: false,
+  },
+  "om-oss": {
+    src: "/images/photos/om-oss.jpg",
+    alt: "Kanitas i Järfälla",
+    brief: "Kontoret eller fordonsparken i Järfälla, visar att vi finns på riktigt",
+    shape: "16:10 liggande",
+    ready: false,
+  },
+} satisfies Record<string, PhotoSlot>;
+
+export type PhotoName = keyof typeof photos;
+
+/**
+ * The four verksamheter kanitas.se routes to. The parent site is a switchboard:
+ * it explains the group, then sends the visitor to the business they came for.
+ *
+ * `href` is the single thing that changes the day a verksamhet gets its own
+ * domain — point it at https://kanitasbygg.se, set `external`, and the card,
+ * the footer and the sitemap all follow.
+ */
+export type Business = {
+  slug: string;
+  /** Full brand name, e.g. "Kanitas Bygg" */
+  name: string;
+  /** Short label for nav and cards, e.g. "Bygg" */
+  short: string;
+  tagline: string;
+  /** Where the switchboard sends the visitor. */
+  href: string;
+  /** True once the verksamhet has moved to its own domain. */
+  external: boolean;
+  /** lucide icon name, see BusinessIcon */
+  icon: string;
+  /** Selling copy — a real paragraph, not a line of bullet points. */
+  blurb: string;
+  highlights: string[];
+  /** Legal entities that carry this verksamhet. */
+  entities: string[];
+};
+
+export const businesses: Business[] = [
+  {
+    slug: "bygg",
+    name: "Kanitas Bygg",
+    short: "Bygg",
+    tagline: "Från grund till nyckelfärdigt",
+    href: "/bygg",
+    external: false,
+    icon: "hardhat",
+    blurb:
+      "Bygg är där Kanitas började och fortfarande koncernens tyngsta gren. Vi tar totalansvar för entreprenader i alla storlekar, från löpande byggservice åt fastighetsägare till kompletta om- och nybyggnationer åt några av Sveriges största byggbolag. NCC, Implenia, ByggPartner och Oljibe återkommer till oss år efter år, och vi tar oss lika gärna an ett badrum i en villa i Järfälla.",
+    highlights: [
+      "Nybyggnation & entreprenad",
+      "Renovering & ombyggnation",
+      "Byggservice med snabb inställelse",
+      "Mark, rivning & sanering",
+    ],
+    entities: ["Kanitas Bygg AB", "Kanitas AB"],
+  },
+  {
+    slug: "stad",
+    name: "Kanitas Städ",
+    short: "Städ",
+    tagline: "Rent, klart och bemannat",
+    href: "/stad",
+    external: false,
+    icon: "sparkles",
+    blurb:
+      "Städ och bemanning drivs i Kanitas ENT och tar vid där bygget slutar. Vi utför byggstädning efter våra egna och andras entreprenader, sköter löpande kontors- och fastighetsstädning åt företag och BRF:er, och hyr ut erfaren personal till byggbolag som behöver folk snabbt. Samma kollektivavtal och samma kvalitetskrav som i byggverksamheten.",
+    highlights: [
+      "Byggstädning & slutstädning",
+      "Kontors- & fastighetsstädning",
+      "Flyttstädning med garanti",
+      "Bemanning till bygg och service",
+    ],
+    entities: ["Kanitas ENT AB"],
+  },
+  {
+    slug: "trading",
+    name: "Kanitas Trading",
+    short: "Trading",
+    tagline: "Verktyg, maskiner och fordon",
+    href: "/kontakt",
+    external: false,
+    icon: "truck",
+    blurb:
+      "Trading köper, säljer och hyr ut det som får ett bygge att rulla: handverktyg, maskiner, transportbilar och arbetsfordon. Eftersom vi handlar löpande till koncernens egna projekt vet vi vad utrustning faktiskt är värd, och den kunskapen får också våra kunder ta del av, oavsett om du ska köpa en grävmaskin eller sälja en transportbil.",
+    highlights: [
+      "Köp & försäljning av fordon",
+      "Maskiner och verktyg",
+      "Uthyrning till projekt",
+      "Värdering av begagnat",
+    ],
+    entities: ["Kanitas Trading AB"],
+  },
+  {
+    slug: "fastigheter",
+    name: "Kanitas Fastigheter",
+    short: "Fastigheter",
+    tagline: "Lokaler och förvaltning",
+    href: "/kontakt",
+    external: false,
+    icon: "building",
+    blurb:
+      "Fastigheter äger och förvaltar koncernens lokaler i Järfälla och Storstockholm. Vi hyr ut verkstads-, lager- och kontorsytor till företag som vill ha en hyresvärd som själv är byggare. När något behöver åtgärdas står hantverkarna redan i huset, och underhållet planeras av folk som vet vad det kostar att skjuta upp det.",
+    highlights: [
+      "Lokaler att hyra",
+      "Fastighetsförvaltning",
+      "Egen byggkompetens i huset",
+      "Långsiktigt underhåll",
+    ],
+    entities: ["Kanitas Fastigheter AB"],
+  },
+];
+
+/** Verksamheter that have a page of their own to send visitors to. */
+export const liveBusinesses = businesses.filter((b) => b.href !== "/kontakt");
 
 /** Legal entities in the group, shown on the About page. */
 export const groupCompanies = [
@@ -492,11 +666,6 @@ export const groupCompanies = [
     name: "Kanitas Fastigheter AB",
     orgnr: "559553-4305",
     role: "Byggverksamhet och fastighetsförvaltning",
-  },
-  {
-    name: "Kanitas Fastigheter 1 AB",
-    orgnr: "556994-3961",
-    role: "Fastighetsägande och förvaltning",
   },
   {
     name: "Kanitas Trading AB",
@@ -551,4 +720,10 @@ export const certifications = [
 ];
 
 /** Topics for the contact form's ärende selector. */
-export const contactTopics = ["Bygg", "Städ", "Annat"] as const;
+export const contactTopics = [
+  "Bygg",
+  "Städ",
+  "Trading",
+  "Fastigheter",
+  "Annat",
+] as const;

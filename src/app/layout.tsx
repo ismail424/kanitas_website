@@ -3,7 +3,7 @@ import { Archivo, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { site } from "@/lib/site";
+import { groupCompanies, site } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,7 +21,7 @@ const archivo = Archivo({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1e1c18",
+  themeColor: "#134b58",
 };
 
 export const metadata: Metadata = {
@@ -107,6 +107,16 @@ const organizationJsonLd = {
     closes: "17:00",
   },
   areaServed: "Storstockholm",
+  // The parent site is a switchboard, so state the group explicitly rather
+  // than letting one legal entity stand in for five.
+  subOrganization: groupCompanies
+    .filter((company) => company.orgnr !== site.orgnr)
+    .map((company) => ({
+      "@type": "Organization",
+      name: company.name,
+      taxID: company.orgnr,
+      description: company.role,
+    })),
 };
 
 export default function RootLayout({
@@ -125,7 +135,7 @@ export default function RootLayout({
         />
         <a
           href="#innehall"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-copper focus:px-4 focus:py-2 focus:font-semibold focus:text-umbra-deep"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-petrol focus:px-4 focus:py-2 focus:font-semibold focus:text-petrol-darker"
         >
           Hoppa till innehållet
         </a>

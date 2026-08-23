@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ValueIcon from "@/components/ValueIcon";
@@ -14,9 +15,9 @@ import {
   values,
 } from "@/lib/site";
 
-const pageTitle = "Om Kanitas: bygg och städ i Järfälla sedan 2011";
+const pageTitle = "Om Kanitas: koncernen i Järfälla sedan 2011";
 const pageDescription =
-  "Kanitas grundades 2011 i Järfälla och är i dag en koncern med sex bolag inom bygg, städ, fastigheter och bil. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
+  "Kanitas grundades 2011 i Järfälla och är i dag en koncern med fem bolag inom bygg, städ, trading och fastigheter. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -42,14 +43,14 @@ export default function OmOssPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Hero */}
-      <section className="hero-umbra relative isolate overflow-hidden">
+      <section className="hero-deep relative isolate overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pb-24 sm:pt-44 lg:px-8">
-          <p className="eyebrow text-sand">Om Kanitas</p>
+          <p className="eyebrow text-copper-soft">Om Kanitas</p>
           <h1 className="mt-5 max-w-3xl display-1 text-white">
             Byggt på förtroende sedan {site.founded}
           </h1>
           <p className="mt-6 max-w-2xl lead text-white/75">
-            Bygg- och städföretag i Järfälla, i dag en koncern med sex bolag
+            Byggbolaget i Järfälla som i dag är en koncern med fem bolag
             och 35 medarbetare.
           </p>
         </div>
@@ -73,7 +74,7 @@ export default function OmOssPage() {
                   byggbolag upptäckte att vi levererade, varje gång.
                 </p>
                 <p>
-                  I dag är vi en familjeägd koncern med sex bolag och 35
+                  I dag är vi en familjeägd koncern med fem bolag och 35
                   medarbetare, verksamma inom bygg, städ, fastigheter och
                   bilhandel. Bredden är vår styrka: vi kan ta ansvar för hela
                   kedjan, från markarbete och nybyggnation till slutstädning,
@@ -89,12 +90,9 @@ export default function OmOssPage() {
             <Reveal delay={100}>
               <div className="grid gap-4">
                 <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                  <Image
-                    src="/images/photos/sthlm-gamla-stan.jpg"
-                    alt="Stockholms silhuett med Riddarholmen i kvällsljus"
-                    fill
+                  <Photo
+                    name="om-oss"
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover"
                   />
                 </div>
                 <dl className="grid grid-cols-2 gap-4">
@@ -119,7 +117,7 @@ export default function OmOssPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-umbra">
+      <section className="bg-petrol-dark">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
@@ -131,8 +129,8 @@ export default function OmOssPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {values.map((value, index) => (
               <Reveal key={value.title} delay={index * 80}>
-                <div className="h-full rounded-2xl border border-line-umbra bg-umbra-soft p-8">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line-umbra bg-umbra text-sand">
+                <div className="h-full rounded-2xl border border-line-deep bg-petrol-raised p-8">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line-deep bg-petrol-dark text-copper-soft">
                     <ValueIcon name={value.icon} className="h-6 w-6" />
                   </span>
                   <h3 className="mt-5 title text-white">
@@ -154,7 +152,7 @@ export default function OmOssPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Koncernen"
-              title="Sex bolag, en helhet"
+              title="Fem bolag, fyra verksamheter"
               lead="Kanitas AB är moderbolag i en koncern där varje bolag är specialiserat på sitt område. Tillsammans täcker vi hela kedjan."
             />
           </Reveal>
@@ -175,7 +173,7 @@ export default function OmOssPage() {
                   {"area" in company && company.area ? (
                     <Link
                       href={company.area}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-copper hover:text-ink"
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-petrol hover:text-ink"
                     >
                       {company.areaLabel}
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -221,7 +219,7 @@ export default function OmOssPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-y border-line bg-sand-pale">
+      <section className="border-y border-line bg-petrol-pale">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
           <div>
             <h2 className="display-2 text-ink">
@@ -234,7 +232,7 @@ export default function OmOssPage() {
           </div>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-copper-deep"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-petrol px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-petrol-deep"
           >
             Kontakta oss
             <ArrowRight className="h-5 w-5" aria-hidden="true" />

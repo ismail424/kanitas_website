@@ -2,15 +2,24 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Phone } from "lucide-react";
+import BusinessIcon from "@/components/BusinessIcon";
+import Photo, { hasPhoto } from "@/components/Photo";
 import ContactSection from "@/components/ContactSection";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import ValueIcon from "@/components/ValueIcon";
-import { activeAreas, ogMeta, references, site, stats, values } from "@/lib/site";
+import {
+  businesses,
+  ogMeta,
+  references,
+  site,
+  stats,
+  values,
+} from "@/lib/site";
 
-const pageTitle = "Byggföretag & städfirma i Stockholm";
+const pageTitle = "Kanitas AB: bygg, städ, maskiner och lokaler";
 const pageDescription =
-  "Kanitas är ett bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i Storstockholm. AAA-kreditvärdighet. Begär offert!";
+  "Kanitas är en familjeägd koncern i Järfälla med fem bolag och 35 medarbetare. Välj verksamhet: Kanitas Bygg, Städ, Trading eller Fastigheter i Storstockholm.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -19,84 +28,56 @@ export const metadata: Metadata = {
   ...ogMeta(pageTitle, pageDescription, "/"),
 };
 
-/** Content for the home page feature sections, per area. */
-const features: Record<
-  string,
-  { image: string; alt: string; highlights: string[] }
-> = {
-  bygg: {
-    image: "/images/photos/bygg-hero.jpg",
-    alt: "Byggarbetare armerar på byggarbetsplats",
-    highlights: [
-      "Nybyggnation & entreprenad",
-      "Renovering & ombyggnation",
-      "Byggservice med snabb inställelse",
-      "Mark, rivning & sanering",
-    ],
-  },
-  stad: {
-    image: "/images/photos/stad-kontor.jpg",
-    alt: "Ljust och rent kontorslandskap",
-    highlights: [
-      "Byggstädning & slutstädning",
-      "Kontors- & fastighetsstädning",
-      "Flyttstädning med garanti",
-      "Storstädning & specialuppdrag",
-    ],
-  },
-};
-
 export default function HomePage() {
   return (
     <>
-      {/* Hero — light, airy, big type left, architecture right */}
+      {/* Hero — the parent company, not one of its businesses */}
       <section className="relative isolate overflow-hidden bg-paper bg-dotgrid">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:min-h-[78svh] lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:min-h-[72svh] lg:grid-cols-12 lg:gap-8 lg:px-8 lg:pb-24">
           <div className="lg:col-span-6">
-            <p className="eyebrow text-copper">
-              Bygg & Städ i Storstockholm
+            <p className="eyebrow text-petrol">
+              Koncern i Järfälla sedan {site.founded}
             </p>
             <h1 className="mt-7 display-1 text-ink">
-              Vi bygger tryggt och lämnar{" "}
-              <em className="not-italic text-copper">rent</em> efter oss.
+              Fyra verksamheter.{" "}
+              <em className="not-italic text-petrol">Ett</em> företag bakom.
             </h1>
             <p className="mt-7 max-w-xl lead-lg text-muted">
-              Kanitas är ett bygg- och städföretag i Järfälla som sedan{" "}
-              {site.founded} anlitas av allt från privatpersoner till Sveriges
-              största byggbolag.
+              Kanitas började som ett byggbolag i Järfälla och är i dag fem
+              bolag med 35 medarbetare som bygger, städar, bemannar, handlar med
+              maskiner och förvaltar lokaler i hela Storstockholm. Välj
+              verksamhet nedan så kommer du rätt direkt.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="/bygg"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-copper-deep"
+                href="#verksamheter"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-petrol px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-petrol-deep"
               >
-                Våra byggtjänster
+                Våra verksamheter
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Link>
-              <Link
-                href="/kontakt"
+              <a
+                href={site.phoneHref}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-3.5 text-lg font-semibold text-ink transition-colors hover:border-ink"
               >
-                <Phone className="h-5 w-5 text-copper" aria-hidden="true" />
-                Kontakta oss
-              </Link>
+                <Phone className="h-5 w-5 text-petrol" aria-hidden="true" />
+                {site.phone}
+              </a>
             </div>
           </div>
 
           <div className="relative lg:col-span-6">
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl lg:aspect-[5/6]">
-              <Image
-                src="/images/photos/bygg-stockholm.jpg"
-                alt="Modern kontorsbyggnad i Stockholm"
-                fill
+              <Photo
+                name="hem-hero"
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
+                placeholderClassName="pb-28 lg:pb-16"
               />
             </div>
             {/* Overlapping feature card */}
-            <div className="absolute -bottom-6 left-4 max-w-xs rounded-2xl bg-umbra p-6 shadow-[0_20px_50px_rgba(19,23,21,0.25)] sm:left-0 lg:-left-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sand">
+            <div className="absolute -bottom-6 left-4 max-w-xs rounded-2xl bg-petrol-dark p-6 shadow-[0_20px_50px_rgba(8,42,51,0.28)] sm:left-0 lg:-left-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-soft">
                 Utvalda uppdragsgivare
               </p>
               <p className="mt-2.5 title text-white">
@@ -104,7 +85,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/om-oss#referenser"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-sand transition-colors hover:text-white"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-copper-soft transition-colors hover:text-white"
               >
                 Se våra referenser
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -133,70 +114,111 @@ export default function HomePage() {
         </dl>
       </div>
 
-      {/* Business areas — bygg first and dominant */}
+      {/* The switchboard — the reason this page exists */}
       <section id="verksamheter" className="scroll-mt-24 bg-dotgrid">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="space-y-24 sm:space-y-32">
-            {activeAreas.map((area, index) => (
-              <Reveal key={area.slug}>
-                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-                  <div
-                    className={`relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_16px_48px_rgba(19,23,21,0.10)] ${
-                      index % 2 === 1 ? "lg:order-2" : ""
-                    }`}
-                  >
-                    <Image
-                      src={features[area.slug]?.image ?? area.heroImage}
-                      alt={features[area.slug]?.alt ?? area.heroAlt}
-                      fill
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="eyebrow text-copper">{area.name}</p>
-                    <h2 className="mt-4 display-2 text-ink">
-                      {area.servicesH2}
-                    </h2>
-                    <p className="mt-5 lead text-muted">
-                      {area.teaser}
+          <Reveal>
+            <SectionHeading
+              eyebrow="Växeln"
+              title="Vilken verksamhet söker du?"
+              lead="Varje verksamhet drivs som ett eget bolag med egna kunder och egen personal. Välj den du är ute efter, så slipper du leta bland resten."
+            />
+          </Reveal>
+
+          <ul className="mt-14 grid gap-6 lg:grid-cols-2">
+            {businesses.map((business, index) => {
+              const hasOwnPage = business.href !== "/kontakt";
+              return (
+                <Reveal key={business.slug} delay={index * 80} as="li" className="h-full">
+                  <article className="flex h-full flex-col rounded-2xl border border-line bg-card p-7 transition-colors hover:border-petrol/40 sm:p-9">
+                    <div className="flex items-center gap-4">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-petrol/10 text-petrol">
+                        <BusinessIcon
+                          name={business.icon}
+                          className="h-6 w-6"
+                        />
+                      </span>
+                      <div>
+                        <h3 className="font-display text-xl font-bold text-ink">
+                          {business.name}
+                        </h3>
+                        <p className="text-sm font-medium text-copper">
+                          {business.tagline}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="mt-6 leading-relaxed text-muted">
+                      {business.blurb}
                     </p>
-                    <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-                      {(features[area.slug]?.highlights ?? []).map((item) => (
+
+                    <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                      {business.highlights.map((item) => (
                         <li key={item} className="flex items-start gap-2.5">
-                          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
-                            <Check className="h-4 w-4" aria-hidden="true" />
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-petrol/10 text-petrol">
+                            <Check className="h-3 w-3" aria-hidden="true" />
                           </span>
-                          <span className="text-ink-soft">{item}</span>
+                          <span className="text-sm text-ink-soft">{item}</span>
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href={`/${area.slug}`}
-                      className="mt-8 inline-flex items-center gap-2 rounded-full bg-copper px-7 py-3 font-semibold text-white transition-colors hover:bg-copper-deep"
-                    >
-                      Mer om {area.name}
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </Link>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+
+                    <div className="mt-auto flex flex-wrap items-center gap-4 pt-8">
+                      <Link
+                        href={business.href}
+                        className={
+                          hasOwnPage
+                            ? "inline-flex items-center gap-2 rounded-full bg-petrol px-6 py-2.5 font-semibold text-white transition-colors hover:bg-petrol-deep"
+                            : "inline-flex items-center gap-2 rounded-full border border-ink/20 px-6 py-2.5 font-semibold text-ink transition-colors hover:border-ink"
+                        }
+                      >
+                        {hasOwnPage
+                          ? `Till ${business.name}`
+                          : `Kontakta ${business.name}`}
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </Link>
+                      {hasOwnPage ? null : (
+                        <p className="text-sm text-muted">
+                          Egen webbplats är på väg.
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </ul>
+
+          <Reveal>
+            <p className="mt-12 text-center text-muted">
+              Osäker på vem du ska prata med? Ring{" "}
+              <a
+                href={site.phoneHref}
+                className="font-semibold text-petrol underline decoration-copper decoration-2 underline-offset-4"
+              >
+                {site.phone}
+              </a>{" "}
+              eller mejla{" "}
+              <a
+                href={`mailto:${site.email}`}
+                className="font-semibold text-petrol underline decoration-copper decoration-2 underline-offset-4"
+              >
+                {site.email}
+              </a>
+              . Samma adress oavsett verksamhet, vi kopplar rätt.
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* About teaser + values */}
-      <section className="bg-umbra">
+      <section className="bg-petrol-dark">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:px-8">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-              <Image
-                src="/images/photos/om-oss-team.jpg"
-                alt="Arbetslag på byggarbetsplats"
-                fill
+              <Photo
+                name="hem-koncern"
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
               />
             </div>
           </Reveal>
@@ -205,12 +227,12 @@ export default function HomePage() {
               on="dark"
               eyebrow="Om Kanitas"
               title="Kollektivavtal, AAA och kunder som stannar kvar"
-              lead={`Bygg- och städfirman som startade i Järfälla ${site.founded} är i dag en koncern med sex bolag och 35 medarbetare. Allt bygger på en enkel princip: vi levererar det vi lovar.`}
+              lead={`Byggbolaget som startade i Järfälla ${site.founded} är i dag en koncern med fem bolag och 35 medarbetare. Verksamheterna är olika, men de delar samma ledning, samma kollektivavtal och samma princip: vi levererar det vi lovar.`}
             />
             <ul className="mt-9 space-y-5">
               {values.map((value) => (
                 <li key={value.title} className="flex items-start gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line-umbra bg-umbra-soft text-sand">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line-deep bg-petrol-raised text-copper-soft">
                     <ValueIcon name={value.icon} className="h-5 w-5" />
                   </span>
                   <div>
@@ -224,9 +246,9 @@ export default function HomePage() {
             </ul>
             <Link
               href="/om-oss"
-              className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-3 font-semibold text-white transition-colors hover:border-sand hover:text-sand"
+              className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-3 font-semibold text-white transition-colors hover:border-copper-soft hover:text-copper-soft"
             >
-              Mer om oss
+              Mer om koncernen
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </Reveal>
@@ -249,7 +271,7 @@ export default function HomePage() {
               {references.map((ref) => (
                 <li
                   key={ref.name}
-                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-card px-6 transition-colors hover:border-copper/40"
+                  className="flex h-24 items-center justify-center rounded-xl border border-line bg-card px-6 transition-colors hover:border-petrol/40"
                 >
                   <Image
                     src={ref.logo}
@@ -266,64 +288,40 @@ export default function HomePage() {
       </section>
 
       {/* Stockholm band — local anchoring */}
-      <section className="relative isolate overflow-hidden bg-umbra-deep">
-        <Image
-          src="/images/photos/sthlm-panorama.jpg"
-          alt="Vy över Riddarholmen i Stockholm i skymningen"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-umbra-deep/85 via-umbra-deep/50 to-umbra-deep/15"
-          aria-hidden="true"
-        />
+      {/* Full-bleed backdrop, so this slot falls back to the dark surface
+          rather than a placeholder the white headline could not sit on. */}
+      <section
+        className={`relative isolate overflow-hidden ${
+          hasPhoto("hem-stockholm") ? "bg-petrol-darker" : "hero-deep"
+        }`}
+      >
+        {hasPhoto("hem-stockholm") ? (
+          <>
+            <Photo name="hem-stockholm" sizes="100vw" />
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-petrol-darker/85 via-petrol-darker/50 to-petrol-darker/15"
+              aria-hidden="true"
+            />
+          </>
+        ) : null}
         <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8">
           <Reveal>
-            <p className="eyebrow text-sand">Storstockholm</p>
+            <p className="eyebrow text-copper-soft">Storstockholm</p>
             <h2 className="mt-4 max-w-2xl display-2 text-white">
               Järfälla är basen. Hela Storstockholm är arbetsplatsen.
             </h2>
             <p className="mt-4 max-w-xl lead text-white/80">
               Från Almarevägen i Järfälla når vi snabbt byggarbetsplatser,
-              kontor och lager i hela Stockholmsområdet.
+              kontor, lager och lokaler i hela Stockholmsområdet.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* CTA banner */}
-      <section className="border-y border-line bg-sand-pale">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
-          <div>
-            <h2 className="display-2 text-ink">
-              Har du ett projekt på gång?
-            </h2>
-            <p className="mt-3 max-w-xl text-lg text-muted">
-              Ring oss direkt eller skicka en offertförfrågan. Vi återkommer
-              oftast samma dag.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <a
-              href={site.phoneHref}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-3.5 text-lg font-semibold text-ink transition-colors hover:border-ink"
-            >
-              <Phone className="h-5 w-5 text-copper" aria-hidden="true" />
-              {site.phone}
-            </a>
-            <Link
-              href="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-copper px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-copper-deep"
-            >
-              Begär offert
-              <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <ContactSection />
+      <ContactSection
+        title="Vet du inte vilken verksamhet du behöver?"
+        lead="Beskriv vad du är ute efter så kopplar vi in rätt person i koncernen. Offerter är alltid kostnadsfria."
+      />
     </>
   );
 }

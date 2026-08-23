@@ -10,12 +10,15 @@ export default function Reveal({
   children,
   className = "",
   delay = 0,
+  as: Tag = "div",
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  /** Element to render, so a reveal can sit directly inside a list. */
+  as?: "div" | "li";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -39,8 +42,12 @@ export default function Reveal({
   }, []);
 
   return (
-    <div ref={ref} className={className} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
+    <Tag
+      ref={ref as React.Ref<HTMLDivElement & HTMLLIElement>}
+      className={className}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+    >
       {children}
-    </div>
+    </Tag>
   );
 }
