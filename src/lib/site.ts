@@ -591,11 +591,11 @@ export type PhotoSlot = {
 
 export const photos = {
   "hem-hero": {
-    src: "/images/photos/hem-hero.jpg",
+    src: "/images/photos/hem-hero.avif",
     alt: "Modern byggnad i glas och stål sedd underifrån mot ljus himmel",
     brief:
       "Ljus arkitekturbild i liggande format. Vänstra tredjedelen måste vara ljus, rubriken ligger där.",
-    shape: "Full bredd, minst 2400 px, ljus vänsterkant",
+    shape: "Full bredd, minst 3200 px, ljus vänsterkant",
     ready: true,
   },
   "hem-koncern": {
