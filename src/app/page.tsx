@@ -6,8 +6,7 @@ import Photo from "@/components/Photo";
 import ContactSection from "@/components/ContactSection";
 import Reveal from "@/components/Reveal";
 import {
-  primaryBusinesses,
-  secondaryBusinesses,
+  routedBusinesses,
   ogMeta,
   references,
   site,
@@ -70,81 +69,144 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Routing is the job of this page, so it sits at the fold and is the
-          largest thing on it. Bygg and ENT lead because they are where the
-          work is; the other two get a quiet line each. */}
-      <section id="verksamheter" className="scroll-mt-24 border-t border-line">
+      {/* The växel: four verksamheter, one weight each. Two are reached by a
+          page and two by phone, which changes the link text and nothing else. */}
+      <section id="verksamheter" className="scroll-mt-24 border-y border-line bg-paper-2">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <ul className="grid gap-10 lg:grid-cols-2 lg:gap-12">
-            {primaryBusinesses.map((business, index) => (
-              <Reveal key={business.slug} delay={index * 80} as="li">
-                <Link href={business.href} className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-md">
-                    <Photo
-                      name={business.photo}
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <p className="mt-7 text-sm font-semibold uppercase tracking-[0.18em] text-copper">
-                    {business.name}
-                  </p>
-                  <h2 className="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">
-                    {business.heading}
-                  </h2>
-                  <p className="mt-3 max-w-md lead text-muted">
-                    {business.highlights.slice(0, 3).join(", ")}.
-                  </p>
-                  <span className="mt-5 inline-flex items-center gap-2 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
-                    Till {business.name}
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
-
           <Reveal>
-            <div className="mt-16 divide-y divide-line border-y border-line">
-              {secondaryBusinesses.map((business) => (
-                <Link
-                  key={business.slug}
-                  href={business.href}
-                  className="group flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-6"
-                >
-                  <span className="font-display text-xl font-bold text-ink">
-                    {business.heading}
-                  </span>
-                  <span className="flex-1 text-muted">{business.name}</span>
-                  <span className="inline-flex items-center gap-2 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
-                    Kontakta oss
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                </Link>
-              ))}
+            <div className="max-w-2xl">
+              <p className="eyebrow text-petrol">Växeln</p>
+              <h2 className="mt-4 display-2 text-ink">
+                Vilken verksamhet gäller det?
+              </h2>
+              <p className="mt-4 lead text-muted">
+                Fyra verksamheter, ett bolag bakom. Välj den som gäller ditt
+                ärende så kommer du direkt rätt.
+              </p>
             </div>
           </Reveal>
+
+          <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+            {routedBusinesses.map((business, index) => {
+              const hasOwnPage = business.href !== "/kontakt";
+              return (
+                <Reveal key={business.slug} delay={index * 70} as="li">
+                  <Link
+                    href={business.href}
+                    className="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-card transition-colors hover:border-petrol/40"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Photo
+                        name={business.photo}
+                        priority={index < 2}
+                        sizes="(min-width: 640px) 50vw, 100vw"
+                        className="transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col p-7 sm:p-8">
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper">
+                        {business.name}
+                      </p>
+                      <h3 className="mt-2 font-display text-2xl font-bold text-ink">
+                        {business.heading}
+                      </h3>
+                      <p className="mt-3 leading-relaxed text-muted">
+                        {business.highlights.slice(0, 3).join(", ")}.
+                      </p>
+                      <span className="mt-auto inline-flex items-center gap-2 pt-6 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
+                        {hasOwnPage
+                          ? `Till ${business.name}`
+                          : `Kontakta ${business.name}`}
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
-      {/* References */}
+      {/* Why four verksamheter exist at all, which is also the argument for
+          picking up the phone. Concrete history, then where it is going. */}
+      <section className="bg-petrol-dark">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <Reveal>
+                <p className="eyebrow text-copper-soft">Om Kanitas</p>
+                <h2 className="mt-4 display-2 text-white">
+                  Byggt inifrån, en verksamhet i taget
+                </h2>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-7">
+              <Reveal delay={60}>
+                <div className="space-y-6 text-lg leading-relaxed text-white/75">
+                  <p>
+                    Kanitas startade {site.founded} som en byggfirma i Järfälla.
+                    De första åren byggde vi åt privatpersoner och mindre
+                    fastighetsägare. När NCC, Implenia och ByggPartner började
+                    anlita oss som underentreprenör ställdes andra krav: egen
+                    personal, egen arbetsledning, dokumenterad egenkontroll och
+                    avtal som håller hela vägen till slutbesiktning.
+                  </p>
+                  <p>
+                    De kraven byggde bolaget. Varje ny verksamhet har vuxit fram
+                    ur ett behov vi först hade själva. Vi behövde folk med kort
+                    varsel, så vi startade ett bemanningsbolag. Vi behövde
+                    byggstädning som höll för besiktning, så vi gjorde den
+                    själva. Vi behövde maskiner, så vi började handla med dem.
+                    Vi behövde lokaler, så vi köpte dem.
+                  </p>
+                  <p className="text-white">
+                    Målet är att en beställare ska kunna vända sig hit för hela
+                    kedjan: bygga, bemanna, städa efteråt och hyra ytan när det
+                    står klart, utan att upphandla fyra leverantörer och
+                    samordna gränssnitten mellan dem.
+                  </p>
+                </div>
+                <Link
+                  href="/om-oss"
+                  className="mt-10 inline-flex items-center gap-2 rounded-md border border-white/25 px-7 py-3 font-semibold text-white transition-colors hover:border-copper-soft hover:text-copper-soft"
+                >
+                  Mer om Kanitas
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* References carry more weight than anything we can say about
+          ourselves, so they get room rather than a footnote strip. */}
       <section id="referenser" className="border-b border-line">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">
-              Uppdragsgivare i urval
-            </p>
+            <div className="max-w-2xl">
+              <p className="eyebrow text-petrol">Uppdragsgivare</p>
+              <h2 className="mt-4 display-2 text-ink">
+                De som redan har lagt jobbet hos oss
+              </h2>
+              <p className="mt-4 lead text-muted">
+                Återkommande uppdrag åt några av landets största bygg-,
+                fastighets- och logistikföretag.
+              </p>
+            </div>
           </Reveal>
           <Reveal delay={80}>
-            <ul className="mt-10 flex flex-wrap items-center gap-x-14 gap-y-10">
+            <ul className="mt-14 grid grid-cols-2 items-center gap-x-12 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
               {references.map((ref) => (
-                <li key={ref.name}>
+                <li key={ref.name} className="flex items-center justify-center">
                   <Image
                     src={ref.logo}
                     alt={ref.name}
-                    width={140}
-                    height={56}
-                    className="h-6 w-auto max-w-[110px] object-contain opacity-55 grayscale"
+                    width={220}
+                    height={88}
+                    className="h-12 w-auto max-w-full object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
                   />
                 </li>
               ))}

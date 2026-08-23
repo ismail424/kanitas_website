@@ -626,6 +626,20 @@ export const photos = {
     shape: "16:10 liggande",
     ready: true,
   },
+  trading: {
+    src: "/images/photos/trading.avif",
+    alt: "Hjullastare uppställd på en grusplan",
+    brief: "Maskiner eller fordon ur eget lager, gärna med Kanitas-dekor",
+    shape: "16:10 liggande",
+    ready: true,
+  },
+  fastigheter: {
+    src: "/images/photos/fastigheter.avif",
+    alt: "Fasad på modern verksamhetslokal",
+    brief: "Egen lokal i beståndet, exteriör eller uthyrningsbar yta",
+    shape: "16:10 liggande",
+    ready: true,
+  },
   "om-oss": {
     src: "/images/photos/om-oss.avif",
     alt: "Vy över Stockholms innerstad från vattnet",
@@ -715,6 +729,7 @@ export const businesses: Business[] = [
     tagline: "Verktyg, maskiner och fordon",
     href: "/kontakt",
     external: false,
+    photo: "trading",
     blurb:
       "Trading handlar med och hyr ut maskiner, verktyg, transportbilar och arbetsfordon. Verksamheten byggdes upp för att förse koncernens egna entreprenader med utrustning och är i dag en självständig affär. Den löpande marknadskännedomen ligger till grund för våra värderingar av begagnad utrustning.",
     highlights: [
@@ -733,6 +748,7 @@ export const businesses: Business[] = [
     tagline: "Lokaler och förvaltning",
     href: "/kontakt",
     external: false,
+    photo: "fastigheter",
     blurb:
       "Fastigheter äger och förvaltar koncernens bestånd av verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Som hyresvärd med egen byggorganisation utför vi hyresgästanpassningar och underhåll i egen regi, vilket ger kortare ledtider och kontroll över kvaliteten.",
     highlights: [
@@ -745,14 +761,12 @@ export const businesses: Business[] = [
   },
 ];
 
-/** Verksamheter with a page of their own. These lead the routing on the home
- *  page, shown as image tiles. */
-export const primaryBusinesses = businesses.filter(
+/** Every verksamhet, each with a tile. The home page is a växel: all four get
+ *  the same weight, and the link text differs only because two of them are
+ *  reached by phone rather than by a page of their own. */
+export const routedBusinesses = businesses.filter(
   (b): b is Business & { photo: PhotoName } => Boolean(b.photo),
 );
-
-/** Verksamheter without a page yet. One quiet line each, no tile. */
-export const secondaryBusinesses = businesses.filter((b) => !b.photo);
 
 /**
  * Who the koncern actually works for. The switchboard sorts by verksamhet;
