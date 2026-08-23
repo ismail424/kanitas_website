@@ -670,6 +670,8 @@ export type Business = {
   href: string;
   /** True once the verksamhet has moved to its own domain. */
   external: boolean;
+  /** Photo slot used when the verksamheten is shown as a tile. */
+  photo?: PhotoName;
   /** Selling copy — a real paragraph, not a line of bullet points. */
   blurb: string;
   highlights: string[];
@@ -685,6 +687,7 @@ export const businesses: Business[] = [
     tagline: "Från grund till nyckelfärdigt",
     href: "/bygg",
     external: false,
+    photo: "bygg-varfor",
     blurb:
       "Byggverksamheten är koncernens största och äldsta gren. Vi utför entreprenader i alla storlekar, från löpande byggservice åt fastighetsägare till kompletta om- och nybyggnationer som underentreprenör åt Sveriges ledande byggbolag. NCC, Implenia, ByggPartner och Oljibe hör till våra återkommande uppdragsgivare.",
     highlights: [
@@ -702,6 +705,7 @@ export const businesses: Business[] = [
     tagline: "Bemanning och byggstädning",
     href: "/stad",
     external: false,
+    photo: "ent-stad",
     blurb:
       "ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal, utan led av underleverantörer.",
     highlights: [
@@ -748,8 +752,14 @@ export const businesses: Business[] = [
   },
 ];
 
-/** Verksamheter that have a page of their own to send visitors to. */
-export const liveBusinesses = businesses.filter((b) => b.href !== "/kontakt");
+/** Verksamheter with a page of their own. These lead the routing on the home
+ *  page, shown as image tiles. */
+export const primaryBusinesses = businesses.filter(
+  (b): b is Business & { photo: PhotoName } => Boolean(b.photo),
+);
+
+/** Verksamheter without a page yet. One quiet line each, no tile. */
+export const secondaryBusinesses = businesses.filter((b) => !b.photo);
 
 /**
  * Who the koncern actually works for. The switchboard sorts by verksamhet;

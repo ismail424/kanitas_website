@@ -1,23 +1,21 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Photo from "@/components/Photo";
 import ContactSection from "@/components/ContactSection";
 import Reveal from "@/components/Reveal";
-import SectionHeading from "@/components/SectionHeading";
 import {
-  businesses,
-  groupCompanies,
-  groupFacts,
+  primaryBusinesses,
+  secondaryBusinesses,
   ogMeta,
   references,
   site,
 } from "@/lib/site";
 
-const pageTitle = "Kanitas AB: bygg, städ, maskiner och lokaler";
+const pageTitle = "Bygg, byggservice och bemanning i Stockholm";
 const pageDescription =
-  "Kanitas är en familjeägd koncern i Järfälla med fem bolag och 35 medarbetare. Välj verksamhet: Kanitas Bygg, Städ, Trading eller Fastigheter i Storstockholm.";
+  "Kanitas utför entreprenader, byggservice, bemanning och byggstädning i hela Storstockholm. Egen personal på kollektivavtal sedan 2011. Begär offert!";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -30,9 +28,7 @@ export default function HomePage() {
   return (
     <>
 
-      {/* Full-bleed hero: the headline sits on the photograph, not beside it.
-          A light scrim on the left guarantees ink-on-photo contrast whatever
-          the crop does at narrow widths. */}
+      {/* Hero: what we do, said plainly. Org structure is not a proposition. */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <Photo name="hem-hero" priority sizes="100vw" />
@@ -42,33 +38,29 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="mx-auto flex min-h-[78svh] max-w-7xl items-center px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="mx-auto flex min-h-[62svh] max-w-7xl items-center px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="max-w-2xl">
-            <p className="eyebrow text-petrol">
-              Kanitas AB · Sedan {site.founded}
-            </p>
+            <p className="eyebrow text-petrol">Stockholm sedan {site.founded}</p>
             <h1 className="mt-7 max-w-xl display-1 text-ink">
-              Fyra verksamheter under samma ledning.
+              Vi bygger, renoverar och sköter Stockholm.
             </h1>
             <p className="mt-7 max-w-xl lead-lg text-ink-soft">
-              Kanitas är en koncern i Järfälla med fem bolag och 35
-              medarbetare inom bygg, bemanning, maskinhandel och
-              fastigheter. Vi levererar åt Sveriges ledande byggbolag och
-              fastighetsägare i hela Storstockholm.
+              Kanitas utför entreprenader, byggservice, bemanning och städ åt
+              Sveriges ledande byggbolag, fastighetsägare och bostadsrätts&shy;föreningar.
+              Egen personal, egna maskiner, hela Storstockholm.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="#verksamheter"
+                href="/bygg"
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-petrol px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-petrol-deep"
               >
-                Våra verksamheter
+                Kanitas Bygg
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Link>
               <a
                 href={site.phoneHref}
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-ink/25 bg-paper/70 px-8 py-3.5 text-lg font-semibold text-ink backdrop-blur-sm transition-colors hover:border-ink"
               >
-                <Phone className="h-5 w-5 text-petrol" aria-hidden="true" />
                 {site.phone}
               </a>
             </div>
@@ -76,74 +68,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The switchboard — the reason this page exists */}
-      <section id="verksamheter" className="scroll-mt-24">
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Verksamheter"
-              title="Fyra verksamheter, fem bolag"
-              lead="Varje verksamhet drivs som ett eget bolag med egen personal, egna kunder och eget resultatansvar. Välj den verksamhet ditt ärende gäller."
-            />
-          </Reveal>
-
-          {/* Typographic blocks on hairlines, not cards. Four verksamheter
-              in four identical bordered tiles gave them equal weight and no
-              hierarchy; a rule and a heading do the same job with less noise. */}
-          <div className="mt-16 divide-y divide-line border-y border-line">
-            {businesses.map((business, index) => {
-              const hasOwnPage = business.href !== "/kontakt";
-              return (
-                <Reveal key={business.slug} delay={index * 60}>
-                  <div className="grid gap-6 py-12 lg:grid-cols-12 lg:gap-10 lg:py-16">
-                    <div className="lg:col-span-4">
-                      <h3 className="font-display text-2xl font-bold text-ink">
-                        {business.name}
-                      </h3>
-                      <p className="mt-1.5 text-muted">{business.tagline}</p>
-                      <Link
-                        href={business.href}
-                        className="mt-5 inline-flex items-center gap-2 font-semibold text-petrol transition-colors hover:text-petrol-deep"
-                      >
-                        {hasOwnPage
-                          ? `Till ${business.name}`
-                          : `Kontakta ${business.name}`}
-                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                      </Link>
-                    </div>
-
-                    <div className="lg:col-span-8">
-                      <p className="max-w-3xl leading-relaxed text-ink-soft">
-                        {business.blurb}
-                      </p>
-                      <p className="mt-5 text-sm text-muted">
-                        {business.highlights.join(" · ")}
-                      </p>
-                    </div>
+      {/* Routing is the job of this page, so it sits at the fold and is the
+          largest thing on it. Bygg and ENT lead because they are where the
+          work is; the other two get a quiet line each. */}
+      <section id="verksamheter" className="scroll-mt-24 border-t border-line">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <ul className="grid gap-10 lg:grid-cols-2 lg:gap-12">
+            {primaryBusinesses.map((business, index) => (
+              <Reveal key={business.slug} delay={index * 80} as="li">
+                <Link href={business.href} className="group block">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-md">
+                    <Photo
+                      name={business.photo}
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
                   </div>
-                </Reveal>
-              );
-            })}
-          </div>
+                  <h2 className="mt-7 font-display text-3xl font-bold text-ink sm:text-4xl">
+                    {business.name}
+                  </h2>
+                  <p className="mt-3 max-w-md lead text-muted">
+                    {business.tagline}. {business.highlights.slice(0, 3).join(", ")}.
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
+                    Till {business.name}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </ul>
 
           <Reveal>
-            <p className="mt-14 text-muted">
-              Gemensam ingång för samtliga verksamheter:{" "}
-              <a
-                href={site.phoneHref}
-                className="font-semibold text-petrol underline decoration-copper decoration-2 underline-offset-4"
-              >
-                {site.phone}
-              </a>{" "}
-              och{" "}
-              <a
-                href={`mailto:${site.email}`}
-                className="font-semibold text-petrol underline decoration-copper decoration-2 underline-offset-4"
-              >
-                {site.email}
-              </a>
-              .
-            </p>
+            <div className="mt-16 divide-y divide-line border-y border-line">
+              {secondaryBusinesses.map((business) => (
+                <Link
+                  key={business.slug}
+                  href={business.href}
+                  className="group flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-6"
+                >
+                  <span className="font-display text-xl font-bold text-ink">
+                    {business.name}
+                  </span>
+                  <span className="flex-1 text-muted">{business.tagline}</span>
+                  <span className="inline-flex items-center gap-2 font-semibold text-petrol transition-colors group-hover:text-petrol-deep">
+                    Kontakta oss
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </Link>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
@@ -165,7 +139,7 @@ export default function HomePage() {
                     alt={ref.name}
                     width={140}
                     height={56}
-                    className="max-h-7 w-auto max-w-[120px] object-contain opacity-55 grayscale"
+                    className="h-6 w-auto max-w-[110px] object-contain opacity-55 grayscale"
                   />
                 </li>
               ))}
@@ -174,67 +148,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Credentials, stated plainly. This is what a procurement function
-          checks before shortlisting, so it is data rather than prose. */}
-      <section className="border-t border-line bg-paper-2">
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
-              <Reveal>
-                <SectionHeading
-                  eyebrow="Koncernen i korthet"
-                  title="Uppgifter för upphandling och leverantörskontroll"
-                  lead="Kanitas AB är moderbolag och avtalspart. Underlag för kreditvärdighet, kollektivavtal och försäkring lämnas på begäran inför upphandling."
-                />
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-7">
-              <Reveal>
-                <dl className="grid grid-cols-1 gap-x-10 border-y border-line sm:grid-cols-2">
-                  {groupFacts.map((fact) => (
-                    <div
-                      key={fact.label}
-                      className="border-b border-line py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0"
-                    >
-                      <dt className="text-sm font-medium text-muted">
-                        {fact.label}
-                      </dt>
-                      <dd className="mt-1 font-display font-semibold text-ink">
-                        {fact.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </Reveal>
-
-              <Reveal delay={80}>
-                <p className="mt-10 text-sm font-semibold uppercase tracking-[0.18em] text-muted">
-                  Bolag i koncernen
-                </p>
-                <ul className="mt-4 space-y-2">
-                  {groupCompanies.map((company) => (
-                    <li
-                      key={company.orgnr}
-                      className="flex flex-wrap items-baseline justify-between gap-x-6 border-b border-line py-2.5 last:border-b-0"
-                    >
-                      <span className="font-medium text-ink">
-                        {company.name}
-                      </span>
-                      <span className="font-mono text-sm text-muted">
-                        {company.orgnr}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <ContactSection
-        title="Kontakta koncernen"
+        title="Skicka en förfrågan"
         lead="Beskriv uppdraget så kopplar vi in rätt verksamhet och rätt kontaktperson. Offerter och förfrågningsunderlag hanteras kostnadsfritt."
       />
     </>

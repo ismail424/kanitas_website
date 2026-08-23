@@ -37,9 +37,9 @@ export default function Footer() {
           <div>
             <LogoLockup on="dark" className="h-16 w-auto" />
             <p className="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-white/60">
-              Kanitas är en familjeägd koncern i Järfälla. Sedan{" "}
-              {site.founded} bygger, städar, bemannar och förvaltar vi åt
-              företag och privatpersoner i hela Storstockholm.
+              Kanitas utför entreprenader, byggservice, bemanning och
+              byggstädning i hela Storstockholm. Egen personal på
+              kollektivavtal sedan {site.founded}.
             </p>
           </div>
 

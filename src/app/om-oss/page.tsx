@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import {
   groupCompanies,
+  groupFacts,
   ogMeta,
   references,
   site,
@@ -118,11 +119,27 @@ export default function OmOssPage() {
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <SectionHeading
-              eyebrow="Koncernen"
-              title="Fem bolag, fyra verksamheter"
-              lead="Kanitas AB är moderbolag i en koncern där varje bolag är specialiserat på sitt område. Tillsammans täcker vi hela kedjan."
+              eyebrow="Bolagsuppgifter"
+              title="Bolag, org.nr och avtalsuppgifter"
+              lead="Kanitas AB är moderbolag och avtalspart. Underlag för kreditvärdighet, kollektivavtal och försäkring lämnas i samband med upphandling."
             />
           </Reveal>
+
+          <Reveal delay={60}>
+            <dl className="mt-12 grid grid-cols-1 gap-x-12 border-y border-line sm:grid-cols-2 lg:grid-cols-4">
+              {groupFacts.map((fact) => (
+                <div key={fact.label} className="border-b border-line py-4">
+                  <dt className="text-sm font-medium text-muted">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-1 font-display font-semibold text-ink">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+
           <Reveal delay={100}>
             <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {groupCompanies.map((company) => (
