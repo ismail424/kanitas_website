@@ -93,9 +93,6 @@ export default function AreaPage({
           <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
             {area.tagline}
           </p>
-          <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-            {area.tagline}
-          </p>
           <h1 className="mt-8 max-w-3xl display-1 text-white">
             {area.h1}
           </h1>

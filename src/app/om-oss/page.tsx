@@ -120,7 +120,7 @@ export default function OmOssPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Bolagsuppgifter"
-              title="Bolag, org.nr och avtalsuppgifter"
+              title="Bolagen i koncernen"
               lead="Kanitas AB är moderbolag och avtalspart. Underlag för kreditvärdighet, kollektivavtal och försäkring lämnas i samband med upphandling."
             />
           </Reveal>
@@ -144,15 +144,12 @@ export default function OmOssPage() {
             <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {groupCompanies.map((company) => (
                 <li
-                  key={company.orgnr}
+                  key={company.name}
                   className="rounded-2xl border border-line bg-card p-6"
                 >
                   <h3 className="font-display font-bold text-ink">
                     {company.name}
                   </h3>
-                  <p className="mt-1 text-sm text-muted">
-                    Org.nr {company.orgnr}
-                  </p>
                   <p className="mt-3 text-ink-soft">{company.role}</p>
                   {"area" in company && company.area ? (
                     <Link

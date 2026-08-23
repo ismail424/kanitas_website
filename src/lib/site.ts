@@ -238,7 +238,7 @@ export const areas: Area[] = [
       },
       {
         q: "Var arbetar ni?",
-        a: "Vi utgår från Almarevägen 13 i Järfälla och arbetar i hela Storstockholm. Till de flesta arbetsplatser i länet är vi framme inom en timme.",
+        a: "Vi utgår från Almarevägen 13 i Järfälla och har hela Storstockholm som hemmaplan — till de flesta arbetsplatser i länet är vi framme inom en timme. För större entreprenader åtar vi oss uppdrag i hela Sverige.",
       },
       {
         q: "Hur snabbt kan ni börja?",
@@ -275,7 +275,7 @@ export const areas: Area[] = [
     teaser:
       "Yrkesarbetare på plats normalt inom ett dygn, och byggstädning som håller för besiktning. Åt entreprenörer, fastighetsägare och BRF:er.",
     intro:
-      "Kanitas ENT hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer, och utför byggstädning inför besiktning. Vid frånvaro eller forcerad etapp löser vi bemanning normalt inom ett dygn, eftersom vi kan omfördela personal från koncernens egna byggprojekt. All personal är anställd hos oss i Kanitas ENT AB, org.nr 559146-9183, på kollektivavtal med Byggnads eller Fastighets, aldrig inhyrd i andra led.",
+      "Kanitas ENT hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer, och utför byggstädning inför besiktning. Vid frånvaro eller forcerad etapp löser vi bemanning normalt inom ett dygn, eftersom vi kan omfördela personal från koncernens egna byggprojekt. All personal är anställd hos oss i Kanitas ENT AB på kollektivavtal med Byggnads eller Fastighets, aldrig inhyrd i andra led.",
     services: [
       {
         title: "Yrkesarbetare till bygg",
@@ -375,7 +375,7 @@ export const areas: Area[] = [
     faq: [
       {
         q: "Är personalen anställd hos er eller inhyrd?",
-        a: "Anställd hos oss i Kanitas ENT AB, org.nr 559146-9183, på kollektivavtal med Byggnads eller Fastighets. Vi hyr aldrig in bemanning i andra led, så du vet alltid vem som befinner sig på arbetsplatsen. Installationsentreprenader inom el, VVS och ventilation är en annan sak och upphandlas hos våra fasta samarbetspartners.",
+        a: "Anställd hos oss i Kanitas ENT AB på kollektivavtal med Byggnads eller Fastighets. Vi hyr aldrig in bemanning i andra led, så du vet alltid vem som befinner sig på arbetsplatsen. Installationsentreprenader inom el, VVS och ventilation är en annan sak och upphandlas hos våra fasta samarbetspartners.",
       },
       {
         q: "Hur snabbt kan ni bemanna?",
@@ -805,11 +805,10 @@ export const audiences = [
  * Kept as data so they are stated once and can be cited anywhere.
  */
 export const groupFacts = [
-  { label: "Organisationsnummer", value: "556841-1010" },
   { label: "Grundat", value: "2011, Järfälla" },
   { label: "Bolag i koncernen", value: "5" },
   { label: "Medarbetare", value: "35" },
-  { label: "Kreditvärdighet", value: "AAA för Kanitas AB, 556841-1010" },
+  { label: "Kreditvärdighet", value: "AAA för Kanitas AB" },
   { label: "Kollektivavtal", value: "Byggnads och Fastighets" },
   { label: "Försäkring", value: "Ansvarsförsäkring, godkänd för F-skatt" },
   { label: "Verksamhetsområde", value: "Storstockholm" },

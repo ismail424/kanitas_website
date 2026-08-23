@@ -12,9 +12,9 @@ import {
   site,
 } from "@/lib/site";
 
-const pageTitle = "Bygg, byggservice och bemanning i Stockholm";
+const pageTitle = "Bygg, bemanning, maskiner och lokaler i Stockholm";
 const pageDescription =
-  "Kanitas utför entreprenader, byggservice, bemanning och byggstädning i hela Storstockholm. Egen personal på kollektivavtal sedan 2011. Begär offert!";
+  "Kanitas i Järfälla: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i hela Storstockholm. Egen personal sedan 2011.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -40,22 +40,21 @@ export default function HomePage() {
         <div className="mx-auto flex min-h-[62svh] max-w-7xl items-center px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="max-w-2xl">
             <p className="eyebrow text-petrol">
-              Byggföretag i Järfälla sedan {site.founded}
+              Storstockholm sedan {site.founded}
             </p>
             <h1 className="mt-7 max-w-xl display-1 text-ink">
-              Vi bygger, renoverar och sköter Stockholm.
+              Vi bygger, bemannar, utrustar och förvaltar.
             </h1>
             <p className="mt-7 max-w-xl lead-lg text-ink-soft">
-              Vi utför byggentreprenader och byggservice, hyr ut yrkesarbetare
-              och tar byggstädningen efteråt. Egen personal på kollektivavtal,
-              i hela Storstockholm.
+              Fyra verksamheter i Järfälla med egen personal på kollektivavtal.
+              Välj den som gäller ditt ärende så kommer du direkt rätt.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="/bygg"
+                href="#verksamheter"
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-petrol px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-petrol-deep"
               >
-                Kanitas Bygg
+                Våra verksamheter
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Link>
               <a
