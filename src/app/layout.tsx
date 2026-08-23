@@ -89,22 +89,9 @@ const organizationJsonLd = {
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    postalCode: site.address.postalCode,
     addressLocality: site.address.city,
     addressRegion: site.address.region,
     addressCountry: site.address.country,
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: site.geo.lat,
-    longitude: site.geo.lng,
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "08:00",
-    closes: "17:00",
   },
   areaServed: "Storstockholm",
   // The parent site is a switchboard, so state the group explicitly rather

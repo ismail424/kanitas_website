@@ -57,8 +57,6 @@ export default function AreaPage({
       telephone: "+46706653248",
       address: {
         "@type": "PostalAddress",
-        streetAddress: site.address.street,
-        postalCode: site.address.postalCode,
         addressLocality: site.address.city,
         addressCountry: site.address.country,
       },

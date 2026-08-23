@@ -119,12 +119,9 @@ export default function Footer() {
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-1 h-4 w-4 shrink-0 text-copper-soft" aria-hidden="true" />
                 <span>
-                  {site.address.street}
-                  <br />
-                  {site.address.postalCode} {site.address.city}
+                  {site.address.city}, {site.address.region}
                 </span>
               </li>
-              <li className="pt-1 text-sm text-white/45">{site.openingHours}</li>
             </ul>
           </div>
         </div>

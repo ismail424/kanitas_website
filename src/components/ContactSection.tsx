@@ -52,29 +52,13 @@ export default function ContactSection({
               <li className="border-t border-line pt-5">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-muted">
-                    Besöksadress
+                    Ort
                   </p>
                   <p className="text-lg font-semibold text-ink">
-                    {site.address.street}, {site.address.postalCode}{" "}
-                    {site.address.city}
+                    {site.address.city}, {site.address.region}
                   </p>
-                  <a
-                    href={site.directionsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 inline-block text-sm font-semibold text-petrol underline decoration-petrol/30 underline-offset-4 hover:text-ink"
-                  >
-                    Vägbeskrivning
-                  </a>
-                </div>
-              </li>
-              <li className="border-t border-line pt-5">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-wider text-muted">
-                    Öppettider
-                  </p>
-                  <p className="text-lg font-semibold text-ink">
-                    {site.openingHours}
+                  <p className="mt-1 text-sm text-muted">
+                    Vi arbetar i hela Storstockholm.
                   </p>
                 </div>
               </li>

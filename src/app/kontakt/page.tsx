@@ -35,7 +35,7 @@ export default function KontaktPage() {
             Kontakta Kanitas
           </h1>
           <p className="mt-6 max-w-2xl lead text-white/75">
-            Samma nummer och samma adress gäller samtliga verksamheter i
+            Samma nummer och samma mejladress gäller samtliga verksamheter i
             koncernen. Ange vad ärendet gäller så kopplas det till rätt bolag
             och rätt kontaktperson. Förfrågningar besvaras normalt inom ett
             dygn.

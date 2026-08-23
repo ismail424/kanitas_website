@@ -14,16 +14,10 @@ export const site = {
   phoneHref: "tel:+46706653248",
   email: "info@kanitas.se",
   address: {
-    street: "Almarevägen 13",
-    postalCode: "176 76",
     city: "Järfälla",
     region: "Stockholm",
     country: "SE",
   },
-  geo: { lat: 59.4253, lng: 17.8345 },
-  openingHours: "Vardagar 08.00 till 17.00",
-  directionsUrl:
-    "https://www.google.com/maps/dir/?api=1&destination=Almarev%C3%A4gen+13%2C+176+76+J%C3%A4rf%C3%A4lla",
 } as const;
 
 /**
@@ -238,7 +232,7 @@ export const areas: Area[] = [
       },
       {
         q: "Var arbetar ni?",
-        a: "Vi utgår från Almarevägen 13 i Järfälla och har hela Storstockholm som hemmaplan — till de flesta arbetsplatser i länet är vi framme inom en timme. För större entreprenader åtar vi oss uppdrag i hela Sverige.",
+        a: "Vi arbetar i hela Storstockholm.",
       },
       {
         q: "Hur snabbt kan ni börja?",
