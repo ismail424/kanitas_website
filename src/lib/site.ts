@@ -622,7 +622,7 @@ export const photos = {
   },
   trading: {
     src: "/images/photos/trading.avif",
-    alt: "Grävmaskin i arbete framför nordisk trähusbebyggelse",
+    alt: "Volvo grävmaskin uppställd på ett markarbete",
     brief: "Maskiner eller fordon ur eget lager, gärna med Kanitas-dekor",
     shape: "16:10 liggande",
     ready: true,
