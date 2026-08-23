@@ -1,143 +1,215 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --primary-color: #124075;
-  --secondary-color: #0e3261;
-  --accent-color: #3a85d8;
-  --bg-light: #f8f8f8;
-  --bg-white: #ffffff;
-  --text-dark: #333333;
-  --text-light: #666666;
+/*
+ * Kanitas design tokens v4 — the palette is taken straight from the logo:
+ * petrol green carries the weight (surfaces, actions, headings) and copper is
+ * the detail, exactly as the mark uses it for its two rules. One palette for
+ * every business area. No hardcoded hex in components.
+ */
+@theme {
+  /* Surfaces */
+  --color-paper: #f4f6f6;
+  --color-paper-2: #e7ecec;
+  --color-card: #ffffff;
+  --color-petrol-pale: #dbe8ea;
+
+  /* Text on light */
+  --color-ink: #0f2229;
+  --color-ink-soft: #33474f;
+  --color-muted: #5d6d73;
+
+  /* Borders */
+  --color-line: #dde4e4;
+  --color-line-deep: #1a5766;
+
+  /* Brand petrol — logo mark, primary action, dark surfaces */
+  --color-petrol: #134b58;
+  --color-petrol-deep: #0c3945;
+  --color-petrol-dark: #0e3d49;
+  --color-petrol-darker: #082a33;
+  --color-petrol-raised: #15586a;
+
+  /* Copper — the logo rule; accent detail only */
+  --color-copper: #c76245;
+  --color-copper-soft: #e08e6d;
+
+  /* Feedback */
+  --color-ok: #2f7d4f;
+  --color-error: #b23a2e;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px; /* For fixed header */
-  color-scheme: light only;
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
-  color: var(--text-dark);
-  background-color: var(--bg-white);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  overflow-x: hidden;
-  forced-color-adjust: none;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Force light mode */
-:root {
-  color-scheme: light only;
+::selection {
+  background-color: var(--color-petrol);
+  color: #ffffff;
 }
 
-@media (max-width: 768px) {
-  html {
-    scroll-padding-top: 70px;
+/* Deep petrol hero surface with a faint construction grid */
+.hero-deep {
+  background-color: var(--color-petrol-darker);
+  background-image:
+    radial-gradient(
+      90rem 40rem at 85% -10%,
+      rgba(224, 142, 109, 0.18),
+      transparent 60%
+    ),
+    linear-gradient(160deg, #082a33 0%, #0e3d49 55%, #15586a 100%);
+  position: relative;
+}
+
+.hero-deep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
+  pointer-events: none;
+}
+
+/* Subtle dot grid so light surfaces are not flat white */
+.bg-dotgrid {
+  background-image: radial-gradient(
+    rgba(15, 34, 41, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+}
+
+/* Eyebrow kicker with rule — used above every section heading */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2.25rem;
+  height: 2px;
+  /* Follows the text color so surface variants carry through automatically */
+  background-color: currentColor;
+}
+
+/*
+ * Global type system — every heading and lead on the site uses one of
+ * these classes so scale, weight and rhythm are identical everywhere.
+ */
+.display-1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.2vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.display-2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.2vw, 2.65rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+.lead {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.lead-lg {
+  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* Scroll reveal, activated by the Reveal component. No-JS and reduced-motion
+   users get the finished state, never a hidden page.
+
+   Only transform and opacity are animated, both compositor-only properties, so
+   scrolling stays smooth on a mid-range phone. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    will-change: opacity, transform;
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  /* Images settle out of a slight zoom rather than sliding, which reads as
+     photography arriving instead of a card animating. */
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Once it has played, drop the hint so the browser can release the layer. */
+  .reveal.is-visible {
+    will-change: auto;
   }
 }
 
-@layer components {
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
-  }
-  
-  .section-title {
-    @apply text-3xl font-bold mb-12 text-center relative;
-    color: var(--secondary-color);
-  }
-  
-  .section-title::after {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent-color);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-  
-  .btn-primary {
-    @apply px-6 py-2 font-medium rounded-md transition-all duration-300;
-    background-color: var(--primary-color);
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  .btn-secondary {
-    @apply px-6 py-2 font-medium rounded-md transition-all duration-300;
-    background-color: white;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-  }
-  
-  .btn-secondary:hover {
-    background-color: var(--bg-light);
+/* Phones do the work with less travel: shorter distance, quicker settle. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 640px) {
+  .reveal {
+    transition-duration: 0.5s;
   }
 
-  /* Hero button hover states */
-  .hero-btn-primary {
-    transition: all 0.3s ease !important;
-  }
-  
-  .hero-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
+  .reveal-up {
+    transform: translate3d(0, 14px, 0);
   }
 
-  .hero-btn-secondary {
-    transition: all 0.3s ease !important;
-  }
-
-  .hero-btn-secondary:hover {
-    background-color: rgba(255,255,255,0.15) !important;
-    transform: translateY(-2px);
-  }
-  
-  /* Mobile optimizations */
-  @media (max-width: 640px) {
-    .hero-btn-primary, .hero-btn-secondary {
-      width: 100%;
-      margin-bottom: 10px;
-      display: block;
-    }
-  }
-  
-  /* Reference logos */
-  .reference-logo {
-    transition: all 0.3s ease;
-  }
-  
-  .reference-logo:hover {
-    transform: scale(1.05);
-    filter: grayscale(0) contrast(1.05) !important;
-  }
-  
-  .section-alternate {
-    background-color: #f5f8fb;
-  }
-  
-  /* Header menu styling */
-  .ant-menu-horizontal > .ant-menu-item::after, 
-  .ant-menu-horizontal > .ant-menu-submenu::after {
-    border-bottom: none !important;
-  }
-  
-  .ant-menu-horizontal > .ant-menu-item-selected, 
-  .ant-menu-horizontal > .ant-menu-item:hover {
-    color: #124075 !important;
-    border-bottom: 2px solid #124075 !important;
-  }
-  
-  .ant-menu-horizontal > .ant-menu-item > a:hover {
-    color: #124075 !important;
+  .reveal-scale {
+    transform: scale(1.025);
   }
 }

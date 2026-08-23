@@ -1,12 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    optimizePackageImports: ["@chakra-ui/react"],
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
   },
 };
 
