@@ -5,19 +5,17 @@ import { ArrowRight } from "lucide-react";
 import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import ValueIcon from "@/components/ValueIcon";
 import {
   groupCompanies,
   ogMeta,
   references,
   site,
   stats,
-  values,
 } from "@/lib/site";
 
 const pageTitle = "Om Kanitas: koncernen i Järfälla sedan 2011";
 const pageDescription =
-  "Kanitas grundades 2011 i Järfälla och är i dag en koncern med fem bolag inom bygg, städ, trading och fastigheter. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
+  "Kanitas grundades 2011 i Järfälla och är i dag en koncern med fem bolag inom bygg, bemanning, maskinhandel och fastigheter. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -63,27 +61,26 @@ export default function OmOssPage() {
             <Reveal>
               <SectionHeading
                 eyebrow="Vår historia"
-                title="Från bygg- och städfirma i Järfälla till koncern med fyra verksamheter"
+                title="Från byggentreprenör till koncern med fyra verksamheter"
               />
               <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink-soft">
                 <p>
-                  Kanitas AB grundades {site.founded} i Järfälla med en enkel
-                  idé: gör jobbet ordentligt, håll det du lovar och behandla
-                  varje kund som den viktigaste. Det som började med bygg- och
-                  städtjänster växte snabbt när några av Sveriges största
-                  byggbolag upptäckte att vi levererade, varje gång.
+                  Kanitas AB grundades {site.founded} i Järfälla som
+                  byggentreprenör. Verksamheten växte genom underentreprenader
+                  åt större byggbolag, och i takt med att uppdragen blev fler
+                  bröts bemanning, maskinhandel och fastighetsägande ut i egna
+                  bolag.
                 </p>
                 <p>
-                  I dag är vi en familjeägd koncern med fem bolag och 35
-                  medarbetare, verksamma inom bygg, städ, fastigheter och
-                  bilhandel. Bredden är vår styrka: vi kan ta ansvar för hela
-                  kedjan, från markarbete och nybyggnation till slutstädning,
-                  förvaltning och fordon.
+                  I dag består koncernen av fem bolag och 35 medarbetare inom
+                  bygg, bemanning, maskinhandel och fastigheter. Bolagen delar
+                  ledning, kollektivavtal och kontor i Järfälla, men drivs med
+                  eget resultatansvar och egna kundrelationer.
                 </p>
                 <p>
-                  Men storleken har aldrig varit målet. Målet är detsamma som{" "}
-                  {site.founded}: nöjda kunder som gärna kommer tillbaka och gärna
-                  rekommenderar oss vidare.
+                  Kanitas AB är moderbolag och avtalspart. Byggentreprenader
+                  utförs av koncernens byggorganisation, bemanning och
+                  byggstädning av Kanitas ENT.
                 </p>
               </div>
             </Reveal>
@@ -112,36 +109,6 @@ export default function OmOssPage() {
                 </dl>
               </div>
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="bg-petrol-dark">
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <Reveal>
-            <SectionHeading
-              on="dark"
-              eyebrow="Våra värderingar"
-              title="Tre löften som styr allt vi gör"
-            />
-          </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {values.map((value, index) => (
-              <Reveal key={value.title} delay={index * 80}>
-                <div className="h-full rounded-2xl border border-line-deep bg-petrol-raised p-8">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line-deep bg-petrol-dark text-copper-soft">
-                    <ValueIcon name={value.icon} className="h-6 w-6" />
-                  </span>
-                  <h3 className="mt-5 title text-white">
-                    {value.title}
-                  </h3>
-                  <p className="mt-3 leading-relaxed text-white/65">
-                    {value.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>
@@ -232,7 +199,7 @@ export default function OmOssPage() {
           </div>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-petrol px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-petrol-deep"
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-petrol px-8 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-petrol-deep"
           >
             Kontakta oss
             <ArrowRight className="h-5 w-5" aria-hidden="true" />

@@ -1,4 +1,3 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
@@ -24,10 +23,7 @@ export default function ContactSection({
         <div className="mt-12 grid gap-10 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
             <ul className="space-y-6">
-              <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-petrol/10 text-petrol">
-                  <Phone className="h-5 w-5" aria-hidden="true" />
-                </span>
+              <li className="border-t border-line pt-5">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-muted">
                     Telefon
@@ -40,10 +36,7 @@ export default function ContactSection({
                   </a>
                 </div>
               </li>
-              <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-petrol/10 text-petrol">
-                  <Mail className="h-5 w-5" aria-hidden="true" />
-                </span>
+              <li className="border-t border-line pt-5">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-muted">
                     E-post
@@ -56,10 +49,7 @@ export default function ContactSection({
                   </a>
                 </div>
               </li>
-              <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-petrol/10 text-petrol">
-                  <MapPin className="h-5 w-5" aria-hidden="true" />
-                </span>
+              <li className="border-t border-line pt-5">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-muted">
                     Besöksadress
@@ -78,10 +68,7 @@ export default function ContactSection({
                   </a>
                 </div>
               </li>
-              <li className="flex gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-petrol/10 text-petrol">
-                  <Clock className="h-5 w-5" aria-hidden="true" />
-                </span>
+              <li className="border-t border-line pt-5">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-muted">
                     Öppettider
@@ -95,7 +82,7 @@ export default function ContactSection({
           </Reveal>
 
           <Reveal delay={100} className="lg:col-span-3">
-            <div className="rounded-2xl border border-line bg-card p-6 shadow-[0_8px_40px_rgba(19,23,21,0.06)] sm:p-8">
+            <div className="border-t border-line pt-8">
               <ContactForm defaultTopic={topic} />
             </div>
           </Reveal>

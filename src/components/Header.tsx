@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 import { nav, site } from "@/lib/site";
 
@@ -59,7 +59,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors ${
+                className={`rounded-md px-4 py-2 text-[0.95rem] font-medium transition-colors ${
                   active
                     ? "bg-paper-2 text-ink"
                     : "text-ink-soft hover:bg-paper-2 hover:text-ink"
@@ -76,12 +76,11 @@ export default function Header() {
             href={site.phoneHref}
             className="inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ink transition-colors hover:text-petrol"
           >
-            <Phone className="h-4 w-4 text-petrol" aria-hidden="true" />
             {site.phone}
           </a>
           <Link
             href="/kontakt"
-            className="rounded-full bg-petrol px-5 py-2.5 text-[0.95rem] font-semibold text-white transition-colors hover:bg-petrol-deep"
+            className="rounded-md bg-petrol px-5 py-2.5 text-[0.95rem] font-semibold text-white transition-colors hover:bg-petrol-deep"
           >
             Begär offert
           </Link>
@@ -90,7 +89,7 @@ export default function Header() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="rounded-full p-2 text-ink hover:bg-paper-2 lg:hidden"
+          className="rounded-md p-2 text-ink hover:bg-paper-2 lg:hidden"
           aria-expanded={open}
           aria-controls="mobilmeny"
           aria-label={open ? "Stäng menyn" : "Öppna menyn"}
@@ -131,12 +130,11 @@ export default function Header() {
               href={site.phoneHref}
               className="inline-flex items-center gap-2 px-3 font-semibold text-ink"
             >
-              <Phone className="h-4 w-4 text-petrol" aria-hidden="true" />
               {site.phone}
             </a>
             <Link
               href="/kontakt"
-              className="rounded-full bg-petrol px-4 py-3 text-center font-semibold text-white"
+              className="rounded-md bg-petrol px-4 py-3 text-center font-semibold text-white"
             >
               Begär offert
             </Link>

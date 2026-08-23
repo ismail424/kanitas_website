@@ -84,7 +84,7 @@ export type Area = {
   contactTopic: (typeof contactTopics)[number];
   teaser: string;
   intro: string;
-  services: { title: string; text: string; icon: string }[];
+  services: { title: string; text: string }[];
   /** Contextual cross-link rendered after the services grid */
   related?: { href: string; label: string; text: string };
   /** Area-specific process steps ("Så går det till") */
@@ -123,42 +123,34 @@ export const areas: Area[] = [
       {
         title: "Nybyggnation",
         text: "Kompletta entreprenader från markarbete till färdig byggnad, för företag, fastighetsägare och privatpersoner.",
-        icon: "building",
       },
       {
         title: "Renovering & ombyggnation",
         text: "Vi moderniserar kontor, lokaler och bostäder med genomtänkta lösningar och minimala störningar i verksamheten.",
-        icon: "hammer",
       },
       {
         title: "Byggservice",
         text: "Löpande underhåll, reparationer och anpassningar med snabb inställelse. Ett tryggt avtal för fastighetsägare.",
-        icon: "wrench",
       },
       {
         title: "Rivning & sanering",
         text: "Selektiv rivning samt bygg-, brand- och fuktsanering. Säkert, miljöriktigt och med full dokumentation.",
-        icon: "shield",
       },
       {
         title: "Mark & anläggning",
         text: "Markentreprenader, grundläggning, dränering och finplanering som ger projektet rätt förutsättningar från start.",
-        icon: "mountain",
       },
       {
         title: "Badrum & våtrum",
         text: "Totalrenovering av badrum enligt Säker Vatten och branschreglerna, med tätskikt och dokumentation som håller för försäkringsbolaget.",
-        icon: "droplets",
       },
       {
         title: "Stomkomplettering & snickerier",
         text: "Innerväggar, undertak, dörrar och platsbyggda snickerier. Ofta den etapp som avgör om ett projekt blir klart i tid.",
-        icon: "ruler",
       },
       {
         title: "Snöröjning",
         text: "Avtalskunder får snöröjning och halkbekämpning som håller fastigheter säkra och tillgängliga hela vintern.",
-        icon: "snowflake",
       },
     ],
     related: {
@@ -226,7 +218,7 @@ export const areas: Area[] = [
           },
           {
             title: "Försäkring, avtal och kreditvärdighet",
-            text: "Ansvarsförsäkring, kollektivavtal med Byggnads och Fastighets samt AAA i kreditvärdighet. Underlag lämnas som standard vid upphandling.",
+            text: "Ansvarsförsäkring, kollektivavtal med Byggnads och Fastighets samt AAA i kreditvärdighet för Kanitas AB. Underlag lämnas i samband med upphandling.",
           },
         ],
       },
@@ -288,32 +280,26 @@ export const areas: Area[] = [
       {
         title: "Yrkesarbetare till bygg",
         text: "Snickare, betongarbetare, murare och ställningsbyggare som integreras i er organisation och arbetar under er arbetsledning.",
-        icon: "hardhat",
       },
       {
         title: "Byggstädning & slutstädning",
         text: "Grov- och finstädning under och efter byggprojekt, alltid klar inför besiktning och inflytt.",
-        icon: "spray",
       },
       {
         title: "Bemanning med kort varsel",
         text: "Frånvaro, försenade leveranser eller forcerade etapper. Bemanning löses normalt inom ett dygn.",
-        icon: "clock",
       },
       {
         title: "Kontors- & fastighetsstädning",
         text: "Regelbunden städning av kontor, trapphus och gemensamma ytor, med fasta kontaktpersoner och tydlig kvalitetsuppföljning.",
-        icon: "briefcase",
       },
       {
         title: "Flyttstädning",
         text: "Garanterat godkänd flyttstädning för bostäder och lokaler, med checklista enligt branschstandard.",
-        icon: "boxes",
       },
       {
         title: "Storstädning & fönsterputs",
         text: "Djuprengöring av golv, fönsterputs och specialuppdrag utöver den löpande städningen.",
-        icon: "droplets",
       },
     ],
     related: {
@@ -440,22 +426,18 @@ export const areas: Area[] = [
       {
         title: "Uthyrning av lokaler",
         text: "Industri-, lager- och verksamhetslokaler med flexibla ytor och bra lägen i Järfälla och Storstockholm.",
-        icon: "warehouse",
       },
       {
         title: "Fastighetsförvaltning",
         text: "Aktiv förvaltning av egna fastigheter med långsiktiga hyresgästrelationer och löpande investeringar.",
-        icon: "key",
       },
       {
         title: "Fastighetsservice & skötsel",
         text: "Tillsyn, underhåll, snöröjning och markskötsel, allt utfört av koncernens egna team.",
-        icon: "cog",
       },
       {
         title: "Lokalanpassning",
         text: "Vi bygger om och anpassar lokalen efter din verksamhet, snabbt, eftersom bygg och fastighet sitter i samma hus.",
-        icon: "layout",
       },
     ],
     related: {
@@ -529,22 +511,18 @@ export const areas: Area[] = [
       {
         title: "Försäljning av bilar",
         text: "Noggrant utvalda personbilar och transportbilar, genomgångna och redo för leverans. Lagret förändras snabbt, ring så berättar vi vad som finns inne just nu.",
-        icon: "car",
       },
       {
         title: "Vi köper din bil",
         text: "Snabb värdering och betalning samma dag, vi köper personbilar och transportbilar i alla prisklasser.",
-        icon: "handshake",
       },
       {
         title: "Lastbilar & arbetsmaskiner",
         text: "Köp och försäljning av lastbilar, släp och arbetsmaskiner för bygg och entreprenad.",
-        icon: "truck",
       },
       {
         title: "Förmedling & inbyte",
         text: "Vi förmedlar fordon åt företag och tar din nuvarande bil i inbyte när du byter upp dig.",
-        icon: "refresh",
       },
     ],
     related: {
@@ -692,8 +670,6 @@ export type Business = {
   href: string;
   /** True once the verksamhet has moved to its own domain. */
   external: boolean;
-  /** lucide icon name, see BusinessIcon */
-  icon: string;
   /** Selling copy — a real paragraph, not a line of bullet points. */
   blurb: string;
   highlights: string[];
@@ -709,7 +685,6 @@ export const businesses: Business[] = [
     tagline: "Från grund till nyckelfärdigt",
     href: "/bygg",
     external: false,
-    icon: "hardhat",
     blurb:
       "Byggverksamheten är koncernens största och äldsta gren. Vi utför entreprenader i alla storlekar, från löpande byggservice åt fastighetsägare till kompletta om- och nybyggnationer som underentreprenör åt Sveriges ledande byggbolag. NCC, Implenia, ByggPartner och Oljibe hör till våra återkommande uppdragsgivare.",
     highlights: [
@@ -727,7 +702,6 @@ export const businesses: Business[] = [
     tagline: "Bemanning och byggstädning",
     href: "/stad",
     external: false,
-    icon: "users",
     blurb:
       "ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal, utan led av underleverantörer.",
     highlights: [
@@ -745,7 +719,6 @@ export const businesses: Business[] = [
     tagline: "Verktyg, maskiner och fordon",
     href: "/kontakt",
     external: false,
-    icon: "truck",
     blurb:
       "Trading handlar med och hyr ut maskiner, verktyg, transportbilar och arbetsfordon. Verksamheten byggdes upp för att förse koncernens egna entreprenader med utrustning och är i dag en självständig affär. Den löpande marknadskännedomen ligger till grund för våra värderingar av begagnad utrustning.",
     highlights: [
@@ -763,7 +736,6 @@ export const businesses: Business[] = [
     tagline: "Lokaler och förvaltning",
     href: "/kontakt",
     external: false,
-    icon: "building",
     blurb:
       "Fastigheter äger och förvaltar koncernens bestånd av verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Som hyresvärd med egen byggorganisation utför vi hyresgästanpassningar och underhåll i egen regi, vilket ger kortare ledtider och kontroll över kvaliteten.",
     highlights: [
@@ -787,28 +759,24 @@ export const liveBusinesses = businesses.filter((b) => b.href !== "/kontakt");
 export const audiences = [
   {
     title: "Byggbolag & totalentreprenörer",
-    icon: "hardhat",
-    text: "Vi går in som underentreprenör i era projekt och hyr ut yrkesarbetare när ni behöver förstärkning. NCC, Implenia, ByggPartner och Oljibe är återkommande uppdragsgivare.",
+    text: "Vi verkar som underentreprenör i era projekt och hyr ut yrkesarbetare vid bemanningsbehov. NCC, Implenia, ByggPartner och Oljibe är återkommande uppdragsgivare.",
     href: "/bygg",
     linkLabel: "Se vad vi bygger",
   },
   {
     title: "Fastighetsägare & förvaltare",
-    icon: "building",
     text: "Byggservice på avtal, hyresgästanpassningar och planerat underhåll, plus löpande fastighetsstädning och snöröjning. En kontaktperson för hela beståndet.",
     href: "/bygg",
     linkLabel: "Läs om byggservice",
   },
   {
     title: "BRF:er",
-    icon: "users",
     text: "Stambyten, fasad- och balkongarbeten och renovering av gemensamma ytor, med information till boende och en tidplan styrelsen kan luta sig mot.",
     href: "/bygg",
     linkLabel: "Så arbetar vi med BRF",
   },
   {
     title: "Privatpersoner",
-    icon: "key",
     text: "Renovering, badrum och tillbyggnad med ROT-avdraget draget direkt på fakturan. Samma hantverkare som byggbolagen anlitar, även för ett enda rum.",
     href: "/bygg",
     linkLabel: "Begär offert",
@@ -824,7 +792,7 @@ export const groupFacts = [
   { label: "Grundat", value: "2011, Järfälla" },
   { label: "Bolag i koncernen", value: "5" },
   { label: "Medarbetare", value: "35" },
-  { label: "Kreditvärdighet", value: "AAA, högsta nivån" },
+  { label: "Kreditvärdighet", value: "AAA för Kanitas AB, 556841-1010" },
   { label: "Kollektivavtal", value: "Byggnads och Fastighets" },
   { label: "Försäkring", value: "Ansvarsförsäkring, godkänd för F-skatt" },
   { label: "Verksamhetsområde", value: "Storstockholm" },
@@ -856,33 +824,12 @@ export const groupCompanies = [
   {
     name: "Kanitas Fastigheter AB",
     orgnr: "559553-4305",
-    role: "Byggverksamhet och fastighetsförvaltning",
+    role: "Fastighetsägande och förvaltning",
   },
   {
     name: "Kanitas Trading AB",
     orgnr: "559553-4263",
     role: "Köp, försäljning och uthyrning av fordon och maskiner",
-  },
-];
-
-export const values = [
-  {
-    title: "Kvalitet",
-    icon: "award",
-    blurb: "Rätt metoder, rätt material och egenkontroll innan vi lämnar.",
-    text: "Vi använder beprövade metoder och rätt material, och lämnar aldrig ett arbete innan det håller vår egen standard. Den är högre än de flesta andras.",
-  },
-  {
-    title: "Pålitlighet",
-    icon: "handshake",
-    blurb: "Vi håller tider, budgetar och det vi har lovat.",
-    text: "Vi håller tider, budgetar och löften. Därför har vi kunder som stannat hos oss i över ett decennium.",
-  },
-  {
-    title: "Kundfokus",
-    icon: "users",
-    blurb: "En fast kontaktperson som svarar när du ringer.",
-    text: "Varje uppdrag anpassas efter dina behov, med en fast kontaktperson som svarar när du ringer.",
   },
 ];
 
