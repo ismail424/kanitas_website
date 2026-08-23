@@ -5,8 +5,8 @@ import Reveal from "@/components/Reveal";
 import { site } from "@/lib/site";
 
 export default function ContactSection({
-  title = "Låt oss prata om ditt projekt",
-  lead = "Beskriv vad du behöver hjälp med så återkommer vi med ett förslag, kostnadsfritt och utan förpliktelser.",
+  title = "Skicka en förfrågan",
+  lead = "Ange omfattning, plats och önskad tidpunkt så återkommer vi med ett förslag. Kostnadsfritt och utan förpliktelser.",
   topic,
 }: {
   title?: string;

@@ -97,8 +97,8 @@ export function LogoLockup({
 }
 
 /**
- * Area hero lockup, e.g. KANITAS BYGG. The area name is live text rather than
- * traced outlines so a new area needs no new artwork.
+ * Area hero lockup, e.g. KANITAS BYGG. The suffix is live text rather than
+ * traced outlines so a new verksamhet needs no new artwork.
  */
 export function BrandLockup({
   suffix,

@@ -15,17 +15,18 @@ export default function StadPage() {
   return (
     <AreaPage
       area={area}
-      whyTitle="Städning med byggarens öga för detaljer"
-      whyLead="Vi kommer från byggbranschen och vet exakt vad en besiktning kräver. Därför blir det rätt första gången, oavsett om det gäller ett byggprojekt eller ett kontor."
+      whyTitle="Bemanning och städning från någon som själv bygger"
+      whyLead="Kanitas ENT sitter i samma koncern som ett byggbolag. Personalen vi hyr ut har jobbat på våra egna projekt, och städarna vet exakt vad en besiktning kräver. Därför blir det rätt första gången."
       whyPoints={[
+        "Egen personal på kollektivavtal, inte inhyrd i flera led",
+        "Yrkesarbetare på plats ofta inom ett dygn",
         "Specialister på byggstädning och slutstädning inför besiktning",
-        "Kollektivavtal och försäkrad personal",
-        "Dokumenterad kvalitetsuppföljning på varje uppdrag",
-        "Flexibla avtal för engångsuppdrag eller löpande städning",
+        "Samma team tillbaka på löpande uppdrag, inte nya ansikten varje vecka",
+        "Vi står kvar tills besiktningen är godkänd",
         "Snabb inställelse i hela Storstockholm",
       ]}
-      whyPhoto="stad-varfor"
-      secondaryPhoto="stad-projekt"
+      whyPhoto="ent-bemanning"
+      secondaryPhoto="ent-stad"
     />
   );
 }

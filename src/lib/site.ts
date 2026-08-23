@@ -80,6 +80,8 @@ export type Area = {
   toneDeep: string;
   /** Label for the primary CTA — matches what the visitor actually wants */
   ctaLabel: string;
+  /** Pre-selected ärende in the contact form; must be one of contactTopics */
+  contactTopic: (typeof contactTopics)[number];
   teaser: string;
   intro: string;
   services: { title: string; text: string; icon: string }[];
@@ -87,13 +89,13 @@ export type Area = {
   related?: { href: string; label: string; text: string };
   /** Area-specific process steps ("Så går det till") */
   process: { step: string; title: string; text: string }[];
-  /** Optional content section for depth (checklist, inventory note etc.) */
-  extraSection?: {
+  /** Optional content sections for depth (checklists, how-it-works etc.) */
+  extraSections?: {
     eyebrow: string;
     title: string;
     lead?: string;
     items: { title: string; text: string }[];
-  };
+  }[];
   /** Optional FAQ — rendered with FAQPage structured data */
   faq?: { q: string; a: string }[];
   seo: { title: string; description: string };
@@ -112,6 +114,7 @@ export const areas: Area[] = [
     tone: "#c9a86a",
     toneDeep: "#1e4d3b",
     ctaLabel: "Begär offert",
+    contactTopic: "Bygg",
     teaser:
       "Nybyggnation, renovering och byggservice för företag och privatpersoner. Vår kärnverksamhet sedan 2011.",
     intro:
@@ -143,6 +146,16 @@ export const areas: Area[] = [
         icon: "mountain",
       },
       {
+        title: "Badrum & våtrum",
+        text: "Totalrenovering av badrum enligt Säker Vatten och branschreglerna, med tätskikt och dokumentation som håller för försäkringsbolaget.",
+        icon: "droplets",
+      },
+      {
+        title: "Stomkomplettering & snickerier",
+        text: "Innerväggar, undertak, dörrar och platsbyggda snickerier. Ofta den etapp som avgör om ett projekt blir klart i tid.",
+        icon: "ruler",
+      },
+      {
         title: "Snöröjning",
         text: "Avtalskunder får snöröjning och halkbekämpning som håller fastigheter säkra och tillgängliga hela vintern.",
         icon: "snowflake",
@@ -150,42 +163,102 @@ export const areas: Area[] = [
     ],
     related: {
       href: "/stad",
-      label: "Kanitas Städ hand om byggstädning och slutstädning",
+      label: "Kanitas ENT hand om byggstädningen och bemanningen",
       text: "Efter bygget tar",
     },
     process: [
       {
         step: "01",
         title: "Kontakt & offert",
-        text: "Beskriv ditt projekt via formuläret eller ring oss. Vi återkommer snabbt med en tydlig offert utan dolda kostnader.",
+        text: "Skicka in projektet via formuläret eller kontakta oss direkt. Vi återkommer med en specificerad offert där omfattning och prisform framgår.",
       },
       {
         step: "02",
         title: "Genomförande",
-        text: "Vi planerar, bemannar och genomför projektet med en fast kontaktperson som håller dig uppdaterad hela vägen.",
+        text: "Vi planerar, bemannar och genomför projektet med fast arbetsledning och avstämningar enligt överenskommen frekvens.",
       },
       {
         step: "03",
         title: "Uppföljning",
-        text: "Vi går igenom resultatet tillsammans och lämnar inte förrän allt är godkänt. Vi finns kvar även efteråt.",
+        text: "Gemensam genomgång mot handlingar och egenkontroll före överlämning. Vårt åtagande kvarstår genom garantitiden.",
+      },
+    ],
+    extraSections: [
+      {
+        eyebrow: "Uppdragsgivare",
+        title: "Vi bygger åt fyra sorters kunder",
+        lead: "Utförandet håller samma standard oavsett uppdragsgivare. Det som skiljer är styrning, beslutsvägar och dokumentationskrav.",
+        items: [
+          {
+            title: "Byggbolag och totalentreprenörer",
+            text: "Vi verkar som underentreprenör i större projekt åt bland andra NCC, Implenia, ByggPartner och Oljibe, med egen personal, egna maskiner och egen arbetsledning på plats.",
+          },
+          {
+            title: "Fastighetsägare och förvaltare",
+            text: "Löpande byggservice på ramavtal: felavhjälpning, hyresgästanpassningar och planerat underhåll, med fast kontaktperson och kännedom om beståndet.",
+          },
+          {
+            title: "BRF:er",
+            text: "Stambyten, fasad- och balkongarbeten samt renovering av gemensamma ytor, med strukturerad boendeinformation och en tidplan styrelsen kan redovisa.",
+          },
+          {
+            title: "Privatpersoner",
+            text: "Villa- och lägenhetsrenoveringar, tillbyggnader och badrum, utförda av samma yrkesarbetare som våra kommersiella projekt. ROT-avdrag dras direkt på fakturan.",
+          },
+        ],
+      },
+      {
+        eyebrow: "Trygghet",
+        title: "Vad en offert från oss innehåller",
+        lead: "Villkoren fastställs innan arbetet påbörjas och gäller genom hela projektet.",
+        items: [
+          {
+            title: "Tydlig prisform och omfattning",
+            text: "Fast pris eller löpande räkning anges i offerten tillsammans med vad som ingår. Ändrings- och tilläggsarbeten godkänns skriftligt innan de utförs.",
+          },
+          {
+            title: "En kontaktperson genom hela projektet",
+            text: "Samma arbetsledare från offert till slutbesiktning, med ansvar för tidplan, avstämningar och överlämning.",
+          },
+          {
+            title: "Dokumenterad egenkontroll",
+            text: "Arbetet kontrolleras mot checklista före överlämning. Egenkontroller och relationshandlingar lämnas som en del av slutdokumentationen.",
+          },
+          {
+            title: "Försäkring, avtal och kreditvärdighet",
+            text: "Ansvarsförsäkring, kollektivavtal med Byggnads och Fastighets samt AAA i kreditvärdighet. Underlag lämnas som standard vid upphandling.",
+          },
+        ],
       },
     ],
     faq: [
       {
         q: "Kan jag använda ROT-avdrag när ni renoverar?",
-        a: "Ja. Som privatperson kan du normalt använda ROT-avdrag för arbetskostnaden när vi utför renovering, ombyggnation eller reparationer i din bostad. Vi hjälper dig med underlaget och drar avdraget direkt på fakturan.",
+        a: "Ja. Privatpersoner kan normalt använda ROT-avdrag för arbetskostnaden vid renovering, ombyggnation och reparation i bostaden. Vi tar fram underlaget och drar avdraget direkt på fakturan.",
       },
       {
         q: "Vad kostar en offert?",
-        a: "Ingenting. Offerter är alltid kostnadsfria och utan förpliktelser. Beskriv ditt projekt så återkommer vi, oftast samma dag.",
+        a: "Offerter är kostnadsfria och utan förpliktelser. Underlag och omfattning gås igenom innan vi lämnar pris, normalt med återkoppling inom ett dygn.",
       },
       {
         q: "Tar ni både små och stora uppdrag?",
-        a: "Ja. Vi utför allt från mindre byggservice och reparationer till kompletta entreprenader, åt både privatpersoner och några av Sveriges största byggbolag.",
+        a: "Ja. Uppdragen spänner från löpande byggservice och enstaka åtgärder till kompletta entreprenader åt Sveriges största byggbolag. Samma organisation och samma kvalitetskrav gäller i båda ändarna.",
       },
       {
         q: "Var arbetar ni?",
-        a: "Vi utgår från Järfälla och arbetar i hela Storstockholm.",
+        a: "Vi utgår från Almarevägen i Järfälla och arbetar i hela Storstockholm. Till de flesta arbetsplatser i länet är vi framme inom en timme.",
+      },
+      {
+        q: "Hur snabbt kan ni börja?",
+        a: "Byggservice och akuta åtgärder hanteras normalt inom några dagar. Större entreprenader planeras in gemensamt och följer projektets tidplan.",
+      },
+      {
+        q: "Har ni egen personal eller anlitar ni underentreprenörer?",
+        a: "Vi arbetar med egen personal på kollektivavtal och kompletterar med yrkesarbetare från Kanitas ENT inom koncernen. Installationsentreprenader inom el, VVS och ventilation upphandlas hos etablerade samarbetspartners.",
+      },
+      {
+        q: "Sköter ni byggstädningen efteråt?",
+        a: "Ja. Bygg- och slutstädning utförs av Kanitas ENT inom koncernen och kan ingå i entreprenaden, vilket tar bort en separat upphandling och en gränssnittsrisk.",
       },
     ],
     seo: {
@@ -197,28 +270,39 @@ export const areas: Area[] = [
   {
     slug: "stad",
     active: true,
-    nav: "Städ",
-    name: "Kanitas Städ",
-    tagline: "Rent, klart och redo",
-    h1: "Byggstädning och kontorsstädning i Stockholm",
-    servicesH2: "Städtjänster för företag och byggprojekt",
-    serviceType: "Byggstädning och kontorsstädning",
+    nav: "Bemanning & städ",
+    name: "Kanitas ENT",
+    tagline: "Bemanning och byggstädning",
+    h1: "Bemanning och byggstädning i Stockholm",
+    servicesH2: "Bemanning och städtjänster i Storstockholm",
+    serviceType: "Bemanning och byggstädning",
     tone: "#c9a86a",
     toneDeep: "#1e4d3b",
     ctaLabel: "Begär offert",
+    contactTopic: "Bemanning",
     teaser:
-      "Byggstädning, kontorsstädning och flyttstädning med dokumenterad kvalitet för företag, BRF:er och byggprojekt.",
+      "Yrkesarbetare med korta inställelsetider och byggstädning som håller för besiktning, åt entreprenörer, fastighetsägare och BRF:er.",
     intro:
-      "Kanitas Städ levererar professionell städning där kraven är som högst. Vi är specialiserade på byggstädning och slutstädning inför besiktning, och tar även hand om den löpande städningen av kontor och fastigheter. Rätt utfört och i rätt tid, varje gång.",
+      "Kanitas ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal med Byggnads och Fastighets, utan led av underleverantörer, vilket ger spårbarhet och en jämn kvalitetsnivå över tid.",
     services: [
+      {
+        title: "Yrkesarbetare till bygg",
+        text: "Snickare, betongarbetare, murare och ställningsbyggare som integreras i er organisation och arbetar under er arbetsledning.",
+        icon: "hardhat",
+      },
       {
         title: "Byggstädning & slutstädning",
         text: "Grov- och finstädning under och efter byggprojekt, alltid klar inför besiktning och inflytt.",
-        icon: "sparkles",
+        icon: "spray",
+      },
+      {
+        title: "Bemanning med kort varsel",
+        text: "Frånvaro, försenade leveranser eller forcerade etapper. Bemanning löses normalt inom ett dygn.",
+        icon: "clock",
       },
       {
         title: "Kontors- & fastighetsstädning",
-        text: "Regelbunden städning av kontor, trapphus och gemensamma ytor, med fasta kontaktpersoner och tydliga kvalitetsuppföljningar.",
+        text: "Regelbunden städning av kontor, trapphus och gemensamma ytor, med fasta kontaktpersoner och tydlig kvalitetsuppföljning.",
         icon: "briefcase",
       },
       {
@@ -227,60 +311,111 @@ export const areas: Area[] = [
         icon: "boxes",
       },
       {
-        title: "Storstädning & specialstädning",
-        text: "Djuprengöring av golv, fönsterputs och specialuppdrag när det behövs mer än det vanliga.",
-        icon: "sparkle",
+        title: "Storstädning & fönsterputs",
+        text: "Djuprengöring av golv, fönsterputs och specialuppdrag utöver den löpande städningen.",
+        icon: "droplets",
       },
     ],
     related: {
       href: "/bygg",
-      label: "renovering och byggservice hos Kanitas Bygg",
-      text: "Behöver du även hantverkare? Se",
+      label: "entreprenad och byggservice hos Kanitas Bygg",
+      text: "För totalansvar i entreprenadform, se",
     },
     process: [
       {
         step: "01",
-        title: "Behovsgenomgång & offert",
-        text: "Berätta vad som ska städas och när det ska vara klart. Vi återkommer snabbt med en tydlig offert och plan.",
+        title: "Behovsgenomgång",
+        text: "Ange yrkesroller, omfattning och period, eller ytor och slutdatum vid städuppdrag. Vi återkommer med bemanningsförslag och pris.",
       },
       {
         step: "02",
-        title: "Städning enligt plan",
-        text: "Vårt team städar på avtalad tid med rätt utrustning och metoder, utan att störa pågående verksamhet eller byggarbete.",
+        title: "Vi bemannar",
+        text: "Du får namngiven personal med redovisad erfarenhet. Löpande städuppdrag bemannas av samma team för att bygga kännedom om lokalen.",
       },
       {
         step: "03",
-        title: "Kvalitetskontroll",
-        text: "Vi går igenom resultatet mot checklistan tillsammans med dig. Vid slutstädning står vi bakom resultatet hela vägen till godkänd besiktning.",
+        title: "Uppföljning",
+        text: "Löpande avstämning av bemanning och kvalitet, och genomgång av städresultat mot checklista. Vid slutstädning kvarstår vårt åtagande till godkänd besiktning.",
       },
     ],
-    extraSection: {
-      eyebrow: "Byggstädning",
-      title: "Det här ingår i en byggstädning",
-      lead: "Byggstädning sker i etapper i takt med projektet, från grovstädning under byggtiden till finstädning inför besiktning och inflytt.",
-      items: [
-        {
-          title: "Grovstädning",
-          text: "Byggdamm, spill och emballage avlägsnas löpande under byggtiden så att hantverkarna kan arbeta säkert och effektivt.",
-        },
-        {
-          title: "Finstädning",
-          text: "Samtliga ytor dammbekämpas och rengörs: snickerier, ventilationsdon, elcentraler, fönsterkarmar och golv.",
-        },
-        {
-          title: "Fönsterputs",
-          text: "Putsning av glas, karmar och bågar invändigt och utvändigt, inklusive borttagning av etiketter och byggtejp.",
-        },
-        {
-          title: "Slutstädning inför besiktning",
-          text: "Sista genomgången innan överlämning. Vi städar tills lokalen eller bostaden håller för besiktning och inflytt.",
-        },
-      ],
-    },
+    extraSections: [
+      {
+        eyebrow: "Bemanning",
+        title: "Så fungerar bemanning hos oss",
+        lead: "Du hyr in yrkeskompetens. Anställning, försäkring, arbetskläder och skyddsutrustning ligger hos oss.",
+        items: [
+          {
+            title: "Egen anställd personal",
+            text: "Samtliga uthyrda är anställda i Kanitas ENT AB på kollektivavtal. Inga led av underleverantörer, och full spårbarhet på vem som befinner sig på arbetsplatsen.",
+          },
+          {
+            title: "Arbetsledning hos beställaren",
+            text: "Personalen arbetar under er arbetsledning och era rutiner. Lön, försäkring, utrustning och arbetsgivaransvar ligger kvar hos oss.",
+          },
+          {
+            title: "Korta inställelsetider",
+            text: "Frånvaro och forcerade etapper hanteras normalt inom ett dygn, eftersom personal kan omfördelas från koncernens egna projekt.",
+          },
+          {
+            title: "Uppdrag i den omfattning som krävs",
+            text: "Från enstaka dagars förstärkning inför besiktning till kompletta lag under hela etapper. Avtalet utformas efter uppdraget.",
+          },
+        ],
+      },
+      {
+        eyebrow: "Byggstädning",
+        title: "Det här ingår i en byggstädning",
+        lead: "Byggstädning sker i etapper i takt med projektet, från grovstädning under byggtiden till finstädning inför besiktning och inflytt.",
+        items: [
+          {
+            title: "Grovstädning",
+            text: "Byggdamm, spill och emballage avlägsnas löpande under byggtiden så att hantverkarna kan arbeta säkert och effektivt.",
+          },
+          {
+            title: "Finstädning",
+            text: "Samtliga ytor dammbekämpas och rengörs: snickerier, ventilationsdon, elcentraler, fönsterkarmar och golv.",
+          },
+          {
+            title: "Fönsterputs",
+            text: "Putsning av glas, karmar och bågar invändigt och utvändigt, inklusive borttagning av etiketter och byggtejp.",
+          },
+          {
+            title: "Slutstädning inför besiktning",
+            text: "Sista genomgången innan överlämning. Vi städar tills lokalen eller bostaden håller för besiktning och inflytt.",
+          },
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Är personalen anställd hos er eller inhyrd?",
+        a: "Anställd hos oss i Kanitas ENT AB på kollektivavtal med Byggnads eller Fastighets. Vi arbetar inte med led av underentreprenörer, vilket ger full spårbarhet på vem som befinner sig på arbetsplatsen.",
+      },
+      {
+        q: "Hur snabbt kan ni bemanna?",
+        a: "Normalt inom ett dygn för enstaka yrkesarbetare och inom några dagar för kompletta lag, eftersom personal kan omfördelas från koncernens egna projekt.",
+      },
+      {
+        q: "Vem leder arbetet när vi hyr in personal?",
+        a: "Beställaren. Personalen arbetar under er arbetsledning och era rutiner, medan anställning, lön, försäkring, arbetskläder och skyddsutrustning ligger hos oss.",
+      },
+      {
+        q: "Hur lång tid tar en byggstädning?",
+        a: "Omfattningen styrs av yta och byggets status vid överlämning. En lägenhet tar normalt en dag, större lokaler flera. Vi planerar bakåt från besiktningsdatum.",
+      },
+      {
+        q: "Vad händer om besiktningen inte blir godkänd?",
+        a: "Vi åtgärdar anmärkningar utan extra kostnad. Åtagandet vid slutstädning kvarstår till godkänd besiktning.",
+      },
+      {
+        q: "Tar ni löpande städavtal eller bara engångsuppdrag?",
+        a: "Båda. Vi tecknar löpande avtal för kontor, trapphus och fastigheter med fast kontaktperson, och åtar oss enskilda uppdrag som flytt- och storstädning.",
+      },
+    ],
     seo: {
-      title: "Byggstädning & kontorsstädning i Stockholm",
+      title: "Bemanning & byggstädning i Stockholm",
       description:
-        "Kanitas Städ utför byggstädning, slutstädning, kontorsstädning och flyttstädning i Stockholm. Dokumenterad kvalitet och kollektivavtal. Begär offert!",
+        "Kanitas ENT hyr ut yrkesarbetare till bygg och utför byggstädning, slutstädning och kontorsstädning i Stockholm. Egen personal på kollektivavtal. Begär offert!",
     },
   },
   {
@@ -296,6 +431,7 @@ export const areas: Area[] = [
     tone: "#9c8265",
     toneDeep: "#5f4c37",
     ctaLabel: "Anmäl intresse",
+    contactTopic: "Fastigheter",
     teaser:
       "Vi förvärvar, förvaltar och hyr ut industri- och lagerlokaler i Storstockholm, med egen drift och skötsel.",
     intro:
@@ -344,25 +480,27 @@ export const areas: Area[] = [
         text: "Behöver lokalen anpassas bygger koncernens eget byggteam om den innan eller efter inflytt, en kontakt för allt.",
       },
     ],
-    extraSection: {
-      eyebrow: "Lediga lokaler",
-      title: "Söker du lokal i Järfälla eller Storstockholm?",
-      lead: "Vårt bestånd består främst av industri-, lager- och verksamhetslokaler. Utbudet förändras löpande och alla objekt publiceras inte här, anmäl intresse så kontaktar vi dig när en lokal som matchar dina behov blir ledig.",
-      items: [
-        {
-          title: "Industri- & lagerlokaler",
-          text: "Flexibla ytor för produktion, lager och logistik med bra lägen och lastmöjligheter.",
-        },
-        {
-          title: "Verksamhetslokaler",
-          text: "Lokaler för verkstad, handel och service som kan anpassas efter din verksamhet.",
-        },
-        {
-          title: "Anpassning ingår i dialogen",
-          text: "Berätta vad din verksamhet kräver, koncernens byggteam kan anpassa lokalen innan du flyttar in.",
-        },
-      ],
-    },
+    extraSections: [
+      {
+        eyebrow: "Lediga lokaler",
+        title: "Söker du lokal i Järfälla eller Storstockholm?",
+        lead: "Vårt bestånd består främst av industri-, lager- och verksamhetslokaler. Utbudet förändras löpande och alla objekt publiceras inte här, anmäl intresse så kontaktar vi dig när en lokal som matchar dina behov blir ledig.",
+        items: [
+          {
+            title: "Industri- & lagerlokaler",
+            text: "Flexibla ytor för produktion, lager och logistik med bra lägen och lastmöjligheter.",
+          },
+          {
+            title: "Verksamhetslokaler",
+            text: "Lokaler för verkstad, handel och service som kan anpassas efter din verksamhet.",
+          },
+          {
+            title: "Anpassning ingår i dialogen",
+            text: "Berätta vad din verksamhet kräver, koncernens byggteam kan anpassa lokalen innan du flyttar in.",
+          },
+        ],
+      },
+    ],
     seo: {
       title: "Lediga lokaler i Järfälla: lager & industri",
       description:
@@ -382,6 +520,7 @@ export const areas: Area[] = [
     tone: "#de7562",
     toneDeep: "#9c2e1f",
     ctaLabel: "Få en värdering",
+    contactTopic: "Annat",
     teaser:
       "Köp och försäljning av personbilar, transportbilar, lastbilar och arbetsmaskiner, alltid genomgångna och rätt prissatta.",
     intro:
@@ -475,59 +614,60 @@ export type PhotoSlot = {
 export const photos = {
   "hem-hero": {
     src: "/images/photos/hem-hero.jpg",
-    alt: "Byggarbetsplats i Storstockholm",
-    brief: "Eget bygge i Storstockholm, gärna med personal i Kanitas-kläder",
-    shape: "5:6 stående på desktop, 4:3 på mobil",
-    ready: false,
+    alt: "Modern byggnad i glas och stål sedd underifrån mot ljus himmel",
+    brief:
+      "Ljus arkitekturbild i liggande format. Vänstra tredjedelen måste vara ljus, rubriken ligger där.",
+    shape: "Full bredd, minst 2400 px, ljus vänsterkant",
+    ready: true,
   },
   "hem-koncern": {
     src: "/images/photos/hem-koncern.jpg",
-    alt: "Arbetslag från Kanitas på plats",
-    brief: "Arbetslaget på plats, ansikten och arbetskläder",
+    alt: "Nybyggnadsområde i Stockholm med tornkranar och nya flerbostadshus",
+    brief: "Eget projekt i Storstockholm, gärna helhetsbild av arbetsplatsen",
     shape: "4:3 liggande",
-    ready: false,
+    ready: true,
   },
   "hem-stockholm": {
     src: "/images/photos/hem-stockholm.jpg",
-    alt: "Vy över Storstockholm",
+    alt: "Stockholms siluett med Riddarholmen i skymningen",
     brief: "Stockholmsvy i skymning, tål mörk överlagring och text",
     shape: "Full bredd, minst 2000 px",
-    ready: false,
+    ready: true,
   },
   "bygg-varfor": {
     src: "/images/photos/bygg-varfor.jpg",
-    alt: "Byggarbetare i arbete",
-    brief: "Hantverk nära på: armering, stomme eller inredningssnickeri",
+    alt: "Betongstomme under uppförande med tornkran mot blå himmel",
+    brief: "Stomme eller konstruktion under uppförande, gärna eget projekt",
     shape: "16:10 liggande",
-    ready: false,
+    ready: true,
   },
   "bygg-projekt": {
     src: "/images/photos/bygg-projekt.jpg",
-    alt: "Färdigställt byggprojekt",
+    alt: "Färdigställt flerbostadshus i tegel mot blå himmel",
     brief: "Färdigt projekt, gärna en fasad eller ett rum vi byggt",
     shape: "16:10 liggande",
-    ready: false,
+    ready: true,
   },
-  "stad-varfor": {
-    src: "/images/photos/stad-varfor.jpg",
-    alt: "Nystädat kontorslandskap",
-    brief: "Nystädad yta efter bygg, tydlig kontrast mot damm och spill",
+  "ent-bemanning": {
+    src: "/images/photos/ent-bemanning.jpg",
+    alt: "Fasad på nyproducerat flerbostadshus med balkonger",
+    brief: "Fastighet eller arbetsplats där vår personal är verksam",
     shape: "16:10 liggande",
-    ready: false,
+    ready: true,
   },
-  "stad-projekt": {
-    src: "/images/photos/stad-projekt.jpg",
-    alt: "Städuppdrag i lokal",
-    brief: "Städpersonal i arbete i en lokal eller ett trapphus",
+  "ent-stad": {
+    src: "/images/photos/ent-stad.jpg",
+    alt: "Byggdammsugare och verktyg i en nyrenoverad lägenhet",
+    brief: "Byggstädning pågår: utrustning och yta efter hantverkarna",
     shape: "16:10 liggande",
-    ready: false,
+    ready: true,
   },
   "om-oss": {
     src: "/images/photos/om-oss.jpg",
-    alt: "Kanitas i Järfälla",
+    alt: "Vy över Stockholms innerstad från vattnet",
     brief: "Kontoret eller fordonsparken i Järfälla, visar att vi finns på riktigt",
     shape: "16:10 liggande",
-    ready: false,
+    ready: true,
   },
 } satisfies Record<string, PhotoSlot>;
 
@@ -571,7 +711,7 @@ export const businesses: Business[] = [
     external: false,
     icon: "hardhat",
     blurb:
-      "Bygg är där Kanitas började och fortfarande koncernens tyngsta gren. Vi tar totalansvar för entreprenader i alla storlekar, från löpande byggservice åt fastighetsägare till kompletta om- och nybyggnationer åt några av Sveriges största byggbolag. NCC, Implenia, ByggPartner och Oljibe återkommer till oss år efter år, och vi tar oss lika gärna an ett badrum i en villa i Järfälla.",
+      "Byggverksamheten är koncernens största och äldsta gren. Vi utför entreprenader i alla storlekar, från löpande byggservice åt fastighetsägare till kompletta om- och nybyggnationer som underentreprenör åt Sveriges ledande byggbolag. NCC, Implenia, ByggPartner och Oljibe hör till våra återkommande uppdragsgivare.",
     highlights: [
       "Nybyggnation & entreprenad",
       "Renovering & ombyggnation",
@@ -582,19 +722,19 @@ export const businesses: Business[] = [
   },
   {
     slug: "stad",
-    name: "Kanitas Städ",
-    short: "Städ",
-    tagline: "Rent, klart och bemannat",
+    name: "Kanitas ENT",
+    short: "Bemanning & städ",
+    tagline: "Bemanning och byggstädning",
     href: "/stad",
     external: false,
-    icon: "sparkles",
+    icon: "users",
     blurb:
-      "Städ och bemanning drivs i Kanitas ENT och tar vid där bygget slutar. Vi utför byggstädning efter våra egna och andras entreprenader, sköter löpande kontors- och fastighetsstädning åt företag och BRF:er, och hyr ut erfaren personal till byggbolag som behöver folk snabbt. Samma kollektivavtal och samma kvalitetskrav som i byggverksamheten.",
+      "ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal, utan led av underleverantörer.",
     highlights: [
+      "Yrkesarbetare till bygg",
       "Byggstädning & slutstädning",
       "Kontors- & fastighetsstädning",
-      "Flyttstädning med garanti",
-      "Bemanning till bygg och service",
+      "Personal med kort varsel",
     ],
     entities: ["Kanitas ENT AB"],
   },
@@ -607,7 +747,7 @@ export const businesses: Business[] = [
     external: false,
     icon: "truck",
     blurb:
-      "Trading köper, säljer och hyr ut det som får ett bygge att rulla: handverktyg, maskiner, transportbilar och arbetsfordon. Eftersom vi handlar löpande till koncernens egna projekt vet vi vad utrustning faktiskt är värd, och den kunskapen får också våra kunder ta del av, oavsett om du ska köpa en grävmaskin eller sälja en transportbil.",
+      "Trading handlar med och hyr ut maskiner, verktyg, transportbilar och arbetsfordon. Verksamheten byggdes upp för att förse koncernens egna entreprenader med utrustning och är i dag en självständig affär. Den löpande marknadskännedomen ligger till grund för våra värderingar av begagnad utrustning.",
     highlights: [
       "Köp & försäljning av fordon",
       "Maskiner och verktyg",
@@ -625,7 +765,7 @@ export const businesses: Business[] = [
     external: false,
     icon: "building",
     blurb:
-      "Fastigheter äger och förvaltar koncernens lokaler i Järfälla och Storstockholm. Vi hyr ut verkstads-, lager- och kontorsytor till företag som vill ha en hyresvärd som själv är byggare. När något behöver åtgärdas står hantverkarna redan i huset, och underhållet planeras av folk som vet vad det kostar att skjuta upp det.",
+      "Fastigheter äger och förvaltar koncernens bestånd av verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Som hyresvärd med egen byggorganisation utför vi hyresgästanpassningar och underhåll i egen regi, vilket ger kortare ledtider och kontroll över kvaliteten.",
     highlights: [
       "Lokaler att hyra",
       "Fastighetsförvaltning",
@@ -639,6 +779,57 @@ export const businesses: Business[] = [
 /** Verksamheter that have a page of their own to send visitors to. */
 export const liveBusinesses = businesses.filter((b) => b.href !== "/kontakt");
 
+/**
+ * Who the koncern actually works for. The switchboard sorts by verksamhet;
+ * this sorts by visitor, because most people know what they are rather than
+ * which of our bolag does the job.
+ */
+export const audiences = [
+  {
+    title: "Byggbolag & totalentreprenörer",
+    icon: "hardhat",
+    text: "Vi går in som underentreprenör i era projekt och hyr ut yrkesarbetare när ni behöver förstärkning. NCC, Implenia, ByggPartner och Oljibe är återkommande uppdragsgivare.",
+    href: "/bygg",
+    linkLabel: "Se vad vi bygger",
+  },
+  {
+    title: "Fastighetsägare & förvaltare",
+    icon: "building",
+    text: "Byggservice på avtal, hyresgästanpassningar och planerat underhåll, plus löpande fastighetsstädning och snöröjning. En kontaktperson för hela beståndet.",
+    href: "/bygg",
+    linkLabel: "Läs om byggservice",
+  },
+  {
+    title: "BRF:er",
+    icon: "users",
+    text: "Stambyten, fasad- och balkongarbeten och renovering av gemensamma ytor, med information till boende och en tidplan styrelsen kan luta sig mot.",
+    href: "/bygg",
+    linkLabel: "Så arbetar vi med BRF",
+  },
+  {
+    title: "Privatpersoner",
+    icon: "key",
+    text: "Renovering, badrum och tillbyggnad med ROT-avdraget draget direkt på fakturan. Samma hantverkare som byggbolagen anlitar, även för ett enda rum.",
+    href: "/bygg",
+    linkLabel: "Begär offert",
+  },
+] as const;
+
+/**
+ * The facts a procurement function checks before shortlisting a supplier.
+ * Kept as data so they are stated once and can be cited anywhere.
+ */
+export const groupFacts = [
+  { label: "Organisationsnummer", value: "556841-1010" },
+  { label: "Grundat", value: "2011, Järfälla" },
+  { label: "Bolag i koncernen", value: "5" },
+  { label: "Medarbetare", value: "35" },
+  { label: "Kreditvärdighet", value: "AAA, högsta nivån" },
+  { label: "Kollektivavtal", value: "Byggnads och Fastighets" },
+  { label: "Försäkring", value: "Ansvarsförsäkring, godkänd för F-skatt" },
+  { label: "Verksamhetsområde", value: "Storstockholm" },
+] as const;
+
 /** Legal entities in the group, shown on the About page. */
 export const groupCompanies = [
   {
@@ -651,9 +842,9 @@ export const groupCompanies = [
   {
     name: "Kanitas ENT AB",
     orgnr: "559146-9183",
-    role: "Bygg- och städservice, entreprenad och bemanning",
+    role: "Bemanning, byggstädning och service",
     area: "/stad",
-    areaLabel: "Kanitas Städ",
+    areaLabel: "Kanitas ENT",
   },
   {
     name: "Kanitas Bygg AB",
@@ -722,6 +913,7 @@ export const certifications = [
 /** Topics for the contact form's ärende selector. */
 export const contactTopics = [
   "Bygg",
+  "Bemanning",
   "Städ",
   "Trading",
   "Fastigheter",

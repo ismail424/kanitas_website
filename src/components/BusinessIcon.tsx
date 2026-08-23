@@ -1,13 +1,21 @@
-import { Building2, HardHat, Sparkles, Truck, type LucideIcon } from "lucide-react";
+import {
+  Building2,
+  HardHat,
+  KeyRound,
+  Truck,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 
 const icons: Record<string, LucideIcon> = {
   hardhat: HardHat,
-  sparkles: Sparkles,
+  users: Users,
+  key: KeyRound,
   truck: Truck,
   building: Building2,
 };
 
-/** Icon for a verksamhet from site.ts — falls back to the hard hat. */
+/** Icon for a verksamhet or uppdragsgivare from site.ts. Falls back to the hard hat. */
 export default function BusinessIcon({
   name,
   className,

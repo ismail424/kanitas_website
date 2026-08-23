@@ -32,17 +32,19 @@ export default function KontaktPage() {
         <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pt-44 lg:px-8">
           <p className="eyebrow text-copper-soft">Kontakt</p>
           <h1 className="mt-5 max-w-3xl display-1 text-white">
-            Vi återkommer oftast samma dag
+            Kontakta Kanitas
           </h1>
           <p className="mt-6 max-w-2xl lead text-white/75">
-            Ring, mejla eller använd formuläret nedan. Vi hjälper dig snabbt vidare, oavsett om det gäller
-            bygg, städ, lokaler eller bil hjälper vi dig snabbt vidare.
+            Samma nummer och samma adress gäller samtliga verksamheter i
+            koncernen. Ange vad ärendet gäller så kopplas det till rätt bolag
+            och rätt kontaktperson. Förfrågningar besvaras normalt inom ett
+            dygn.
           </p>
         </div>
       </section>
       <ContactSection
-        title="Berätta vad du behöver"
-        lead="Beskriv ditt ärende så kopplar vi in rätt person i koncernen. Offerter är alltid kostnadsfria."
+        title="Skicka en förfrågan"
+        lead="Ange omfattning, plats och önskad tidpunkt. Offerter och förfrågningsunderlag hanteras kostnadsfritt och utan förpliktelser."
       />
     </>
   );

@@ -90,7 +90,7 @@ export default function AreaPage({
       {/* Hero — clean petrol gradient with sub-brand lockup */}
       <section className="hero-deep relative isolate overflow-hidden">
         <div className="relative mx-auto w-full max-w-7xl px-4 pb-24 pt-36 sm:px-6 sm:pb-28 sm:pt-44 lg:px-8">
-          <BrandLockup suffix={area.slug} />
+          <BrandLockup suffix={area.name.replace(/^Kanitas\s+/, "")} />
           <h1 className="mt-8 max-w-3xl display-1 text-white">
             {area.h1}
           </h1>
@@ -163,34 +163,36 @@ export default function AreaPage({
         </div>
       </section>
 
-      {/* Extra content section (checklist / inventory) */}
-      {area.extraSection ? (
-        <section className="border-y border-line bg-paper-2">
+      {/* Deep-dive sections: how it works, checklists, who we build for.
+          Alternating surfaces keep several of them from reading as one slab. */}
+      {(area.extraSections ?? []).map((section, sectionIndex) => (
+        <section
+          key={section.title}
+          className={
+            sectionIndex % 2 === 0
+              ? "border-y border-line bg-paper-2"
+              : "border-b border-line bg-paper"
+          }
+        >
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
             <Reveal>
               <div className="max-w-2xl">
-                <p className="eyebrow text-petrol">{area.extraSection.eyebrow}</p>
-                <h2 className="mt-4 display-2 text-ink">
-                  {area.extraSection.title}
-                </h2>
-                {area.extraSection.lead ? (
-                  <p className="mt-5 lead text-muted">
-                    {area.extraSection.lead}
-                  </p>
+                <p className="eyebrow text-petrol">{section.eyebrow}</p>
+                <h2 className="mt-4 display-2 text-ink">{section.title}</h2>
+                {section.lead ? (
+                  <p className="mt-5 lead text-muted">{section.lead}</p>
                 ) : null}
               </div>
             </Reveal>
             <div className="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-              {area.extraSection.items.map((item, index) => (
+              {section.items.map((item, index) => (
                 <Reveal key={item.title} delay={index * 50}>
                   <div className="flex gap-4">
                     <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-petrol/10 text-petrol">
                       <Check className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <div>
-                      <h3 className="title text-ink">
-                        {item.title}
-                      </h3>
+                      <h3 className="title text-ink">{item.title}</h3>
                       <p className="mt-1.5 leading-relaxed text-muted">
                         {item.text}
                       </p>
@@ -201,7 +203,7 @@ export default function AreaPage({
             </div>
           </div>
         </section>
-      ) : null}
+      ))}
 
       {/* Why us */}
       <section>
@@ -312,7 +314,7 @@ export default function AreaPage({
       <ContactSection
         title={`Behöver du hjälp av ${area.name}?`}
         lead="Skicka en förfrågan så återkommer vi med ett förslag, kostnadsfritt och utan förpliktelser."
-        topic={area.nav}
+        topic={area.contactTopic}
       />
     </>
   );
