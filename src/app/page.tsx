@@ -89,7 +89,7 @@ export default function HomePage() {
             {routedBusinesses.map((business, index) => {
               const hasOwnPage = business.href !== "/kontakt";
               return (
-                <Reveal key={business.slug} delay={index * 70} as="li">
+                <Reveal key={business.slug} delay={index * 90} as="li" variant="scale">
                   <Link
                     href={business.href}
                     className="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-card transition-colors hover:border-petrol/40"

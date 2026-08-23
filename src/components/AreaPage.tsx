@@ -160,6 +160,14 @@ export default function AreaPage({
         </div>
       </section>
 
+      {/* A wide image between the two long text runs, so the page is not
+          paragraph after paragraph before the first photograph. */}
+      <Reveal variant="scale">
+        <section className="relative isolate h-[42svh] min-h-[300px] overflow-hidden sm:h-[52svh]">
+          <Photo name={secondaryPhoto} sizes="100vw" />
+        </section>
+      </Reveal>
+
       {/* Deep-dive sections: how it works, checklists, who we build for.
           Alternating surfaces keep several of them from reading as one slab. */}
       {(area.extraSections ?? []).map((section, sectionIndex) => (
@@ -218,20 +226,9 @@ export default function AreaPage({
               ))}
             </ul>
           </Reveal>
-          <Reveal delay={100}>
-            <div className="grid gap-5">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                <Photo
-                  name={whyPhoto}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                />
-              </div>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                <Photo
-                  name={secondaryPhoto}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                />
-              </div>
+          <Reveal delay={100} variant="scale">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-md">
+              <Photo name={whyPhoto} sizes="(min-width: 1024px) 50vw, 100vw" />
             </div>
           </Reveal>
         </div>

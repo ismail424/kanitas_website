@@ -163,18 +163,53 @@ body {
   line-height: 1.65;
 }
 
-/* Scroll reveal (activated by Reveal component; no-JS users see content) */
+/* Scroll reveal, activated by the Reveal component. No-JS and reduced-motion
+   users get the finished state, never a hidden page.
+
+   Only transform and opacity are animated, both compositor-only properties, so
+   scrolling stays smooth on a mid-range phone. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
-    opacity: 0;
-    transform: translateY(14px);
+    will-change: opacity, transform;
     transition:
-      opacity 0.55s var(--ease-out-soft),
-      transform 0.55s var(--ease-out-soft);
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  /* Images settle out of a slight zoom rather than sliding, which reads as
+     photography arriving instead of a card animating. */
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(1.04);
   }
 
   .reveal.is-visible {
     opacity: 1;
     transform: none;
+  }
+
+  /* Once it has played, drop the hint so the browser can release the layer. */
+  .reveal.is-visible {
+    will-change: auto;
+  }
+}
+
+/* Phones do the work with less travel: shorter distance, quicker settle. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 640px) {
+  .reveal {
+    transition-duration: 0.5s;
+  }
+
+  .reveal-up {
+    transform: translate3d(0, 14px, 0);
+  }
+
+  .reveal-scale {
+    transform: scale(1.025);
   }
 }
