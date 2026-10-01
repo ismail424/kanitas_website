@@ -12,26 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function ByggPage() {
-  return (
-    <AreaPage
-      area={area}
-      whyTitle="Byggpartnern som de stora aktörerna litar på"
-      whyLead="NCC, Implenia, ByggPartner och Oljibe är några av företagen som anlitar oss. Det förtroendet har vi byggt upp genom att leverera, år efter år."
-      whyPoints={[
-        "AAA, högsta kreditvärdighet och stabil ekonomi",
-        "Kollektivavtal med Byggnads och Fastighets",
-        "Egen personal på kollektivavtal, förstärkt med yrkesarbetare från Kanitas ENT i koncernen",
-        "Totalansvar: bygg, mark, sanering och byggstädning i samma koncern",
-        "Fast kontaktperson och tydlig kommunikation genom hela projektet",
-      ]}
-      heroPhoto="bygg-varfor"
-      gallery={[
-        { photo: "kranar", label: "Nybyggnation & entreprenad" },
-        { photo: "renovering", label: "Renovering & ombyggnation" },
-        { photo: "snickeri", label: "Stomkomplettering & snickerier" },
-      ]}
-      bandPhoto="bygg-projekt"
-      drawing="crane"
-    />
-  );
+  return <AreaPage area={area} />;
 }

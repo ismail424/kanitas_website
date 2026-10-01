@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
 import { ogMeta, site } from "@/lib/site";
 
 const pageTitle = "Integritetspolicy";
@@ -65,34 +64,38 @@ const sections = [
 export default function IntegritetspolicyPage() {
   return (
     <>
-      <PageHero
-        crumbs={[{ href: "/integritetspolicy", label: "Integritetspolicy" }]}
-        kicker={<p className="eyebrow text-copper-soft">Personuppgifter</p>}
-        title="Integritetspolicy"
-        lead={`Så behandlar ${site.legalName} de personuppgifter du lämnar när du kontaktar oss.`}
-      />
+      <section className="pb-24 pt-16 sm:pb-32 sm:pt-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="display-page text-ink">Integritetspolicy</h1>
+            <p className="mt-6 lead text-muted">
+              Så behandlar {site.legalName} de personuppgifter du lämnar när du
+              kontaktar oss.
+            </p>
 
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl divide-y divide-line border-y border-line">
-            {sections.map((section) => (
-              <div key={section.title} className="py-9">
-                <h2 className="display-3 text-ink">{section.title}</h2>
-                <div className="mt-4 space-y-4 text-lg leading-relaxed text-ink-soft">
-                  {section.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
+            <div className="mt-14 divide-y divide-line border-y border-line">
+              {sections.map((section) => (
+                <div key={section.title} className="py-9">
+                  <h2 className="display-3 text-ink">{section.title}</h2>
+                  <div className="mt-4 space-y-4 leading-relaxed text-ink-soft">
+                    {section.body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <p className="mt-10 text-muted">
+              Har du frågor om policyn?{" "}
+              <Link
+                href="/kontakt"
+                className="font-semibold text-petrol underline underline-offset-4 hover:text-ink"
+              >
+                Kontakta oss
+              </Link>
+              .
+            </p>
           </div>
-          <p className="mt-10 text-sm text-muted">
-            Har du frågor om policyn?{" "}
-            <Link href="/kontakt" className="font-semibold text-petrol underline underline-offset-4 hover:text-ink">
-              Kontakta oss
-            </Link>
-            .
-          </p>
         </div>
       </section>
     </>

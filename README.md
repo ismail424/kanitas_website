@@ -1,7 +1,7 @@
 # Kanitas – kanitas.se
 
-Webbplats för Kanitas, en familjeägd koncern i Järfälla med fyra
-verksamhetsområden: bygg, städ, fastigheter och bil.
+Webbplats för Kanitas, en koncern i Järfälla med fyra verksamheter:
+bygg, bemanning och byggstädning, maskiner och fordon samt lokaler.
 
 ## Teknologier
 
@@ -42,9 +42,9 @@ Kontaktformuläret skickar e-post via SMTP och behöver:
 ## Struktur
 
 - `src/app` – sidor (startsida, /bygg, /stad, /om-oss, /kontakt, /integritetspolicy), layout, API, sitemap/robots, favicon och appikoner
-- `src/components` – återanvändbara komponenter, bland annat `HomeHero` (bildspel), `Blueprint` (animerade linjeteckningar), `PageHero`, `LogoMarquee` och `Logo`
+- `src/components` – återanvändbara komponenter, bland annat `HomeHero`, `PageHero`, `AreaPage` (Bygg och Städ), `LogoWall`, `ContactSection` och `Logo`
 - `src/lib/site.ts` – all webbplatsdata: kontaktuppgifter, verksamheter, fotoregister, referenser, koncernbolag
-- `public/images/photos` – foton i AVIF (Unsplash/Pexels, fria för kommersiellt bruk). Byt mot egna foton via fotoregistret i `site.ts`
+- `public/images/photos` – foton i AVIF. De är AI-genererade platshållare i svensk miljö; byt mot egna foton via fotoregistret i `site.ts`, där varje plats har en beskrivning av vad bilden ska visa
 - `public/references`, `public/images/cert` – kundlogotyper och certifikat
 - `public/og*.jpg` – delningsbilder för sociala medier
 

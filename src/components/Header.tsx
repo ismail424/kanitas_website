@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import Logo from "@/components/Logo";
-import { indexNumber } from "@/lib/format";
 import { businessHref, businesses, nav, site } from "@/lib/site";
 
 export default function Header() {
@@ -79,7 +78,7 @@ export default function Header() {
           : "border-line/60"
       }`}
     >
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
         <Logo />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Huvudmeny">
@@ -89,7 +88,7 @@ export default function Header() {
             aria-expanded={panelOpen}
             aria-controls="verksamheter-meny"
             onClick={() => setPanelOpen((v) => !v)}
-            className={`inline-flex items-center gap-1.5 rounded-xs px-4 py-2 text-[0.95rem] font-medium transition-colors ${
+            className={`inline-flex items-center gap-1.5 rounded-xs px-4 py-2 text-base font-medium transition-colors ${
               panelOpen || inVerksamheter
                 ? "bg-paper-2 text-ink"
                 : "text-ink-soft hover:bg-paper-2 hover:text-ink"
@@ -109,7 +108,7 @@ export default function Header() {
               href={item.href}
               onClick={closeAll}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`rounded-xs px-4 py-2 text-[0.95rem] font-medium transition-colors ${
+              className={`rounded-xs px-4 py-2 text-base font-medium transition-colors ${
                 isActive(item.href)
                   ? "bg-paper-2 text-ink"
                   : "text-ink-soft hover:bg-paper-2 hover:text-ink"
@@ -123,15 +122,15 @@ export default function Header() {
         <div className="hidden items-center gap-5 lg:flex">
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-2 text-[0.95rem] font-semibold text-ink transition-colors hover:text-petrol"
+            className="inline-flex items-center gap-2 text-base font-semibold text-ink transition-colors hover:text-petrol"
           >
-            <Phone className="h-4 w-4 text-copper" aria-hidden="true" />
+            <Phone className="h-4 w-4 text-petrol" aria-hidden="true" />
             {site.phone}
           </a>
           <Link
             href="/kontakt"
             onClick={closeAll}
-            className="btn btn-primary min-h-11 px-5 py-2.5 text-[0.95rem]"
+            className="btn btn-primary min-h-11 px-5 py-2.5 text-base"
           >
             Begär offert
           </Link>
@@ -156,34 +155,29 @@ export default function Header() {
         hidden={!panelOpen}
         className="absolute inset-x-0 top-full hidden border-b border-line bg-paper shadow-[0_24px_48px_-24px_rgba(15,34,41,0.25)] lg:block"
       >
-        <div className="mx-auto max-w-7xl px-8 pb-10 pt-8">
-          <ul className="grid grid-cols-4 gap-px overflow-hidden border border-line bg-line">
-            {businesses.map((business, index) => (
-              <li key={business.slug} className="bg-paper">
+        <div className="mx-auto max-w-7xl px-8 pb-8 pt-10">
+          <ul className="grid grid-cols-4 gap-8">
+            {businesses.map((business) => (
+              <li key={business.slug}>
                 <Link
                   href={businessHref(business)}
                   onClick={closeAll}
-                  className="group flex h-full flex-col p-6 transition-colors hover:bg-paper-2"
+                  className="group -m-4 flex h-full flex-col rounded-xs p-4 transition-colors hover:bg-paper-2"
                 >
-                  <span className="index text-sm text-copper-ink">
-                    {indexNumber(index)}
+                  <span className="title text-ink group-hover:text-petrol">
+                    {business.heading}
                   </span>
-                  <span className="mt-4 title text-ink">{business.heading}</span>
-                  <span className="mt-1 label text-muted">{business.name}</span>
-                  <span className="mt-4 text-[0.95rem] leading-relaxed text-ink-soft">
+                  <span className="mt-1 text-sm text-muted">{business.name}</span>
+                  <span className="mt-3 leading-relaxed text-ink-soft">
                     {business.summary}
-                  </span>
-                  <span className="link-arrow mt-auto pt-6 text-sm text-petrol">
-                    {business.page ? "Till sidan" : "Läs mer"}
-                    <ArrowRight aria-hidden="true" />
                   </span>
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex items-center justify-between text-sm">
+          <div className="mt-8 flex items-center justify-between border-t border-line pt-6 text-sm">
             <p className="text-muted">
-              Fyra verksamheter, ett nummer:{" "}
+              Telefon:{" "}
               <a
                 href={site.phoneHref}
                 className="font-semibold text-ink hover:text-petrol"
@@ -208,28 +202,21 @@ export default function Header() {
         <nav
           id="mobilmeny"
           aria-label="Mobilmeny"
-          className="fixed inset-x-0 bottom-0 top-18 overflow-y-auto border-t border-line bg-paper px-4 pb-10 pt-6 sm:px-6 lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-18 overflow-y-auto border-t border-line bg-paper px-5 pb-10 pt-6 sm:px-6 lg:hidden"
         >
-          <p className="label text-muted">Verksamheter</p>
+          <p className="text-sm font-semibold text-muted">Verksamheter</p>
           <ul className="mt-3 divide-y divide-line border-y border-line">
-            {businesses.map((business, index) => (
+            {businesses.map((business) => (
               <li key={business.slug}>
                 <Link
                   href={businessHref(business)}
                   onClick={closeAll}
                   aria-current={business.page === pathname ? "page" : undefined}
-                  className="flex items-baseline gap-4 py-4"
+                  className="block py-4"
                 >
-                  <span className="index w-6 shrink-0 text-sm text-copper-ink">
-                    {indexNumber(index)}
-                  </span>
-                  <span>
-                    <span className="block title text-ink">
-                      {business.heading}
-                    </span>
-                    <span className="mt-0.5 block text-sm text-muted">
-                      {business.name}
-                    </span>
+                  <span className="block title text-ink">{business.heading}</span>
+                  <span className="mt-0.5 block text-sm text-muted">
+                    {business.name}
                   </span>
                 </Link>
               </li>

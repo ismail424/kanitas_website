@@ -1,16 +1,15 @@
 @import "tailwindcss";
 
 /*
- * Kanitas design tokens v5. The palette is taken from the logo: petrol carries
- * the weight (type, actions, dark bands) and copper is the detail, the way the
- * mark uses it for its two rules. Surfaces are white and a cool mist, so a
- * change of band reads as structure rather than as two near-identical greys.
+ * Kanitas design tokens. The palette is taken from the logo: petrol carries
+ * the weight (type, actions, dark bands) and copper is a small accent, the way
+ * the mark uses it for its two rules. Surfaces are white and a cool mist.
  * No hardcoded hex in components.
  */
 @theme {
   /* Surfaces */
   --color-paper: #ffffff;
-  --color-paper-2: #eef2f2;
+  --color-paper-2: #f1f4f4;
   --color-card: #ffffff;
   --color-petrol-pale: #dde9eb;
 
@@ -20,7 +19,7 @@
   --color-muted: #5a6a70;
 
   /* Borders */
-  --color-line: #d8e0e0;
+  --color-line: #dbe2e2;
   --color-line-deep: #1d5766;
 
   /* Brand petrol: logo mark, primary action, dark surfaces */
@@ -41,7 +40,7 @@
   --color-error: #b23a2e;
 
   /* Typography. Archivo carries a width axis; headings run slightly wide to
-     echo the KANITAS wordmark, labels wider still. */
+     echo the KANITAS wordmark. Body text is Inter. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif,
@@ -84,15 +83,16 @@
 }
 
 /*
- * Global type system. Every heading and lead on the site uses one of these,
- * so scale, width and rhythm are identical everywhere. Layered as components
- * so a utility on the same element still wins.
+ * Type system. Every heading and lead on the site uses one of these, so scale
+ * and rhythm are identical everywhere. Layered as components so a utility on
+ * the same element still wins.
  */
 @layer components {
   /* Swedish compounds ("byggentreprenör", "fastighetsförvaltning") are wider
      than a phone at display sizes: let them break rather than overflow, and
-     hyphenate on narrow screens only, where a broken word beats a clipped one. */
+     hyphenate on narrow screens only. */
   .display-1,
+  .display-page,
   .display-2,
   .display-3,
   .title {
@@ -101,51 +101,64 @@
 
   @media (max-width: 30rem) {
     .display-1,
+    .display-page,
     .display-2,
     .display-3 {
       hyphens: auto;
     }
   }
 
+  /* Home hero only. */
   .display-1 {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-size: clamp(2.5rem, 4.8vw, 4.1rem);
     font-weight: 700;
-    font-variation-settings: "wdth" 108;
-    letter-spacing: -0.022em;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.02em;
     word-spacing: 0.04em;
-    line-height: 1.02;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  /* Headline of every other page. */
+  .display-page {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw, 3.4rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.02em;
+    word-spacing: 0.04em;
+    line-height: 1.06;
     text-wrap: balance;
   }
 
   .display-2 {
     font-family: var(--font-display);
-    font-size: clamp(1.85rem, 3.2vw, 2.8rem);
-    font-weight: 700;
-    font-variation-settings: "wdth" 108;
-    letter-spacing: -0.018em;
-    word-spacing: 0.04em;
-    line-height: 1.08;
+    font-size: clamp(1.75rem, 2.8vw, 2.4rem);
+    font-weight: 600;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.016em;
+    word-spacing: 0.03em;
+    line-height: 1.12;
     text-wrap: balance;
   }
 
   .display-3 {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2.3vw, 2rem);
-    font-weight: 700;
-    font-variation-settings: "wdth" 106;
-    letter-spacing: -0.014em;
-    word-spacing: 0.03em;
-    line-height: 1.12;
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    font-weight: 600;
+    font-variation-settings: "wdth" 104;
+    letter-spacing: -0.012em;
+    line-height: 1.18;
     text-wrap: balance;
   }
 
   .title {
     font-family: var(--font-display);
     font-size: 1.125rem;
-    font-weight: 700;
-    font-variation-settings: "wdth" 104;
-    letter-spacing: -0.006em;
+    font-weight: 600;
+    font-variation-settings: "wdth" 102;
+    letter-spacing: -0.005em;
     line-height: 1.35;
   }
 
@@ -154,56 +167,22 @@
     line-height: 1.65;
   }
 
-  .lead-lg {
-    font-size: clamp(1.125rem, 1.5vw, 1.3rem);
-    line-height: 1.6;
-  }
-
-  /* Small wide capitals, after the tagline under the wordmark. */
+  /* Small heading for a group of links or facts, in sentence case. */
   .label {
-    font-family: var(--font-display);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    font-variation-settings: "wdth" 118;
-    letter-spacing: 0.14em;
     line-height: 1.4;
-    text-transform: uppercase;
   }
 
-  /* Section kicker: the copper rule from the logo, then the label. */
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.875rem;
-    font-family: var(--font-display);
-    font-size: 0.75rem;
-    font-weight: 600;
-    font-variation-settings: "wdth" 118;
-    letter-spacing: 0.16em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
-  .eyebrow::before {
-    content: "";
-    flex: none;
-    width: 1.75rem;
-    height: 3px;
-    background-color: var(--color-copper);
-  }
-
-  /* Index numbers: 01, 02 … set wide and tabular so a column of them aligns. */
+  /* Step numbers, for the one list that really is a sequence. */
   .index {
-    font-family: var(--font-display);
     font-variant-numeric: tabular-nums;
     font-weight: 600;
-    font-variation-settings: "wdth" 118;
-    letter-spacing: 0.06em;
   }
 
   /*
    * Buttons. Square-cornered like the blocks of the mark; one height, one
-   * weight, four surfaces. Arrows inside nudge on hover.
+   * weight, three surfaces. Arrows inside nudge on hover.
    */
   .btn {
     display: inline-flex;
@@ -258,19 +237,7 @@
   }
 
   .btn-light:hover {
-    background-color: var(--color-copper-soft);
-    color: var(--color-petrol-darker);
-  }
-
-  /* Secondary action on petrol */
-  .btn-ghost {
-    border-color: rgb(255 255 255 / 0.32);
-    color: #ffffff;
-  }
-
-  .btn-ghost:hover {
-    border-color: #ffffff;
-    background-color: rgb(255 255 255 / 0.08);
+    background-color: var(--color-paper-2);
   }
 
   /* Text link with a trailing arrow, used wherever a whole block links on. */
@@ -296,12 +263,12 @@
   /*
    * Client and certificate logos arrive as mixed PNG/JPEG, some with white
    * boxes baked in. Multiply drops the box into whatever surface they sit on,
-   * and greyscale evens out a wall of competing brand colours.
+   * and greyscale evens out a row of competing brand colours.
    */
   .logo-mono {
     mix-blend-mode: multiply;
     filter: grayscale(1);
-    opacity: 0.78;
+    opacity: 0.7;
     transition:
       filter 0.3s,
       opacity 0.3s;
@@ -310,10 +277,6 @@
   .logo-mono:hover {
     filter: none;
     opacity: 1;
-  }
-
-  .logo-flat {
-    mix-blend-mode: multiply;
   }
 
   /* PageHero photograph: starts where the 7-of-12 text column ends and
@@ -326,64 +289,12 @@
       left: calc(max(2rem, 50% - 38rem) + min(58.3333% - 2.3333rem, 44.3333rem));
     }
   }
-
-  /* Deep petrol surface with a faint construction grid. */
-  .surface-blueprint {
-    position: relative;
-    isolation: isolate;
-    background-color: var(--color-petrol-darker);
-    background-image:
-      radial-gradient(
-        70rem 34rem at 92% -20%,
-        rgb(224 142 109 / 0.14),
-        transparent 60%
-      ),
-      linear-gradient(160deg, #082a33 0%, #0e3d49 60%, #134b58 100%);
-  }
-
-  .surface-blueprint::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 90%);
-    pointer-events: none;
-  }
 }
 
-/* Home hero. The verb belonging to the photograph on screen is underlined
-   in copper; photographs drift slowly; the index shows time to the next. */
-.hero-verb {
-  /* Inline padding lowers the box's bottom edge below the descenders
-     without touching the line height, so the rule clears g and y. */
-  padding-bottom: 0.1em;
-  background-image: linear-gradient(var(--color-copper), var(--color-copper));
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 0.07em;
-  transition:
-    background-size 0.7s var(--ease-out-soft),
-    color 0.7s var(--ease-out-soft);
-}
-
-.hero-verb.is-active {
-  color: var(--color-copper-soft);
-  background-size: 100% 0.07em;
-}
-
+/* Home hero: the photograph drifts very slowly, the text settles in once. */
 @media (prefers-reduced-motion: no-preference) {
   .hero-drift {
-    animation: hero-drift 18s ease-in-out infinite alternate;
-  }
-
-  .hero-progress {
-    animation-name: hero-progress;
-    animation-timing-function: linear;
-    animation-fill-mode: both;
+    animation: hero-drift 24s ease-in-out infinite alternate;
   }
 
   .hero-in {
@@ -394,98 +305,21 @@
 
 @keyframes hero-drift {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.02);
   }
   to {
-    transform: scale(1.1) translate3d(-1.5%, -1%, 0);
-  }
-}
-
-@keyframes hero-progress {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
+    transform: scale(1.08) translate3d(-1%, -0.5%, 0);
   }
 }
 
 @keyframes hero-in {
   from {
     opacity: 0;
-    transform: translate3d(0, 18px, 0);
+    transform: translate3d(0, 16px, 0);
   }
   to {
     opacity: 1;
     transform: none;
-  }
-}
-
-/* Client logos on a slow conveyor. The list is rendered twice and moved by
-   half its width, so the loop has no seam; hovering stops it. */
-@media (prefers-reduced-motion: no-preference) {
-  .marquee-track {
-    animation: marquee 48s linear infinite;
-  }
-
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-/* Image bands drift against the scroll where the browser supports
-   scroll-driven animation; elsewhere they simply sit still. */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .parallax > * {
-      animation: parallax linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-    }
-  }
-}
-
-@keyframes parallax {
-  from {
-    transform: translate3d(0, -7%, 0) scale(1.14);
-  }
-  to {
-    transform: translate3d(0, 7%, 0) scale(1.14);
-  }
-}
-
-/* Line drawings (Blueprint). Stroke weight is in drawing units, so a drawing
-   shown larger draws heavier; `--bp-stroke` thins it where that matters. */
-.blueprint path {
-  stroke: currentColor;
-  stroke-width: var(--bp-stroke, 1.5);
-}
-
-.blueprint .blueprint-accent {
-  stroke: var(--bp-accent, var(--color-copper));
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  /* Hidden only once the Reveal component has armed it, so no-JS readers
-     always see the finished drawing. */
-  .reveal .blueprint path {
-    stroke-dasharray: 1 1;
-    stroke-dashoffset: 1;
-    transition: stroke-dashoffset 0.9s var(--ease-out-soft);
-    transition-delay: calc(var(--i) * 55ms + 150ms);
-  }
-
-  .reveal.is-visible .blueprint path {
-    stroke-dashoffset: 0;
   }
 }
 
@@ -525,14 +359,14 @@
 
   .reveal-up {
     opacity: 0;
-    transform: translate3d(0, 22px, 0);
+    transform: translate3d(0, 20px, 0);
   }
 
   /* Images settle out of a slight zoom rather than sliding, which reads as
      photography arriving instead of a card animating. */
   .reveal-scale {
     opacity: 0;
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
 
   .reveal.is-visible {
@@ -553,10 +387,10 @@
   }
 
   .reveal-up {
-    transform: translate3d(0, 14px, 0);
+    transform: translate3d(0, 12px, 0);
   }
 
   .reveal-scale {
-    transform: scale(1.025);
+    transform: scale(1.02);
   }
 }

@@ -69,10 +69,13 @@ export default function ContactForm({
         className="border-l-4 border-ok bg-ok/10 p-8 outline-none"
         role="status"
       >
-        <p className="display-3 text-ink">Tack för ditt meddelande!</p>
+        <p className="display-3 text-ink">Tack!</p>
         <p className="mt-3 text-ink-soft">
-          Vi återkommer så snart som möjligt, oftast samma dag. Brådskande? Ring{" "}
-          <a href={site.phoneHref} className="font-semibold text-petrol underline underline-offset-4">
+          Vi svarar normalt inom ett dygn. Brådskande? Ring{" "}
+          <a
+            href={site.phoneHref}
+            className="font-semibold text-petrol underline underline-offset-4"
+          >
             {site.phone}
           </a>
           .
@@ -85,7 +88,7 @@ export default function ContactForm({
     <form onSubmit={onSubmit} className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-6">
       <fieldset className="sm:col-span-6">
         <legend className={labelClasses}>Vad gäller ärendet?</legend>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 min-[22rem]:grid-cols-2 lg:grid-cols-3">
           {contactTopics.map((value) => (
             <label key={value} className="relative block cursor-pointer">
               <input
@@ -96,7 +99,7 @@ export default function ContactForm({
                 onChange={() => setTopic(value)}
                 className="peer sr-only"
               />
-              <span className="flex h-full min-h-12 items-center rounded-xs border border-line bg-paper px-4 py-2.5 text-[0.95rem] font-medium text-ink-soft transition-colors hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
+              <span className="flex h-full min-h-12 items-center rounded-xs border border-line bg-paper px-3 py-2.5 text-sm font-medium text-ink-soft transition-colors sm:px-4 sm:text-base hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
                 {contactTopicLabels[value]}
               </span>
             </label>
@@ -170,8 +173,7 @@ export default function ContactForm({
 
       <div className="flex flex-col gap-4 sm:col-span-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted sm:order-1 sm:max-w-xs">
-          Vi använder uppgifterna endast för att besvara ditt meddelande. Läs
-          vår{" "}
+          Vi använder uppgifterna bara för att svara dig. Läs vår{" "}
           <Link
             href="/integritetspolicy"
             className="underline underline-offset-4 hover:text-ink"

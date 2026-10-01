@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import ContactBand from "@/components/ContactBand";
 import LogoWall from "@/components/LogoWall";
 import PageHero from "@/components/PageHero";
-import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import {
@@ -15,9 +15,8 @@ import {
   site,
 } from "@/lib/site";
 
-const pageTitle = "Om Kanitas: koncernen i Järfälla sedan 2011";
-const pageDescription =
-  "Kanitas grundades 2011 i Järfälla och är i dag en koncern med fem bolag inom bygg, bemanning, maskinhandel och fastigheter. AAA-kreditvärdighet, kollektivavtal och kunder som NCC och Implenia.";
+const pageTitle = `Om Kanitas: koncernen i Järfälla sedan ${site.founded}`;
+const pageDescription = `Kanitas grundades ${site.founded} i Järfälla och är i dag en koncern med ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och fastigheter. AAA i kreditvärdighet och kollektivavtal med Byggnads och Fastighets.`;
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -48,92 +47,66 @@ export default function OmOssPage() {
       />
 
       <PageHero
-        crumbs={[{ href: "/om-oss", label: "Om oss" }]}
-        kicker={<p className="eyebrow text-copper-soft">Om Kanitas</p>}
-        title={`Byggt på förtroende sedan ${site.founded}`}
-        lead="Från byggfirma i Järfälla till koncern med fem bolag inom bygg, bemanning, maskiner och fastigheter. Samma ledning, samma kollektivavtal och samma krav på utförandet sedan starten."
+        title="Om Kanitas"
+        lead={`Koncernen har ${groupCompanies.length} bolag och ${site.employees} anställda inom bygg, bemanning, maskiner och lokaler. Kontoret ligger i ${site.address.city}.`}
         photo="team"
       />
 
-      {/* Story beside the fact sheet a procurement function checks first. */}
+      {/* The story, and beside it the facts a procurement function checks. */}
       <section className="py-24 sm:py-32">
-        <div className="mx-auto grid grid-cols-1 max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-20 lg:px-8">
-          <Reveal className="lg:col-span-7">
-            <SectionHeading
-              eyebrow="Vår historia"
-              title="Från byggentreprenör till koncern med fyra verksamheter"
-            />
-            <div className="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-ink-soft">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+          <Reveal className="lg:col-span-5">
+            <SectionHeading title="Så växte Kanitas" />
+            <div className="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-ink-soft">
               <p>
-                Kanitas AB grundades {site.founded} i Järfälla som
-                byggentreprenör. Verksamheten växte genom underentreprenader åt
-                större byggbolag, och i takt med att uppdragen blev fler bröts
-                bemanning, maskinhandel och fastighetsägande ut i egna bolag.
+                Kanitas AB startade som byggfirma i {site.address.city}{" "}
+                {site.founded} och växte genom uppdrag som underentreprenör åt
+                större byggbolag. Med tiden fick bemanning, maskinhandel och
+                fastigheter egna bolag.
               </p>
               <p>
-                I dag består koncernen av fem bolag och 35 medarbetare inom
-                bygg, bemanning, maskinhandel och fastigheter. Bolagen delar
-                ledning, kollektivavtal och kontor i Järfälla, men drivs med
-                eget resultatansvar och egna kundrelationer.
-              </p>
-              <p>
-                Kanitas AB är moderbolag och avtalspart. Byggentreprenader
-                utförs av koncernens byggorganisation, bemanning och
-                byggstädning av Kanitas ENT.
+                Bygg är fortfarande den största verksamheten. Vi arbetar med
+                egen personal och anlitar fasta samarbetspartner för el, VVS
+                och ventilation.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={100} className="lg:col-span-5">
-            <div className="border-t-[3px] border-petrol bg-paper-2 p-7 sm:p-9 lg:sticky lg:top-28">
-              <h2 className="label text-petrol">Fakta om koncernen</h2>
-              <dl className="mt-6 divide-y divide-line border-y border-line">
-                {groupFacts.map((fact) => (
-                  <div
-                    key={fact.label}
-                    className="grid grid-cols-[8.5rem_minmax(0,1fr)] gap-4 py-3.5 sm:grid-cols-[10rem_minmax(0,1fr)]"
-                  >
-                    <dt className="text-sm text-muted">{fact.label}</dt>
-                    <dd className="text-[0.95rem] font-semibold text-ink">
-                      {fact.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+          <Reveal delay={80} className="lg:col-span-6 lg:col-start-7">
+            <h2 className="label text-muted">Fakta om koncernen</h2>
+            <dl className="mt-6 grid grid-cols-1 gap-x-10 sm:grid-cols-2">
+              {groupFacts.map((fact) => (
+                <div key={fact.label} className="border-t border-line py-5">
+                  <dt className="text-sm text-muted">{fact.label}</dt>
+                  <dd className="mt-1 font-semibold text-ink">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </div>
       </section>
 
-      <div className="parallax relative isolate h-[40svh] min-h-[260px] overflow-hidden sm:h-[52svh]">
-        <Photo name="kranar" sizes="100vw" />
-      </div>
-
       {/* Legal entities with org.nr, the way a supplier register lists them. */}
-      <section id="bolagen" className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="bolagen" className="bg-paper-2 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
-            <SectionHeading
-              eyebrow="Bolagsuppgifter"
-              title="Bolagen i koncernen"
-              lead="Kanitas AB är moderbolag och avtalspart. Underlag för kreditvärdighet, kollektivavtal och försäkring lämnas i samband med upphandling."
-            />
+            <SectionHeading title="Bolagen i koncernen" />
           </Reveal>
 
           <Reveal delay={60}>
-            <table className="mt-14 w-full border-y border-line text-left">
+            <table className="mt-12 w-full border-y border-line text-left">
               <thead className="sr-only md:not-sr-only">
                 <tr className="border-b border-line">
-                  <th scope="col" className="label py-4 pr-6 font-semibold text-muted">
+                  <th scope="col" className="py-4 pr-6 text-sm font-semibold text-muted">
                     Bolag
                   </th>
-                  <th scope="col" className="label py-4 pr-6 font-semibold text-muted">
+                  <th scope="col" className="py-4 pr-6 text-sm font-semibold text-muted">
                     Org.nr
                   </th>
-                  <th scope="col" className="label py-4 pr-6 font-semibold text-muted">
+                  <th scope="col" className="py-4 pr-6 text-sm font-semibold text-muted">
                     Inriktning
                   </th>
-                  <th scope="col" className="label py-4 font-semibold text-muted">
+                  <th scope="col" className="py-4 text-sm font-semibold text-muted">
                     Verksamhet
                   </th>
                 </tr>
@@ -153,7 +126,7 @@ export default function OmOssPage() {
                       >
                         <span className="title text-ink">{company.name}</span>
                         {parent ? (
-                          <span className="label ml-3 inline-block bg-petrol px-2 py-1 text-[0.65rem] text-white">
+                          <span className="ml-3 inline-block bg-petrol px-2 py-0.5 align-middle text-xs font-medium text-white">
                             Moderbolag
                           </span>
                         ) : null}
@@ -187,42 +160,18 @@ export default function OmOssPage() {
         </div>
       </section>
 
-      <section id="referenser" className="border-t border-line bg-paper-2 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="referenser" className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
-            <SectionHeading
-              eyebrow="Referenser"
-              title="Kunder som ställer krav och kommer tillbaka"
-              lead="Vi arbetar som partner och underentreprenör åt några av Sveriges ledande bygg-, fastighets- och logistikföretag."
-            />
+            <SectionHeading title="Några av våra uppdragsgivare" />
           </Reveal>
-          <Reveal delay={100}>
+          <Reveal delay={60}>
             <LogoWall className="mt-14" />
           </Reveal>
         </div>
       </section>
 
-      <section className="surface-blueprint overflow-hidden">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-4 py-20 sm:px-6 sm:py-24 lg:flex-row lg:items-center lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="display-2 text-white">Vad kan vi hjälpa dig med?</h2>
-            <p className="mt-4 lead text-white/75">
-              Bygg, bemanning, maskiner eller lokaler: hör av dig så kopplar vi
-              dig till rätt verksamhet och rätt kontaktperson.
-            </p>
-          </div>
-          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Link href="/kontakt" className="btn btn-light">
-              Kontakta oss
-              <ArrowRight aria-hidden="true" />
-            </Link>
-            <a href={site.phoneHref} className="btn btn-ghost">
-              <Phone aria-hidden="true" />
-              {site.phone}
-            </a>
-          </div>
-        </div>
-      </section>
+      <ContactBand />
     </>
   );
 }

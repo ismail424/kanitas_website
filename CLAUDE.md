@@ -23,6 +23,6 @@
 
 ## Viktigt
 - Innehållsspråk: Svenska
-- Webbplatsens fokus: Koncernen Kanitas med fyra verksamhetsområden — bygg (kärnverksamhet), städ, fastigheter och bil
+- Webbplatsens fokus: Koncernen Kanitas med fyra verksamheter — bygg (kärnverksamhet), bemanning och byggstädning (Kanitas ENT), maskiner och fordon (Kanitas Trading) samt lokaler (Kanitas Fastigheter)
 - Kontaktuppgifter och företagsfakta ändras ENDAST i `src/lib/site.ts`
 - Kontaktformuläret skickar via `/api/send-email` (SMTP-konfiguration via miljövariabler, mottagare är hårdkodad server-side av säkerhetsskäl)

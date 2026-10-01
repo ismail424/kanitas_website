@@ -18,12 +18,10 @@ export default function FaqList({
             <span className="title text-ink transition-colors group-hover:text-petrol">
               {item.q}
             </span>
-            <span
+            <Plus
               aria-hidden="true"
-              className="-mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-xs border border-line text-petrol transition-colors group-open:border-petrol group-open:bg-petrol group-open:text-white"
-            >
-              <Plus className="h-4 w-4 transition-transform duration-300 group-open:rotate-45" />
-            </span>
+              className="mt-0.5 h-5 w-5 shrink-0 text-petrol transition-transform duration-300 group-open:rotate-45"
+            />
           </summary>
           <p className="max-w-3xl pb-7 pr-12 leading-relaxed text-ink-soft">
             {item.a}
