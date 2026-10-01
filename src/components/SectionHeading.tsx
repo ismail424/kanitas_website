@@ -1,6 +1,6 @@
 /**
- * Eyebrow + heading + optional lead, the recurring heading pattern
- * of the site. `on="dark"` inverts colors for dark sections.
+ * Eyebrow + heading + optional lead, the recurring heading pattern of the
+ * site. `on="dark"` inverts colours for petrol sections.
  */
 export default function SectionHeading({
   eyebrow,
@@ -9,6 +9,7 @@ export default function SectionHeading({
   on = "light",
   align = "left",
   as: Tag = "h2",
+  className = "",
 }: {
   eyebrow: string;
   title: string;
@@ -16,30 +17,26 @@ export default function SectionHeading({
   on?: "light" | "dark";
   align?: "left" | "center";
   as?: "h1" | "h2";
+  className?: string;
 }) {
   const centered = align === "center";
+  const dark = on === "dark";
   return (
-    <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+    <div
+      className={`${centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}
+    >
       <p
         className={`eyebrow ${centered ? "justify-center" : ""} ${
-          on === "dark" ? "text-copper-soft" : "text-petrol"
+          dark ? "text-copper-soft" : "text-petrol"
         }`}
       >
         {eyebrow}
       </p>
-      <Tag
-        className={`mt-4 display-2 ${
-          on === "dark" ? "text-white" : "text-ink"
-        }`}
-      >
+      <Tag className={`mt-5 display-2 ${dark ? "text-white" : "text-ink"}`}>
         {title}
       </Tag>
       {lead ? (
-        <p
-          className={`mt-5 text-lg leading-relaxed ${
-            on === "dark" ? "text-white/70" : "text-muted"
-          }`}
-        >
+        <p className={`mt-5 lead ${dark ? "text-white/70" : "text-muted"}`}>
           {lead}
         </p>
       ) : null}

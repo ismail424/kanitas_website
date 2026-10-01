@@ -41,10 +41,11 @@ Kontaktformuläret skickar e-post via SMTP och behöver:
 
 ## Struktur
 
-- `src/app` – sidor (startsida, /bygg, /stad, /fastigheter, /bil, /om-oss, /kontakt), layout, API, sitemap/robots
-- `src/components` – återanvändbara komponenter
-- `src/lib/site.ts` – all webbplatsdata: kontaktuppgifter, verksamhetsområden, referenser, koncernbolag
-- `public/images/photos` – optimerade foton (Unsplash)
+- `src/app` – sidor (startsida, /bygg, /stad, /om-oss, /kontakt, /integritetspolicy), layout, API, sitemap/robots, favicon och appikoner
+- `src/components` – återanvändbara komponenter, bland annat `HomeHero` (bildspel), `Blueprint` (animerade linjeteckningar), `PageHero`, `LogoMarquee` och `Logo`
+- `src/lib/site.ts` – all webbplatsdata: kontaktuppgifter, verksamheter, fotoregister, referenser, koncernbolag
+- `public/images/photos` – foton i AVIF (Unsplash/Pexels, fria för kommersiellt bruk). Byt mot egna foton via fotoregistret i `site.ts`
 - `public/references`, `public/images/cert` – kundlogotyper och certifikat
+- `public/og*.jpg` – delningsbilder för sociala medier
 
 Företagsfakta och kontaktuppgifter ändras endast i `src/lib/site.ts`.

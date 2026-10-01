@@ -15,8 +15,8 @@ export default function StadPage() {
   return (
     <AreaPage
       area={area}
-      whyTitle="Bemanning och städning från någon som själv bygger"
-      whyLead="Kanitas ENT sitter i samma koncern som ett byggbolag. Personalen vi hyr ut har jobbat på våra egna projekt, och städarna vet exakt vad en besiktning kräver. Därför blir det rätt första gången."
+      whyTitle="Bemanning och byggstädning med byggkunskap i grunden"
+      whyLead="Kanitas ENT ingår i samma koncern som ett byggbolag. Personalen vi hyr ut har arbetat i våra egna projekt, och våra byggstädare vet vad en besiktning kräver."
       whyPoints={[
         "Egen personal på kollektivavtal, inte inhyrd i flera led",
         "Yrkesarbetare på plats ofta inom ett dygn",
@@ -25,8 +25,14 @@ export default function StadPage() {
         "Vi står kvar tills besiktningen är godkänd",
         "Snabb inställelse i hela Storstockholm",
       ]}
-      whyPhoto="ent-bemanning"
-      secondaryPhoto="ent-stad"
+      heroPhoto="arbetsplats"
+      gallery={[
+        { photo: "ent-stad", label: "Byggstädning & slutstädning" },
+        { photo: "stad-fonster", label: "Fönsterputs & storstädning" },
+        { photo: "kontor", label: "Kontors- & fastighetsstädning" },
+      ]}
+      bandPhoto="snickeri"
+      drawing="hardhat"
     />
   );
 }

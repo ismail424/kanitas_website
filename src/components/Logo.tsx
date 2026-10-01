@@ -97,6 +97,23 @@ export function LogoLockup({
 }
 
 /**
+ * The K alone, without its rule, for use as a graphic rather than a logo:
+ * hidden from assistive tech, coloured entirely by `className`.
+ */
+export function Mark({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="8 0.4 91.6 93.2"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fillRule="evenodd" d={MARK_D} />
+    </svg>
+  );
+}
+
+/**
  * Area hero lockup, e.g. KANITAS BYGG. The suffix is live text rather than
  * traced outlines so a new verksamhet needs no new artwork.
  */

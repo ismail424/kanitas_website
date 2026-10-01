@@ -1,43 +1,47 @@
 @import "tailwindcss";
 
 /*
- * Kanitas design tokens v4 — the palette is taken straight from the logo:
- * petrol green carries the weight (surfaces, actions, headings) and copper is
- * the detail, exactly as the mark uses it for its two rules. One palette for
- * every business area. No hardcoded hex in components.
+ * Kanitas design tokens v5. The palette is taken from the logo: petrol carries
+ * the weight (type, actions, dark bands) and copper is the detail, the way the
+ * mark uses it for its two rules. Surfaces are white and a cool mist, so a
+ * change of band reads as structure rather than as two near-identical greys.
+ * No hardcoded hex in components.
  */
 @theme {
   /* Surfaces */
-  --color-paper: #f4f6f6;
-  --color-paper-2: #e7ecec;
+  --color-paper: #ffffff;
+  --color-paper-2: #eef2f2;
   --color-card: #ffffff;
-  --color-petrol-pale: #dbe8ea;
+  --color-petrol-pale: #dde9eb;
 
   /* Text on light */
   --color-ink: #0f2229;
   --color-ink-soft: #33474f;
-  --color-muted: #5d6d73;
+  --color-muted: #5a6a70;
 
   /* Borders */
-  --color-line: #dde4e4;
-  --color-line-deep: #1a5766;
+  --color-line: #d8e0e0;
+  --color-line-deep: #1d5766;
 
-  /* Brand petrol — logo mark, primary action, dark surfaces */
+  /* Brand petrol: logo mark, primary action, dark surfaces */
   --color-petrol: #134b58;
   --color-petrol-deep: #0c3945;
   --color-petrol-dark: #0e3d49;
   --color-petrol-darker: #082a33;
   --color-petrol-raised: #15586a;
 
-  /* Copper — the logo rule; accent detail only */
+  /* Copper, the logo rule. `copper` is for rules and marks only; text uses
+     `copper-ink` on light surfaces and `copper-soft` on petrol, both AA. */
   --color-copper: #c76245;
+  --color-copper-ink: #a84e33;
   --color-copper-soft: #e08e6d;
 
   /* Feedback */
   --color-ok: #2f7d4f;
   --color-error: #b23a2e;
 
-  /* Typography */
+  /* Typography. Archivo carries a width axis; headings run slightly wide to
+     echo the KANITAS wordmark, labels wider still. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif,
@@ -47,8 +51,30 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html {
-  scroll-padding-top: 96px;
+@layer base {
+  html {
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-petrol);
+    color: #ffffff;
+  }
+
+  /* One focus ring everywhere, in the accent colour so it is never mistaken
+     for a border. */
+  :focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 3px;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -57,110 +83,431 @@ html {
   }
 }
 
-body {
-  background-color: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-::selection {
-  background-color: var(--color-petrol);
-  color: #ffffff;
-}
-
-/* Deep petrol hero surface with a faint construction grid */
-.hero-deep {
-  background-color: var(--color-petrol-darker);
-  background-image:
-    radial-gradient(
-      90rem 40rem at 85% -10%,
-      rgba(224, 142, 109, 0.18),
-      transparent 60%
-    ),
-    linear-gradient(160deg, #082a33 0%, #0e3d49 55%, #15586a 100%);
-  position: relative;
-}
-
-.hero-deep::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 76px 76px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
-  pointer-events: none;
-}
-
-/* Subtle dot grid so light surfaces are not flat white */
-.bg-dotgrid {
-  background-image: radial-gradient(
-    rgba(15, 34, 41, 0.07) 1px,
-    transparent 1px
-  );
-  background-size: 26px 26px;
-}
-
-/* Eyebrow kicker with rule — used above every section heading */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.eyebrow::before {
-  content: "";
-  width: 2.25rem;
-  height: 2px;
-  /* Follows the text color so surface variants carry through automatically */
-  background-color: currentColor;
-}
-
 /*
- * Global type system — every heading and lead on the site uses one of
- * these classes so scale, weight and rhythm are identical everywhere.
+ * Global type system. Every heading and lead on the site uses one of these,
+ * so scale, width and rhythm are identical everywhere. Layered as components
+ * so a utility on the same element still wins.
  */
-.display-1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5.2vw, 4rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+@layer components {
+  /* Swedish compounds ("byggentreprenör", "fastighetsförvaltning") are wider
+     than a phone at display sizes: let them break rather than overflow, and
+     hyphenate on narrow screens only, where a broken word beats a clipped one. */
+  .display-1,
+  .display-2,
+  .display-3,
+  .title {
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 30rem) {
+    .display-1,
+    .display-2,
+    .display-3 {
+      hyphens: auto;
+    }
+  }
+
+  .display-1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 108;
+    letter-spacing: -0.022em;
+    word-spacing: 0.04em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .display-2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 3.2vw, 2.8rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 108;
+    letter-spacing: -0.018em;
+    word-spacing: 0.04em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .display-3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.3vw, 2rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.014em;
+    word-spacing: 0.03em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    font-variation-settings: "wdth" 104;
+    letter-spacing: -0.006em;
+    line-height: 1.35;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  .lead-lg {
+    font-size: clamp(1.125rem, 1.5vw, 1.3rem);
+    line-height: 1.6;
+  }
+
+  /* Small wide capitals, after the tagline under the wordmark. */
+  .label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variation-settings: "wdth" 118;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  /* Section kicker: the copper rule from the logo, then the label. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variation-settings: "wdth" 118;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    content: "";
+    flex: none;
+    width: 1.75rem;
+    height: 3px;
+    background-color: var(--color-copper);
+  }
+
+  /* Index numbers: 01, 02 … set wide and tabular so a column of them aligns. */
+  .index {
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    font-variation-settings: "wdth" 118;
+    letter-spacing: 0.06em;
+  }
+
+  /*
+   * Buttons. Square-cornered like the blocks of the mark; one height, one
+   * weight, four surfaces. Arrows inside nudge on hover.
+   */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3.25rem;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 600;
+    line-height: 1.25;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+
+  .btn > svg {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+
+  .btn:hover > svg.lucide-arrow-right {
+    transform: translateX(3px);
+  }
+
+  .btn-primary {
+    background-color: var(--color-petrol);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-petrol-deep);
+  }
+
+  .btn-outline {
+    border-color: color-mix(in oklab, var(--color-ink) 28%, transparent);
+    color: var(--color-ink);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-ink);
+  }
+
+  /* Primary action on petrol */
+  .btn-light {
+    background-color: #ffffff;
+    color: var(--color-petrol);
+  }
+
+  .btn-light:hover {
+    background-color: var(--color-copper-soft);
+    color: var(--color-petrol-darker);
+  }
+
+  /* Secondary action on petrol */
+  .btn-ghost {
+    border-color: rgb(255 255 255 / 0.32);
+    color: #ffffff;
+  }
+
+  .btn-ghost:hover {
+    border-color: #ffffff;
+    background-color: rgb(255 255 255 / 0.08);
+  }
+
+  /* Text link with a trailing arrow, used wherever a whole block links on. */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+
+  .link-arrow > svg {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+
+  .link-arrow:hover > svg,
+  .group:hover .link-arrow > svg {
+    transform: translateX(3px);
+  }
+
+  /*
+   * Client and certificate logos arrive as mixed PNG/JPEG, some with white
+   * boxes baked in. Multiply drops the box into whatever surface they sit on,
+   * and greyscale evens out a wall of competing brand colours.
+   */
+  .logo-mono {
+    mix-blend-mode: multiply;
+    filter: grayscale(1);
+    opacity: 0.78;
+    transition:
+      filter 0.3s,
+      opacity 0.3s;
+  }
+
+  .logo-mono:hover {
+    filter: none;
+    opacity: 1;
+  }
+
+  .logo-flat {
+    mix-blend-mode: multiply;
+  }
+
+  /* PageHero photograph: starts where the 7-of-12 text column ends and
+     bleeds off the right edge, whatever the viewport width. That is the
+     container's left edge, max(2rem, 50% - 38rem), plus 7/12 of its content
+     width, min(100% - 4rem, 76rem). Written pre-multiplied: the nested form
+     crashes the CSS optimiser in production builds. */
+  @media (min-width: 64rem) {
+    .hero-photo {
+      left: calc(max(2rem, 50% - 38rem) + min(58.3333% - 2.3333rem, 44.3333rem));
+    }
+  }
+
+  /* Deep petrol surface with a faint construction grid. */
+  .surface-blueprint {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--color-petrol-darker);
+    background-image:
+      radial-gradient(
+        70rem 34rem at 92% -20%,
+        rgb(224 142 109 / 0.14),
+        transparent 60%
+      ),
+      linear-gradient(160deg, #082a33 0%, #0e3d49 60%, #134b58 100%);
+  }
+
+  .surface-blueprint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 90%);
+    pointer-events: none;
+  }
 }
 
-.display-2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.2vw, 2.65rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
+/* Home hero. The verb belonging to the photograph on screen is underlined
+   in copper; photographs drift slowly; the index shows time to the next. */
+.hero-verb {
+  /* Inline padding lowers the box's bottom edge below the descenders
+     without touching the line height, so the rule clears g and y. */
+  padding-bottom: 0.1em;
+  background-image: linear-gradient(var(--color-copper), var(--color-copper));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 0.07em;
+  transition:
+    background-size 0.7s var(--ease-out-soft),
+    color 0.7s var(--ease-out-soft);
 }
 
-.title {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
+.hero-verb.is-active {
+  color: var(--color-copper-soft);
+  background-size: 100% 0.07em;
 }
 
-.lead {
-  font-size: 1.125rem;
-  font-weight: 400;
-  line-height: 1.65;
+@media (prefers-reduced-motion: no-preference) {
+  .hero-drift {
+    animation: hero-drift 18s ease-in-out infinite alternate;
+  }
+
+  .hero-progress {
+    animation-name: hero-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+  }
+
+  .hero-in {
+    animation: hero-in 0.9s var(--ease-out-soft) both;
+    animation-delay: calc(var(--in, 0) * 110ms + 80ms);
+  }
 }
 
-.lead-lg {
-  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
-  font-weight: 300;
-  line-height: 1.65;
+@keyframes hero-drift {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.1) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Client logos on a slow conveyor. The list is rendered twice and moved by
+   half its width, so the loop has no seam; hovering stops it. */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee 48s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Image bands drift against the scroll where the browser supports
+   scroll-driven animation; elsewhere they simply sit still. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .parallax > * {
+      animation: parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translate3d(0, -7%, 0) scale(1.14);
+  }
+  to {
+    transform: translate3d(0, 7%, 0) scale(1.14);
+  }
+}
+
+/* Line drawings (Blueprint). Stroke weight is in drawing units, so a drawing
+   shown larger draws heavier; `--bp-stroke` thins it where that matters. */
+.blueprint path {
+  stroke: currentColor;
+  stroke-width: var(--bp-stroke, 1.5);
+}
+
+.blueprint .blueprint-accent {
+  stroke: var(--bp-accent, var(--color-copper));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hidden only once the Reveal component has armed it, so no-JS readers
+     always see the finished drawing. */
+  .reveal .blueprint path {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.9s var(--ease-out-soft);
+    transition-delay: calc(var(--i) * 55ms + 150ms);
+  }
+
+  .reveal.is-visible .blueprint path {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* FAQ disclosure: open and close animate where the browser can size to auto. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
+
+    details.faq::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size 0.35s var(--ease-out-soft),
+        content-visibility 0.35s allow-discrete;
+    }
+
+    details.faq[open]::details-content {
+      block-size: auto;
+    }
+  }
 }
 
 /* Scroll reveal, activated by the Reveal component. No-JS and reduced-motion

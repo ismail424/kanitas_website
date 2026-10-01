@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactSection from "@/components/ContactSection";
+import PageHero from "@/components/PageHero";
 import { ogMeta, site } from "@/lib/site";
 
 const pageTitle = "Kontakta oss för offert och rådgivning";
@@ -28,20 +29,15 @@ export default function KontaktPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <section className="hero-deep relative isolate overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-36 sm:px-6 sm:pt-44 lg:px-8">
-          <p className="eyebrow text-copper-soft">Kontakt</p>
-          <h1 className="mt-5 max-w-3xl display-1 text-white">
-            Kontakta Kanitas
-          </h1>
-          <p className="mt-6 max-w-2xl lead text-white/75">
-            Samma nummer och samma mejladress gäller samtliga verksamheter i
-            koncernen. Ange vad ärendet gäller så kopplas det till rätt bolag
-            och rätt kontaktperson. Förfrågningar besvaras normalt inom ett
-            dygn.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ href: "/kontakt", label: "Kontakt" }]}
+        kicker={
+          <p className="eyebrow text-copper-soft">Järfälla · Storstockholm</p>
+        }
+        title="Kontakta Kanitas"
+        lead="Ett nummer och en mejladress för samtliga verksamheter i koncernen. Ange vad ärendet gäller så kopplas det till rätt bolag och rätt kontaktperson. Förfrågningar besvaras normalt inom ett dygn."
+        photo="stockholm"
+      />
       <ContactSection
         title="Skicka en förfrågan"
         lead="Ange omfattning, plats och önskad tidpunkt. Offerter och förfrågningsunderlag hanteras kostnadsfritt och utan förpliktelser."

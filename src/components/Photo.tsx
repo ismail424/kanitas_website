@@ -15,11 +15,14 @@ export default function Photo({
   priority = false,
   className = "",
   placeholderClassName = "",
+  decorative = false,
 }: {
   name: PhotoName;
   sizes: string;
   priority?: boolean;
   className?: string;
+  /** Pure atmosphere (e.g. behind a headline): empty alt, skipped by readers. */
+  decorative?: boolean;
   /** Extra classes for the placeholder only, e.g. to clear an overlapping card. */
   placeholderClassName?: string;
 }) {
@@ -44,7 +47,7 @@ export default function Photo({
   return (
     <Image
       src={photo.src}
-      alt={photo.alt}
+      alt={decorative ? "" : photo.alt}
       fill
       priority={priority}
       sizes={sizes}

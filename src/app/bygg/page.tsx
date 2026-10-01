@@ -24,8 +24,14 @@ export default function ByggPage() {
         "Totalansvar: bygg, mark, sanering och byggstädning i samma koncern",
         "Fast kontaktperson och tydlig kommunikation genom hela projektet",
       ]}
-      whyPhoto="bygg-varfor"
-      secondaryPhoto="bygg-projekt"
+      heroPhoto="bygg-varfor"
+      gallery={[
+        { photo: "kranar", label: "Nybyggnation & entreprenad" },
+        { photo: "renovering", label: "Renovering & ombyggnation" },
+        { photo: "snickeri", label: "Stomkomplettering & snickerier" },
+      ]}
+      bandPhoto="bygg-projekt"
+      drawing="crane"
     />
   );
 }

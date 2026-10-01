@@ -10,13 +10,15 @@
 - Använd Typescript för alla komponenter
 - Följ Next.js 15 konventioner och App Router (server components som standard)
 - Använd Tailwind CSS v4 för all styling — designtokens definieras i `src/app/globals.css` under `@theme`
-- Inga hårdkodade färger i komponenter: använd tokens (cream, ink, muted, dark, amber m.fl.)
+- Inga hårdkodade färger i komponenter: använd tokens (paper, ink, muted, petrol, copper m.fl.)
+- Typsnitt: Archivo (rubriker, med breddaxel) och Inter (brödtext); typklasser som `display-1`, `title`, `label` och knappar (`btn btn-primary` m.fl.) definieras i `globals.css`
+- Logotypen (`src/components/logo-paths.ts`) är ren geometri: K-märket ritat i exakta polygoner och ordmärket satt i Jost som konturer. Ändra inte koordinaterna för hand
 - Ikoner: lucide-react
 - Språk: Svenska för användargränssnitt, engelska för kod och kommentarer
 - Filstruktur:
   - `/src/app`: Sidor, layout, API-routes, sitemap/robots
   - `/src/components`: Återanvändbara komponenter
-  - `/src/lib/site.ts`: All webbplatsdata (kontaktuppgifter, verksamhetsområden, referenser, koncernbolag)
+  - `/src/lib/site.ts`: All webbplatsdata (kontaktuppgifter, verksamheter, fotoregister, referenser, koncernbolag)
   - `/public`: Statiska filer (bilder, fonts)
 
 ## Viktigt

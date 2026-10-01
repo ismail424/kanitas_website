@@ -16,6 +16,7 @@ const archivo = Archivo({
   subsets: ["latin"],
   variable: "--font-archivo",
   display: "swap",
+  axes: ["wdth"],
 });
 
 export const viewport: Viewport = {
@@ -24,14 +25,19 @@ export const viewport: Viewport = {
   themeColor: "#134b58",
 };
 
+// Fallbacks for any page without its own metadata. The group runs four
+// verksamheter, so the fallback names all four rather than two of them.
+const defaultTitle = "Kanitas | Bygg, bemanning, maskiner och lokaler i Stockholm";
+const defaultDescription =
+  "Kanitas i Järfälla: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i hela Storstockholm sedan 2011.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Kanitas | Byggföretag & städfirma i Stockholm",
+    default: defaultTitle,
     template: "%s | Kanitas",
   },
-  description:
-    "Kanitas är ett bygg- och städföretag i Järfälla. Nybyggnation, renovering, byggservice och byggstädning i hela Storstockholm sedan 2011.",
+  description: defaultDescription,
   keywords: [
     "byggföretag Stockholm",
     "byggservice Järfälla",
@@ -48,16 +54,14 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: site.url,
     siteName: site.legalName,
-    title: "Kanitas | Byggföretag & städfirma i Stockholm",
-    description:
-      "Bygg- och städföretag i Järfälla. Byggentreprenader, byggservice och städning i Storstockholm sedan 2011.",
+    title: defaultTitle,
+    description: defaultDescription,
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Kanitas" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kanitas | Byggföretag & städfirma i Stockholm",
-    description:
-      "Bygg- och städföretag i Järfälla. Byggentreprenader, byggservice och städning i Storstockholm sedan 2011.",
+    title: defaultTitle,
+    description: defaultDescription,
     images: ["/og.jpg"],
   },
   robots: {
@@ -84,7 +88,7 @@ const organizationJsonLd = {
   image: `${site.url}/og.jpg`,
   foundingDate: String(site.founded),
   taxID: site.orgnr,
-  telephone: "+46706653248",
+  telephone: site.phoneIntl,
   email: site.email,
   priceRange: "$$",
   address: {
@@ -122,7 +126,7 @@ export default function RootLayout({
         />
         <a
           href="#innehall"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-petrol focus:px-4 focus:py-2 focus:font-semibold focus:text-petrol-darker"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:rounded-lg focus:bg-petrol focus:px-4 focus:py-2 focus:font-semibold focus:text-white"
         >
           Hoppa till innehållet
         </a>

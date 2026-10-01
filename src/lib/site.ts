@@ -11,6 +11,7 @@ export const site = {
   founded: 2011,
   url: "https://kanitas.se",
   phone: "070-665 32 48",
+  phoneIntl: "+46706653248",
   phoneHref: "tel:+46706653248",
   email: "info@kanitas.se",
   address: {
@@ -74,8 +75,8 @@ export type Area = {
   toneDeep: string;
   /** Label for the primary CTA — matches what the visitor actually wants */
   ctaLabel: string;
-  /** Pre-selected ärende in the contact form; must be one of contactTopics */
-  contactTopic: (typeof contactTopics)[number];
+  /** Pre-selected ärende in the contact form */
+  contactTopic: ContactTopic;
   teaser: string;
   intro: string;
   services: { title: string; text: string }[];
@@ -83,11 +84,13 @@ export type Area = {
   related?: { href: string; label: string; text: string };
   /** Area-specific process steps ("Så går det till") */
   process: { step: string; title: string; text: string }[];
-  /** Optional content sections for depth (checklists, how-it-works etc.) */
+  /** Optional content sections for depth (checklists, how-it-works etc.).
+   *  `steps` draws the items as a sequence, for content that happens in order. */
   extraSections?: {
     eyebrow: string;
     title: string;
     lead?: string;
+    layout?: "list" | "steps";
     items: { title: string; text: string }[];
   }[];
   /** Optional FAQ — rendered with FAQPage structured data */
@@ -112,7 +115,7 @@ export const areas: Area[] = [
     teaser:
       "Nybyggnation, renovering och byggservice för företag och privatpersoner. Vår kärnverksamhet sedan 2011.",
     intro:
-      "Bygg är hjärtat i Kanitas. Vi tar totalansvar för projekt i alla storlekar, från löpande byggservice till kompletta entreprenader, åt byggbolag, fastighetsägare och privatpersoner. Bland våra uppdragsgivare finns flera av Sveriges ledande bygg- och fastighetsaktörer, och vi hjälper lika gärna dig som ska renovera hemma.",
+      "Kanitas Bygg utför entreprenader i alla storlekar, från löpande byggservice till kompletta om- och nybyggnationer, åt byggbolag, fastighetsägare, bostadsrättsföreningar och privatpersoner. Vi tar totalansvar från första offert till godkänd slutbesiktning.",
     services: [
       {
         title: "Nybyggnation",
@@ -345,6 +348,7 @@ export const areas: Area[] = [
       {
         eyebrow: "Byggstädning",
         title: "Det här ingår i en byggstädning",
+        layout: "steps",
         lead: "Byggstädning sker i etapper i takt med projektet, från grovstädning under byggtiden till finstädning inför besiktning och inflytt.",
         items: [
           {
@@ -553,18 +557,11 @@ export const areas: Area[] = [
  * for now — flip `active` and restore their route folders to re-enable. */
 export const activeAreas = areas.filter((a) => a.active);
 
+/** Header links after the Verksamheter menu, which lists `businesses`. */
 export const nav = [
-  { href: "/#verksamheter", label: "Verksamheter" },
-  ...activeAreas.map((a) => ({ href: `/${a.slug}`, label: a.nav })),
   { href: "/om-oss", label: "Om oss" },
+  { href: "/om-oss#referenser", label: "Referenser" },
   { href: "/kontakt", label: "Kontakt" },
-];
-
-export const stats = [
-  { value: "2011", label: "Grundat i Järfälla" },
-  { value: "35", label: "Medarbetare i koncernen" },
-  { value: "5", label: "Bolag i koncernen" },
-  { value: "AAA", label: "Högsta kreditvärdighet" },
 ];
 
 /**
@@ -587,9 +584,8 @@ export const photos = {
   "hem-hero": {
     src: "/images/photos/hem-hero.avif",
     alt: "Modern byggnad i glas och stål sedd underifrån mot ljus himmel",
-    brief:
-      "Ljus arkitekturbild i liggande format. Vänstra tredjedelen måste vara ljus, rubriken ligger där.",
-    shape: "Full bredd, minst 3200 px, ljus vänsterkant",
+    brief: "Ljus arkitekturbild i liggande format.",
+    shape: "Full bredd, minst 3200 px",
     ready: true,
   },
   "bygg-varfor": {
@@ -606,11 +602,39 @@ export const photos = {
     shape: "16:10 liggande",
     ready: true,
   },
-  "ent-bemanning": {
-    src: "/images/photos/ent-bemanning.avif",
-    alt: "Fasad på nyproducerat flerbostadshus med balkonger",
-    brief: "Fastighet eller arbetsplats där vår personal är verksam",
-    shape: "16:10 liggande",
+  kranar: {
+    src: "/images/photos/kranar.avif",
+    alt: "Tornkranar över en byggnad under uppförande",
+    brief: "Pågående entreprenad med kranar, gärna vårt eget projekt",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  arbetsplats: {
+    src: "/images/photos/arbetsplats.avif",
+    alt: "Yrkesarbetare i varselkläder som armerar ett bjälklag",
+    brief: "Vår egen personal i arbete, i Kanitas arbetskläder",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  team: {
+    src: "/images/photos/team.avif",
+    alt: "Arbetslag i varselkläder samlat på en stor arbetsplats",
+    brief: "Hela arbetslaget på en av våra arbetsplatser",
+    shape: "5:2 liggande",
+    ready: true,
+  },
+  snickeri: {
+    src: "/images/photos/snickeri.avif",
+    alt: "Snickare som kapar virke med cirkelsåg",
+    brief: "Hantverkare i arbete, händer och verktyg i fokus",
+    shape: "16:9 liggande",
+    ready: true,
+  },
+  renovering: {
+    src: "/images/photos/renovering.avif",
+    alt: "Nyrenoverat vardagsrum och kök i öppen planlösning",
+    brief: "Färdig renovering, interiör",
+    shape: "3:2 liggande",
     ready: true,
   },
   "ent-stad": {
@@ -620,6 +644,27 @@ export const photos = {
     shape: "16:10 liggande",
     ready: true,
   },
+  "stad-fonster": {
+    src: "/images/photos/stad-fonster.avif",
+    alt: "Lokalvårdare i skyddsutrustning som rengör ett fönster",
+    brief: "Vår städpersonal i arbete",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  "stad-detalj": {
+    src: "/images/photos/stad-detalj.avif",
+    alt: "Hand i skyddshandske med sprayflaska",
+    brief: "Detaljbild från städning",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  kontor: {
+    src: "/images/photos/kontor.avif",
+    alt: "Ljust kontor med loungemöbler och glaspartier",
+    brief: "Kontor eller lokal som vi städar eller förvaltar",
+    shape: "3:2 liggande",
+    ready: true,
+  },
   trading: {
     src: "/images/photos/trading.avif",
     alt: "Volvo grävmaskin uppställd på ett markarbete",
@@ -627,18 +672,25 @@ export const photos = {
     shape: "16:10 liggande",
     ready: true,
   },
-  fastigheter: {
-    src: "/images/photos/fastigheter.avif",
-    alt: "Fasad på modern verksamhetslokal",
-    brief: "Egen lokal i beståndet, exteriör eller uthyrningsbar yta",
-    shape: "16:10 liggande",
+  lager: {
+    src: "/images/photos/lager.avif",
+    alt: "Lagerlokal med pallställ i full höjd",
+    brief: "Egen lager- eller verkstadslokal i beståndet",
+    shape: "3:2 liggande",
     ready: true,
   },
-  "om-oss": {
-    src: "/images/photos/om-oss.avif",
-    alt: "Vy över Stockholms innerstad från vattnet",
-    brief: "Kontoret eller fordonsparken i Järfälla, visar att vi finns på riktigt",
-    shape: "16:10 liggande",
+  lokal: {
+    src: "/images/photos/lokal.avif",
+    alt: "Tom kontorslokal med korridor och pentry, klar för inflyttning",
+    brief: "Ledig lokal i beståndet, interiör",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  stockholm: {
+    src: "/images/photos/stockholm.avif",
+    alt: "Stockholm i kvällsljus sett över vattnet mot Riddarholmen",
+    brief: "Kontoret i Järfälla eller vår närmiljö",
+    shape: "2:1 liggande",
     ready: true,
   },
 } satisfies Record<string, PhotoSlot>;
@@ -646,29 +698,37 @@ export const photos = {
 export type PhotoName = keyof typeof photos;
 
 /**
- * The four verksamheter kanitas.se routes to. The parent site is a switchboard:
- * it explains the group, then sends the visitor to the business they came for.
+ * The four verksamheter. The parent site is a switchboard: it explains the
+ * group, then sends the visitor to the business they came for.
  *
- * `href` is the single thing that changes the day a verksamhet gets its own
- * domain — point it at https://kanitasbygg.se, set `external`, and the card,
- * the footer and the sitemap all follow.
+ * A verksamhet with a `page` is routed there. One without is presented in full
+ * on the home page, in a section whose id is its slug, and reached through the
+ * contact form with its ärende chosen. The day a verksamhet gets its own domain,
+ * point `page` at it and the menu, the home page and the footer all follow.
  */
 export type Business = {
+  /** Also the id of its section on the home page. */
   slug: string;
   /** Full brand name, e.g. "Kanitas Bygg" */
   name: string;
-  /** Short label for nav and cards, e.g. "Bygg" */
+  /** Short label, e.g. "Bygg" */
   short: string;
   /** What the verksamheten actually does, used as the headline when routing.
    *  The brand name means nothing to a first-time visitor; this does. */
   heading: string;
   tagline: string;
-  /** Where the switchboard sends the visitor. */
-  href: string;
-  /** True once the verksamhet has moved to its own domain. */
-  external: boolean;
-  /** Photo slot used when the verksamheten is shown as a tile. */
-  photo?: PhotoName;
+  /** One line for the menu and the index, saying what the visitor gets. */
+  summary: string;
+  /** The verksamhet's own page, when it has one. */
+  page?: string;
+  /** Ärende pre-selected when this verksamhet sends someone to the form. */
+  topic: ContactTopic;
+  /** Photograph beside its pitch on the home page. */
+  photo: PhotoName;
+  /** Its slide in the home hero; usually its strongest single image. */
+  heroPhoto: PhotoName;
+  /** The verb it contributes to "Vi bygger, bemannar, utrustar och förvaltar". */
+  verb: string;
   /** Selling copy — a real paragraph, not a line of bullet points. */
   blurb: string;
   highlights: string[];
@@ -683,9 +743,12 @@ export const businesses: Business[] = [
     short: "Bygg",
     heading: "Bygg & entreprenad",
     tagline: "Från grund till nyckelfärdigt",
-    href: "/bygg",
-    external: false,
-    photo: "bygg-varfor",
+    summary: "Entreprenader, renovering och byggservice",
+    page: "/bygg",
+    topic: "Bygg",
+    photo: "kranar",
+    heroPhoto: "bygg-varfor",
+    verb: "bygger",
     blurb:
       "Byggverksamheten är koncernens största och äldsta gren. Vi utför entreprenader i alla storlekar, från löpande byggservice åt fastighetsägare till kompletta om- och nybyggnationer som underentreprenör åt Sveriges ledande byggbolag. NCC, Implenia, ByggPartner och Oljibe hör till våra återkommande uppdragsgivare.",
     highlights: [
@@ -702,11 +765,14 @@ export const businesses: Business[] = [
     short: "Bemanning & städ",
     heading: "Bemanning & byggstädning",
     tagline: "Bemanning och byggstädning",
-    href: "/stad",
-    external: false,
-    photo: "ent-stad",
+    summary: "Yrkesarbetare och byggstädning med kort varsel",
+    page: "/stad",
+    topic: "Bemanning",
+    photo: "snickeri",
+    heroPhoto: "arbetsplats",
+    verb: "bemannar",
     blurb:
-      "ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal, utan led av underleverantörer.",
+      "Kanitas ENT är koncernens bemannings- och servicebolag. Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer med bemanningsbehov, och utför byggstädning efter våra egna och andras entreprenader. Personalen är anställd hos oss på kollektivavtal, utan led av underleverantörer.",
     highlights: [
       "Yrkesarbetare till bygg",
       "Byggstädning & slutstädning",
@@ -721,11 +787,13 @@ export const businesses: Business[] = [
     short: "Trading",
     heading: "Maskiner & fordon",
     tagline: "Verktyg, maskiner och fordon",
-    href: "/kontakt",
-    external: false,
+    summary: "Köp, försäljning och uthyrning av maskiner och fordon",
+    topic: "Trading",
     photo: "trading",
+    heroPhoto: "trading",
+    verb: "utrustar",
     blurb:
-      "Trading handlar med och hyr ut maskiner, verktyg, transportbilar och arbetsfordon. Verksamheten byggdes upp för att förse koncernens egna entreprenader med utrustning och är i dag en självständig affär. Den löpande marknadskännedomen ligger till grund för våra värderingar av begagnad utrustning.",
+      "Kanitas Trading köper, säljer och hyr ut maskiner, verktyg, transportbilar och arbetsfordon. Verksamheten byggdes upp för att förse koncernens egna entreprenader med utrustning och är i dag en självständig affär. Den löpande marknadskännedomen ligger till grund för våra värderingar av begagnad utrustning.",
     highlights: [
       "Köp & försäljning av fordon",
       "Maskiner och verktyg",
@@ -740,11 +808,13 @@ export const businesses: Business[] = [
     short: "Fastigheter",
     heading: "Lokaler & förvaltning",
     tagline: "Lokaler och förvaltning",
-    href: "/kontakt",
-    external: false,
-    photo: "fastigheter",
+    summary: "Verkstads-, lager- och kontorslokaler att hyra",
+    topic: "Fastigheter",
+    photo: "lokal",
+    heroPhoto: "lager",
+    verb: "förvaltar",
     blurb:
-      "Fastigheter äger och förvaltar koncernens bestånd av verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Som hyresvärd med egen byggorganisation utför vi hyresgästanpassningar och underhåll i egen regi, vilket ger kortare ledtider och kontroll över kvaliteten.",
+      "Kanitas Fastigheter äger och förvaltar koncernens bestånd av verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Som hyresvärd med egen byggorganisation utför vi hyresgästanpassningar och underhåll i egen regi, vilket ger kortare ledtider och kontroll över kvaliteten.",
     highlights: [
       "Lokaler att hyra",
       "Fastighetsförvaltning",
@@ -755,12 +825,15 @@ export const businesses: Business[] = [
   },
 ];
 
-/** Every verksamhet, each with a tile. The home page is a växel: all four get
- *  the same weight, and the link text differs only because two of them are
- *  reached by phone rather than by a page of their own. */
-export const routedBusinesses = businesses.filter(
-  (b): b is Business & { photo: PhotoName } => Boolean(b.photo),
-);
+/** Where a verksamhet lives: its own page, or its section on the home page. */
+export function businessHref(business: Business) {
+  return business.page ?? `/#${business.slug}`;
+}
+
+/** The contact form with an ärende already chosen. */
+export function contactHref(topic: ContactTopic) {
+  return `/kontakt?amne=${encodeURIComponent(topic)}#kontakt`;
+}
 
 /**
  * Who the koncern actually works for. The switchboard sorts by verksamhet;
@@ -808,28 +881,23 @@ export const groupFacts = [
   { label: "Verksamhetsområde", value: "Storstockholm" },
 ] as const;
 
-/** Legal entities in the group, shown on the About page. */
+/** Legal entities in the group, shown on the About page. Each links to the
+ *  verksamhet that lists it under `entities`. */
 export const groupCompanies = [
   {
     name: "Kanitas AB",
     orgnr: "556841-1010",
     role: "Moderbolag för bygg, städ och service sedan 2011",
-    area: "/bygg",
-    areaLabel: "Kanitas Bygg",
   },
   {
     name: "Kanitas ENT AB",
     orgnr: "559146-9183",
     role: "Bemanning, byggstädning och service",
-    area: "/stad",
-    areaLabel: "Kanitas ENT",
   },
   {
     name: "Kanitas Bygg AB",
     orgnr: "559553-4297",
     role: "Byggnads- och markentreprenader",
-    area: "/bygg",
-    areaLabel: "Kanitas Bygg",
   },
   {
     name: "Kanitas Fastigheter AB",
@@ -867,7 +935,8 @@ export const certifications = [
   { name: "Svenskt Näringsliv", image: "/images/cert/svnaring_B.png" },
 ];
 
-/** Topics for the contact form's ärende selector. */
+/** Topics for the contact form's ärende selector. The short value is what
+ *  lands in the mail subject; the label is what the visitor picks from. */
 export const contactTopics = [
   "Bygg",
   "Bemanning",
@@ -876,3 +945,14 @@ export const contactTopics = [
   "Fastigheter",
   "Annat",
 ] as const;
+
+export type ContactTopic = (typeof contactTopics)[number];
+
+export const contactTopicLabels: Record<ContactTopic, string> = {
+  Bygg: "Bygg & entreprenad",
+  Bemanning: "Bemanning",
+  Städ: "Städ & byggstädning",
+  Trading: "Maskiner & fordon",
+  Fastigheter: "Lokaler",
+  Annat: "Något annat",
+};
