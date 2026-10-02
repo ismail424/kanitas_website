@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import HeroScene from "@/components/scene/HeroScene";
+import Photo from "@/components/Photo";
 import { site } from "@/lib/site";
 
 const trust = [
@@ -10,19 +10,32 @@ const trust = [
 ];
 
 /**
- * The home hero: the headline in an evening sky, and below it a Järfälla
- * street that builds itself with all four verksamheter on it. On a phone the
- * street is wider than the screen and pans slowly from end to end.
+ * The home hero: two of our own people at a job, with the headline beside
+ * them. From desktop the photograph fills the hero and darkens towards the
+ * text on the left; on a phone it sits on top and fades into the text below.
  */
 export default function HomeHero() {
   return (
-    <section className="hero-home relative isolate flex flex-col overflow-hidden bg-gradient-to-b from-petrol-darker from-40% to-dusk text-white">
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pt-16 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
+    <section className="hero-home relative isolate overflow-hidden bg-petrol-darker text-white lg:flex lg:items-center">
+      <div className="relative h-[46svh] min-h-64 max-h-[26rem] sm:max-h-[30rem] lg:absolute lg:inset-0 lg:h-auto lg:max-h-none">
+        <Photo
+          name="jobbstart"
+          priority
+          sizes="100vw"
+          className="object-[88%_center] lg:object-[70%_center]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-petrol-darker via-petrol-darker/10 via-35% to-transparent lg:bg-gradient-to-r lg:from-petrol-darker/95 lg:via-petrol-darker/60 lg:via-45% lg:to-petrol-darker/0"
+        />
+      </div>
+
+      <div className="relative mx-auto -mt-10 w-full max-w-7xl px-5 pb-16 sm:-mt-12 sm:px-6 sm:pb-20 lg:mt-0 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
           <h1 className="hero-in display-1 text-white">
             Vi bygger, bemannar, hyr ut och förvaltar.
           </h1>
-          <p className="hero-in mt-6 max-w-xl lead text-white/75 [--in:1]">
+          <p className="hero-in mt-6 max-w-xl lead text-white/80 [--in:1]">
             Bygg, bemanning, maskiner och lokaler i Storstockholm. Egen personal
             på kollektivavtal sedan {site.founded}.
           </p>
@@ -38,7 +51,7 @@ export default function HomeHero() {
               Ring {site.phone}
             </a>
           </div>
-          <ul className="hero-in mt-9 flex flex-col gap-2 text-sm text-white/70 sm:flex-row sm:flex-wrap sm:gap-x-7 [--in:3]">
+          <ul className="hero-in mt-9 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-7 [--in:3]">
             {trust.map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <Check
@@ -50,10 +63,6 @@ export default function HomeHero() {
             ))}
           </ul>
         </div>
-      </div>
-
-      <div className="relative mt-10 h-72 overflow-hidden sm:h-80 lg:absolute lg:inset-x-0 lg:bottom-0 lg:mt-0 lg:h-auto">
-        <HeroScene className="scene-pan-track h-full w-auto max-w-none lg:h-auto lg:w-full" />
       </div>
     </section>
   );

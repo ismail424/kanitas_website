@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Careers from "@/components/Careers";
 import ContactSection from "@/components/ContactSection";
-import CountUp from "@/components/CountUp";
 import HomeHero from "@/components/HomeHero";
 import LogoWall from "@/components/LogoWall";
 import Photo from "@/components/Photo";
@@ -11,7 +10,6 @@ import ProcessSteps from "@/components/ProcessSteps";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import TrustSection from "@/components/TrustSection";
-import SkylineStrip from "@/components/scene/SkylineStrip";
 import {
   businesses,
   contactHref,
@@ -33,10 +31,10 @@ export const metadata: Metadata = {
 
 /** The group in four figures, for the band under the story. */
 const figures = [
-  { value: site.founded, from: 2000, label: `Grundat i ${site.address.city}` },
-  { value: site.employees, from: 0, label: "Anställda på kollektivavtal" },
-  { value: groupCompanies.length, from: 0, label: "Bolag i koncernen" },
-  { text: "AAA", label: "Kreditvärdighet för Kanitas AB" },
+  { value: site.founded, label: `Grundat i ${site.address.city}` },
+  { value: site.employees, label: "Anställda på kollektivavtal" },
+  { value: groupCompanies.length, label: "Bolag i koncernen" },
+  { value: "AAA", label: "Kreditvärdighet för Kanitas AB" },
 ];
 
 export default function HomePage() {
@@ -112,10 +110,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The story in a paragraph and four figures, over the same evening
-          street as the hero. */}
-      <section className="relative isolate overflow-hidden bg-petrol-darker text-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 pb-36 pt-24 sm:px-6 sm:pb-44 sm:pt-32 lg:grid-cols-12 lg:gap-16 lg:px-8">
+      {/* The story in a paragraph and four figures. */}
+      <section className="bg-petrol-darker text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-12 lg:gap-16 lg:px-8">
           <Reveal className="lg:col-span-5">
             <h2 className="display-2 text-white">
               Från byggfirma till koncern
@@ -143,19 +140,12 @@ export default function HomePage() {
               >
                 <dt className="mt-2 text-white/65">{figure.label}</dt>
                 <dd className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">
-                  {"text" in figure ? (
-                    figure.text
-                  ) : (
-                    <CountUp value={figure.value} from={figure.from} />
-                  )}
+                  {figure.value}
                 </dd>
               </Reveal>
             ))}
           </dl>
         </div>
-        <Reveal className="absolute inset-x-0 bottom-0">
-          <SkylineStrip />
-        </Reveal>
       </section>
 
       <ProcessSteps />

@@ -95,10 +95,10 @@ export type Area = {
   services: { title: string; text: string }[];
   /** One line linking to the sister business, after the services */
   related?: { href: string; label: string };
-  /** How a job runs, told beside the page's animated illustration. */
+  /** How a job runs, told beside a photograph. */
   process?: {
     title: string;
-    scene: "build" | "clean";
+    photo: PhotoName;
     steps: { title: string; text: string }[];
   };
   /** A short list of things, e.g. the trades we staff. */
@@ -168,7 +168,7 @@ export const areas: Area[] = [
     },
     process: {
       title: "Så går ett byggprojekt till",
-      scene: "build",
+      photo: "platsbesok",
       steps: [
         {
           title: "Förfrågan och platsbesök",
@@ -306,7 +306,7 @@ export const areas: Area[] = [
     },
     process: {
       title: "Byggstädning i fyra steg",
-      scene: "clean",
+      photo: "slutstadning",
       steps: [
         {
           title: "Grovstädning",
@@ -468,6 +468,13 @@ export type PhotoSlot = {
 };
 
 export const photos = {
+  jobbstart: {
+    src: "/images/photos/jobbstart.avif",
+    alt: "Två hantverkare går igenom ritningen vid servicebilen utanför ett flerbostadshus",
+    brief: "Vårt eget lag vid ett jobb, för startsidans toppbild",
+    shape: "16:9 liggande, personerna i högra tredjedelen",
+    ready: true,
+  },
   bygglag: {
     src: "/images/photos/bygglag.avif",
     alt: "Hantverkare bär in gipsskivor från en servicebil till ett flerbostadshus",
@@ -496,6 +503,13 @@ export const photos = {
     shape: "4:3 liggande",
     ready: true,
   },
+  platsbesok: {
+    src: "/images/photos/platsbesok.avif",
+    alt: "Arbetsledare går igenom planritningen med ett par vid deras köksbord",
+    brief: "Platsbesök hos en kund inför en renovering",
+    shape: "3:2 liggande",
+    ready: true,
+  },
   snickare: {
     src: "/images/photos/snickare.avif",
     alt: "Snickare monterar gipsskivor på en ny innervägg i en lägenhet",
@@ -507,6 +521,13 @@ export const photos = {
     src: "/images/photos/byggstadning.avif",
     alt: "Två städare gör byggstädning i en nyrenoverad lägenhet",
     brief: "Vår städpersonal vid en byggstädning",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  slutstadning: {
+    src: "/images/photos/slutstadning.avif",
+    alt: "Städare torkar ur skåpen i ett nytt kök vid slutstädning medan en kollega dammsuger",
+    brief: "Slutstädning inför besiktning",
     shape: "3:2 liggande",
     ready: true,
   },
@@ -526,14 +547,14 @@ export const photos = {
   },
   maskin: {
     src: "/images/photos/maskin.avif",
-    alt: "Grävmaskin, hjullastare och transportbilar framför en verkstadshall",
-    brief: "Maskiner och fordon ur vårt eget lager",
+    alt: "Minigrävare på släp, transportbilar och en flakbil på gården utanför verkstaden",
+    brief: "Maskiner och fordon på vår gård",
     shape: "3:2 liggande",
     ready: true,
   },
   fastighet: {
     src: "/images/photos/fastighet.avif",
-    alt: "Verksamhetslokal med lastportar och kontorsdel i ett industriområde",
+    alt: "Industribyggnad med lokaler att hyra, där en port står öppen in till en tom lokal",
     brief: "Egen lokal i beståndet, exteriör",
     shape: "3:2 liggande",
     ready: true,

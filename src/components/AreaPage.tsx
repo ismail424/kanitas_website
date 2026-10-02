@@ -8,20 +8,20 @@ import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import TrustSection from "@/components/TrustSection";
-import BuildScene from "@/components/scene/BuildScene";
-import CleanScene from "@/components/scene/CleanScene";
 import { site, type Area, type AreaSection } from "@/lib/site";
 
-const scenes = { build: BuildScene, clean: CleanScene };
-
-/** How a job runs, beside the page's animated picture. */
+/** How a job runs, step by step beside a photograph of it. */
 function Process({ process }: { process: NonNullable<Area["process"]> }) {
-  const Scene = scenes[process.scene];
   return (
     <section className="py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
-        <Reveal variant="scale" className="overflow-hidden lg:col-span-6">
-          <Scene />
+        <Reveal variant="scale" className="lg:col-span-7">
+          <div className="relative aspect-[3/2] overflow-hidden bg-paper-2">
+            <Photo
+              name={process.photo}
+              sizes="(min-width: 1280px) 690px, (min-width: 1024px) 58vw, 100vw"
+            />
+          </div>
         </Reveal>
         <div className="lg:col-span-5 lg:col-start-8">
           <Reveal>

@@ -13,7 +13,7 @@ const businessFor = (companyName: string) =>
 
 /**
  * The group as a family tree: the parent company above, the four operating
- * companies below, joined by lines that draw themselves in. Org.nr and what
+ * companies below, joined by connecting lines. Org.nr and what
  * each company does sit in its box, the way a supplier register lists them.
  */
 export default function GroupTree() {
@@ -40,25 +40,12 @@ export default function GroupTree() {
       {/* Connectors, wide screens only: down from the parent, across, and
           down to each company. */}
       <div aria-hidden="true" className="relative hidden h-16 lg:block">
-        <Reveal
-          variant="drop"
-          delay={250}
-          className="absolute left-1/2 top-0 h-8 w-px bg-line-deep"
-        />
-        <Reveal
-          variant="line"
-          delay={500}
-          className="from-center absolute left-[12.5%] right-[12.5%] top-8 h-px bg-line-deep"
-        />
-        {[12.5, 37.5, 62.5, 87.5].map((left, i) => (
-          <Reveal
-            key={left}
-            variant="drop"
-            delay={900 + i * 80}
-            className="absolute top-8 h-8 w-px bg-line-deep"
-            style={{ left: `${left}%` }}
-          />
-        ))}
+        <div className="absolute left-1/2 top-0 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[12.5%] right-[12.5%] top-8 h-px bg-line-deep" />
+        <div className="absolute left-[12.5%] top-8 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[37.5%] top-8 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[62.5%] top-8 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[87.5%] top-8 h-8 w-px bg-line-deep" />
       </div>
 
       <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 lg:gap-6">
@@ -68,7 +55,7 @@ export default function GroupTree() {
             <Reveal
               key={company.orgnr}
               as="li"
-              delay={1100 + i * 120}
+              delay={i * 80}
               className="flex flex-col border border-line bg-paper p-6"
             >
               <p className="title text-ink">{company.name}</p>
