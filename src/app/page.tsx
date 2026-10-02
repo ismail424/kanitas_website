@@ -1,34 +1,171 @@
-"use client"
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import Careers from "@/components/Careers";
+import ContactSection from "@/components/ContactSection";
+import HomeHero from "@/components/HomeHero";
+import LogoWall from "@/components/LogoWall";
+import Photo from "@/components/Photo";
+import ProcessSteps from "@/components/ProcessSteps";
+import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
+import {
+  businesses,
+  contactHref,
+  groupCompanies,
+  ogMeta,
+  site,
+} from "@/lib/site";
 
-import { Layout } from 'antd';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
-import ServicesSection from '../components/ServicesSection';
-import ReferencesSection from '../components/ReferencesSection';
-import ContactSection from '../components/ContactSection';
-import { Separator } from '@chakra-ui/react';
-import { Toaster } from "@/components/ui/toaster"
-import { Analytics } from "@vercel/analytics/react"
+const pageTitle = "Kanitas | Bygg, bemanning, maskiner och lokaler i Stockholm";
+const pageDescription = `Kanitas i ${site.address.city}: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i Storstockholm. Grundat ${site.founded}.`;
 
-const { Content } = Layout;
+export const metadata: Metadata = {
+  title: { absolute: pageTitle },
+  description: pageDescription,
+  alternates: { canonical: "/" },
+  ...ogMeta(pageTitle, pageDescription, "/"),
+};
 
-export default function Home() {
+/** The group in four figures, for the band under the story. */
+const figures = [
+  { value: site.founded, label: `Grundat i ${site.address.city}` },
+  { value: site.employees, label: "Anställda" },
+  { value: groupCompanies.length, label: "Bolag i koncernen" },
+  { value: site.creditRating, label: `Kreditvärdighet för ${site.legalName}` },
+];
+
+/** Tells search engines the site's name, shown above the result. Belongs on
+ *  the home page only. */
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  name: "Kanitas",
+  alternateName: site.legalName,
+  url: site.url,
+  inLanguage: "sv-SE",
+  publisher: { "@id": `${site.url}/#organization` },
+};
+
+export default function HomePage() {
   return (
-    <Layout>
-      <Header />
-      <Content>
-        <HeroSection />
-        <AboutSection />
-        <ReferencesSection />
-        <ServicesSection />
-        <Separator borderColor="gray.200"  borderWidth="1px" />
-        <ContactSection />
-      </Content>
-      <Footer />
-      <Toaster />
-      <Analytics />
-    </Layout>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <HomeHero />
+
+      {/* Who already hires us, straight after the promise. */}
+      <section
+        aria-labelledby="uppdragsgivare"
+        className="border-b border-line py-14 sm:py-16"
+      >
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <h2
+            id="uppdragsgivare"
+            className="text-center text-sm font-semibold text-muted"
+          >
+            Anlitade av bland andra
+          </h2>
+          <LogoWall className="mt-10" />
+        </div>
+      </section>
+
+      {/* The four verksamheter, equal weight. Trading and Fastigheter have no
+          page of their own, so their tile leads to the form instead. */}
+      <section id="verksamheter" className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <Reveal>
+            <SectionHeading
+              title="Det här gör vi"
+              lead="Du når alla fyra verksamheter på samma telefonnummer."
+            />
+          </Reveal>
+
+          <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:mt-16 md:grid-cols-2 lg:gap-x-12 lg:gap-y-20">
+            {businesses.map((business) => (
+              <Reveal key={business.slug} className="h-full">
+                <article
+                  id={business.slug}
+                  className="relative flex h-full flex-col"
+                  aria-labelledby={`${business.slug}-rubrik`}
+                >
+                  <div className="relative aspect-[3/2] overflow-hidden bg-paper-2">
+                    <Photo
+                      name={business.photo}
+                      sizes="(min-width: 1280px) 584px, (min-width: 768px) calc(50vw - 40px), 100vw"
+                    />
+                  </div>
+                  <h3
+                    id={`${business.slug}-rubrik`}
+                    className="mt-7 display-3 text-ink"
+                  >
+                    {business.heading}
+                  </h3>
+                  <p className="mt-3 max-w-lg leading-relaxed text-ink-soft">
+                    {business.blurb}
+                  </p>
+                  {/* The link covers the whole tile and sits at its foot, level
+                      with its neighbour's. */}
+                  <Link
+                    href={business.page ?? contactHref(business.topic)}
+                    className="link-arrow mt-auto pt-5 text-petrol underline-offset-4 after:absolute after:inset-0 hover:text-ink hover:underline"
+                  >
+                    {business.page
+                      ? `Till ${business.name}`
+                      : `Kontakta ${business.name}`}
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The story in a paragraph and four figures. */}
+      <section className="bg-petrol-darker text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-12 lg:gap-16 lg:px-8">
+          <Reveal className="lg:col-span-5">
+            <h2 className="display-2 text-white">
+              Från byggfirma till koncern
+            </h2>
+            <p className="mt-6 lead text-white/75">
+              Kanitas startade som byggfirma i {site.address.city}. Med tiden
+              fick bemanning, maskiner och lokaler egna bolag, men bygg är
+              fortfarande den största verksamheten.
+            </p>
+            <Link
+              href="/om-oss"
+              className="link-arrow mt-8 text-copper-soft hover:text-white"
+            >
+              Mer om koncernen
+              <ArrowRight aria-hidden="true" />
+            </Link>
+          </Reveal>
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-12 self-center lg:col-span-6 lg:col-start-7">
+            {figures.map((figure) => (
+              <Reveal
+                key={figure.label}
+                className="flex flex-col-reverse justify-end border-t border-line-deep pt-6"
+              >
+                <dt className="mt-2 text-white/65">{figure.label}</dt>
+                <dd className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                  {figure.value}
+                </dd>
+              </Reveal>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <ProcessSteps />
+
+      <Careers />
+
+      <ContactSection title="Begär offert" />
+    </>
   );
 }

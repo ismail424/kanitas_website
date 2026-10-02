@@ -1,340 +1,290 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Text,
-  IconButton,
-  Container,
-  CloseButton,
-  Drawer,
-  Portal,
-} from '@chakra-ui/react';
-import Link from 'next/link';
-import { FiMenu, FiPhone, FiMail } from 'react-icons/fi';
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
+import { businessHref, businesses, nav, site } from "@/lib/site";
 
-const Header = () => {
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const [activeKey, setActiveKey] = useState('home');
+/**
+ * The site header. The logo arrives rendered from the server (the layout
+ * passes it in), so its path data never ships in this client bundle.
+ */
+export default function Header({ logo }: { logo: React.ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const panelButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Define colors directly
-  const primaryColor = "#124075"; // Main blue color
-  const primaryColorHover = "#0d325c"; // Darker shade for hover states
+  const inVerksamheter = businesses.some((b) => b.page === pathname);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Handle scroll state for header styling
-      setScrolled(window.scrollY > 80);
-      
-      // Update active nav item based on scroll position
-      const sections = ['kontakt', 'referenser', 'tjanster', 'om-oss'];
-      let current = 'home';
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element && window.scrollY >= element.offsetTop - 200) {
-          current = section === 'om-oss' ? 'about' : 
-                   section === 'tjanster' ? 'services' : 
-                   section === 'referenser' ? 'references' : 'contact';
-          break;
-        }
-      }
-      
-      setActiveKey(current);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string): void => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop;
-      window.scrollTo({
-        top: offsetTop - 90,
-        behavior: 'smooth'
-      });
-    }
-    setDrawerVisible(false);
+  // Close everything on navigation. Links to a section of the current page
+  // do not change the pathname, so every link also closes on click.
+  useEffect(() => {
+    setMenuOpen(false);
+    setPanelOpen(false);
+  }, [pathname]);
+
+  const closeAll = () => {
+    setMenuOpen(false);
+    setPanelOpen(false);
   };
 
-  const navItems = [
-    { key: 'home', label: 'Hem', section: 'top' },
-    { key: 'about', label: 'Om oss', section: 'om-oss' },
-    { key: 'services', label: 'Tjänster', section: 'tjanster' },
-    { key: 'references', label: 'Referenser', section: 'referenser' },
-    { key: 'contact', label: 'Kontakt', section: 'kontakt' },
-  ];
+  // Escape closes whichever menu is open and returns focus to its toggle;
+  // a click outside the header closes the desktop panel.
+  useEffect(() => {
+    if (!menuOpen && !panelOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (panelOpen) panelButtonRef.current?.focus();
+      if (menuOpen) menuButtonRef.current?.focus();
+      closeAll();
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) closeAll();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [menuOpen, panelOpen]);
+
+  // The phone menu covers the page: stop the page scrolling underneath it,
+  // and take it out of reach so Tab and screen readers stay in the menu.
+  useEffect(() => {
+    document.documentElement.style.overflow = menuOpen ? "hidden" : "";
+    const behind = document.querySelectorAll<HTMLElement>(
+      '#innehall, footer, a[href="#innehall"]',
+    );
+    behind.forEach((el) => (el.inert = menuOpen));
+    return () => {
+      document.documentElement.style.overflow = "";
+      behind.forEach((el) => (el.inert = false));
+    };
+  }, [menuOpen]);
+
+  const isActive = (href: string) =>
+    href === pathname || (href !== "/" && pathname.startsWith(`${href}/`));
 
   return (
-    <>
-      {/* Top info bar */}
-      <Box 
-        display={{ base: 'none', md: 'block' }} 
-        bg={primaryColor}
-        color="white"
-        position="relative"
-        zIndex={1001}
-      >
-        <Container maxW="7xl" py={2} px={{ base: 4, sm: 6, lg: 8 }}>
-          <Box display="flex" justifyContent="flex-end" alignItems="center">
-            <Box display="flex" gap={6}>
-              <Box 
-                as="a" 
-                display="flex" 
-                alignItems="center" 
-                gap={2} 
-                color="white" 
-                _hover={{ color: "whiteAlpha.900" }}
-              >
-                <Box color="white" as={FiPhone} />
-                <Text color={'white'} fontSize="sm">070-665 32 48</Text>
-              </Box>
-              <Box 
-                as="a" 
-                display="flex" 
-                alignItems="center" 
-                gap={2} 
-                color="white" 
-                _hover={{ color: "whiteAlpha.900" }}
-              >
-                <Box color="white" as={FiMail} />
-                <Text color="white" fontSize="sm">info@kanitas.se</Text>
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-      </Box>
-      
-      {/* Main header with navigation */}
-      <Box 
-        as="header"
-        position="sticky"
-        top={0}
-        bg="white"
-        borderBottom="1px solid"
-        borderColor={scrolled ? "gray.200" : "gray.100"}
-        height={scrolled ? '70px' : '80px'}
-        transition="all 0.3s ease"
-        zIndex={1000}
-      >
-        <Container 
-          maxW="7xl" 
-          height="full" 
-          px={{ base: 4, sm: 6, lg: 8 }}
+    <header
+      ref={headerRef}
+      className={`sticky top-0 z-50 border-b bg-paper transition-shadow ${
+        scrolled || panelOpen ? "border-line shadow-header" : "border-line/60"
+      }`}
+    >
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
+        {logo}
+
+        <nav
+          className="hidden items-center gap-1 lg:flex"
+          aria-label="Huvudmeny"
         >
-          <Box 
-            display="flex"
-            justifyContent="space-between" 
-            alignItems="center" 
-            height="full"
+          {/* The panel follows its button, so Tab goes straight into it, and
+              it closes when focus moves on. Neither wrapper is positioned:
+              the panel spans the header, not the button. */}
+          <div
+            onBlur={(event) => {
+              const next = event.relatedTarget as Node | null;
+              if (next && !event.currentTarget.contains(next)) {
+                setPanelOpen(false);
+              }
+            }}
           >
-            {/* Text logo instead of image */}
-            <Link href="/" passHref legacyBehavior>
-              <Box 
-                as="a" 
-                display="flex" 
-                alignItems="center"
-              >
-                <Text 
-                  fontSize={scrolled ? "2xl" : "3xl"} 
-                  fontWeight="bold" 
-                  color={primaryColor}
-                  transition="all 0.3s ease"
-                >
-                  KanitasAB
-                </Text>
-              </Box>
-            </Link>
-            
-            {/* Desktop navigation */}
-            <Box 
-              display={{ base: 'none', md: 'flex' }}
-              gap={2}
-              height="full"
-              alignItems="center"
+            <button
+              ref={panelButtonRef}
+              type="button"
+              aria-expanded={panelOpen}
+              aria-controls="verksamheter-meny"
+              onClick={() => setPanelOpen((v) => !v)}
+              className={`inline-flex items-center gap-1.5 rounded-xs px-4 py-2 text-base font-medium transition-colors ${
+                panelOpen || inVerksamheter
+                  ? "bg-paper-2 text-ink"
+                  : "text-ink-soft hover:bg-paper-2 hover:text-ink"
+              }`}
             >
-              {navItems.map((item) => (
-                <Box 
-                  key={item.key}
-                  as="button"
-                  onClick={() => scrollToSection(item.section)}
-                  px={4}
-                  py={2}
-                  position="relative"
-                  fontWeight={500}
-                  color={primaryColor}
-                  transition="color 0.2s"
-                  _hover={{ 
-                    color: primaryColorHover
-                  }}
-                  _after={{
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-2px',
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    bg: activeKey === item.key ? primaryColor : 'transparent',
-                    transition: 'background-color 0.3s'
-                  }}
+              Verksamheter
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  panelOpen ? "rotate-180" : ""
+                }`}
+                aria-hidden="true"
+              />
+            </button>
+            {/* Desktop: the four verksamheter, equal weight, one row. */}
+            <div
+              id="verksamheter-meny"
+              hidden={!panelOpen}
+              className="absolute inset-x-0 top-full hidden border-b border-line bg-paper shadow-panel lg:block"
+            >
+              <div className="mx-auto max-w-7xl px-8 pb-8 pt-10">
+                <ul className="grid grid-cols-4 gap-8">
+                  {businesses.map((business) => (
+                    <li key={business.slug}>
+                      <Link
+                        href={businessHref(business)}
+                        onClick={closeAll}
+                        className="group -m-4 flex flex-col rounded-xs p-4 transition-colors hover:bg-paper-2"
+                      >
+                        <span className="title text-ink group-hover:text-petrol">
+                          {business.heading}
+                        </span>
+                        <span className="mt-1 text-sm text-muted">
+                          {business.name}
+                        </span>
+                        <span className="mt-3 leading-relaxed text-ink-soft">
+                          {business.summary}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 flex items-center justify-between border-t border-line pt-6 text-sm">
+                  <p className="text-muted">
+                    Telefon:{" "}
+                    <a
+                      href={site.phoneHref}
+                      className="font-semibold text-ink hover:text-petrol"
+                    >
+                      {site.phone}
+                    </a>
+                  </p>
+                  <Link
+                    href="/om-oss"
+                    onClick={closeAll}
+                    className="link-arrow text-petrol hover:text-ink"
+                  >
+                    Om koncernen
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={closeAll}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              className={`rounded-xs px-4 py-2 text-base font-medium transition-colors ${
+                isActive(item.href)
+                  ? "bg-paper-2 text-ink"
+                  : "text-ink-soft hover:bg-paper-2 hover:text-ink"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-5 lg:flex">
+          <a
+            href={site.phoneHref}
+            className="inline-flex items-center gap-2 text-base font-semibold text-ink transition-colors hover:text-petrol"
+          >
+            <Phone className="h-4 w-4 text-petrol" aria-hidden="true" />
+            {site.phone}
+          </a>
+          <Link
+            href="/kontakt"
+            onClick={closeAll}
+            className="btn btn-primary min-h-11 px-5 py-2.5 text-base"
+          >
+            Begär offert
+          </Link>
+        </div>
+
+        {/* Calling is the main way in on a phone: one tap, always in view. */}
+        <a
+          href={site.phoneHref}
+          aria-label={`Ring ${site.phone}`}
+          className="ml-auto rounded-xs p-2 text-petrol hover:bg-paper-2 lg:hidden"
+        >
+          <Phone className="h-6 w-6" aria-hidden="true" />
+        </a>
+
+        <button
+          ref={menuButtonRef}
+          type="button"
+          className="-mr-2 rounded-xs p-2 text-ink hover:bg-paper-2 lg:hidden"
+          aria-expanded={menuOpen}
+          aria-controls="mobilmeny"
+          aria-label={menuOpen ? "Stäng menyn" : "Öppna menyn"}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {/* Phone and tablet: one full-height sheet. */}
+      {menuOpen ? (
+        <nav
+          id="mobilmeny"
+          aria-label="Mobilmeny"
+          className="fixed inset-x-0 bottom-0 top-18 overflow-y-auto border-t border-line bg-paper px-5 pb-10 pt-6 sm:px-6 lg:hidden"
+        >
+          <p className="text-sm font-semibold text-muted">Verksamheter</p>
+          <ul className="mt-3 divide-y divide-line border-y border-line">
+            {businesses.map((business) => (
+              <li key={business.slug}>
+                <Link
+                  href={businessHref(business)}
+                  onClick={closeAll}
+                  aria-current={business.page === pathname ? "page" : undefined}
+                  className="block py-4 aria-[current=page]:border-l-4 aria-[current=page]:border-copper aria-[current=page]:pl-4"
+                >
+                  <span className="block title text-ink">
+                    {business.heading}
+                  </span>
+                  <span className="mt-0.5 block text-sm text-muted">
+                    {business.name}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="mt-6 flex flex-col">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={closeAll}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className="block py-2.5 text-lg font-medium text-ink underline-offset-4 aria-[current=page]:text-petrol aria-[current=page]:underline"
                 >
                   {item.label}
-                </Box>
-              ))}
-            </Box>
-            
-            {/* Updated Contact button (desktop) - smaller size with color */}
-            <Button
-              display={{ base: 'none', md: 'block' }}
-              onClick={() => scrollToSection('kontakt')}
-              variant="solid"
-              size="md"
-              fontWeight={500}
-              px={4}
-              py={2}
-              height="auto"
-              bg={primaryColor}
-              color="white"
-              _hover={{
-                bg: primaryColorHover,
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.2s"
-              borderRadius="md"
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <a href={site.phoneHref} className="btn btn-outline">
+              <Phone aria-hidden="true" />
+              {site.phone}
+            </a>
+            <Link
+              href="/kontakt"
+              onClick={closeAll}
+              className="btn btn-primary"
             >
-              Kontakta oss
-            </Button>
-            
-            {/* Mobile menu button */}
-            <IconButton
-              display={{ base: 'flex', md: 'none' }}
-              aria-label="Open menu"
-              variant="ghost"
-              color={primaryColor}
-              onClick={() => setDrawerVisible(true)}
-              _hover={{ bg: 'gray.50' }}
-            >
-              <FiMenu size={24} />
-            </IconButton>
-          </Box>
-        </Container>
-      </Box>
-      
-      {/* Mobile navigation drawer */}
-      <Drawer.Root open={drawerVisible} onOpenChange={(details) => setDrawerVisible(details.open)} placement="end">
-        <Portal>
-          <Drawer.Backdrop bg="blackAlpha.300" />
-          <Drawer.Positioner>
-            <Drawer.Content bg="white" maxW="300px" h="100vh">
-              <Box p={5}>
-                {/* Text logo and close button */}
-                <Box 
-                  display="flex" 
-                  justifyContent="space-between" 
-                  alignItems="center" 
-                  mb={8}
-                  borderBottom="1px solid"
-                  borderColor="gray.100"
-                  pb={4}
-                >
-                  <Text 
-                    fontSize="2xl" 
-                    fontWeight="bold" 
-                    color={primaryColor}
-                  >
-                    KanitasAB
-                  </Text>
-                  <Drawer.CloseTrigger asChild>
-                    <CloseButton size="md" color={primaryColor} />
-                  </Drawer.CloseTrigger>
-                </Box>
-                
-                {/* Navigation links */}
-                <Box display="flex" flexDirection="column" gap={1} mb={10}>
-                  {navItems.map((item) => (
-                    <Box
-                      key={item.key}
-                      as="button"
-                      onClick={() => scrollToSection(item.section)}
-                      py={3}
-                      width="full"
-                      textAlign="left"
-                      fontSize="lg"
-                      fontWeight={activeKey === item.key ? "600" : "500"}
-                      color={activeKey === item.key ? primaryColor : "gray.700"}
-                      _hover={{ color: primaryColor, bg: "gray.50" }}
-                      borderRadius="md"
-                      px={3}
-                      transition="all 0.2s"
-                    >
-                      {item.label}
-                    </Box>
-                  ))}
-                </Box>
-                
-                {/* Contact information */}
-                <Box 
-                  display="flex" 
-                  flexDirection="column" 
-                  gap={4} 
-                  mt={8}
-                  pt={6}
-                  borderTop="1px solid"
-                  borderColor="gray.100"
-                >
-                  <Box 
-                    as="a"
-                    display="flex" 
-                    alignItems="center" 
-                    gap={3}
-                    color="gray.700"
-                    _hover={{ color: primaryColor }}
-                  >
-                    <Box as={FiPhone} />
-                    <Text>070-665 32 48</Text>
-                  </Box>
-                  <Box 
-                    as="a"
-                    display="flex" 
-                    alignItems="center" 
-                    gap={3}
-                    color="gray.700"
-                    _hover={{ color: primaryColor }}
-                  >
-                    <Box as={FiMail} />
-                    <Text>info@kanitas.se</Text>
-                  </Box>
-                  <Button
-                    variant="solid"
-                    width="full"
-                    mt={4}
-                    py={2.5}
-                    height="auto"
-                    fontSize="md"
-                    bg={primaryColor}
-                    color="white"
-                    fontWeight={500}
-                    onClick={() => scrollToSection('kontakt')}
-                    _hover={{
-                      bg: primaryColorHover,
-                    }}
-                    transition="all 0.2s"
-                    borderRadius="md"
-                  >
-                    Kontakta oss
-                  </Button>
-                </Box>
-              </Box>
-            </Drawer.Content>
-          </Drawer.Positioner>
-        </Portal>
-      </Drawer.Root>
-    </>
+              Begär offert
+            </Link>
+          </div>
+        </nav>
+      ) : null}
+    </header>
   );
-};
-
-export default Header;
+}

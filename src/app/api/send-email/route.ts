@@ -1,139 +1,219 @@
-// File: /app/api/send-email/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { z } from "zod";
+import { contactTopics } from "@/lib/site";
 
-// Define the request schema using Zod for strict type validation
-const EmailRequestSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email format"),
-  phone: z.string().optional(),
-  message: z.string().min(1, "Message is required"),
-  recipient: z.string().email("Invalid recipient email"),
-  subject: z.string().min(1, "Subject is required"),
+// Run the form handler in Stockholm, next to the mail server and the people
+// whose details it carries (the privacy policy says so).
+export const preferredRegion = "arn1";
+
+// The recipient is fixed server-side; the endpoint must never relay
+// mail to arbitrary addresses supplied by the client.
+const RECIPIENT = process.env.CONTACT_RECIPIENT ?? "info@kanitas.se";
+const SMTP_HOST = process.env.SMTP_HOST ?? "send.one.com";
+const SMTP_PORT = Number(process.env.SMTP_PORT ?? 465);
+const SMTP_USER = process.env.SMTP_USER ?? "info@kanitas.se";
+
+// A real request is a few hundred bytes; anything near this is not a person.
+const MAX_BODY_BYTES = 16_384;
+
+// The form asks for a phone number first and everything else after, so a
+// request is valid with nothing but a number we can call back. The rules
+// match the form's: any separators, at least seven digits. Optional fields
+// never fail a request; a lead is worth more than tidy input.
+const ContactSchema = z.object({
+  phone: z
+    .string()
+    .max(40)
+    .transform((value) => value.replace(/[^\d+]+/g, " ").trim())
+    .refine((value) => value.replace(/\D/g, "").length >= 7),
+  name: z.string().trim().max(200).optional().catch(undefined),
+  email: z.string().trim().max(200).optional().catch(undefined),
+  topic: z.enum(contactTopics).optional().catch(undefined),
+  message: z.string().trim().max(5000).optional().catch(undefined),
 });
 
-// Interface for nodemailer transport options
-interface TransportOptions {
-  host: string;
-  port: number;
-  secure: boolean;
-  auth: {
-    user: string;
-    pass: string | undefined;
-  };
+const isEmail = (value: string) => z.string().email().safeParse(value).success;
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+// Best-effort rate limit per runtime instance.
+const hits = new Map<string, { count: number; reset: number }>();
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 5;
+const MAX_TRACKED_IPS = 10_000;
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  // Keep the map bounded: drop expired entries, then the oldest if needed.
+  if (hits.size > MAX_TRACKED_IPS) {
+    for (const [key, value] of hits) {
+      if (now > value.reset) hits.delete(key);
+    }
+    for (const key of hits.keys()) {
+      if (hits.size <= MAX_TRACKED_IPS) break;
+      hits.delete(key);
+    }
+  }
+  const entry = hits.get(ip);
+  if (!entry || now > entry.reset) {
+    hits.set(ip, { count: 1, reset: now + WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > MAX_PER_WINDOW;
+}
+
+/** The client's address as the hosting platform saw it. x-real-ip and the
+ *  last x-forwarded-for entry are set by the proxy; the first entry of
+ *  x-forwarded-for is whatever the client claimed. */
+function clientIp(request: NextRequest): string | null {
+  return (
+    request.headers.get("x-real-ip") ??
+    request.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim() ??
+    null
+  );
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    // Parse and validate the request body
-    const body = await request.json();
-    const result = EmailRequestSchema.safeParse(body);
-    
-    if (!result.success) {
-      // Return validation errors
+    // Only our own page may post here: a cross-site HTML form can send
+    // text/plain without a preflight, but not application/json.
+    if (!request.headers.get("content-type")?.startsWith("application/json")) {
       return NextResponse.json(
-        { 
-          error: 'Validation failed', 
-          details: result.error.format() 
-        },
-        { status: 400 }
+        { error: "Unsupported media type" },
+        { status: 415 },
       );
     }
-    
-    // Extract validated data
-    const { name, email, phone, message, recipient, subject } = result.data;
-    
-    // Validate that we have an email password in environment variables
-    if (!process.env.EMAIL_PASSWORD) {
-      throw new Error('EMAIL_PASSWORD environment variable is not set');
+    const fetchSite = request.headers.get("sec-fetch-site");
+    if (fetchSite && fetchSite !== "same-origin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    // Get the current date and time
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString('sv-SE'); // Swedish date format
-    const formattedTime = now.toLocaleTimeString('sv-SE'); // Swedish time format
+    if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: "Too large" }, { status: 413 });
+    }
+    const raw = await request.text();
+    if (raw.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: "Too large" }, { status: 413 });
+    }
 
-    // Configure email transporter with your One.com email settings
-    const transportOptions: TransportOptions = {
-      host: 'send.one.com',
-      port: 465,
-      secure: true, // use SSL
-      auth: {
-        user: 'info@kanitas.se', // your email
-        pass: process.env.EMAIL_PASSWORD, // use environment variable for security
-      },
-    };
+    let body: unknown = null;
+    try {
+      body = JSON.parse(raw);
+    } catch {
+      // Falls through to the type check below.
+    }
+    if (body === null || typeof body !== "object") {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
 
-    const transporter = nodemailer.createTransport(transportOptions);
+    // Honeypot triggered: pretend success, send nothing.
+    if ((body as Record<string, unknown>).hp_kanitas) {
+      return NextResponse.json({ success: true });
+    }
 
-    // Format the email content with enhanced styling
-    const emailContent = `
-      ========== NYTT KONTAKTFORMULÄR - KANITAS AB ==========
-      
-      Mottaget: ${formattedDate} kl. ${formattedTime}
-      
-      === KONTAKTINFORMATION ===
-      Namn: ${name}
-      E-post: ${email}
-      Telefon: ${phone || 'Ej angivet'}
-      
-      === MEDDELANDE ===
-      ${message}
-      
-      =======================================
-      
-      Detta är ett automatiskt meddelande från Kanitas AB webbplats.
-      Vänligen svara inte på detta e-postmeddelande, utan kontakta kunden direkt via deras kontaktuppgifter ovan.
-    `;
+    const result = ContactSchema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json({ error: "Validation failed" }, { status: 400 });
+    }
 
-    // Create a nicer HTML version for email clients that support it
-    const htmlContent = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
-        <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">Nytt kontaktformulär - Kanitas AB</h2>
-        
-        <p style="color: #666;">Mottaget: <strong>${formattedDate}</strong> kl. <strong>${formattedTime}</strong></p>
-        
-        <div style="background-color: #f8fafc; padding: 15px; border-radius: 5px; margin: 15px 0;">
-          <h3 style="color: #2563eb; margin-top: 0;">Kontaktinformation</h3>
-          <p><strong>Namn:</strong> ${name}</p>
-          <p><strong>E-post:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a></p>
-          <p><strong>Telefon:</strong> ${phone ? `<a href="tel:${phone}" style="color: #2563eb;">${phone}</a>` : 'Ej angivet'}</p>
-        </div>
-        
-        <div style="background-color: #f8fafc; padding: 15px; border-radius: 5px; margin: 15px 0;">
-          <h3 style="color: #2563eb; margin-top: 0;">Meddelande</h3>
-          <p style="white-space: pre-wrap;">${message}</p>
-        </div>
-        
-        <div style="font-size: 12px; color: #666; border-top: 1px solid #e0e0e0; margin-top: 20px; padding-top: 10px;">
-          <p>Detta är ett automatiskt meddelande från Kanitas AB webbplats.</p>
-          <p>Vänligen svara inte på detta e-postmeddelande, utan kontakta kunden direkt via deras kontaktuppgifter ovan.</p>
-        </div>
-      </div>
-    `;
+    // Counted only for requests that would send mail, so a visitor fixing a
+    // typo never uses up their attempts. Without an identifiable client the
+    // request is let through rather than pooled with everyone else.
+    const ip = clientIp(request);
+    if (ip && rateLimited(ip)) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
 
-    // Send the email with both text and HTML versions
-    await transporter.sendMail({
-      from: '"Kanitas Webbplats" <info@kanitas.se>',
-      to: recipient,
-      subject: `${subject} från ${name}`,
-      text: emailContent,
-      html: htmlContent,
+    const { name, email, phone, topic, message } = result.data;
+
+    if (!process.env.EMAIL_PASSWORD) {
+      console.error("EMAIL_PASSWORD environment variable is not set");
+      return NextResponse.json(
+        { error: "Server misconfigured" },
+        { status: 500 },
+      );
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_PORT === 465,
+      auth: { user: SMTP_USER, pass: process.env.EMAIL_PASSWORD },
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 20_000,
     });
 
-    // Return success response
+    // The server runs in UTC; whoever reads the mail is in Sweden.
+    const now = new Date();
+    const zone = { timeZone: "Europe/Stockholm" } as const;
+    const timestamp = `${now.toLocaleDateString("sv-SE", zone)} kl. ${now.toLocaleTimeString("sv-SE", { ...zone, hour: "2-digit", minute: "2-digit" })}`;
+
+    const missing = "Ej angivet";
+    const safe = {
+      name: name ? escapeHtml(name) : missing,
+      email: email ? escapeHtml(email) : missing,
+      phone: escapeHtml(phone),
+      topic: topic ? escapeHtml(topic) : missing,
+      message: message ? escapeHtml(message) : "Inget meddelande, ring upp.",
+    };
+    const subjectName = name ? `: ${name.replace(/[\r\n]+/g, " ")}` : "";
+    // An address that does not parse is still shown, just not replied to.
+    const replyTo = email && isEmail(email) ? email : undefined;
+
+    // Inline styles are all a mail client reads; the colours are the site's
+    // petrol palette.
+    await transporter.sendMail({
+      from: `"Kanitas webbplats" <${SMTP_USER}>`,
+      to: RECIPIENT,
+      replyTo,
+      subject: `Ring upp ${phone}${topic ? ` [${topic}]` : ""}${subjectName}`,
+      text: [
+        `Ny förfrågan via kanitas.se (${timestamp})`,
+        "",
+        `Telefon: ${phone}`,
+        `Namn: ${name || missing}`,
+        `E-post: ${email || missing}`,
+        `Ärende: ${topic || missing}`,
+        "",
+        "Meddelande:",
+        message || "Inget meddelande, ring upp.",
+      ].join("\n"),
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #dbe2e2; border-radius: 12px;">
+          <h2 style="color: #0f2229; border-bottom: 3px solid #134b58; padding-bottom: 10px;">Ny förfrågan via kanitas.se</h2>
+          <p style="color: #5a6a70;">Mottaget: <strong>${timestamp}</strong></p>
+          <div style="background-color: #f1f4f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
+            <p><strong>Telefon:</strong> <a href="tel:${safe.phone.replace(/\s/g, "")}" style="color: #134b58;">${safe.phone}</a></p>
+            <p><strong>Namn:</strong> ${safe.name}</p>
+            <p><strong>E-post:</strong> ${safe.email}</p>
+            <p><strong>Ärende:</strong> ${safe.topic}</p>
+          </div>
+          <div style="background-color: #f1f4f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
+            <p style="white-space: pre-wrap;">${safe.message}</p>
+          </div>
+          <p style="font-size: 12px; color: #5a6a70; border-top: 1px solid #dbe2e2; margin-top: 20px; padding-top: 12px;">
+            Ring upp på numret ovan${replyTo ? " eller svara på det här mejlet" : ""}.
+          </p>
+        </div>
+      `,
+    });
+
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Email sending failed:', error);
-    
-    // Type-safe error handling
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    
-    // Return error response
+    console.error("Email sending failed:", error);
     return NextResponse.json(
-      { error: 'Failed to send email', details: errorMessage },
-      { status: 500 }
+      { error: "Failed to send email" },
+      { status: 500 },
     );
   }
 }

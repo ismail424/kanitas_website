@@ -1,148 +1,123 @@
-"use client"
+import Link from "next/link";
+import Image from "next/image";
+import Logo from "@/components/Logo";
+import { businessHref, businesses, certifications, site } from "@/lib/site";
 
-import React from 'react';
-import { Layout, Typography, Row, Col, Space } from 'antd';
-import { PhoneOutlined, MailOutlined, HomeOutlined } from '@ant-design/icons';
-import Image from 'next/image';
+const companyLinks = [
+  { href: "/om-oss", label: "Om oss" },
+  { href: "/om-oss#bolagen", label: "Bolagen" },
+  { href: "/om-oss#referenser", label: "Referenser" },
+  { href: "/kontakt", label: "Kontakt" },
+];
 
-const { Footer: AntFooter } = Layout;
-const { Text, Link: AntLink, Title } = Typography;
-
-const Footer: React.FC = () => {
+export default function Footer() {
   return (
-    <AntFooter 
-      className="pt-16 pb-6"
-      style={{ 
-        background: '#0e3261',
-        color: 'white'
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Certificate Images Row - Further Improved Styling */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 32, // reduced from 48
-            marginTop: 4, // reduced from 12
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: 16, // reduced from 48
-              background: 'rgba(255,255,255,0.18)',
-              borderRadius: 22,
-              boxShadow: '0 4px 32px 0 rgba(18,64,117,0.13)',
-              padding: '20px 24px', // reduced from 28px 40px
-              flexWrap: 'wrap',
-              border: '1.5px solid #3a85d844',
-              maxWidth: 900,
-              width: '100%',
-              minHeight: 90, // reduced from 110
-              transition: 'box-shadow 0.3s',
-            }}
-          >
-            <Image src="/images/cert/aaa_120.png" alt="AAA certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/byggnads_140.png" alt="Byggnads certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/fastighets_120.png" alt="Fastighets certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/SafeTrade_120.png" alt="SafeTrade certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
-            <Image src="/images/cert/svnaring_B.png" alt="Svensk Näring certifikat" width={140} height={80} style={{ objectFit: 'contain', background: '#fff', borderRadius: 12, padding: 8, boxShadow: '0 2px 12px #12407522', border: '1px solid #e5e7eb', margin: 4 }} />
+    <>
+      {/* Agreements and memberships, in greyscale so five brand colours do
+          not compete with the page above. */}
+      <section
+        aria-label="Avtal, kreditvärdighet och medlemskap"
+        className="border-t border-line bg-paper"
+      >
+        <ul className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-6 px-5 py-10 sm:px-6 lg:justify-between lg:px-8">
+          {certifications.map((cert) => (
+            <li key={cert.name}>
+              <Image
+                src={cert.image}
+                alt={cert.name}
+                width={120}
+                height={48}
+                title={cert.name}
+                style={{ height: cert.h }}
+                className="logo-mono w-auto object-contain"
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <footer className="bg-petrol-darker text-white">
+        <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-12 lg:gap-8">
+            <div className="col-span-2 lg:col-span-4">
+              <Logo on="dark" />
+              <p className="mt-6 max-w-xs leading-relaxed text-white/65">
+                Bygg, bemanning, maskiner och lokaler i Storstockholm sedan{" "}
+                {site.founded}.
+              </p>
+            </div>
+
+            <nav aria-label="Verksamheter" className="lg:col-span-3">
+              <p className="label text-white">Verksamheter</p>
+              <ul className="mt-5 space-y-3">
+                {businesses.map((business) => (
+                  <li key={business.slug}>
+                    <Link
+                      href={businessHref(business)}
+                      className="text-white/70 transition-colors hover:text-white"
+                    >
+                      {business.heading}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <nav aria-label="Företaget" className="lg:col-span-2">
+              <p className="label text-white">Företaget</p>
+              <ul className="mt-5 space-y-3">
+                {companyLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-white/70 transition-colors hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div className="col-span-2 sm:col-span-1 lg:col-span-3">
+              <p className="label text-white">Kontakt</p>
+              <ul className="mt-5 space-y-3 text-white/70">
+                <li>
+                  <a
+                    href={site.phoneHref}
+                    className="font-semibold text-white transition-colors hover:text-copper-soft"
+                  >
+                    {site.phone}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {site.email}
+                  </a>
+                </li>
+                <li>
+                  {site.address.city}, {site.address.region}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-16 flex flex-col gap-3 border-t border-line-deep py-7 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              © {new Date().getFullYear()} {site.legalName}, org.nr {site.orgnr}
+            </p>
+            <Link
+              href="/integritetspolicy"
+              className="transition-colors hover:text-white"
+            >
+              Integritetspolicy
+            </Link>
           </div>
         </div>
-        <Row gutter={[48, 48]}>
-          <Col xs={24} sm={12} lg={8}>
-            <div className="mb-6">
-              <Image 
-                src="/images/logo_circle.png" 
-                alt="Kanitas AB Logo" 
-                width={'70'}
-                height={'70'}
-                className="rounded-full"
-              />
-            </div>
-            <Text 
-              className="block mb-4"
-              style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-            >
-              Etablerat 2011. Vi bedriver verksamhet inom bygg- och städbranschen, 
-              byggstädning, byggservice, byggsanering, brandsanering, fuktsanering, 
-              snöröjning, rivning, och mark- och anläggningsentreprenader.
-            </Text>
-          </Col>
-          
-          <Col xs={24} sm={12} lg={8}>
-            <Title 
-              level={4} 
-              className="mb-6"
-              style={{ color: 'white', fontSize: '18px', position: 'relative' }}
-            >
-              <span 
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '-10px', 
-                  left: '0', 
-                  width: '30px', 
-                  height: '2px', 
-                  background: '#3a85d8' 
-                }}
-              ></span>
-              Kontakta oss
-            </Title>
-            <Space direction="vertical" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-              <Space>
-                <PhoneOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>070-665 32 48</Text>
-              </Space>
-              <Space>
-                <MailOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>info@kanitas.se</Text>
-              </Space>
-              <Space>
-                <HomeOutlined style={{ color: '#3a85d8' }} />
-                <Text style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Almarevägen 13, 176 76 Järfälla</Text>
-              </Space>
-            </Space>
-          </Col>
-          
-          <Col xs={24} sm={12} lg={8}>
-            <Title 
-              level={4} 
-              className="mb-6"
-              style={{ color: 'white', fontSize: '18px', position: 'relative' }}
-            >
-              <span 
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '-10px', 
-                  left: '0', 
-                  width: '30px', 
-                  height: '2px', 
-                  background: '#3a85d8' 
-                }}
-              ></span>
-              Snabblänkar
-            </Title>
-            <Space direction="vertical" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-              <AntLink href="/#om-oss" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Om oss</AntLink>
-              <AntLink href="/#tjanster" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Våra tjänster</AntLink>
-              <AntLink href="/#referenser" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Referenser</AntLink>
-              <AntLink href="/#kontakt" style={{ color: 'rgba(255, 255, 255, 0.7)', transition: 'color 0.3s' }} className="hover:text-white">Kontakt</AntLink>
-            </Space>
-          </Col>
-        </Row>
-        
-        <div className="border-t border-opacity-20 border-white mt-12 pt-6 text-center">
-          <Text style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-            © {new Date().getFullYear()} Kanitas AB · Org.nr: 556841-1010 · Alla rättigheter förbehållna
-          </Text>
-        </div>
-      </div>
-    </AntFooter>
+      </footer>
+    </>
   );
-};
-
-export default Footer;
+}

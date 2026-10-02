@@ -1,143 +1,346 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --primary-color: #124075;
-  --secondary-color: #0e3261;
-  --accent-color: #3a85d8;
-  --bg-light: #f8f8f8;
-  --bg-white: #ffffff;
-  --text-dark: #333333;
-  --text-light: #666666;
+/*
+ * Kanitas design tokens. The palette is taken from the logo: petrol carries
+ * the weight (type, actions, dark bands) and copper is a small accent, the way
+ * the mark uses it for its two rules. Surfaces are white and a cool mist.
+ * No hardcoded hex in components.
+ */
+@theme {
+  /* Surfaces */
+  --color-paper: #ffffff;
+  --color-paper-2: #f1f4f4;
+  --color-petrol-pale: #dde9eb;
+
+  /* Text on light */
+  --color-ink: #0f2229;
+  --color-ink-soft: #33474f;
+  --color-muted: #5a6a70;
+
+  /* Borders */
+  --color-line: #dbe2e2;
+  --color-line-deep: #1d5766;
+
+  /* Brand petrol: logo mark, primary action, dark surfaces */
+  --color-petrol: #134b58;
+  --color-petrol-deep: #0c3945;
+  --color-petrol-darker: #082a33;
+
+  /* Copper, the logo rule. `copper` is for rules and marks only; text uses
+     `copper-ink` on light surfaces and `copper-soft` on petrol-darker, both
+     AA (copper-soft on plain petrol is not). */
+  --color-copper: #c76245;
+  --color-copper-ink: #a84e33;
+  --color-copper-soft: #e08e6d;
+
+  /* Shadows, tinted with ink rather than black */
+  --shadow-header: 0 1px 24px rgb(15 34 41 / 0.07);
+  --shadow-panel: 0 24px 48px -24px rgb(15 34 41 / 0.25);
+  --shadow-card: 0 18px 40px -28px rgb(15 34 41 / 0.45);
+
+  /* Feedback */
+  --color-ok: #2f7d4f;
+  --color-error: #b23a2e;
+
+  /* Typography. Archivo carries a width axis; headings run slightly wide to
+     echo the KANITAS wordmark. Body text is Inter. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px; /* For fixed header */
-  color-scheme: light only;
-}
+@layer base {
+  /* No lone last words in running text. */
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
 
-body {
-  color: var(--text-dark);
-  background-color: var(--bg-white);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  overflow-x: hidden;
-  forced-color-adjust: none;
-}
-
-/* Force light mode */
-:root {
-  color-scheme: light only;
-}
-
-@media (max-width: 768px) {
   html {
-    scroll-padding-top: 70px;
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-petrol);
+    color: #ffffff;
+  }
+
+  /* One focus ring everywhere, in the accent colour so it is never mistaken
+     for a border. */
+  :focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 3px;
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/*
+ * Type system. Every heading and lead on the site uses one of these, so scale
+ * and rhythm are identical everywhere. Layered as components so a utility on
+ * the same element still wins.
+ */
 @layer components {
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
-  }
-  
-  .section-title {
-    @apply text-3xl font-bold mb-12 text-center relative;
-    color: var(--secondary-color);
-  }
-  
-  .section-title::after {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent-color);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-  
-  .btn-primary {
-    @apply px-6 py-2 font-medium rounded-md transition-all duration-300;
-    background-color: var(--primary-color);
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  .btn-secondary {
-    @apply px-6 py-2 font-medium rounded-md transition-all duration-300;
-    background-color: white;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-  }
-  
-  .btn-secondary:hover {
-    background-color: var(--bg-light);
+  /* Swedish compounds ("byggentreprenör", "fastighetsförvaltning") are wider
+     than a phone at display sizes: let them break rather than overflow, and
+     hyphenate on narrow screens only. */
+  .display-1,
+  .display-page,
+  .display-2,
+  .display-3,
+  .title {
+    overflow-wrap: break-word;
   }
 
-  /* Hero button hover states */
-  .hero-btn-primary {
-    transition: all 0.3s ease !important;
-  }
-  
-  .hero-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
-  }
-
-  .hero-btn-secondary {
-    transition: all 0.3s ease !important;
-  }
-
-  .hero-btn-secondary:hover {
-    background-color: rgba(255,255,255,0.15) !important;
-    transform: translateY(-2px);
-  }
-  
-  /* Mobile optimizations */
-  @media (max-width: 640px) {
-    .hero-btn-primary, .hero-btn-secondary {
-      width: 100%;
-      margin-bottom: 10px;
-      display: block;
+  @media (max-width: 30rem) {
+    .display-1,
+    .display-page,
+    .display-2,
+    .display-3 {
+      hyphens: auto;
     }
   }
-  
-  /* Reference logos */
-  .reference-logo {
-    transition: all 0.3s ease;
+
+  /* Home hero only. */
+  .display-1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4.8vw, 4.1rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.02em;
+    word-spacing: 0.04em;
+    line-height: 1.04;
+    text-wrap: balance;
   }
-  
-  .reference-logo:hover {
-    transform: scale(1.05);
-    filter: grayscale(0) contrast(1.05) !important;
+
+  /* Headline of every other page. */
+  .display-page {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw, 3.4rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.02em;
+    word-spacing: 0.04em;
+    line-height: 1.06;
+    text-wrap: balance;
   }
-  
-  .section-alternate {
-    background-color: #f5f8fb;
+
+  .display-2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 2.8vw, 2.4rem);
+    font-weight: 600;
+    font-variation-settings: "wdth" 106;
+    letter-spacing: -0.016em;
+    word-spacing: 0.03em;
+    line-height: 1.12;
+    text-wrap: balance;
   }
-  
-  /* Header menu styling */
-  .ant-menu-horizontal > .ant-menu-item::after, 
-  .ant-menu-horizontal > .ant-menu-submenu::after {
-    border-bottom: none !important;
+
+  .display-3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    font-weight: 600;
+    font-variation-settings: "wdth" 104;
+    letter-spacing: -0.012em;
+    line-height: 1.18;
+    text-wrap: balance;
   }
-  
-  .ant-menu-horizontal > .ant-menu-item-selected, 
-  .ant-menu-horizontal > .ant-menu-item:hover {
-    color: #124075 !important;
-    border-bottom: 2px solid #124075 !important;
+
+  .title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-variation-settings: "wdth" 102;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+    text-wrap: balance;
   }
-  
-  .ant-menu-horizontal > .ant-menu-item > a:hover {
-    color: #124075 !important;
+
+  .lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  /* Small heading for a group of links or facts, in sentence case. */
+  .label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* Step numbers, for the one list that really is a sequence. */
+  .index {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  /*
+   * Buttons. Square-cornered like the blocks of the mark; one height, one
+   * weight, three surfaces. Arrows inside nudge on hover.
+   */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3.25rem;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 600;
+    line-height: 1.25;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+
+  .btn > svg {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+
+  .btn:hover > svg.lucide-arrow-right {
+    transform: translateX(3px);
+  }
+
+  .btn-primary {
+    background-color: var(--color-petrol);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-petrol-deep);
+  }
+
+  .btn-outline {
+    border-color: color-mix(in oklab, var(--color-ink) 28%, transparent);
+    color: var(--color-ink);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-ink);
+  }
+
+  /* Primary action on petrol */
+  .btn-light {
+    background-color: #ffffff;
+    color: var(--color-petrol);
+  }
+
+  .btn-light:hover {
+    background-color: var(--color-paper-2);
+  }
+
+  /* Text link with a trailing arrow, used wherever a whole block links on. */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+
+  .link-arrow > svg {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+
+  .link-arrow:hover > svg,
+  .group:hover .link-arrow > svg {
+    transform: translateX(3px);
+  }
+
+  /*
+   * Client and certificate logos arrive as mixed PNG/JPEG, some with white
+   * boxes baked in. Multiply drops the box into whatever surface they sit on,
+   * and greyscale evens out a row of competing brand colours.
+   */
+  .logo-mono {
+    mix-blend-mode: multiply;
+    filter: grayscale(1);
+    opacity: 0.7;
+  }
+
+  /* PageHero photograph: starts where the 7-of-12 text column ends and
+     bleeds off the right edge, whatever the viewport width. That is the
+     container's left edge, max(2rem, 50% - 38rem), plus 7/12 of its content
+     width, min(100% - 4rem, 76rem). Written pre-multiplied: the nested form
+     crashes the CSS optimiser in production builds. */
+  @media (min-width: 64rem) {
+    .hero-photo {
+      left: calc(max(2rem, 50% - 38rem) + min(58.3333% - 2.3333rem, 44.3333rem));
+    }
+  }
+}
+
+/* From desktop the home hero fills the screen, within reason, with the
+   photograph behind the headline. */
+@media (min-width: 64rem) {
+  .hero-home {
+    min-height: clamp(44rem, 100svh - 4.5rem, 58rem);
+  }
+}
+
+/* FAQ disclosure: open and close animate where the browser can size to auto. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
+
+    details.faq::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size 0.35s var(--ease-out-soft),
+        content-visibility 0.35s allow-discrete;
+    }
+
+    details.faq[open]::details-content {
+      block-size: auto;
+    }
+  }
+}
+
+/* Scroll reveal, activated by the Reveal component: a plain fade, nothing
+   slides or zooms. No-JS and reduced-motion users get the finished state,
+   never a hidden page. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+  }
+}
+
+/* Print everything, whether or not it has been scrolled into view. */
+@media print {
+  .reveal {
+    opacity: 1 !important;
+    transition: none !important;
   }
 }
