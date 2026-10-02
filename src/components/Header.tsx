@@ -191,12 +191,15 @@ export default function Header({ logo }: { logo: React.ReactNode }) {
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
+          {/* The number itself only once there is room for it beside the
+              menu; until then the icon alone dials it. */}
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-2 text-base font-semibold text-ink transition-colors hover:text-petrol"
+            aria-label={`Ring ${site.phone}`}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 text-base font-semibold text-ink transition-colors hover:text-petrol xl:min-w-0"
           >
             <Phone className="h-4 w-4 text-petrol" aria-hidden="true" />
-            {site.phone}
+            <span className="hidden xl:inline">{site.phone}</span>
           </a>
           <Link
             href="/kontakt"

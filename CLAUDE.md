@@ -12,7 +12,7 @@
 - Använd Tailwind CSS v4 för all styling — designtokens definieras i `src/app/globals.css` under `@theme`
 - Inga hårdkodade färger i komponenter: använd tokens (paper, ink, muted, petrol, copper m.fl.)
 - Typsnitt: Archivo (rubriker, med breddaxel) och Inter (brödtext); typklasser som `display-1`, `title`, `label` och knappar (`btn btn-primary` m.fl.) definieras i `globals.css`
-- Logotypen (`src/components/logo-paths.ts`) är ren geometri: K-märket ritat i exakta polygoner och ordmärket satt i Jost som konturer. Ändra inte koordinaterna för hand
+- Logotypen (`src/components/logo-paths.ts`) är ren geometri: symbolen Kvarteret (fyra huskroppar runt en gård i koppar) och namnet satt i Schibsted Grotesk som konturer. Ändra inte koordinaterna för hand
 - Ikoner: lucide-react
 - Språk: Svenska för användargränssnitt, engelska för kod och kommentarer
 - Filstruktur:

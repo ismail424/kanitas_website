@@ -1,21 +1,20 @@
 import Link from "next/link";
 import {
-  MARK_D,
-  MARK_RULE_D,
+  MARK_CORE_D,
+  MARK_WINGS_D,
+  NAME_CENTRE_DY,
   TAGLINE_D,
   VIEWBOX,
   WORD_D,
-  WORD_RULE_D,
 } from "@/components/logo-paths";
 
 type Variant = keyof typeof VIEWBOX;
 type Surface = "light" | "dark";
 
 /**
- * The Kanitas lockup, traced from the master artwork: the building-block K,
- * the KANITAS wordmark, two copper rules and the tagline. Every variant draws
- * from one coordinate space, so a nav-sized mark and a footer-sized full
- * lockup are the same artwork cropped differently, never redrawn.
+ * The Kanitas lockup: the Kvarteret mark, the name and, in the full lockup,
+ * the service line. Every variant draws from one coordinate space, so a
+ * nav-sized logo and a full lockup are the same artwork, never redrawn.
  */
 function Lockup({
   variant,
@@ -29,8 +28,7 @@ function Lockup({
   label: string;
 }) {
   const dark = on === "dark";
-  const letters = dark ? "fill-white" : "fill-petrol";
-  const rule = dark ? "fill-copper-soft" : "fill-copper";
+  const ink = dark ? "fill-white" : "fill-petrol";
 
   return (
     <svg
@@ -39,17 +37,23 @@ function Lockup({
       role="img"
       aria-label={label}
     >
-      <path className={letters} fillRule="evenodd" d={MARK_D} />
-      {variant !== "compact" ? <path className={rule} d={MARK_RULE_D} /> : null}
-      {variant !== "mark" ? (
-        <path className={letters} fillRule="evenodd" d={WORD_D} />
+      <path className={ink} d={MARK_WINGS_D} />
+      <path
+        className={dark ? "fill-copper-soft" : "fill-copper"}
+        d={MARK_CORE_D}
+      />
+      {variant === "compact" ? (
+        <path
+          className={ink}
+          d={WORD_D}
+          transform={`translate(0 ${NAME_CENTRE_DY})`}
+        />
       ) : null}
       {variant === "lockup" ? (
         <>
-          <path className={rule} d={WORD_RULE_D} />
+          <path className={ink} d={WORD_D} />
           <path
-            className={dark ? "fill-white/70" : "fill-muted"}
-            fillRule="evenodd"
+            className={dark ? "fill-white/75" : "fill-petrol"}
             d={TAGLINE_D}
           />
         </>
@@ -58,7 +62,7 @@ function Lockup({
   );
 }
 
-/** Mark plus wordmark, linked home. Used in the header. */
+/** Mark plus name, linked home. Used in the header and footer. */
 export default function Logo({ on = "light" }: { on?: Surface }) {
   return (
     <Link
@@ -69,14 +73,14 @@ export default function Logo({ on = "light" }: { on?: Surface }) {
       <Lockup
         variant="compact"
         on={on}
-        className="h-7 w-auto sm:h-8"
+        className="h-8 w-auto xl:h-9"
         label="Kanitas"
       />
     </Link>
   );
 }
 
-/** The complete lockup including rules and tagline. Used in the footer. */
+/** The complete lockup including the service line. */
 export function LogoLockup({
   on = "light",
   className = "h-14 w-auto",
@@ -89,7 +93,7 @@ export function LogoLockup({
       variant="lockup"
       on={on}
       className={className}
-      label="Kanitas: bygg, anläggning, helhetsansvar"
+      label="Kanitas: bygg, bemanning, maskiner, lokaler"
     />
   );
 }
