@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Loader2 } from "lucide-react";
 import {
@@ -20,13 +20,26 @@ const labelClasses = "mb-2 block text-sm font-semibold text-ink";
 const isTopic = (value: string | null): value is ContactTopic =>
   contactTopics.includes(value as ContactTopic);
 
+/** A Swedish number has at least seven digits, area code included. */
+const isPhone = (value: string) => value.replace(/\D/g, "").length >= 7;
+
+/**
+ * A callback request in two steps. It opens with one field, the phone
+ * number, because that is all we need to call back. Once a number is typed
+ * the optional details unfold below it, and the same button sends either.
+ */
 export default function ContactForm({
   defaultTopic,
 }: {
   defaultTopic?: ContactTopic;
 }) {
+  const id = useId();
   const [status, setStatus] = useState<Status>("idle");
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState(false);
+  const [revealed, setRevealed] = useState(false);
   const [topic, setTopic] = useState<ContactTopic | "">(defaultTopic ?? "");
+  const phoneRef = useRef<HTMLInputElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
 
   // A link such as /kontakt?amne=Trading arrives with its ärende chosen. Read
@@ -41,8 +54,22 @@ export default function ContactForm({
     if (status === "sent") successRef.current?.focus();
   }, [status]);
 
+  function onPhoneChange(value: string) {
+    setPhone(value);
+    if (isPhone(value)) {
+      setRevealed(true);
+      setPhoneError(false);
+    }
+  }
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isPhone(phone)) {
+      setPhoneError(true);
+      phoneRef.current?.focus();
+      return;
+    }
+
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
 
@@ -55,7 +82,6 @@ export default function ContactForm({
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus("sent");
-      form.reset();
     } catch {
       setStatus("error");
     }
@@ -69,9 +95,9 @@ export default function ContactForm({
         className="border-l-4 border-ok bg-ok/10 p-8 outline-none"
         role="status"
       >
-        <p className="display-3 text-ink">Tack!</p>
+        <p className="display-3 text-ink">Tack, vi ringer upp!</p>
         <p className="mt-3 text-ink-soft">
-          Vi svarar normalt inom ett dygn. Brådskande? Ring{" "}
+          Vi hör av oss normalt inom ett dygn. Brådskande? Ring{" "}
           <a
             href={site.phoneHref}
             className="font-semibold text-petrol underline underline-offset-4"
@@ -85,107 +111,133 @@ export default function ContactForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-6">
-      <fieldset className="sm:col-span-6">
-        <legend className={labelClasses}>Vad gäller ärendet?</legend>
-        <div className="grid grid-cols-1 gap-2 min-[22rem]:grid-cols-2 lg:grid-cols-3">
-          {contactTopics.map((value) => (
-            <label key={value} className="relative block cursor-pointer">
-              <input
-                type="radio"
-                name="topic"
-                value={value}
-                checked={topic === value}
-                onChange={() => setTopic(value)}
-                className="peer sr-only"
-              />
-              <span className="flex h-full min-h-12 items-center rounded-xs border border-line bg-paper px-3 py-2.5 text-sm font-medium text-ink-soft transition-colors sm:px-4 sm:text-base hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
-                {contactTopicLabels[value]}
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+    <form onSubmit={onSubmit} noValidate>
+      <label htmlFor={`${id}-phone`} className={labelClasses}>
+        Ditt telefonnummer
+      </label>
+      <input
+        ref={phoneRef}
+        id={`${id}-phone`}
+        name="phone"
+        type="tel"
+        inputMode="tel"
+        autoComplete="tel"
+        required
+        maxLength={40}
+        value={phone}
+        onChange={(event) => onPhoneChange(event.target.value)}
+        aria-invalid={phoneError}
+        aria-describedby={`${id}-phone-hint`}
+        className={`${inputClasses} text-lg`}
+        placeholder="070-123 45 67"
+      />
+      <p
+        id={`${id}-phone-hint`}
+        className={`mt-2 text-sm ${phoneError ? "font-medium text-error" : "text-muted"}`}
+      >
+        {phoneError
+          ? "Skriv ditt telefonnummer så ringer vi upp."
+          : "Vi ringer upp, normalt inom ett dygn."}
+      </p>
 
-      <div className="sm:col-span-3">
-        <label htmlFor="name" className={labelClasses}>
-          Namn <span className="text-error">*</span>
-        </label>
-        <input
-          id="name"
-          name="name"
-          required
-          maxLength={200}
-          autoComplete="name"
-          className={inputClasses}
-          placeholder="Förnamn Efternamn"
-        />
-      </div>
-      <div className="sm:col-span-3">
-        <label htmlFor="phone" className={labelClasses}>
-          Telefon
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="tel"
-          maxLength={40}
-          autoComplete="tel"
-          className={inputClasses}
-          placeholder="070-123 45 67"
-        />
-      </div>
-      <div className="sm:col-span-6">
-        <label htmlFor="email" className={labelClasses}>
-          E-post <span className="text-error">*</span>
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          maxLength={200}
-          autoComplete="email"
-          className={inputClasses}
-          placeholder="namn@foretag.se"
-        />
-      </div>
-      <div className="sm:col-span-6">
-        <label htmlFor="message" className={labelClasses}>
-          Meddelande <span className="text-error">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          maxLength={5000}
-          rows={5}
-          className={inputClasses}
-          placeholder="Vad ska göras, var och när?"
-        />
+      {/* The optional details. Hidden and inert until a number is typed, then
+          they unfold; none of them is required. */}
+      <div
+        inert={!revealed}
+        className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${
+          revealed ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="-mx-1 overflow-hidden px-1">
+          <div className="space-y-6 pb-2 pt-8">
+            <fieldset>
+              <legend className={labelClasses}>
+                Vad gäller det?{" "}
+                <span className="font-normal text-muted">(valfritt)</span>
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {contactTopics.map((value) => (
+                  <label key={value} className="relative block cursor-pointer">
+                    <input
+                      type="radio"
+                      name="topic"
+                      value={value}
+                      checked={topic === value}
+                      onChange={() => setTopic(value)}
+                      className="peer sr-only"
+                    />
+                    <span className="flex min-h-11 items-center rounded-xs border border-line bg-paper px-4 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
+                      {contactTopicLabels[value]}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor={`${id}-name`} className={labelClasses}>
+                  Namn{" "}
+                  <span className="font-normal text-muted">(valfritt)</span>
+                </label>
+                <input
+                  id={`${id}-name`}
+                  name="name"
+                  maxLength={200}
+                  autoComplete="name"
+                  className={inputClasses}
+                />
+              </div>
+              <div>
+                <label htmlFor={`${id}-email`} className={labelClasses}>
+                  E-post{" "}
+                  <span className="font-normal text-muted">(valfritt)</span>
+                </label>
+                <input
+                  id={`${id}-email`}
+                  name="email"
+                  type="email"
+                  maxLength={200}
+                  autoComplete="email"
+                  className={inputClasses}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor={`${id}-message`} className={labelClasses}>
+                Vad behöver du hjälp med?{" "}
+                <span className="font-normal text-muted">(valfritt)</span>
+              </label>
+              <textarea
+                id={`${id}-message`}
+                name="message"
+                maxLength={5000}
+                rows={3}
+                className={inputClasses}
+                placeholder="Vad ska göras, var och när?"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Honeypot – hidden from people, tempting for bots */}
       <div className="hidden" aria-hidden="true">
-        <label htmlFor="company">Företag</label>
-        <input id="company" name="company" tabIndex={-1} autoComplete="off" />
+        <label htmlFor={`${id}-company`}>Företag</label>
+        <input
+          id={`${id}-company`}
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
-      <div className="flex flex-col gap-4 sm:col-span-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted sm:order-1 sm:max-w-xs">
-          Vi använder uppgifterna bara för att svara dig. Läs vår{" "}
-          <Link
-            href="/integritetspolicy"
-            className="underline underline-offset-4 hover:text-ink"
-          >
-            integritetspolicy
-          </Link>
-          .
-        </p>
+      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
           disabled={status === "sending"}
-          className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60 sm:order-2 sm:w-auto"
+          className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {status === "sending" ? (
             <>
@@ -194,14 +246,23 @@ export default function ContactForm({
             </>
           ) : (
             <>
-              Skicka förfrågan
+              Ring upp mig
               <ArrowRight aria-hidden="true" />
             </>
           )}
         </button>
+        <p className="text-sm text-muted sm:max-w-xs sm:text-right">
+          Vi använder uppgifterna bara för att svara dig.{" "}
+          <Link
+            href="/integritetspolicy"
+            className="underline underline-offset-4 hover:text-ink"
+          >
+            Integritetspolicy
+          </Link>
+        </p>
       </div>
       {status === "error" ? (
-        <p className="text-sm font-medium text-error sm:col-span-6" role="alert">
+        <p className="mt-4 text-sm font-medium text-error" role="alert">
           Något gick fel. Försök igen eller ring oss på {site.phone}.
         </p>
       ) : null}

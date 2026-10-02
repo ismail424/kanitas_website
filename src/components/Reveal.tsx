@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-type Variant = "up" | "scale";
+type Variant = "up" | "scale" | "line" | "drop";
 
 /**
  * Reveals content as it scrolls into view. Content is fully visible without JS
@@ -18,14 +18,17 @@ export default function Reveal({
   delay = 0,
   as: Tag = "div",
   variant = "up",
+  style,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   delay?: number;
   /** Element to render, so a reveal can sit directly inside a list. */
   as?: "div" | "li";
-  /** "up" slides and fades; "scale" settles an image out of a slight zoom. */
+  /** "up" slides and fades; "scale" settles an image out of a slight zoom;
+   *  "line" draws a rule out from the left, "drop" a rule down from the top. */
   variant?: Variant;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLElement>(null);
 
@@ -64,7 +67,7 @@ export default function Reveal({
     <Tag
       ref={ref as React.Ref<HTMLDivElement & HTMLLIElement>}
       className={className}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={delay ? { ...style, transitionDelay: `${delay}ms` } : style}
     >
       {children}
     </Tag>

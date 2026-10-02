@@ -42,7 +42,8 @@ Kontaktformuläret skickar e-post via SMTP och behöver:
 ## Struktur
 
 - `src/app` – sidor (startsida, /bygg, /stad, /om-oss, /kontakt, /integritetspolicy), layout, API, sitemap/robots, favicon och appikoner
-- `src/components` – återanvändbara komponenter, bland annat `HomeHero`, `PageHero`, `AreaPage` (Bygg och Städ), `LogoWall`, `ContactSection` och `Logo`
+- `src/components` – återanvändbara komponenter, bland annat `HomeHero`, `PageHero`, `AreaPage` (Bygg och Städ), `ContactForm` (telefonnummer först, resten visas när numret är ifyllt), `LogoWall` och `Logo`
+- `src/components/scene` – de animerade illustrationerna: Järfälla i skymning på startsidan (`HeroScene`), huset som byggs (`BuildScene`), lägenheten som städas (`CleanScene`) och kartan över Storstockholm (`MapScene`). Animationerna ligger i `globals.css` och stängs av för den som valt reducerad rörelse
 - `src/lib/site.ts` – all webbplatsdata: kontaktuppgifter, verksamheter, fotoregister, referenser, koncernbolag
 - `public/images/photos` – foton i AVIF. De är AI-genererade platshållare i svensk miljö; byt mot egna foton via fotoregistret i `site.ts`, där varje plats har en beskrivning av vad bilden ska visa
 - `public/references`, `public/images/cert` – kundlogotyper och certifikat

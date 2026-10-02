@@ -80,8 +80,8 @@ export type Area = {
   /** One or two sentences under the h1 */
   intro: string;
   heroPhoto: PhotoName;
-  /** Full-width photograph after the services */
-  photo: PhotoName;
+  /** One or two photographs after the services */
+  photos: PhotoName[];
   /** Keyword-bearing heading for the services */
   servicesH2: string;
   /** schema.org serviceType for the area's Service JSON-LD */
@@ -95,7 +95,19 @@ export type Area = {
   services: { title: string; text: string }[];
   /** One line linking to the sister business, after the services */
   related?: { href: string; label: string };
+  /** How a job runs, told beside the page's animated illustration. */
+  process?: {
+    title: string;
+    scene: "build" | "clean";
+    steps: { title: string; text: string }[];
+  };
+  /** A short list of things, e.g. the trades we staff. */
+  tags?: { title: string; text: string; items: string[] };
   sections?: AreaSection[];
+  /** Everything a job includes, as a ticked list. */
+  checklist?: { title: string; items: string[] };
+  /** One fact set apart, e.g. how ROT works. */
+  callout?: { title: string; text: string };
   /** Rendered with FAQPage structured data */
   faq?: { q: string; a: string }[];
   seo: { title: string; description: string };
@@ -110,8 +122,8 @@ export const areas: Area[] = [
     h1: "Byggföretag i Stockholm",
     intro:
       "Nybyggnation, renovering och byggservice åt byggbolag, fastighetsägare, BRF:er och privatpersoner i hela Storstockholm.",
-    heroPhoto: "bygge",
-    photo: "renovering",
+    heroPhoto: "bygglag",
+    photos: ["badrum", "renovering"],
     servicesH2: "Byggtjänster",
     serviceType: "Byggentreprenad och byggservice",
     ctaLabel: "Begär offert",
@@ -154,6 +166,32 @@ export const areas: Area[] = [
       href: "/stad",
       label: "Byggstädning och extra personal: Kanitas ENT",
     },
+    process: {
+      title: "Så går ett byggprojekt till",
+      scene: "build",
+      steps: [
+        {
+          title: "Förfrågan och platsbesök",
+          text: "Vi går igenom vad som ska göras och tittar på platsen.",
+        },
+        {
+          title: "Offert",
+          text: "Fast pris eller löpande räkning, med omfattning och tidplan. Tilläggsarbeten godkänns skriftligt innan de utförs.",
+        },
+        {
+          title: "Planering",
+          text: "Material, tider och bemanning bokas. Du får en kontaktperson som följer jobbet hela vägen.",
+        },
+        {
+          title: "Bygget",
+          text: "Egen personal och arbetsledning på plats, med egenkontroller under arbetet.",
+        },
+        {
+          title: "Slutbesiktning och överlämning",
+          text: "Vi går igenom jobbet tillsammans och lämnar över egenkontroller och relationshandlingar.",
+        },
+      ],
+    },
     sections: [
       {
         title: "Våra kunder",
@@ -173,34 +211,16 @@ export const areas: Area[] = [
           },
           {
             title: "Privatpersoner",
-            text: "Renovering av villor och lägenheter, tillbyggnader och badrum. ROT-avdraget dras direkt på fakturan.",
+            text: "Renovering av villor och lägenheter, tillbyggnader och badrum.",
           },
         ],
         references: true,
       },
-      {
-        title: "Så arbetar vi",
-        layout: "list",
-        items: [
-          {
-            title: "Tydlig offert",
-            text: "Prisform och omfattning står i offerten. Tilläggsarbeten godkänns skriftligt innan de utförs.",
-          },
-          {
-            title: "En kontaktperson",
-            text: "Samma arbetsledare från offert till slutbesiktning.",
-          },
-          {
-            title: "Dokumenterad egenkontroll",
-            text: "Egenkontroller och relationshandlingar lämnas vid överlämningen.",
-          },
-          {
-            title: "Försäkring och avtal",
-            text: "Ansvarsförsäkring, kollektivavtal med Byggnads och Fastighets och AAA i kreditvärdighet.",
-          },
-        ],
-      },
     ],
+    callout: {
+      title: "ROT-avdrag för privatpersoner",
+      text: "Renoverar du ditt hem får du ROT-avdrag på arbetskostnaden, inte på material. Vi tar fram underlaget och drar avdraget direkt på fakturan, så du betalar bara din del.",
+    },
     faq: [
       {
         q: "Kan jag använda ROT-avdrag?",
@@ -238,7 +258,7 @@ export const areas: Area[] = [
     intro:
       "Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer och gör byggstädning inför besiktning. All personal är anställd hos oss på kollektivavtal.",
     heroPhoto: "snickare",
-    photo: "stad",
+    photos: ["byggstadning", "trapphus"],
     servicesH2: "Bemanning och städtjänster",
     serviceType: "Bemanning och byggstädning",
     ctaLabel: "Begär offert",
@@ -273,29 +293,57 @@ export const areas: Area[] = [
       href: "/bygg",
       label: "Bygg och renovering: Kanitas Bygg",
     },
+    tags: {
+      title: "Yrkesroller vi hyr ut",
+      text: "Alla är anställda hos oss på kollektivavtal, med egna arbetskläder och skyddsutrustning.",
+      items: [
+        "Snickare",
+        "Betongarbetare",
+        "Murare",
+        "Ställningsbyggare",
+        "Byggstädare",
+      ],
+    },
+    process: {
+      title: "Byggstädning i fyra steg",
+      scene: "clean",
+      steps: [
+        {
+          title: "Grovstädning",
+          text: "Byggdamm, spill och emballage tas bort löpande under byggtiden.",
+        },
+        {
+          title: "Finstädning",
+          text: "Alla ytor rengörs: snickerier, ventilationsdon, elcentraler, fönsterkarmar och golv.",
+        },
+        {
+          title: "Fönsterputs",
+          text: "Glas, karmar och bågar, invändigt och utvändigt. Etiketter och byggtejp tas bort.",
+        },
+        {
+          title: "Slutstädning",
+          text: "Sista genomgången före besiktning och inflyttning.",
+        },
+      ],
+    },
+    checklist: {
+      title: "Det här ingår i slutstädningen",
+      items: [
+        "Golv dammsugs och våttorkas",
+        "Fönster putsas in- och utvändigt",
+        "Fönsterbänkar, karmar och bågar torkas",
+        "Dörrar, karmar och lister torkas",
+        "Eluttag, strömbrytare och elcentral dammtorkas",
+        "Ventilationsdon och element rengörs",
+        "Skåp och lådor torkas ur, in- och utvändigt",
+        "Vitvaror rengörs in- och utvändigt",
+        "Badrum: kakel, porslin och golvbrunn",
+        "Byggtejp, etiketter och skyddsplast tas bort",
+        "Byggdamm tas bort från alla ytor",
+        "Emballage och skräp bärs ut",
+      ],
+    },
     sections: [
-      {
-        title: "Byggstädning i fyra steg",
-        layout: "steps",
-        items: [
-          {
-            title: "Grovstädning",
-            text: "Byggdamm, spill och emballage tas bort löpande under byggtiden.",
-          },
-          {
-            title: "Finstädning",
-            text: "Alla ytor rengörs: snickerier, ventilationsdon, elcentraler, fönsterkarmar och golv.",
-          },
-          {
-            title: "Fönsterputs",
-            text: "Glas, karmar och bågar, invändigt och utvändigt. Etiketter och byggtejp tas bort.",
-          },
-          {
-            title: "Slutstädning",
-            text: "Sista genomgången före besiktning och inflyttning.",
-          },
-        ],
-      },
       {
         title: "Så fungerar bemanning hos oss",
         layout: "list",
@@ -356,7 +404,7 @@ export const areas: Area[] = [
     intro:
       "Verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Anpassningar och underhåll gör vi själva.",
     heroPhoto: "fastighet",
-    photo: "fastighet",
+    photos: ["fastighet"],
     servicesH2: "Lokaler och förvaltning",
     serviceType: "Fastighetsförvaltning och lokaluthyrning",
     businessType: "RealEstateAgent",
@@ -420,52 +468,59 @@ export type PhotoSlot = {
 };
 
 export const photos = {
-  hem: {
-    src: "/images/photos/hem.avif",
-    alt: "Flerbostadshus under uppförande med två tornkranar i en Stockholmsförort",
-    brief: "Ett av våra egna projekt, helhetsbild av arbetsplatsen",
-    shape: "16:9 liggande, motivet till höger",
-    ready: true,
-  },
-  bygge: {
-    src: "/images/photos/bygge.avif",
-    alt: "Flerbostadshus under uppförande med byggställning och tornkran",
-    brief: "Pågående entreprenad, gärna vår egen arbetsplats",
+  bygglag: {
+    src: "/images/photos/bygglag.avif",
+    alt: "Hantverkare bär in gipsskivor från en servicebil till ett flerbostadshus",
+    brief: "Vårt eget lag på väg in till ett jobb, med firmabilen",
     shape: "16:9 liggande",
     ready: true,
   },
   armering: {
     src: "/images/photos/armering.avif",
-    alt: "Yrkesarbetare i varselkläder armerar ett bjälklag",
-    brief: "Vår egen personal i arbete, i Kanitas arbetskläder",
+    alt: "Yrkesarbetare i varselkläder binder armering på ett bjälklag",
+    brief: "Vår egen personal i arbete på en byggarbetsplats",
     shape: "3:2 liggande",
+    ready: true,
+  },
+  badrum: {
+    src: "/images/photos/badrum.avif",
+    alt: "Plattsättare lägger klinker i ett badrum under renovering",
+    brief: "En badrumsrenovering som pågår, gärna vårt eget jobb",
+    shape: "4:3 liggande",
     ready: true,
   },
   renovering: {
     src: "/images/photos/renovering.avif",
     alt: "Nyrenoverat rum i en äldre Stockholmslägenhet med kakelugn och fiskbensparkett",
     brief: "Färdig renovering, interiör",
-    shape: "21:9 liggande",
+    shape: "4:3 liggande",
     ready: true,
   },
   snickare: {
     src: "/images/photos/snickare.avif",
-    alt: "Snickare monterar gipsskivor på en ny innervägg",
+    alt: "Snickare monterar gipsskivor på en ny innervägg i en lägenhet",
     brief: "Hantverkare i arbete inomhus",
     shape: "16:9 liggande",
     ready: true,
   },
-  stad: {
-    src: "/images/photos/stad.avif",
-    alt: "Lokalvårdare putsar fönster i en ljus kontorslokal",
-    brief: "Vår städpersonal i arbete",
-    shape: "21:9 liggande",
+  byggstadning: {
+    src: "/images/photos/byggstadning.avif",
+    alt: "Två städare gör byggstädning i en nyrenoverad lägenhet",
+    brief: "Vår städpersonal vid en byggstädning",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  trapphus: {
+    src: "/images/photos/trapphus.avif",
+    alt: "Lokalvårdare moppar trapphuset i ett flerbostadshus",
+    brief: "Trapphusstädning hos en av våra avtalskunder",
+    shape: "4:3 liggande",
     ready: true,
   },
   team: {
     src: "/images/photos/team.avif",
-    alt: "Arbetslag i varselkläder samlat på en byggarbetsplats",
-    brief: "Hela arbetslaget på en av våra arbetsplatser",
+    alt: "Medarbetare samlas vid servicebilarna utanför verkstaden innan dagens jobb",
+    brief: "Hela laget vid våra bilar i Järfälla",
     shape: "16:9 liggande",
     ready: true,
   },
@@ -536,7 +591,7 @@ export const businesses: Business[] = [
       "Vi hyr ut yrkesarbetare och byggstädare till entreprenörer, ofta med kort varsel, och gör byggstädning inför besiktning.",
     page: "/stad",
     topic: "Bemanning",
-    photo: "snickare",
+    photo: "byggstadning",
     entities: ["Kanitas ENT AB"],
   },
   {
@@ -651,6 +706,7 @@ export const contactTopics = [
   "Städ",
   "Trading",
   "Fastigheter",
+  "Jobb",
   "Annat",
 ] as const;
 
@@ -662,5 +718,77 @@ export const contactTopicLabels: Record<ContactTopic, string> = {
   Städ: "Städ",
   Trading: "Maskiner och fordon",
   Fastigheter: "Lokaler",
+  Jobb: "Jobb hos oss",
   Annat: "Något annat",
 };
+
+/** How a job starts, from the first call to the work itself. */
+export const processSteps = [
+  {
+    title: "Du hör av dig",
+    text: "Ring, mejla eller lämna ditt nummer här på sidan. Vi svarar normalt inom ett dygn.",
+  },
+  {
+    title: "Vi tittar på jobbet",
+    text: "Vid behov kommer vi ut och ser på platsen innan vi räknar.",
+  },
+  {
+    title: "Du får en offert",
+    text: "Med pris, omfattning och tidplan. Offerten är kostnadsfri.",
+  },
+  {
+    title: "Vi gör jobbet",
+    text: "Med egen personal och en kontaktperson ända fram till överlämningen.",
+  },
+];
+
+/** What a buyer can count on, whichever verksamhet does the job. */
+export const trustPoints = [
+  {
+    title: "Kollektivavtal",
+    text: "All personal är anställd hos oss på kollektivavtal med Byggnads eller Fastighets.",
+  },
+  {
+    title: "Försäkring och F-skatt",
+    text: "Ansvarsförsäkring, och registrerade för F-skatt, moms och arbetsgivaravgift.",
+  },
+  {
+    title: "Stabil ekonomi",
+    text: "Kanitas AB har AAA, den högsta kreditvärdigheten.",
+  },
+  {
+    title: "Ordning på arbetsplatsen",
+    text: "Egen arbetsledning, skyddsutrustning och egenkontroller på varje jobb.",
+  },
+];
+
+/** The trades we hire for, for the careers block. */
+export const careers = {
+  title: "Jobba hos oss",
+  text: "Vi tar gärna emot intresseanmälningar från snickare, betongarbetare, murare och byggstädare. Hos oss får du anställning på kollektivavtal, arbetskläder och skyddsutrustning.",
+  topic: "Jobb" as ContactTopic,
+};
+
+/** The group's story in a few steps. Years only where we know them. */
+export const history = [
+  {
+    when: String(site.founded),
+    title: "Byggfirma i Järfälla",
+    text: "Kanitas AB startar med byggservice och renovering.",
+  },
+  {
+    when: "Sedan dess",
+    title: "Större uppdrag",
+    text: "Underentreprenader åt bland andra NCC, Implenia och ByggPartner.",
+  },
+  {
+    when: "Egna bolag",
+    title: "Fyra verksamheter",
+    text: "Bemanning och byggstädning blir Kanitas ENT. Bygg, maskiner och fastigheter får egna bolag.",
+  },
+  {
+    when: "I dag",
+    title: `${site.employees} anställda`,
+    text: "Fem bolag med kontor i Järfälla, som arbetar i hela Storstockholm.",
+  },
+];

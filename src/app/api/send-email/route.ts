@@ -9,12 +9,19 @@ const SMTP_HOST = process.env.SMTP_HOST ?? "send.one.com";
 const SMTP_PORT = Number(process.env.SMTP_PORT ?? 465);
 const SMTP_USER = process.env.SMTP_USER ?? "info@kanitas.se";
 
+// The form asks for a phone number first and everything else after, so a
+// request is valid with nothing but a number we can call back.
 const ContactSchema = z.object({
-  name: z.string().trim().min(1).max(200),
-  email: z.string().trim().email().max(200),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
+  phone: z
+    .string()
+    .trim()
+    .max(40)
+    .regex(/^[+()\d\s-]+$/)
+    .refine((value) => value.replace(/\D/g, "").length >= 7),
+  name: z.string().trim().max(200).optional().or(z.literal("")),
+  email: z.string().trim().email().max(200).optional().or(z.literal("")),
   topic: z.string().trim().max(40).optional().or(z.literal("")),
-  message: z.string().trim().min(1).max(5000),
+  message: z.string().trim().max(5000).optional().or(z.literal("")),
 });
 // Honeypot: the hidden "company" field is checked on the raw body before
 // validation, so it never needs to be part of the schema.
@@ -83,7 +90,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     if (!process.env.EMAIL_PASSWORD) {
       console.error("EMAIL_PASSWORD environment variable is not set");
-      return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Server misconfigured" },
+        { status: 500 },
+      );
     }
 
     const transporter = nodemailer.createTransport({
@@ -96,45 +106,47 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const now = new Date();
     const timestamp = `${now.toLocaleDateString("sv-SE")} kl. ${now.toLocaleTimeString("sv-SE")}`;
 
+    const missing = "Ej angivet";
     const safe = {
-      name: escapeHtml(name),
-      email: escapeHtml(email),
-      phone: phone ? escapeHtml(phone) : "Ej angivet",
-      topic: topic ? escapeHtml(topic) : "Ej angivet",
-      message: escapeHtml(message),
+      name: name ? escapeHtml(name) : missing,
+      email: email ? escapeHtml(email) : missing,
+      phone: escapeHtml(phone),
+      topic: topic ? escapeHtml(topic) : missing,
+      message: message ? escapeHtml(message) : "Inget meddelande, ring upp.",
     };
+    const subjectName = name ? `: ${name.replace(/[\r\n]+/g, " ")}` : "";
 
     await transporter.sendMail({
       from: `"Kanitas webbplats" <${SMTP_USER}>`,
       to: RECIPIENT,
-      replyTo: email,
-      subject: `Kontaktformulär${topic ? ` [${topic}]` : ""}: ${name}`,
+      replyTo: email || undefined,
+      subject: `Ring upp ${phone}${topic ? ` [${topic}]` : ""}${subjectName}`,
       text: [
-        `Nytt meddelande via kanitas.se (${timestamp})`,
+        `Ny förfrågan via kanitas.se (${timestamp})`,
         "",
-        `Namn: ${name}`,
-        `E-post: ${email}`,
-        `Telefon: ${phone || "Ej angivet"}`,
-        `Ärende: ${topic || "Ej angivet"}`,
+        `Telefon: ${phone}`,
+        `Namn: ${name || missing}`,
+        `E-post: ${email || missing}`,
+        `Ärende: ${topic || missing}`,
         "",
         "Meddelande:",
-        message,
+        message || "Inget meddelande, ring upp.",
       ].join("\n"),
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e8e4; border-radius: 12px;">
-          <h2 style="color: #131715; border-bottom: 3px solid #1e4d3b; padding-bottom: 10px;">Nytt meddelande via kanitas.se</h2>
+          <h2 style="color: #131715; border-bottom: 3px solid #1e4d3b; padding-bottom: 10px;">Ny förfrågan via kanitas.se</h2>
           <p style="color: #5b6660;">Mottaget: <strong>${timestamp}</strong></p>
           <div style="background-color: #f4f6f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
+            <p><strong>Telefon:</strong> <a href="tel:${safe.phone.replace(/\s/g, "")}" style="color: #1e4d3b;">${safe.phone}</a></p>
             <p><strong>Namn:</strong> ${safe.name}</p>
-            <p><strong>E-post:</strong> <a href="mailto:${safe.email}" style="color: #1e4d3b;">${safe.email}</a></p>
-            <p><strong>Telefon:</strong> ${safe.phone}</p>
+            <p><strong>E-post:</strong> ${safe.email}</p>
             <p><strong>Ärende:</strong> ${safe.topic}</p>
           </div>
           <div style="background-color: #f4f6f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p style="white-space: pre-wrap;">${safe.message}</p>
           </div>
           <p style="font-size: 12px; color: #5b6660; border-top: 1px solid #e5e8e4; margin-top: 20px; padding-top: 12px;">
-            Svara direkt på detta mejl för att nå avsändaren.
+            Ring upp på numret ovan${email ? ", eller svara på detta mejl" : ""}.
           </p>
         </div>
       `,
@@ -143,6 +155,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Email sending failed:", error);
-    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 },
+    );
   }
 }
