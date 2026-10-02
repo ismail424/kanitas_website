@@ -12,7 +12,7 @@
 - Använd Tailwind CSS v4 för all styling — designtokens definieras i `src/app/globals.css` under `@theme`
 - Inga hårdkodade färger i komponenter: använd tokens (paper, ink, muted, petrol, copper m.fl.)
 - Typsnitt: Archivo (rubriker, med breddaxel) och Inter (brödtext); typklasser som `display-1`, `title`, `label` och knappar (`btn btn-primary` m.fl.) definieras i `globals.css`
-- Logotypen (`src/components/logo-paths.ts`) är ren geometri: symbolen Kvarteret (fyra huskroppar runt en gård i koppar) och namnet satt i Schibsted Grotesk som konturer. Ändra inte koordinaterna för hand
+- Logotypen (`src/components/logo-paths.ts`) är ren geometri: namnet KANITAS i Mona Sans som konturer, i en färg, där K:ets nedre ben står fritt. K:et ensamt är favikon och appikon (`src/app/icon.svg` följer webbläsarens ljusa/mörka läge). Ändra inte koordinaterna för hand
 - Ikoner: lucide-react
 - Språk: Svenska för användargränssnitt, engelska för kod och kommentarer
 - Filstruktur:
