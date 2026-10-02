@@ -33,11 +33,11 @@ export default function HomeHero() {
       <div className="relative mx-auto -mt-10 w-full max-w-7xl px-5 pb-16 sm:-mt-12 sm:px-6 sm:pb-20 lg:mt-0 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
           <h1 className="hero-in display-1 text-white">
-            Vi bygger, bemannar, hyr ut och förvaltar.
+            Vi bygger, bemannar, hyr ut och förvaltar
           </h1>
           <p className="hero-in mt-6 max-w-xl lead text-white/80 [--in:1]">
-            Bygg, bemanning, maskiner och lokaler i Storstockholm. Egen personal
-            på kollektivavtal sedan {site.founded}.
+            Byggentreprenader, bemanning och byggstädning, maskiner och fordon
+            samt lokaler att hyra i hela Storstockholm.
           </p>
           <div className="hero-in mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8 [--in:2]">
             <Link href="/kontakt" className="btn btn-light">

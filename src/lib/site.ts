@@ -135,7 +135,7 @@ export const areas: Area[] = [
       },
       {
         title: "Renovering och ombyggnation",
-        text: "Kontor, lokaler och bostäder.",
+        text: "Bostäder, kontor och andra lokaler.",
       },
       {
         title: "Byggservice",
@@ -143,11 +143,11 @@ export const areas: Area[] = [
       },
       {
         title: "Badrum och våtrum",
-        text: "Totalrenovering enligt Säker Vatten.",
+        text: "Totalrenovering, med fasta samarbetspartner för VVS.",
       },
       {
         title: "Stomkomplettering och snickerier",
-        text: "Innerväggar, undertak, dörrar och platsbyggda snickerier.",
+        text: "Innerväggar, undertak, dörrar och platsbyggd inredning.",
       },
       {
         title: "Mark och anläggning",
@@ -187,8 +187,8 @@ export const areas: Area[] = [
           text: "Egen personal och arbetsledning på plats, med egenkontroller under arbetet.",
         },
         {
-          title: "Slutbesiktning och överlämning",
-          text: "Vi går igenom jobbet tillsammans och lämnar över egenkontroller och relationshandlingar.",
+          title: "Slutgenomgång och överlämning",
+          text: "Vi går igenom jobbet tillsammans och lämnar över egenkontroller och, vid större jobb, relationshandlingar.",
         },
       ],
     },
@@ -199,7 +199,7 @@ export const areas: Area[] = [
         items: [
           {
             title: "Byggbolag",
-            text: "Som underentreprenör åt bland andra NCC, Implenia, ByggPartner och Oljibe, med egen arbetsledning på plats.",
+            text: "Som underentreprenör åt bland andra NCC, Implenia och ByggPartner, med egen arbetsledning på plats.",
           },
           {
             title: "Fastighetsägare",
@@ -207,36 +207,32 @@ export const areas: Area[] = [
           },
           {
             title: "BRF:er",
-            text: "Stambyten, fasad- och balkongarbeten och renovering av gemensamma utrymmen. De boende får information under hela arbetet.",
+            text: "Stambyten, fasad- och balkongarbeten samt renovering av gemensamma utrymmen. De boende får information under hela arbetet.",
           },
           {
             title: "Privatpersoner",
-            text: "Renovering av villor och lägenheter, tillbyggnader och badrum.",
+            text: "Badrum, tillbyggnader och renovering av villor och lägenheter.",
           },
         ],
         references: true,
       },
     ],
     callout: {
-      title: "ROT-avdrag för privatpersoner",
-      text: "Renoverar du ditt hem får du ROT-avdrag på arbetskostnaden, inte på material. Vi tar fram underlaget och drar avdraget direkt på fakturan, så du betalar bara din del.",
+      title: "Rotavdrag för privatpersoner",
+      text: "Renoverar du din bostad kan du få rotavdrag för arbetskostnaden, men inte för material. Vi drar avdraget direkt på fakturan, så att du bara betalar din del.",
     },
     faq: [
       {
-        q: "Kan jag använda ROT-avdrag?",
-        a: "Ja, för arbetskostnaden. Vi drar avdraget direkt på fakturan.",
-      },
-      {
         q: "Vad kostar en offert?",
-        a: "Inget. Offerten är kostnadsfri.",
+        a: "Ingenting.",
       },
       {
         q: "Tar ni även mindre uppdrag?",
-        a: "Ja, från enstaka reparationer till hela entreprenader.",
+        a: "Ja, även enstaka reparationer.",
       },
       {
         q: "Hur snabbt kan ni börja?",
-        a: "Byggservice och akuta åtgärder kan vi normalt börja med inom några dagar. Större entreprenader planerar vi efter projektets tidplan.",
+        a: "Byggservice kan vi normalt börja med inom några dagar. Större entreprenader planerar vi efter projektets tidplan.",
       },
       {
         q: "Har ni egen personal?",
@@ -244,9 +240,9 @@ export const areas: Area[] = [
       },
     ],
     seo: {
-      title: "Byggföretag i Stockholm: renovering och byggservice",
+      title: "Byggföretag i Stockholm: renovering och service",
       description:
-        "Kanitas Bygg utför nybyggnation, renovering, byggservice och rivning i Stockholm. Kollektivavtal och AAA i kreditvärdighet. Begär en kostnadsfri offert.",
+        "Kanitas Bygg utför nybyggnation, renovering, byggservice och rivning i Stockholm. Egen personal på kollektivavtal. Begär en kostnadsfri offert.",
     },
   },
   {
@@ -278,7 +274,7 @@ export const areas: Area[] = [
       },
       {
         title: "Kontors- och fastighetsstädning",
-        text: "Kontor, trapphus och gemensamma utrymmen, med samma team varje gång.",
+        text: "Kontor, trapphus och gemensamma utrymmen, med samma städare så långt det går.",
       },
       {
         title: "Flyttstädning",
@@ -295,7 +291,7 @@ export const areas: Area[] = [
     },
     tags: {
       title: "Yrkesroller vi hyr ut",
-      text: "Alla är anställda hos oss på kollektivavtal, med egna arbetskläder och skyddsutrustning.",
+      text: "Alla har arbetskläder och skyddsutrustning från oss.",
       items: [
         "Snickare",
         "Betongarbetare",
@@ -327,7 +323,7 @@ export const areas: Area[] = [
       ],
     },
     checklist: {
-      title: "Det här ingår i slutstädningen",
+      title: "Det här ingår i byggstädningen",
       items: [
         "Golv dammsugs och våttorkas",
         "Fönster putsas in- och utvändigt",
@@ -335,9 +331,9 @@ export const areas: Area[] = [
         "Dörrar, karmar och lister torkas",
         "Eluttag, strömbrytare och elcentral dammtorkas",
         "Ventilationsdon och element rengörs",
-        "Skåp och lådor torkas ur, in- och utvändigt",
+        "Skåp och lådor torkas in- och utvändigt",
         "Vitvaror rengörs in- och utvändigt",
-        "Badrum: kakel, porslin och golvbrunn",
+        "Kakel, porslin och golvbrunn i badrummet rengörs",
         "Byggtejp, etiketter och skyddsplast tas bort",
         "Byggdamm tas bort från alla ytor",
         "Emballage och skräp bärs ut",
@@ -350,49 +346,45 @@ export const areas: Area[] = [
         items: [
           {
             title: "Inga mellanhänder",
-            text: "Vi hyr aldrig in personal från andra bemanningsföretag, så du vet vem som är på arbetsplatsen.",
+            text: "Personalen är anställd hos oss, så du vet vem som kommer till arbetsplatsen.",
           },
           {
             title: "Er arbetsledning",
-            text: "Personalen arbetar under er arbetsledning. Lön, försäkring och skyddsutrustning står vi för.",
+            text: "Ni leder arbetet på plats. Lön och försäkring står vi för.",
           },
           {
-            title: "Reserv i egna projekt",
-            text: "Vid behov flyttar vi personal från koncernens egna byggen, så en lucka kan fyllas snabbt.",
+            title: "Reserv från egna byggen",
+            text: "Vid behov flyttar vi personal från koncernens egna byggen, så att en lucka kan fyllas snabbt.",
           },
           {
             title: "Korta och långa uppdrag",
-            text: "Från några dagars förstärkning till hela arbetslag.",
+            text: "En person i några dagar eller ett helt arbetslag under hela projektet.",
           },
         ],
       },
     ],
     faq: [
       {
-        q: "Är personalen anställd hos er?",
-        a: "Ja, på kollektivavtal med Byggnads eller Fastighets.",
-      },
-      {
         q: "Hur snabbt kan ni bemanna?",
-        a: "Normalt inom ett dygn för enstaka yrkesarbetare och inom några dagar för ett helt arbetslag.",
+        a: "Enstaka yrkesarbetare kan vi ofta skicka redan nästa arbetsdag. Ett helt arbetslag tar normalt några dagar.",
       },
       {
         q: "Hur lång tid tar en byggstädning?",
         a: "En lägenhet tar normalt en dag, större lokaler flera. Vi planerar utifrån besiktningsdatumet.",
       },
       {
-        q: "Vad händer om besiktningen får anmärkningar?",
-        a: "Vi åtgärdar dem utan extra kostnad.",
+        q: "Vad händer om besiktningsmannen har anmärkningar på städningen?",
+        a: "Då städar vi om de ytorna utan extra kostnad.",
       },
       {
-        q: "Tar ni löpande städavtal?",
+        q: "Erbjuder ni löpande städavtal?",
         a: "Ja, för kontor, trapphus och fastigheter. Vi tar också enstaka uppdrag som flytt- och storstädning.",
       },
     ],
     seo: {
       title: "Bemanning och byggstädning i Stockholm",
       description:
-        "Kanitas ENT hyr ut yrkesarbetare till bygg och utför byggstädning, slutstädning och kontorsstädning i Stockholm. Egen personal på kollektivavtal.",
+        "Kanitas ENT hyr ut yrkesarbetare till byggföretag och utför byggstädning, slutstädning och kontorsstädning i Stockholm. Egen personal på kollektivavtal.",
     },
   },
   {
@@ -402,7 +394,7 @@ export const areas: Area[] = [
     name: "Kanitas Fastigheter",
     h1: "Lokaler att hyra i Järfälla",
     intro:
-      "Verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Anpassningar och underhåll gör vi själva.",
+      "Verkstads-, lager- och kontorslokaler i Järfälla. Anpassningar och underhåll gör vi själva.",
     heroPhoto: "fastighet",
     photos: ["fastighet"],
     servicesH2: "Lokaler och förvaltning",
@@ -413,7 +405,7 @@ export const areas: Area[] = [
     services: [
       {
         title: "Lokaler att hyra",
-        text: "Verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm.",
+        text: "Verkstads-, lager- och kontorslokaler i Järfälla.",
       },
       {
         title: "Förvaltning",
@@ -435,7 +427,7 @@ export const areas: Area[] = [
     seo: {
       title: "Lokaler att hyra i Järfälla",
       description:
-        "Kanitas Fastigheter hyr ut verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm.",
+        "Kanitas Fastigheter hyr ut verkstads-, lager- och kontorslokaler i Järfälla.",
     },
   },
 ];
@@ -607,7 +599,7 @@ export const businesses: Business[] = [
     heading: "Bygg och entreprenad",
     summary: "Entreprenader, renovering och byggservice",
     blurb:
-      "Vår största verksamhet. Vi bygger åt fastighetsägare, BRF:er och privatpersoner, och som underentreprenör åt bland andra NCC, Implenia och ByggPartner.",
+      "Vi bygger åt fastighetsägare, BRF:er och privatpersoner, och som underentreprenör åt bland andra NCC, Implenia och ByggPartner.",
     page: "/bygg",
     topic: "Bygg",
     photo: "armering",
@@ -642,7 +634,7 @@ export const businesses: Business[] = [
     heading: "Lokaler och förvaltning",
     summary: "Verkstads-, lager- och kontorslokaler att hyra",
     blurb:
-      "Vi hyr ut verkstads-, lager- och kontorslokaler i Järfälla och Storstockholm. Anpassningar och underhåll gör vi själva.",
+      "Vi hyr ut verkstads-, lager- och kontorslokaler i Järfälla. Anpassningar och underhåll gör vi själva.",
     topic: "Fastigheter",
     photo: "fastighet",
     entities: ["Kanitas Fastigheter AB"],
@@ -685,7 +677,7 @@ export const groupCompanies = [
   {
     name: "Kanitas Trading AB",
     orgnr: "559553-4263",
-    role: "Köp, försäljning och uthyrning av fordon och maskiner",
+    role: "Köp, försäljning och uthyrning av maskiner och fordon",
   },
 ];
 
@@ -700,7 +692,7 @@ export const groupFacts = [
   { label: "Kreditvärdighet", value: "AAA för Kanitas AB" },
   { label: "Kollektivavtal", value: "Byggnads och Fastighets" },
   { label: "Försäkring", value: "Ansvarsförsäkring" },
-  { label: "Registrerat för", value: "F-skatt, moms och arbetsgivaravgift" },
+  { label: "Skatt och moms", value: "Godkänt för F-skatt, registrerat för moms och som arbetsgivare" },
   { label: "Certifiering och medlemskap", value: "SafeTrade, Svenskt Näringsliv" },
 ];
 
@@ -757,7 +749,7 @@ export const contactTopicLabels: Record<ContactTopic, string> = {
 export const processSteps = [
   {
     title: "Du hör av dig",
-    text: "Ring, mejla eller lämna ditt nummer här på sidan. Vi svarar normalt inom ett dygn.",
+    text: "Ring, mejla eller lämna ditt nummer här på sidan.",
   },
   {
     title: "Vi tittar på jobbet",
@@ -765,7 +757,7 @@ export const processSteps = [
   },
   {
     title: "Du får en offert",
-    text: "Med pris, omfattning och tidplan. Offerten är kostnadsfri.",
+    text: "Med pris, omfattning och tidplan.",
   },
   {
     title: "Vi gör jobbet",
@@ -777,11 +769,11 @@ export const processSteps = [
 export const trustPoints = [
   {
     title: "Kollektivavtal",
-    text: "All personal är anställd hos oss på kollektivavtal med Byggnads eller Fastighets.",
+    text: "Våra yrkesarbetare och städare är anställda på kollektivavtal med Byggnads eller Fastighets.",
   },
   {
     title: "Försäkring och F-skatt",
-    text: "Ansvarsförsäkring, och registrerade för F-skatt, moms och arbetsgivaravgift.",
+    text: "Vi har ansvarsförsäkring, är godkända för F-skatt och registrerade för moms och som arbetsgivare.",
   },
   {
     title: "Stabil ekonomi",
@@ -789,14 +781,14 @@ export const trustPoints = [
   },
   {
     title: "Ordning på arbetsplatsen",
-    text: "Egen arbetsledning, skyddsutrustning och egenkontroller på varje jobb.",
+    text: "Skyddsutrustning och egenkontroller på varje jobb, och egen arbetsledning på våra entreprenader.",
   },
 ];
 
 /** The trades we hire for, for the careers block. */
 export const careers = {
   title: "Jobba hos oss",
-  text: "Vi tar gärna emot intresseanmälningar från snickare, betongarbetare, murare och byggstädare. Hos oss får du anställning på kollektivavtal, arbetskläder och skyddsutrustning.",
+  text: "Vi tar gärna emot intresseanmälningar från yrkesarbetare och byggstädare. Hos oss får du anställning på kollektivavtal, arbetskläder och skyddsutrustning.",
   topic: "Jobb" as ContactTopic,
 };
 
@@ -805,7 +797,7 @@ export const history = [
   {
     when: String(site.founded),
     title: "Byggfirma i Järfälla",
-    text: "Kanitas AB startar med byggservice och renovering.",
+    text: "Kanitas AB startar med bygg, byggservice och städ.",
   },
   {
     when: "Sedan dess",
@@ -813,13 +805,13 @@ export const history = [
     text: "Underentreprenader åt bland andra NCC, Implenia och ByggPartner.",
   },
   {
-    when: "Egna bolag",
+    when: "Med tiden",
     title: "Fyra verksamheter",
     text: "Bemanning och byggstädning blir Kanitas ENT. Bygg, maskiner och fastigheter får egna bolag.",
   },
   {
     when: "I dag",
     title: `${site.employees} anställda`,
-    text: "Fem bolag med kontor i Järfälla, som arbetar i hela Storstockholm.",
+    text: "Fem bolag med kontor i Järfälla och uppdrag i hela Storstockholm.",
   },
 ];

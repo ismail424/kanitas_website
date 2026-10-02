@@ -4,7 +4,7 @@ import ProcessSteps from "@/components/ProcessSteps";
 import { ogMeta, site } from "@/lib/site";
 
 const pageTitle = "Kontakta oss";
-const pageDescription = `Kontakta Kanitas i Järfälla: ring ${site.phone}, mejla ${site.email} eller skicka en offertförfrågan via formuläret. Vi svarar normalt inom ett dygn.`;
+const pageDescription = `Kontakta Kanitas i Järfälla: ring ${site.phone}, mejla ${site.email} eller lämna ditt nummer så ringer vi upp.`;
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -37,13 +37,10 @@ export default function KontaktPage() {
       <ContactSection
         as="h1"
         title="Kontakta oss"
-        lead="Lämna ditt nummer så ringer vi upp, normalt inom ett dygn. Samma telefon och e-post gäller alla bolag i koncernen."
+        lead="Lämna ditt nummer så ringer vi upp. Samma telefonnummer och e-postadress gäller alla bolag i koncernen."
       />
 
-      <ProcessSteps
-        title="Det här händer när du hört av dig"
-        className="bg-paper-2"
-      />
+      <ProcessSteps className="bg-paper-2" />
     </>
   );
 }

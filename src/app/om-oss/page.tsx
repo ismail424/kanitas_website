@@ -9,8 +9,8 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { groupCompanies, groupFacts, ogMeta, site } from "@/lib/site";
 
-const pageTitle = `Om Kanitas: koncernen i Järfälla sedan ${site.founded}`;
-const pageDescription = `Kanitas grundades ${site.founded} i Järfälla och är i dag en koncern med ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och fastigheter. AAA i kreditvärdighet och kollektivavtal med Byggnads och Fastighets.`;
+const pageTitle = `Om oss: koncernen i Järfälla sedan ${site.founded}`;
+const pageDescription = `Kanitas grundades ${site.founded} i Järfälla och är i dag ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och lokaler. Kollektivavtal och AAA i kreditvärdighet.`;
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -51,18 +51,15 @@ export default function OmOssPage() {
       <section className="py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
           <Reveal className="lg:col-span-5">
-            <SectionHeading title="Så växte Kanitas" />
+            <SectionHeading title="Så arbetar vi" />
             <div className="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-ink-soft">
               <p>
-                Kanitas AB startade som byggfirma i {site.address.city}{" "}
-                {site.founded} och växte genom uppdrag som underentreprenör åt
-                större byggbolag. Med tiden fick bemanning, maskinhandel och
-                fastigheter egna bolag.
+                Bygg är den största verksamheten. Vi arbetar med egen personal
+                och anlitar fasta samarbetspartner för el, VVS och ventilation.
               </p>
               <p>
-                Bygg är fortfarande den största verksamheten. Vi arbetar med
-                egen personal och anlitar fasta samarbetspartner för el, VVS och
-                ventilation.
+                Bemanning, maskiner och lokaler drivs i egna bolag, men du når
+                alla på samma telefonnummer.
               </p>
             </div>
           </Reveal>
@@ -96,7 +93,7 @@ export default function OmOssPage() {
           <Reveal>
             <SectionHeading
               title="Bolagen i koncernen"
-              lead="Varje verksamhet drivs i ett eget bolag."
+              lead="Kanitas AB är moderbolag och har ett dotterbolag för varje verksamhet."
             />
           </Reveal>
           <div className="mt-14">

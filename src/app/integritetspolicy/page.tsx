@@ -23,14 +23,14 @@ const sections = [
   {
     title: "Vilka uppgifter vi behandlar",
     body: [
-      "När du använder kontaktformuläret behandlar vi de uppgifter du själv lämnar: namn, e-postadress, telefonnummer om du anger det, vad ärendet gäller och ditt meddelande. Detsamma gäller uppgifter du lämnar när du mejlar eller ringer oss.",
+      "När du använder kontaktformuläret behandlar vi ditt telefonnummer, som är det enda du måste fylla i, och de uppgifter du själv väljer att lägga till: namn, e-postadress, vad ärendet gäller och ditt meddelande. Detsamma gäller uppgifter du lämnar när du mejlar eller ringer oss.",
       "Lämna inga känsliga personuppgifter i formuläret, till exempel uppgifter om hälsa.",
     ],
   },
   {
     title: "Varför vi behandlar dem",
     body: [
-      "Uppgifterna används för att besvara din förfrågan, ta fram en offert och, om vi kommer överens, genomföra uppdraget. Den rättsliga grunden är vårt berättigade intresse av att besvara förfrågningar, och när du begär en offert de åtgärder som krävs innan ett avtal ingås.",
+      "Uppgifterna används för att besvara din förfrågan, ta fram en offert och, om vi kommer överens, genomföra uppdraget. Skickar du en intresseanmälan om jobb använder vi dem för att kontakta dig om en anställning. Den rättsliga grunden är vårt berättigade intresse av att besvara förfrågningar. När du begär en offert eller anlitar oss behandlar vi uppgifterna för att kunna ingå och fullgöra avtalet med dig.",
       "Vi använder inte uppgifterna för marknadsföring som du inte har bett om, och vi säljer dem aldrig vidare.",
     ],
   },
@@ -43,13 +43,14 @@ const sections = [
   {
     title: "Vem som får del av dem",
     body: [
-      "Uppgifterna hanteras av medarbetare inom koncernen som arbetar med ditt ärende. Leverantörer som driver webbplatsen och vår e-post kan få tillgång till uppgifterna i den mån det behövs för att leverera sina tjänster till oss.",
+      `Det du skriver i formuläret skickas som e-post till ${site.email} och sparas i vår e-post, inte på webbplatsen. Gäller ärendet ett annat bolag i koncernen, till exempel Kanitas ENT AB för bemanning och städ, skickar vi det vidare dit. När du skickar formuläret används din IP-adress tillfälligt för att stoppa spam.`,
+      "Webbplatsen drivs av Vercel och vår e-post av One.com. De kan få tillgång till uppgifterna i den mån det behövs för att leverera sina tjänster till oss. Kontaktformuläret hanteras på servrar i Stockholm.",
     ],
   },
   {
     title: "Cookies och besöksstatistik",
     body: [
-      "Webbplatsen sätter inga cookies. Vi mäter antal besök och vilka sidor som läses, utan cookies och utan att enskilda besökare kan identifieras.",
+      "Webbplatsen sätter inga cookies. Vi mäter antal besök och vilka sidor som läses, utan att enskilda besökare kan identifieras.",
     ],
   },
   {

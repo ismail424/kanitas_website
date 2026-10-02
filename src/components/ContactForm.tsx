@@ -97,7 +97,7 @@ export default function ContactForm({
       >
         <p className="display-3 text-ink">Tack, vi ringer upp!</p>
         <p className="mt-3 text-ink-soft">
-          Vi hör av oss normalt inom ett dygn. Brådskande? Ring{" "}
+          Vi hör av oss normalt inom en arbetsdag. Brådskande? Ring{" "}
           <a
             href={site.phoneHref}
             className="font-semibold text-petrol underline underline-offset-4"
@@ -137,7 +137,7 @@ export default function ContactForm({
       >
         {phoneError
           ? "Skriv ditt telefonnummer så ringer vi upp."
-          : "Vi ringer upp, normalt inom ett dygn."}
+          : "Vi ringer upp, normalt inom en arbetsdag."}
       </p>
 
       {/* The optional details. Hidden and inert until a number is typed, then
@@ -252,7 +252,7 @@ export default function ContactForm({
           )}
         </button>
         <p className="text-sm text-muted sm:max-w-xs sm:text-right">
-          Vi använder uppgifterna bara för att svara dig.{" "}
+          Vi använder uppgifterna bara för ditt ärende.{" "}
           <Link
             href="/integritetspolicy"
             className="underline underline-offset-4 hover:text-ink"

@@ -18,12 +18,12 @@ import {
   site,
 } from "@/lib/site";
 
-const pageTitle = "Bygg, bemanning, maskiner och lokaler i Stockholm";
+const pageTitle = "Kanitas | Bygg, bemanning, maskiner och lokaler i Stockholm";
 const pageDescription =
-  "Kanitas i Järfälla: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i Storstockholm. Egen personal sedan 2011.";
+  "Kanitas i Järfälla: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i Storstockholm. Grundat 2011.";
 
 export const metadata: Metadata = {
-  title: pageTitle,
+  title: { absolute: pageTitle },
   description: pageDescription,
   alternates: { canonical: "/" },
   ...ogMeta(pageTitle, pageDescription, "/"),
@@ -32,14 +32,31 @@ export const metadata: Metadata = {
 /** The group in four figures, for the band under the story. */
 const figures = [
   { value: site.founded, label: `Grundat i ${site.address.city}` },
-  { value: site.employees, label: "Anställda på kollektivavtal" },
+  { value: site.employees, label: "Anställda" },
   { value: groupCompanies.length, label: "Bolag i koncernen" },
   { value: "AAA", label: "Kreditvärdighet för Kanitas AB" },
 ];
 
+/** Tells search engines the site's name, shown above the result. Belongs on
+ *  the home page only. */
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  name: "Kanitas",
+  alternateName: site.legalName,
+  url: site.url,
+  inLanguage: "sv-SE",
+  publisher: { "@id": `${site.url}/#organization` },
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <HomeHero />
 
       {/* Who already hires us, straight after the promise. */}
@@ -65,7 +82,7 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               title="Det här gör vi"
-              lead="Fyra verksamheter med egen personal. Samma telefonnummer gäller alla."
+              lead="Du når alla fyra verksamheter på samma telefonnummer."
             />
           </Reveal>
 
@@ -118,10 +135,9 @@ export default function HomePage() {
               Från byggfirma till koncern
             </h2>
             <p className="mt-6 lead text-white/75">
-              Kanitas startade {site.founded} som byggfirma i{" "}
-              {site.address.city}. I dag är vi {groupCompanies.length} bolag och{" "}
-              {site.employees} anställda, och bygg är fortfarande den största
-              verksamheten.
+              Kanitas startade som byggfirma i {site.address.city}. Med tiden
+              fick bemanning, maskiner och lokaler egna bolag, men bygg är
+              fortfarande den största verksamheten.
             </p>
             <Link
               href="/om-oss"
@@ -154,7 +170,7 @@ export default function HomePage() {
 
       <Careers />
 
-      <ContactSection title="Begär en offert" />
+      <ContactSection title="Begär offert" />
     </>
   );
 }

@@ -5,7 +5,7 @@ import { site, type ContactTopic } from "@/lib/site";
 
 export default function ContactSection({
   title = "Skicka en förfrågan",
-  lead = "Lämna ditt nummer så ringer vi upp, normalt inom ett dygn. Offerten är kostnadsfri.",
+  lead = "Lämna ditt nummer så ringer vi upp. Offerten är kostnadsfri.",
   topic,
   as = "h2",
 }: {

@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 
+// Run the form handler in Stockholm, next to the mail server and the people
+// whose details it carries (the privacy policy says so).
+export const preferredRegion = "arn1";
+
 // The recipient is fixed server-side; the endpoint must never relay
 // mail to arbitrary addresses supplied by the client.
 const RECIPIENT = process.env.CONTACT_RECIPIENT ?? "info@kanitas.se";
@@ -103,8 +107,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       auth: { user: SMTP_USER, pass: process.env.EMAIL_PASSWORD },
     });
 
+    // The server runs in UTC; whoever reads the mail is in Sweden.
     const now = new Date();
-    const timestamp = `${now.toLocaleDateString("sv-SE")} kl. ${now.toLocaleTimeString("sv-SE")}`;
+    const zone = { timeZone: "Europe/Stockholm" } as const;
+    const timestamp = `${now.toLocaleDateString("sv-SE", zone)} kl. ${now.toLocaleTimeString("sv-SE", { ...zone, hour: "2-digit", minute: "2-digit" })}`;
 
     const missing = "Ej angivet";
     const safe = {
@@ -146,7 +152,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             <p style="white-space: pre-wrap;">${safe.message}</p>
           </div>
           <p style="font-size: 12px; color: #5b6660; border-top: 1px solid #e5e8e4; margin-top: 20px; padding-top: 12px;">
-            Ring upp på numret ovan${email ? ", eller svara på detta mejl" : ""}.
+            Ring upp på numret ovan${email ? " eller svara på det här mejlet" : ""}.
           </p>
         </div>
       `,
