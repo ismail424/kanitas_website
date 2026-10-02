@@ -6,11 +6,14 @@ type Variant = "up" | "scale";
 
 /**
  * Reveals content as it scrolls into view. Content is fully visible without JS
- * — the .reveal styles are only applied once this component mounts, so no-JS
- * and reduced-motion users never see a hidden page.
+ * and the first paint never hides anything: the .reveal styles are only added
+ * to blocks the observer reports as below the fold, and reduced-motion users
+ * get no transition at all (globals.css).
  *
- * The observer disconnects after the first intersection: re-animating on every
- * pass is what makes scroll effects feel cheap, and it costs battery on mobile.
+ * Positions come from the IntersectionObserver rather than a layout read on
+ * mount, so a page full of reveals never forces a reflow per block. The
+ * observer disconnects once a block is shown: re-animating on every pass is
+ * what makes scroll effects feel cheap, and it costs battery on mobile.
  */
 export default function Reveal({
   children,
@@ -33,27 +36,28 @@ export default function Reveal({
     const el = ref.current;
     if (!el) return;
 
-    el.classList.add("reveal", `reveal-${variant}`);
-
-    // Anything already on screen at load should not animate in behind the
-    // fold-line; show it immediately so the first paint looks settled.
-    const viewportH = window.innerHeight;
-    if (el.getBoundingClientRect().top < viewportH * 0.9) {
-      el.classList.add("is-visible");
-      return;
-    }
-
+    let first = true;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
+          if (first) {
+            first = false;
+            // On screen at load: leave it be, so the first paint stays put.
+            if (entry.boundingClientRect.top < window.innerHeight) {
+              observer.disconnect();
+              return;
+            }
+            el.classList.add("reveal", `reveal-${variant}`);
+            continue;
+          }
           if (entry.isIntersecting) {
             el.classList.add("is-visible");
             observer.disconnect();
           }
         }
       },
-      // Trigger slightly before the element scrolls into view so content never
-      // visibly pops in mid-viewport.
+      // Start once the block is a little way into the viewport, so the fade
+      // is seen rather than spent below the fold.
       { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
     observer.observe(el);
