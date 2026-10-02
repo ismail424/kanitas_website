@@ -21,6 +21,8 @@ export const site = {
     region: "Stockholm",
     country: "SE",
   },
+  /** Credit rating of Kanitas AB, the parent company. */
+  creditRating: "AAA",
 } as const;
 
 /**
@@ -252,9 +254,9 @@ export const areas: Area[] = [
     name: "Kanitas ENT",
     h1: "Bemanning och byggstädning i Stockholm",
     intro:
-      "Vi hyr ut snickare, betongarbetare, murare och byggstädare till entreprenörer och gör byggstädning inför besiktning. All personal är anställd hos oss på kollektivavtal.",
+      "Vi hyr ut yrkesarbetare och byggstädare till entreprenörer och gör byggstädning inför besiktning. All personal är anställd hos oss på kollektivavtal.",
     heroPhoto: "snickare",
-    photos: ["byggstadning", "trapphus"],
+    photos: ["armering", "trapphus"],
     servicesH2: "Bemanning och städtjänster",
     serviceType: "Bemanning och byggstädning",
     ctaLabel: "Begär offert",
@@ -432,9 +434,8 @@ export const areas: Area[] = [
   },
 ];
 
-/** Areas currently presented on the site. Fastigheter is parked for now:
- *  flip `active` and add its route folder to re-enable it. */
-export const activeAreas = areas.filter((a) => a.active);
+// Fastigheter is parked for now: flip `active` and add its route folder to
+// re-enable it (the sitemap lists active areas only).
 
 /** Header links after the Verksamheter menu, which lists `businesses`. */
 export const nav = [
@@ -517,6 +518,7 @@ export const photos = {
     alt: "Snickare monterar gipsskivor på en ny innervägg i en lägenhet",
     brief: "Hantverkare i arbete inomhus",
     shape: "16:9 liggande",
+    focus: "30% 50%",
     ready: true,
   },
   byggstadning: {
@@ -692,7 +694,7 @@ export const groupFacts = [
   { label: "Kreditvärdighet", value: "AAA för Kanitas AB" },
   { label: "Kollektivavtal", value: "Byggnads och Fastighets" },
   { label: "Försäkring", value: "Ansvarsförsäkring" },
-  { label: "Skatt och moms", value: "Godkänt för F-skatt, registrerat för moms och som arbetsgivare" },
+  { label: "Skatt och moms", value: "Godkänt för F‑skatt, registrerat för moms och som arbetsgivare" },
   { label: "Certifiering och medlemskap", value: "SafeTrade, Svenskt Näringsliv" },
 ];
 
@@ -772,8 +774,8 @@ export const trustPoints = [
     text: "Våra yrkesarbetare och städare är anställda på kollektivavtal med Byggnads eller Fastighets.",
   },
   {
-    title: "Försäkring och F-skatt",
-    text: "Vi har ansvarsförsäkring, är godkända för F-skatt och registrerade för moms och som arbetsgivare.",
+    title: "Försäkring och F‑skatt",
+    text: "Vi har ansvarsförsäkring, är godkända för F‑skatt och registrerade för moms och som arbetsgivare.",
   },
   {
     title: "Stabil ekonomi",
@@ -790,6 +792,7 @@ export const careers = {
   title: "Jobba hos oss",
   text: "Vi tar gärna emot intresseanmälningar från yrkesarbetare och byggstädare. Hos oss får du anställning på kollektivavtal, arbetskläder och skyddsutrustning.",
   topic: "Jobb" as ContactTopic,
+  trades: ["Snickare", "Betongarbetare", "Murare", "Byggstädare"],
 };
 
 /** The group's story in a few steps. Years only where we know them. */

@@ -40,9 +40,7 @@ function Lockup({
       aria-label={label}
     >
       <path className={letters} fillRule="evenodd" d={MARK_D} />
-      {variant !== "compact" ? (
-        <path className={rule} d={MARK_RULE_D} />
-      ) : null}
+      {variant !== "compact" ? <path className={rule} d={MARK_RULE_D} /> : null}
       {variant !== "mark" ? (
         <path className={letters} fillRule="evenodd" d={WORD_D} />
       ) : null}

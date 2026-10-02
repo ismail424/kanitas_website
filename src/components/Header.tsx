@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
-import Logo from "@/components/Logo";
 import { businessHref, businesses, nav, site } from "@/lib/site";
 
-export default function Header() {
+/**
+ * The site header. The logo arrives rendered from the server (the layout
+ * passes it in), so its path data never ships in this client bundle.
+ */
+export default function Header({ logo }: { logo: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -58,11 +61,17 @@ export default function Header() {
     };
   }, [menuOpen, panelOpen]);
 
-  // The phone menu covers the page; stop the page scrolling underneath it.
+  // The phone menu covers the page: stop the page scrolling underneath it,
+  // and take it out of reach so Tab and screen readers stay in the menu.
   useEffect(() => {
     document.documentElement.style.overflow = menuOpen ? "hidden" : "";
+    const behind = document.querySelectorAll<HTMLElement>(
+      '#innehall, footer, a[href="#innehall"]',
+    );
+    behind.forEach((el) => (el.inert = menuOpen));
     return () => {
       document.documentElement.style.overflow = "";
+      behind.forEach((el) => (el.inert = false));
     };
   }, [menuOpen]);
 
@@ -73,35 +82,97 @@ export default function Header() {
     <header
       ref={headerRef}
       className={`sticky top-0 z-50 border-b bg-paper transition-shadow ${
-        scrolled || panelOpen
-          ? "border-line shadow-[0_1px_24px_rgba(15,34,41,0.07)]"
-          : "border-line/60"
+        scrolled || panelOpen ? "border-line shadow-header" : "border-line/60"
       }`}
     >
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 sm:px-6 lg:px-8">
-        <Logo />
+        {logo}
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Huvudmeny">
-          <button
-            ref={panelButtonRef}
-            type="button"
-            aria-expanded={panelOpen}
-            aria-controls="verksamheter-meny"
-            onClick={() => setPanelOpen((v) => !v)}
-            className={`inline-flex items-center gap-1.5 rounded-xs px-4 py-2 text-base font-medium transition-colors ${
-              panelOpen || inVerksamheter
-                ? "bg-paper-2 text-ink"
-                : "text-ink-soft hover:bg-paper-2 hover:text-ink"
-            }`}
+        <nav
+          className="hidden items-center gap-1 lg:flex"
+          aria-label="Huvudmeny"
+        >
+          {/* The panel follows its button, so Tab goes straight into it, and
+              it closes when focus moves on. Neither wrapper is positioned:
+              the panel spans the header, not the button. */}
+          <div
+            onBlur={(event) => {
+              const next = event.relatedTarget as Node | null;
+              if (next && !event.currentTarget.contains(next)) {
+                setPanelOpen(false);
+              }
+            }}
           >
-            Verksamheter
-            <ChevronDown
-              className={`h-4 w-4 transition-transform duration-200 ${
-                panelOpen ? "rotate-180" : ""
+            <button
+              ref={panelButtonRef}
+              type="button"
+              aria-expanded={panelOpen}
+              aria-controls="verksamheter-meny"
+              onClick={() => setPanelOpen((v) => !v)}
+              className={`inline-flex items-center gap-1.5 rounded-xs px-4 py-2 text-base font-medium transition-colors ${
+                panelOpen || inVerksamheter
+                  ? "bg-paper-2 text-ink"
+                  : "text-ink-soft hover:bg-paper-2 hover:text-ink"
               }`}
-              aria-hidden="true"
-            />
-          </button>
+            >
+              Verksamheter
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  panelOpen ? "rotate-180" : ""
+                }`}
+                aria-hidden="true"
+              />
+            </button>
+            {/* Desktop: the four verksamheter, equal weight, one row. */}
+            <div
+              id="verksamheter-meny"
+              hidden={!panelOpen}
+              className="absolute inset-x-0 top-full hidden border-b border-line bg-paper shadow-panel lg:block"
+            >
+              <div className="mx-auto max-w-7xl px-8 pb-8 pt-10">
+                <ul className="grid grid-cols-4 gap-8">
+                  {businesses.map((business) => (
+                    <li key={business.slug}>
+                      <Link
+                        href={businessHref(business)}
+                        onClick={closeAll}
+                        className="group -m-4 flex flex-col rounded-xs p-4 transition-colors hover:bg-paper-2"
+                      >
+                        <span className="title text-ink group-hover:text-petrol">
+                          {business.heading}
+                        </span>
+                        <span className="mt-1 text-sm text-muted">
+                          {business.name}
+                        </span>
+                        <span className="mt-3 leading-relaxed text-ink-soft">
+                          {business.summary}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 flex items-center justify-between border-t border-line pt-6 text-sm">
+                  <p className="text-muted">
+                    Telefon:{" "}
+                    <a
+                      href={site.phoneHref}
+                      className="font-semibold text-ink hover:text-petrol"
+                    >
+                      {site.phone}
+                    </a>
+                  </p>
+                  <Link
+                    href="/om-oss"
+                    onClick={closeAll}
+                    className="link-arrow text-petrol hover:text-ink"
+                  >
+                    Om koncernen
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -136,6 +207,15 @@ export default function Header() {
           </Link>
         </div>
 
+        {/* Calling is the main way in on a phone: one tap, always in view. */}
+        <a
+          href={site.phoneHref}
+          aria-label={`Ring ${site.phone}`}
+          className="ml-auto rounded-xs p-2 text-petrol hover:bg-paper-2 lg:hidden"
+        >
+          <Phone className="h-6 w-6" aria-hidden="true" />
+        </a>
+
         <button
           ref={menuButtonRef}
           type="button"
@@ -147,54 +227,6 @@ export default function Header() {
         >
           {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
-      </div>
-
-      {/* Desktop: the four verksamheter, equal weight, one row. */}
-      <div
-        id="verksamheter-meny"
-        hidden={!panelOpen}
-        className="absolute inset-x-0 top-full hidden border-b border-line bg-paper shadow-[0_24px_48px_-24px_rgba(15,34,41,0.25)] lg:block"
-      >
-        <div className="mx-auto max-w-7xl px-8 pb-8 pt-10">
-          <ul className="grid grid-cols-4 gap-8">
-            {businesses.map((business) => (
-              <li key={business.slug}>
-                <Link
-                  href={businessHref(business)}
-                  onClick={closeAll}
-                  className="group -m-4 flex h-full flex-col rounded-xs p-4 transition-colors hover:bg-paper-2"
-                >
-                  <span className="title text-ink group-hover:text-petrol">
-                    {business.heading}
-                  </span>
-                  <span className="mt-1 text-sm text-muted">{business.name}</span>
-                  <span className="mt-3 leading-relaxed text-ink-soft">
-                    {business.summary}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 flex items-center justify-between border-t border-line pt-6 text-sm">
-            <p className="text-muted">
-              Telefon:{" "}
-              <a
-                href={site.phoneHref}
-                className="font-semibold text-ink hover:text-petrol"
-              >
-                {site.phone}
-              </a>
-            </p>
-            <Link
-              href="/om-oss"
-              onClick={closeAll}
-              className="link-arrow text-petrol hover:text-ink"
-            >
-              Om koncernen
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
       </div>
 
       {/* Phone and tablet: one full-height sheet. */}
@@ -212,9 +244,11 @@ export default function Header() {
                   href={businessHref(business)}
                   onClick={closeAll}
                   aria-current={business.page === pathname ? "page" : undefined}
-                  className="block py-4"
+                  className="block py-4 aria-[current=page]:border-l-4 aria-[current=page]:border-copper aria-[current=page]:pl-4"
                 >
-                  <span className="block title text-ink">{business.heading}</span>
+                  <span className="block title text-ink">
+                    {business.heading}
+                  </span>
                   <span className="mt-0.5 block text-sm text-muted">
                     {business.name}
                   </span>
@@ -229,7 +263,7 @@ export default function Header() {
                   href={item.href}
                   onClick={closeAll}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className="block py-2.5 text-lg font-medium text-ink"
+                  className="block py-2.5 text-lg font-medium text-ink underline-offset-4 aria-[current=page]:text-petrol aria-[current=page]:underline"
                 >
                   {item.label}
                 </Link>
@@ -241,7 +275,11 @@ export default function Header() {
               <Phone aria-hidden="true" />
               {site.phone}
             </a>
-            <Link href="/kontakt" onClick={closeAll} className="btn btn-primary">
+            <Link
+              href="/kontakt"
+              onClick={closeAll}
+              className="btn btn-primary"
+            >
               Begär offert
             </Link>
           </div>

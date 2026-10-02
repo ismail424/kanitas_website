@@ -8,14 +8,20 @@ import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import TrustSection from "@/components/TrustSection";
-import { site, type Area, type AreaSection } from "@/lib/site";
+import {
+  businesses,
+  groupCompanies,
+  site,
+  type Area,
+  type AreaSection,
+} from "@/lib/site";
 
 /** How a job runs, step by step beside a photograph of it. */
 function Process({ process }: { process: NonNullable<Area["process"]> }) {
   return (
     <section className="py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
-        <Reveal variant="scale" className="lg:col-span-7">
+        <Reveal className="lg:col-span-7">
           <div className="relative aspect-[3/2] overflow-hidden bg-paper-2">
             <Photo
               name={process.photo}
@@ -32,7 +38,6 @@ function Process({ process }: { process: NonNullable<Area["process"]> }) {
               <Reveal
                 key={step.title}
                 as="li"
-                delay={index * 90}
                 className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-4"
               >
                 <span
@@ -89,14 +94,16 @@ function Items({
 function Section({ section }: { section: AreaSection }) {
   const tinted = section.layout === "list";
   return (
-    <section className={`py-24 sm:py-32 ${tinted ? "bg-paper-2" : ""}`}>
+    <section
+      className={`py-24 sm:py-32 ${tinted ? "bg-paper-2" : "border-t border-line"}`}
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {tinted ? (
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-5">
               <SectionHeading title={section.title} />
             </Reveal>
-            <Reveal delay={60} className="lg:col-span-7">
+            <Reveal className="lg:col-span-7">
               <Items
                 items={section.items}
                 className="gap-x-12 gap-y-10 sm:grid-cols-2"
@@ -108,7 +115,7 @@ function Section({ section }: { section: AreaSection }) {
             <Reveal>
               <SectionHeading title={section.title} />
             </Reveal>
-            <Reveal delay={60}>
+            <Reveal>
               <Items
                 items={section.items}
                 numbered={section.layout === "steps"}
@@ -133,6 +140,15 @@ export default function AreaPage({ area }: { area: Area }) {
   const pageUrl = `${site.url}/${area.slug}`;
   const businessId = `${pageUrl}#business`;
 
+  // The company that runs this verksamhet, as declared in the layout's
+  // organisation data; the parent company when it runs it itself.
+  const entity = businesses.find((b) => b.slug === area.slug)?.entities[0];
+  const company = groupCompanies.find((c) => c.name === entity);
+  const providerId =
+    company && company.orgnr !== site.orgnr
+      ? `${site.url}/#org-${company.orgnr}`
+      : `${site.url}/#organization`;
+
   const graph: object[] = [
     {
       "@type": "Service",
@@ -142,7 +158,7 @@ export default function AreaPage({ area }: { area: Area }) {
       description: area.seo.description,
       provider: area.businessType
         ? { "@id": businessId }
-        : { "@id": `${site.url}/#organization` },
+        : { "@id": providerId },
       areaServed: "Storstockholm",
       url: pageUrl,
     },
@@ -184,6 +200,11 @@ export default function AreaPage({ area }: { area: Area }) {
 
   const jsonLd = { "@context": "https://schema.org", "@graph": graph };
 
+  const listSections = (area.sections ?? []).filter((s) => s.layout === "list");
+  const otherSections = (area.sections ?? []).filter(
+    (s) => s.layout !== "list",
+  );
+
   // Eight services sit as four by two, six as three by two: never a ragged row.
   const serviceColumns =
     area.services.length % 4 === 0 ? "lg:grid-cols-4" : "lg:grid-cols-3";
@@ -220,7 +241,7 @@ export default function AreaPage({ area }: { area: Area }) {
           <Reveal>
             <SectionHeading title={area.servicesH2} />
           </Reveal>
-          <Reveal delay={60}>
+          <Reveal>
             <Items
               items={area.services}
               className={`mt-14 gap-x-10 gap-y-12 sm:grid-cols-2 ${serviceColumns}`}
@@ -228,12 +249,17 @@ export default function AreaPage({ area }: { area: Area }) {
           </Reveal>
           {area.related ? (
             <Reveal className="mt-16">
+              {/* Inline arrow, so it follows the last word when the label
+                  wraps on a phone. */}
               <Link
                 href={area.related.href}
-                className="link-arrow text-petrol hover:text-ink"
+                className="font-semibold text-petrol underline-offset-4 hover:text-ink hover:underline"
               >
                 {area.related.label}
-                <ArrowRight aria-hidden="true" />
+                <ArrowRight
+                  className="ml-2 inline h-4 w-4 align-[-0.125em]"
+                  aria-hidden="true"
+                />
               </Link>
             </Reveal>
           ) : null}
@@ -254,7 +280,7 @@ export default function AreaPage({ area }: { area: Area }) {
                 {area.tags.items.map((item) => (
                   <li
                     key={item}
-                    className="rounded-full border border-line bg-paper-2 px-5 py-2.5 font-medium text-ink"
+                    className="rounded-full border border-line bg-paper-2 px-4 py-2 text-sm font-medium text-ink"
                   >
                     {item}
                   </li>
@@ -265,13 +291,21 @@ export default function AreaPage({ area }: { area: Area }) {
         </section>
       ) : null}
 
+      {/* Staffing first: on a page with a "how staffing works" list, it
+          follows the trades directly, before the cleaning half of the page. */}
+      {listSections.map((section) => (
+        <Section key={section.title} section={section} />
+      ))}
+
+      {/* A phone shows one photo here; three in a row is a scroll of
+          pictures with nothing to read. */}
       <div
         className={`mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 sm:px-6 lg:gap-6 lg:px-8 ${
           area.photos.length > 1 ? "sm:grid-cols-2" : ""
-        }`}
+        } ${listSections.length ? "pt-24 sm:pt-32" : ""}`}
       >
         {area.photos.map((photo, index) => (
-          <Reveal key={photo} variant="scale" delay={index * 90}>
+          <Reveal key={photo} className={index > 0 ? "max-sm:hidden" : ""}>
             <div
               className={`relative overflow-hidden bg-paper-2 ${
                 area.photos.length > 1
@@ -300,7 +334,7 @@ export default function AreaPage({ area }: { area: Area }) {
             <Reveal>
               <SectionHeading title={area.checklist.title} />
             </Reveal>
-            <Reveal delay={60}>
+            <Reveal>
               <ul className="mt-12 grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
                 {area.checklist.items.map((item) => (
                   <li
@@ -320,7 +354,7 @@ export default function AreaPage({ area }: { area: Area }) {
         </section>
       ) : null}
 
-      {(area.sections ?? []).map((section) => (
+      {otherSections.map((section) => (
         <Section key={section.title} section={section} />
       ))}
 
@@ -343,15 +377,7 @@ export default function AreaPage({ area }: { area: Area }) {
         </section>
       ) : null}
 
-      {/* One tinted band per stretch: the trust points take the tint unless
-          the page already has a tinted list just above them. */}
-      <TrustSection
-        className={
-          area.sections?.some((section) => section.layout === "list")
-            ? ""
-            : "bg-paper-2"
-        }
-      />
+      <TrustSection className="bg-paper-2" />
 
       {area.faq ? (
         <section className="border-t border-line py-24 sm:py-32">
@@ -359,7 +385,7 @@ export default function AreaPage({ area }: { area: Area }) {
             <Reveal className="lg:col-span-4">
               <SectionHeading title="Vanliga frågor" />
             </Reveal>
-            <Reveal delay={60} className="lg:col-span-8">
+            <Reveal className="lg:col-span-8">
               <FaqList items={area.faq} />
             </Reveal>
           </div>

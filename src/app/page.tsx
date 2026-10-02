@@ -9,7 +9,6 @@ import Photo from "@/components/Photo";
 import ProcessSteps from "@/components/ProcessSteps";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import TrustSection from "@/components/TrustSection";
 import {
   businesses,
   contactHref,
@@ -19,8 +18,7 @@ import {
 } from "@/lib/site";
 
 const pageTitle = "Kanitas | Bygg, bemanning, maskiner och lokaler i Stockholm";
-const pageDescription =
-  "Kanitas i Järfälla: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i Storstockholm. Grundat 2011.";
+const pageDescription = `Kanitas i ${site.address.city}: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i Storstockholm. Grundat ${site.founded}.`;
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
@@ -34,7 +32,7 @@ const figures = [
   { value: site.founded, label: `Grundat i ${site.address.city}` },
   { value: site.employees, label: "Anställda" },
   { value: groupCompanies.length, label: "Bolag i koncernen" },
-  { value: "AAA", label: "Kreditvärdighet för Kanitas AB" },
+  { value: site.creditRating, label: `Kreditvärdighet för ${site.legalName}` },
 ];
 
 /** Tells search engines the site's name, shown above the result. Belongs on
@@ -87,18 +85,17 @@ export default function HomePage() {
           </Reveal>
 
           <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:mt-16 md:grid-cols-2 lg:gap-x-12 lg:gap-y-20">
-            {businesses.map((business, index) => (
-              <Reveal key={business.slug} delay={(index % 2) * 80}>
+            {businesses.map((business) => (
+              <Reveal key={business.slug} className="h-full">
                 <article
                   id={business.slug}
-                  className="group relative"
+                  className="relative flex h-full flex-col"
                   aria-labelledby={`${business.slug}-rubrik`}
                 >
                   <div className="relative aspect-[3/2] overflow-hidden bg-paper-2">
                     <Photo
                       name={business.photo}
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className="transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      sizes="(min-width: 1280px) 584px, (min-width: 768px) calc(50vw - 40px), 100vw"
                     />
                   </div>
                   <h3
@@ -110,10 +107,11 @@ export default function HomePage() {
                   <p className="mt-3 max-w-lg leading-relaxed text-ink-soft">
                     {business.blurb}
                   </p>
-                  {/* The link covers the whole tile. */}
+                  {/* The link covers the whole tile and sits at its foot, level
+                      with its neighbour's. */}
                   <Link
                     href={business.page ?? contactHref(business.topic)}
-                    className="link-arrow mt-5 text-petrol after:absolute after:inset-0 hover:text-ink"
+                    className="link-arrow mt-auto pt-5 text-petrol underline-offset-4 after:absolute after:inset-0 hover:text-ink hover:underline"
                   >
                     {business.page
                       ? `Till ${business.name}`
@@ -148,10 +146,9 @@ export default function HomePage() {
             </Link>
           </Reveal>
           <dl className="grid grid-cols-2 gap-x-8 gap-y-12 self-center lg:col-span-6 lg:col-start-7">
-            {figures.map((figure, index) => (
+            {figures.map((figure) => (
               <Reveal
                 key={figure.label}
-                delay={index * 100}
                 className="flex flex-col-reverse justify-end border-t border-line-deep pt-6"
               >
                 <dt className="mt-2 text-white/65">{figure.label}</dt>
@@ -165,8 +162,6 @@ export default function HomePage() {
       </section>
 
       <ProcessSteps />
-
-      <TrustSection className="bg-paper-2" />
 
       <Careers />
 

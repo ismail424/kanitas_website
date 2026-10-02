@@ -4,9 +4,9 @@ import Photo from "@/components/Photo";
 import { site } from "@/lib/site";
 
 const trust = [
-  "AAA i kreditvärdighet",
+  `${site.creditRating} i kreditvärdighet`,
   "Kollektivavtal",
-  `I Järfälla sedan ${site.founded}`,
+  `I ${site.address.city} sedan ${site.founded}`,
 ];
 
 /**
@@ -32,14 +32,14 @@ export default function HomeHero() {
 
       <div className="relative mx-auto -mt-10 w-full max-w-7xl px-5 pb-16 sm:-mt-12 sm:px-6 sm:pb-20 lg:mt-0 lg:px-8 lg:py-28">
         <div className="max-w-2xl">
-          <h1 className="hero-in display-1 text-white">
-            Vi bygger, bemannar, hyr ut och förvaltar
+          <h1 className="display-1 text-white">
+            Vi bygger, bemannar, hyr ut och förvaltar
           </h1>
-          <p className="hero-in mt-6 max-w-xl lead text-white/80 [--in:1]">
+          <p className="mt-6 max-w-xl lead text-white/80">
             Byggentreprenader, bemanning och byggstädning, maskiner och fordon
             samt lokaler att hyra i hela Storstockholm.
           </p>
-          <div className="hero-in mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8 [--in:2]">
+          <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
             <Link href="/kontakt" className="btn btn-light">
               Begär offert
               <ArrowRight aria-hidden="true" />
@@ -51,7 +51,7 @@ export default function HomeHero() {
               Ring {site.phone}
             </a>
           </div>
-          <ul className="hero-in mt-9 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-7 [--in:3]">
+          <ul className="mt-9 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-7">
             {trust.map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <Check

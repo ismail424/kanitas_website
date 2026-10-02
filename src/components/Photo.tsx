@@ -14,24 +14,19 @@ export default function Photo({
   sizes,
   priority = false,
   className = "",
-  placeholderClassName = "",
-  decorative = false,
 }: {
   name: PhotoName;
   sizes: string;
+  /** The page's largest image: preloaded and fetched ahead of the rest. */
   priority?: boolean;
   className?: string;
-  /** Pure atmosphere (e.g. behind a headline): empty alt, skipped by readers. */
-  decorative?: boolean;
-  /** Extra classes for the placeholder only, e.g. to clear an overlapping card. */
-  placeholderClassName?: string;
 }) {
   const photo: PhotoSlot = photos[name];
 
   if (!photo.ready) {
     return (
       <div
-        className={`absolute inset-0 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-petrol/25 bg-petrol-pale p-6 text-center ${className} ${placeholderClassName}`}
+        className={`absolute inset-0 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-petrol/25 bg-petrol-pale p-6 text-center ${className}`}
       >
         <ImageIcon className="h-7 w-7 text-petrol/50" aria-hidden="true" />
         <p className="max-w-xs text-sm font-medium text-petrol">
@@ -47,17 +42,13 @@ export default function Photo({
   return (
     <Image
       src={photo.src}
-      alt={decorative ? "" : photo.alt}
+      alt={photo.alt}
       fill
       priority={priority}
+      fetchPriority={priority ? "high" : undefined}
       sizes={sizes}
       className={`object-cover ${className}`}
       style={photo.focus ? { objectPosition: photo.focus } : undefined}
     />
   );
-}
-
-/** Whether a slot has a real photograph yet, for layouts that adapt. */
-export function hasPhoto(name: PhotoName) {
-  return photos[name].ready;
 }

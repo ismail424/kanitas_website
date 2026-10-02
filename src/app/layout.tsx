@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/Header";
+import Logo from "@/components/Logo";
 import Footer from "@/components/Footer";
 import { groupCompanies, site } from "@/lib/site";
 import "./globals.css";
@@ -27,9 +28,9 @@ export const viewport: Viewport = {
 
 // Fallbacks for any page without its own metadata. The group runs four
 // verksamheter, so the fallback names all four rather than two of them.
-const defaultTitle = "Kanitas | Bygg, bemanning, maskiner och lokaler i Stockholm";
-const defaultDescription =
-  "Kanitas i Järfälla: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i hela Storstockholm sedan 2011.";
+const defaultTitle =
+  "Kanitas | Bygg, bemanning, maskiner och lokaler i Stockholm";
+const defaultDescription = `Kanitas i ${site.address.city}: byggentreprenader, bemanning och byggstädning, maskiner och fordon samt lokaler att hyra i hela Storstockholm sedan ${site.founded}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -105,6 +106,7 @@ const organizationJsonLd = {
     .filter((company) => company.orgnr !== site.orgnr)
     .map((company) => ({
       "@type": "Organization",
+      "@id": `${site.url}/#org-${company.orgnr}`,
       name: company.name,
       taxID: company.orgnr,
       description: company.role,
@@ -131,7 +133,7 @@ export default function RootLayout({
         >
           Hoppa till innehållet
         </a>
-        <Header />
+        <Header logo={<Logo />} />
         <main id="innehall">{children}</main>
         <Footer />
         <Analytics />

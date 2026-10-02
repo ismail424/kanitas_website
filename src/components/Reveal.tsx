@@ -2,10 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-type Variant = "up" | "scale";
-
 /**
- * Reveals content as it scrolls into view. Content is fully visible without JS
+ * Fades content in as it scrolls into view. Content is fully visible without JS
  * and the first paint never hides anything: the .reveal styles are only added
  * to blocks the observer reports as below the fold, and reduced-motion users
  * get no transition at all (globals.css).
@@ -18,17 +16,12 @@ type Variant = "up" | "scale";
 export default function Reveal({
   children,
   className = "",
-  delay = 0,
   as: Tag = "div",
-  variant = "up",
 }: {
   children: React.ReactNode;
   className?: string;
-  delay?: number;
   /** Element to render, so a reveal can sit directly inside a list. */
   as?: "div" | "li";
-  /** "up" slides and fades; "scale" settles an image out of a slight zoom. */
-  variant?: Variant;
 }) {
   const ref = useRef<HTMLElement>(null);
 
@@ -47,7 +40,7 @@ export default function Reveal({
               observer.disconnect();
               return;
             }
-            el.classList.add("reveal", `reveal-${variant}`);
+            el.classList.add("reveal");
             continue;
           }
           if (entry.isIntersecting) {
@@ -62,13 +55,12 @@ export default function Reveal({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [variant]);
+  }, []);
 
   return (
     <Tag
       ref={ref as React.Ref<HTMLDivElement & HTMLLIElement>}
       className={className}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>

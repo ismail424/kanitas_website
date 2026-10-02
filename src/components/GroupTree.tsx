@@ -30,7 +30,7 @@ export default function GroupTree() {
 
   return (
     <div>
-      <Reveal className="mx-auto max-w-sm border-t-4 border-petrol bg-paper p-6 text-center shadow-[0_18px_40px_-28px_rgba(15,34,41,0.45)]">
+      <Reveal className="mx-auto max-w-sm border-t-4 border-petrol bg-paper p-6 text-center shadow-card">
         <p className="text-sm font-medium text-copper-ink">Moderbolag</p>
         <p className="mt-1 title text-ink">{parent.name}</p>
         <p className="index mt-1 text-sm text-muted">Org.nr {parent.orgnr}</p>
@@ -41,21 +41,22 @@ export default function GroupTree() {
           down to each company. */}
       <div aria-hidden="true" className="relative hidden h-16 lg:block">
         <div className="absolute left-1/2 top-0 h-8 w-px bg-line-deep" />
-        <div className="absolute left-[12.5%] right-[12.5%] top-8 h-px bg-line-deep" />
-        <div className="absolute left-[12.5%] top-8 h-8 w-px bg-line-deep" />
-        <div className="absolute left-[37.5%] top-8 h-8 w-px bg-line-deep" />
-        <div className="absolute left-[62.5%] top-8 h-8 w-px bg-line-deep" />
-        <div className="absolute left-[87.5%] top-8 h-8 w-px bg-line-deep" />
+        {/* Card centres in a four-column grid with 1.5rem gaps, written
+            pre-multiplied: nested calc trips the CSS optimiser. */}
+        <div className="absolute left-[calc(12.5%-0.5625rem)] right-[calc(12.5%-0.5625rem)] top-8 h-px bg-line-deep" />
+        <div className="absolute left-[calc(12.5%-0.5625rem)] top-8 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[calc(37.5%-0.1875rem)] top-8 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[calc(62.5%+0.1875rem)] top-8 h-8 w-px bg-line-deep" />
+        <div className="absolute left-[calc(87.5%+0.5625rem)] top-8 h-8 w-px bg-line-deep" />
       </div>
 
       <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 lg:gap-6">
-        {children.map((company, i) => {
+        {children.map((company) => {
           const business = businessFor(company.name);
           return (
             <Reveal
               key={company.orgnr}
               as="li"
-              delay={i * 80}
               className="flex flex-col border border-line bg-paper p-6"
             >
               <p className="title text-ink">{company.name}</p>

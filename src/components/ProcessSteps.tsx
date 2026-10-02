@@ -27,14 +27,9 @@ export default function ProcessSteps({
           />
           <ol className="relative grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
             {processSteps.map((step, index) => {
-              const Icon = icons[index];
+              const Icon = icons[index % icons.length];
               return (
-                <Reveal
-                  key={step.title}
-                  as="li"
-                  delay={index * 90}
-                  className="relative"
-                >
+                <Reveal key={step.title} as="li" className="relative">
                   <div className="relative grid h-16 w-16 place-items-center rounded-full border border-line bg-paper">
                     <Icon
                       className="h-7 w-7 text-petrol"

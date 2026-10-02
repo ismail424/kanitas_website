@@ -9,8 +9,8 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { groupCompanies, groupFacts, ogMeta, site } from "@/lib/site";
 
-const pageTitle = `Om oss: koncernen i Järfälla sedan ${site.founded}`;
-const pageDescription = `Kanitas grundades ${site.founded} i Järfälla och är i dag ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och lokaler. Kollektivavtal och AAA i kreditvärdighet.`;
+const pageTitle = `Om oss: koncernen i ${site.address.city} sedan ${site.founded}`;
+const pageDescription = `Kanitas grundades ${site.founded} i ${site.address.city} och är i dag ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och lokaler. Kollektivavtal och ${site.creditRating} i kreditvärdighet.`;
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -64,7 +64,7 @@ export default function OmOssPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={80} className="lg:col-span-6 lg:col-start-7">
+          <Reveal className="lg:col-span-6 lg:col-start-7">
             <h2 className="label text-muted">Fakta om koncernen</h2>
             <dl className="mt-6 grid grid-cols-1 gap-x-10 sm:grid-cols-2">
               {groupFacts.map((fact) => (
@@ -107,7 +107,7 @@ export default function OmOssPage() {
           <Reveal>
             <SectionHeading title="Några av våra uppdragsgivare" />
           </Reveal>
-          <Reveal delay={60}>
+          <Reveal>
             <LogoWall className="mt-14" />
           </Reveal>
         </div>

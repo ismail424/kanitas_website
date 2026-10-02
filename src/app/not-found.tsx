@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { businessHref, businesses } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Sidan finns inte",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

@@ -13,13 +13,8 @@ export default function History() {
         className="absolute inset-x-0 top-[7px] hidden h-px bg-line-deep lg:block"
       />
       <ol className="relative grid grid-cols-1 gap-10 border-l border-line-deep pl-8 lg:grid-cols-4 lg:gap-8 lg:border-l-0 lg:pl-0">
-        {history.map((step, index) => (
-          <Reveal
-            key={step.title}
-            as="li"
-            delay={index * 90}
-            className="relative lg:pt-10"
-          >
+        {history.map((step) => (
+          <Reveal key={step.title} as="li" className="relative lg:pt-10">
             <span
               aria-hidden="true"
               className="absolute -left-[2.45rem] top-1 h-4 w-4 rounded-full border-2 border-copper bg-paper-2 lg:left-0 lg:top-0"

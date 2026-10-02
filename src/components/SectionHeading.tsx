@@ -14,7 +14,11 @@ export default function SectionHeading({
 }) {
   return (
     <div className={`max-w-2xl ${className}`}>
-      <Tag className="display-2 text-ink">{title}</Tag>
+      <Tag
+        className={`${Tag === "h1" ? "display-page" : "display-2"} text-ink`}
+      >
+        {title}
+      </Tag>
       {lead ? <p className="mt-5 lead text-muted">{lead}</p> : null}
     </div>
   );

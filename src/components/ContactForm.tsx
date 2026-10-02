@@ -10,17 +10,19 @@ import {
   type ContactTopic,
 } from "@/lib/site";
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sending" | "sent" | "error" | "limited";
 
+// Borders at 3:1 against the white card so every field reads as a field.
 const inputClasses =
-  "w-full rounded-xs border border-line bg-paper px-4 py-3 text-ink placeholder:text-muted/70 outline-none transition focus:border-petrol focus:ring-2 focus:ring-petrol/25";
+  "w-full rounded-xs border border-muted/75 bg-paper px-4 py-3 text-ink placeholder:text-muted outline-none transition focus:border-petrol focus:ring-2 focus:ring-petrol/25";
 
 const labelClasses = "mb-2 block text-sm font-semibold text-ink";
 
 const isTopic = (value: string | null): value is ContactTopic =>
   contactTopics.includes(value as ContactTopic);
 
-/** A Swedish number has at least seven digits, area code included. */
+/** A Swedish number has at least seven digits, area code included. The
+ *  server applies the same rule, whatever separators are typed. */
 const isPhone = (value: string) => value.replace(/\D/g, "").length >= 7;
 
 /**
@@ -64,7 +66,9 @@ export default function ContactForm({
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === "sending") return;
     if (!isPhone(phone)) {
+      setStatus("idle");
       setPhoneError(true);
       phoneRef.current?.focus();
       return;
@@ -79,7 +83,16 @@ export default function ContactForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        // Give up rather than spin forever on a dead connection.
+        signal:
+          typeof AbortSignal.timeout === "function"
+            ? AbortSignal.timeout(30_000)
+            : undefined,
       });
+      if (res.status === 429) {
+        setStatus("limited");
+        return;
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus("sent");
     } catch {
@@ -92,7 +105,7 @@ export default function ContactForm({
       <div
         ref={successRef}
         tabIndex={-1}
-        className="border-l-4 border-ok bg-ok/10 p-8 outline-none"
+        className="border-l-4 border-ok py-2 pl-6 outline-none"
         role="status"
       >
         <p className="display-3 text-ink">Tack, vi ringer upp!</p>
@@ -100,7 +113,7 @@ export default function ContactForm({
           Vi hör av oss normalt inom en arbetsdag. Brådskande? Ring{" "}
           <a
             href={site.phoneHref}
-            className="font-semibold text-petrol underline underline-offset-4"
+            className="whitespace-nowrap font-semibold text-petrol underline underline-offset-4"
           >
             {site.phone}
           </a>
@@ -112,6 +125,16 @@ export default function ContactForm({
 
   return (
     <form onSubmit={onSubmit} noValidate>
+      {/* A link such as "Kontakta Kanitas Trading" arrives with its ärende
+          chosen; say so until the choices themselves are visible. */}
+      {topic && !revealed ? (
+        <p className="mb-5 text-sm text-muted">
+          Ärende:{" "}
+          <span className="font-semibold text-ink">
+            {contactTopicLabels[topic]}
+          </span>
+        </p>
+      ) : null}
       <label htmlFor={`${id}-phone`} className={labelClasses}>
         Ditt telefonnummer
       </label>
@@ -128,11 +151,12 @@ export default function ContactForm({
         onChange={(event) => onPhoneChange(event.target.value)}
         aria-invalid={phoneError}
         aria-describedby={`${id}-phone-hint`}
-        className={`${inputClasses} text-lg`}
+        className={`${inputClasses} text-lg aria-[invalid=true]:border-error aria-[invalid=true]:focus:border-error aria-[invalid=true]:focus:ring-error/20`}
         placeholder="070-123 45 67"
       />
       <p
         id={`${id}-phone-hint`}
+        aria-live="polite"
         className={`mt-2 text-sm ${phoneError ? "font-medium text-error" : "text-muted"}`}
       >
         {phoneError
@@ -166,7 +190,7 @@ export default function ContactForm({
                       onChange={() => setTopic(value)}
                       className="peer sr-only"
                     />
-                    <span className="flex min-h-11 items-center rounded-xs border border-line bg-paper px-4 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
+                    <span className="flex min-h-11 items-center rounded-xs border border-muted/75 bg-paper px-4 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
                       {contactTopicLabels[value]}
                     </span>
                   </label>
@@ -222,22 +246,25 @@ export default function ContactForm({
         </div>
       </div>
 
-      {/* Honeypot – hidden from people, tempting for bots */}
+      {/* Honeypot: hidden from people, tempting for bots. The name means
+          nothing to autofill, so a password manager never fills it in. */}
       <div className="hidden" aria-hidden="true">
-        <label htmlFor={`${id}-company`}>Företag</label>
+        <label htmlFor={`${id}-hp`}>Lämna tomt</label>
         <input
-          id={`${id}-company`}
-          name="company"
+          id={`${id}-hp`}
+          name="hp_kanitas"
           tabIndex={-1}
           autoComplete="off"
         />
       </div>
 
       <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        {/* aria-disabled rather than disabled, so focus stays on the button
+            while it sends. */}
         <button
           type="submit"
-          disabled={status === "sending"}
-          className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          aria-disabled={status === "sending"}
+          className="btn btn-primary w-full aria-disabled:cursor-not-allowed aria-disabled:opacity-60 sm:w-auto"
         >
           {status === "sending" ? (
             <>
@@ -263,7 +290,20 @@ export default function ContactForm({
       </div>
       {status === "error" ? (
         <p className="mt-4 text-sm font-medium text-error" role="alert">
-          Något gick fel. Försök igen eller ring oss på {site.phone}.
+          Något gick fel. Försök igen eller ring oss på{" "}
+          <a href={site.phoneHref} className="whitespace-nowrap underline">
+            {site.phone}
+          </a>
+          .
+        </p>
+      ) : null}
+      {status === "limited" ? (
+        <p className="mt-4 text-sm font-medium text-error" role="alert">
+          Du har skickat flera förfrågningar på kort tid. Ring oss på{" "}
+          <a href={site.phoneHref} className="whitespace-nowrap underline">
+            {site.phone}
+          </a>
+          .
         </p>
       ) : null}
     </form>

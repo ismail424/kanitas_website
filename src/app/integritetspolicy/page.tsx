@@ -23,7 +23,7 @@ const sections = [
   {
     title: "Vilka uppgifter vi behandlar",
     body: [
-      "När du använder kontaktformuläret behandlar vi ditt telefonnummer, som är det enda du måste fylla i, och de uppgifter du själv väljer att lägga till: namn, e-postadress, vad ärendet gäller och ditt meddelande. Detsamma gäller uppgifter du lämnar när du mejlar eller ringer oss.",
+      "När du använder kontaktformuläret behandlar vi ditt telefonnummer, som är det enda du måste fylla i, och de uppgifter du själv väljer att lägga till: namn, e‑postadress, vad ärendet gäller och ditt meddelande. Detsamma gäller uppgifter du lämnar när du mejlar eller ringer oss.",
       "Lämna inga känsliga personuppgifter i formuläret, till exempel uppgifter om hälsa.",
     ],
   },
@@ -43,8 +43,8 @@ const sections = [
   {
     title: "Vem som får del av dem",
     body: [
-      `Det du skriver i formuläret skickas som e-post till ${site.email} och sparas i vår e-post, inte på webbplatsen. Gäller ärendet ett annat bolag i koncernen, till exempel Kanitas ENT AB för bemanning och städ, skickar vi det vidare dit. När du skickar formuläret används din IP-adress tillfälligt för att stoppa spam.`,
-      "Webbplatsen drivs av Vercel och vår e-post av One.com. De kan få tillgång till uppgifterna i den mån det behövs för att leverera sina tjänster till oss. Kontaktformuläret hanteras på servrar i Stockholm.",
+      `Det du skriver i formuläret skickas som e‑post till ${site.email} och sparas i vår e‑post, inte på webbplatsen. Gäller ärendet ett annat bolag i koncernen, till exempel Kanitas ENT AB för bemanning och städ, skickar vi det vidare dit. När du skickar formuläret används din IP-adress tillfälligt för att stoppa spam.`,
+      "Webbplatsen drivs av Vercel och vår e‑post av One.com. De kan få tillgång till uppgifterna i den mån det behövs för att leverera sina tjänster till oss. Kontaktformuläret hanteras på servrar i Stockholm.",
     ],
   },
   {

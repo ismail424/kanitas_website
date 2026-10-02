@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { LogoLockup } from "@/components/Logo";
+import Logo from "@/components/Logo";
 import { businessHref, businesses, certifications, site } from "@/lib/site";
 
 const companyLinks = [
@@ -38,9 +38,9 @@ export default function Footer() {
 
       <footer className="bg-petrol-darker text-white">
         <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-            <div className="sm:col-span-2 lg:col-span-4">
-              <LogoLockup on="dark" className="h-14 w-auto" />
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-12 lg:gap-8">
+            <div className="col-span-2 lg:col-span-4">
+              <Logo on="dark" />
               <p className="mt-6 max-w-xs leading-relaxed text-white/65">
                 Bygg, bemanning, maskiner och lokaler i Storstockholm sedan{" "}
                 {site.founded}.
@@ -79,7 +79,7 @@ export default function Footer() {
               </ul>
             </nav>
 
-            <div className="lg:col-span-3">
+            <div className="col-span-2 sm:col-span-1 lg:col-span-3">
               <p className="label text-white">Kontakt</p>
               <ul className="mt-5 space-y-3 text-white/70">
                 <li>
@@ -107,8 +107,7 @@ export default function Footer() {
 
           <div className="mt-16 flex flex-col gap-3 border-t border-line-deep py-7 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {new Date().getFullYear()} {site.legalName}, org.nr{" "}
-              {site.orgnr}
+              © {new Date().getFullYear()} {site.legalName}, org.nr {site.orgnr}
             </p>
             <Link
               href="/integritetspolicy"

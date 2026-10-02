@@ -10,7 +10,6 @@
   /* Surfaces */
   --color-paper: #ffffff;
   --color-paper-2: #f1f4f4;
-  --color-card: #ffffff;
   --color-petrol-pale: #dde9eb;
 
   /* Text on light */
@@ -25,15 +24,19 @@
   /* Brand petrol: logo mark, primary action, dark surfaces */
   --color-petrol: #134b58;
   --color-petrol-deep: #0c3945;
-  --color-petrol-dark: #0e3d49;
   --color-petrol-darker: #082a33;
-  --color-petrol-raised: #15586a;
 
   /* Copper, the logo rule. `copper` is for rules and marks only; text uses
-     `copper-ink` on light surfaces and `copper-soft` on petrol, both AA. */
+     `copper-ink` on light surfaces and `copper-soft` on petrol-darker, both
+     AA (copper-soft on plain petrol is not). */
   --color-copper: #c76245;
   --color-copper-ink: #a84e33;
   --color-copper-soft: #e08e6d;
+
+  /* Shadows, tinted with ink rather than black */
+  --shadow-header: 0 1px 24px rgb(15 34 41 / 0.07);
+  --shadow-panel: 0 24px 48px -24px rgb(15 34 41 / 0.25);
+  --shadow-card: 0 18px 40px -28px rgb(15 34 41 / 0.45);
 
   /* Feedback */
   --color-ok: #2f7d4f;
@@ -51,6 +54,13 @@
 }
 
 @layer base {
+  /* No lone last words in running text. */
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
   html {
     scroll-padding-top: 96px;
   }
@@ -160,6 +170,7 @@
     font-variation-settings: "wdth" 102;
     letter-spacing: -0.005em;
     line-height: 1.35;
+    text-wrap: balance;
   }
 
   .lead {
@@ -269,14 +280,6 @@
     mix-blend-mode: multiply;
     filter: grayscale(1);
     opacity: 0.7;
-    transition:
-      filter 0.3s,
-      opacity 0.3s;
-  }
-
-  .logo-mono:hover {
-    filter: none;
-    opacity: 1;
   }
 
   /* PageHero photograph: starts where the 7-of-12 text column ends and
@@ -288,25 +291,6 @@
     .hero-photo {
       left: calc(max(2rem, 50% - 38rem) + min(58.3333% - 2.3333rem, 44.3333rem));
     }
-  }
-}
-
-/* Home hero: the text settles in once on load. */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-in {
-    animation: hero-in 0.9s var(--ease-out-soft) both;
-    animation-delay: calc(var(--in, 0) * 110ms + 80ms);
-  }
-}
-
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
   }
 }
 
@@ -339,47 +323,24 @@
   }
 }
 
-/* Scroll reveal, activated by the Reveal component. No-JS and reduced-motion
-   users get the finished state, never a hidden page.
-
-   Only transform and opacity are animated, both compositor-only properties, so
-   scrolling stays smooth on a mid-range phone. */
+/* Scroll reveal, activated by the Reveal component: a plain fade, nothing
+   slides or zooms. No-JS and reduced-motion users get the finished state,
+   never a hidden page. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
-    transition:
-      opacity 0.7s var(--ease-out-soft),
-      transform 0.7s var(--ease-out-soft);
-  }
-
-  .reveal-up {
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-
-  /* Images settle out of a slight zoom rather than sliding, which reads as
-     photography arriving instead of a card animating. */
-  .reveal-scale {
-    opacity: 0;
-    transform: scale(1.03);
+    transition: opacity 0.6s ease-out;
   }
 
   .reveal.is-visible {
     opacity: 1;
-    transform: none;
   }
 }
 
-/* Phones do the work with less travel: shorter distance, quicker settle. */
-@media (prefers-reduced-motion: no-preference) and (max-width: 640px) {
+/* Print everything, whether or not it has been scrolled into view. */
+@media print {
   .reveal {
-    transition-duration: 0.5s;
-  }
-
-  .reveal-up {
-    transform: translate3d(0, 12px, 0);
-  }
-
-  .reveal-scale {
-    transform: scale(1.02);
+    opacity: 1 !important;
+    transition: none !important;
   }
 }

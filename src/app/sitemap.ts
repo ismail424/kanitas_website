@@ -1,34 +1,30 @@
 import type { MetadataRoute } from "next";
-import { activeAreas, site } from "@/lib/site";
+import { areas, site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Static site: lastModified reflects the latest deploy, which is when
-  // content can actually have changed.
-  const lastModified = new Date();
+  // No lastModified: a build date on every page says nothing about when its
+  // content changed, and search engines learn to ignore it.
+  const activeAreas = areas.filter((area) => area.active);
 
   return [
-    { url: site.url, lastModified, changeFrequency: "monthly", priority: 1 },
+    { url: site.url, changeFrequency: "monthly", priority: 1 },
     ...activeAreas.map((area) => ({
       url: `${site.url}/${area.slug}`,
-      lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
     {
       url: `${site.url}/om-oss`,
-      lastModified,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${site.url}/kontakt`,
-      lastModified,
       changeFrequency: "yearly",
       priority: 0.8,
     },
     {
       url: `${site.url}/integritetspolicy`,
-      lastModified,
       changeFrequency: "yearly",
       priority: 0.2,
     },

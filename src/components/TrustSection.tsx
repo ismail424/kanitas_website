@@ -20,9 +20,9 @@ export default function TrustSection({
         </Reveal>
         <ul className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {trustPoints.map((point, index) => {
-            const Icon = icons[index];
+            const Icon = icons[index % icons.length];
             return (
-              <Reveal key={point.title} as="li" delay={index * 90}>
+              <Reveal key={point.title} as="li">
                 <span className="grid h-12 w-12 place-items-center rounded-full bg-petrol text-white">
                   <Icon className="h-6 w-6" aria-hidden="true" />
                 </span>
