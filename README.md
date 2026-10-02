@@ -41,7 +41,7 @@ Kontaktformuläret skickar e-post via SMTP och behöver:
 
 ## Struktur
 
-- `src/app` – sidor (startsida, /bygg, /stad, /om-oss, /kontakt, /integritetspolicy), layout, API, sitemap/robots, favicon och appikoner
+- `src/app` – sidor (startsida, /bygg, /stad, /maskiner, /lokaler, /om-oss, /kontakt, /integritetspolicy), layout, API, sitemap/robots, favicon och appikoner
 - `src/components` – återanvändbara komponenter, bland annat `HomeHero`, `PageHero`, `AreaPage` (Bygg och Städ), `ContactForm` (telefonnummer först, resten visas när numret är ifyllt), `LogoWall` och `Logo`
 - `src/lib/site.ts` – all webbplatsdata: kontaktuppgifter, verksamheter, fotoregister, referenser, koncernbolag
 - `public/images/photos` – foton i AVIF. De är AI-genererade platshållare i svensk miljö; byt mot egna foton via fotoregistret i `site.ts`, där varje plats har en beskrivning av vad bilden ska visa

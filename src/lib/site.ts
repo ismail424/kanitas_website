@@ -9,8 +9,6 @@ export const site = {
   legalName: "Kanitas AB",
   orgnr: "556841-1010",
   founded: 2011,
-  /** Across the group, as stated by the company. */
-  employees: 35,
   url: "https://kanitas.se",
   phone: "070-665 32 48",
   phoneIntl: "+46706653248",
@@ -73,8 +71,6 @@ export type Area = {
   slug: string;
   /** Whether the area is shown on the site (nav, sitemap, routes) */
   active: boolean;
-  /** Short name used in navigation, e.g. "Bygg" */
-  nav: string;
   /** Full brand name, e.g. "Kanitas Bygg" */
   name: string;
   /** Keyword-bearing page heading (h1) */
@@ -82,18 +78,22 @@ export type Area = {
   /** One or two sentences under the h1 */
   intro: string;
   heroPhoto: PhotoName;
-  /** One or two photographs after the services */
+  /** Up to two photographs after the services (none is fine) */
   photos: PhotoName[];
   /** Keyword-bearing heading for the services */
   servicesH2: string;
   /** schema.org serviceType for the area's Service JSON-LD */
   serviceType: string;
-  /** Optional schema.org LocalBusiness subtype for the area */
-  businessType?: string;
   /** Label for the primary action */
   ctaLabel: string;
   /** Pre-selected ärende in the contact form */
   contactTopic: ContactTopic;
+  /** Heading of the contact section; "Begär offert från …" by default */
+  contactTitle?: string;
+  /** Line under that heading, when the default about quotes does not fit */
+  contactLead?: string;
+  /** The "Trygg att anlita" points; on unless a page sets false */
+  trust?: boolean;
   services: { title: string; text: string }[];
   /** One line linking to the sister business, after the services */
   related?: { href: string; label: string };
@@ -119,7 +119,6 @@ export const areas: Area[] = [
   {
     slug: "bygg",
     active: true,
-    nav: "Bygg",
     name: "Kanitas Bygg",
     h1: "Byggföretag i Stockholm",
     intro:
@@ -250,7 +249,6 @@ export const areas: Area[] = [
   {
     slug: "stad",
     active: true,
-    nav: "Bemanning och städ",
     name: "Kanitas ENT",
     h1: "Bemanning och byggstädning i Stockholm",
     intro:
@@ -390,20 +388,94 @@ export const areas: Area[] = [
     },
   },
   {
-    slug: "fastigheter",
-    active: false,
-    nav: "Fastigheter",
+    slug: "maskiner",
+    active: true,
+    name: "Kanitas Trading",
+    h1: "Maskiner och fordon att hyra i Järfälla",
+    intro:
+      "Vi hyr ut, köper och säljer maskiner, verktyg, transportbilar och arbetsfordon. Det är samma maskiner som vi använder på våra egna byggen.",
+    heroPhoto: "maskin",
+    photos: [],
+    servicesH2: "Uthyrning, köp och försäljning",
+    serviceType: "Uthyrning och försäljning av maskiner och fordon",
+    ctaLabel: "Fråga om pris",
+    contactTopic: "Trading",
+    contactTitle: "Fråga Kanitas Trading",
+    contactLead: "Lämna ditt nummer så ringer vi upp med pris och tillgång.",
+    trust: false,
+    services: [
+      {
+        title: "Hyra maskiner och verktyg",
+        text: "Bygg- och markmaskiner och verktyg till ditt jobb.",
+      },
+      {
+        title: "Hyra transportbil",
+        text: "Skåpbilar och arbetsfordon för hantverkare och företag.",
+      },
+      {
+        title: "Köp och försäljning",
+        text: "Vi köper och säljer maskiner och fordon. Hör av dig om du säljer eller letar efter något.",
+      },
+    ],
+    related: {
+      href: "/bygg",
+      label: "Bygg och renovering: Kanitas Bygg",
+    },
+    process: {
+      title: "Så hyr du hos oss",
+      photo: "fordon",
+      steps: [
+        {
+          title: "Berätta vad du behöver",
+          text: "Vilken maskin eller vilket fordon, och för hur lång tid.",
+        },
+        {
+          title: "Pris och tillgång",
+          text: "Vi ringer upp med pris och när det är ledigt.",
+        },
+        {
+          title: "Avtal och hyrtid",
+          text: "Vi skriver avtal, och du hämtar och lämnar tillbaka enligt överenskommelse.",
+        },
+      ],
+    },
+    faq: [
+      {
+        q: "Vad kostar det att hyra?",
+        a: "Det beror på maskin eller fordon och hur länge du behöver det. Lämna ditt nummer så ringer vi upp med ett pris.",
+      },
+      {
+        q: "Kan jag köpa en maskin eller ett fordon av er?",
+        a: "Ja. Berätta vad du letar efter så hör vi av oss när vi har något som passar.",
+      },
+      {
+        q: "Köper ni maskiner och fordon?",
+        a: "Ja. Berätta vad du vill sälja, gärna med bilder, så återkommer vi.",
+      },
+    ],
+    seo: {
+      title: "Hyra maskiner och fordon i Järfälla",
+      description:
+        "Kanitas Trading hyr ut, köper och säljer maskiner, verktyg, transportbilar och arbetsfordon i Järfälla och Storstockholm.",
+    },
+  },
+  {
+    slug: "lokaler",
+    active: true,
     name: "Kanitas Fastigheter",
     h1: "Lokaler att hyra i Järfälla",
     intro:
       "Verkstads-, lager- och kontorslokaler i Järfälla. Anpassningar och underhåll gör vi själva.",
     heroPhoto: "fastighet",
-    photos: ["fastighet"],
+    photos: [],
     servicesH2: "Lokaler och förvaltning",
-    serviceType: "Fastighetsförvaltning och lokaluthyrning",
-    businessType: "RealEstateAgent",
-    ctaLabel: "Anmäl intresse",
+    serviceType: "Uthyrning av lokaler",
+    ctaLabel: "Fråga om lediga lokaler",
     contactTopic: "Fastigheter",
+    contactTitle: "Fråga om lediga lokaler",
+    contactLead:
+      "Lämna ditt nummer så berättar vi vilka lokaler som är lediga.",
+    trust: false,
     services: [
       {
         title: "Lokaler att hyra",
@@ -426,16 +498,49 @@ export const areas: Area[] = [
       href: "/bygg",
       label: "Ombyggnad och anpassning: Kanitas Bygg",
     },
+    process: {
+      title: "Så hyr du en lokal",
+      photo: "lokalvisning",
+      steps: [
+        {
+          title: "Hör av dig",
+          text: "Berätta vilken sorts lokal du söker, ungefär hur stor och när du behöver den.",
+        },
+        {
+          title: "Visning",
+          text: "Vi visar det som är ledigt.",
+        },
+        {
+          title: "Avtal och anpassning",
+          text: "Vi skriver avtal och anpassar lokalen om det behövs.",
+        },
+        {
+          title: "Inflyttning",
+          text: "Du flyttar in. Tillsyn och underhåll av fastigheten sköter vi.",
+        },
+      ],
+    },
+    faq: [
+      {
+        q: "Vilka lokaler är lediga just nu?",
+        a: "Det varierar. Lämna ditt nummer så berättar vi vad som finns.",
+      },
+      {
+        q: "Kan lokalen anpassas efter min verksamhet?",
+        a: "Ja, Kanitas Bygg kan bygga om och anpassa lokalen.",
+      },
+      {
+        q: "Vem sköter underhållet?",
+        a: "Vi sköter tillsyn och underhåll av våra fastigheter.",
+      },
+    ],
     seo: {
-      title: "Lokaler att hyra i Järfälla",
+      title: "Lokaler att hyra i Järfälla: lager och verkstad",
       description:
-        "Kanitas Fastigheter hyr ut verkstads-, lager- och kontorslokaler i Järfälla.",
+        "Kanitas Fastigheter hyr ut verkstads-, lager- och kontorslokaler i Järfälla. Vi anpassar lokalen efter din verksamhet. Hör av dig om lediga lokaler.",
     },
   },
 ];
-
-// Fastigheter is parked for now: flip `active` and add its route folder to
-// re-enable it (the sitemap lists active areas only).
 
 /** Header links after the Verksamheter menu, which lists `businesses`. */
 export const nav = [
@@ -556,6 +661,20 @@ export const photos = {
     shape: "3:2 liggande",
     ready: true,
   },
+  fordon: {
+    src: "/images/photos/fordon.avif",
+    alt: "En transportbil lämnas ut till en kund på gården utanför verkstaden",
+    brief: "Uthyrning av en transportbil",
+    shape: "3:2 liggande",
+    ready: true,
+  },
+  lokalvisning: {
+    src: "/images/photos/lokalvisning.avif",
+    alt: "Visning av en tom verkstads- och lagerlokal med entresolplan och öppen port",
+    brief: "Visning av en ledig lokal",
+    shape: "3:2 liggande",
+    ready: true,
+  },
   fastighet: {
     src: "/images/photos/fastighet.avif",
     alt: "Industribyggnad med lokaler att hyra, där en port står öppen in till en tom lokal",
@@ -626,6 +745,7 @@ export const businesses: Business[] = [
     summary: "Köp, försäljning och uthyrning av maskiner och fordon",
     blurb:
       "Vi köper, säljer och hyr ut maskiner, verktyg, transportbilar och arbetsfordon, till våra egna byggen och till andra.",
+    page: "/maskiner",
     topic: "Trading",
     photo: "maskin",
     entities: ["Kanitas Trading AB"],
@@ -637,6 +757,7 @@ export const businesses: Business[] = [
     summary: "Verkstads-, lager- och kontorslokaler att hyra",
     blurb:
       "Vi hyr ut verkstads-, lager- och kontorslokaler i Järfälla. Anpassningar och underhåll gör vi själva.",
+    page: "/lokaler",
     topic: "Fastigheter",
     photo: "fastighet",
     entities: ["Kanitas Fastigheter AB"],
@@ -690,12 +811,17 @@ export const groupCompanies = [
 export const groupFacts = [
   { label: "Grundat", value: "2011 i Järfälla" },
   { label: "Bolag i koncernen", value: String(groupCompanies.length) },
-  { label: "Anställda", value: String(site.employees) },
   { label: "Kreditvärdighet", value: "AAA för Kanitas AB" },
   { label: "Kollektivavtal", value: "Byggnads och Fastighets" },
   { label: "Försäkring", value: "Ansvarsförsäkring" },
-  { label: "Skatt och moms", value: "Godkänt för F‑skatt, registrerat för moms och som arbetsgivare" },
-  { label: "Certifiering och medlemskap", value: "SafeTrade, Svenskt Näringsliv" },
+  {
+    label: "Skatt och moms",
+    value: "Godkänt för F‑skatt, registrerat för moms och som arbetsgivare",
+  },
+  {
+    label: "Certifiering och medlemskap",
+    value: "SafeTrade, Svenskt Näringsliv",
+  },
 ];
 
 /** Client logos, trimmed to their ink. `h` evens out optical weight: a wide
@@ -716,9 +842,21 @@ export const references = [
 /** Agreements, credit rating and memberships, shown above the footer. `h`
  *  evens out optical weight the same way as for the client logos. */
 export const certifications = [
-  { name: "AAA, högsta kreditvärdighet", image: "/images/cert/aaa_120.png", h: 34 },
-  { name: "Kollektivavtal Byggnads", image: "/images/cert/byggnads_140.png", h: 28 },
-  { name: "Kollektivavtal Fastighets", image: "/images/cert/fastighets_120.png", h: 30 },
+  {
+    name: "AAA, högsta kreditvärdighet",
+    image: "/images/cert/aaa_120.png",
+    h: 34,
+  },
+  {
+    name: "Kollektivavtal Byggnads",
+    image: "/images/cert/byggnads_140.png",
+    h: 28,
+  },
+  {
+    name: "Kollektivavtal Fastighets",
+    image: "/images/cert/fastighets_120.png",
+    h: 30,
+  },
   { name: "SafeTrade", image: "/images/cert/SafeTrade_120.png", h: 30 },
   { name: "Svenskt Näringsliv", image: "/images/cert/svnaring_B.png", h: 44 },
 ];
@@ -794,27 +932,3 @@ export const careers = {
   topic: "Jobb" as ContactTopic,
   trades: ["Snickare", "Betongarbetare", "Murare", "Byggstädare"],
 };
-
-/** The group's story in a few steps. Years only where we know them. */
-export const history = [
-  {
-    when: String(site.founded),
-    title: "Byggfirma i Järfälla",
-    text: "Kanitas AB startar med bygg, byggservice och städ.",
-  },
-  {
-    when: "Sedan dess",
-    title: "Större uppdrag",
-    text: "Underentreprenader åt bland andra NCC, Implenia och ByggPartner.",
-  },
-  {
-    when: "Med tiden",
-    title: "Fyra verksamheter",
-    text: "Bemanning och byggstädning blir Kanitas ENT. Bygg, maskiner och fastigheter får egna bolag.",
-  },
-  {
-    when: "I dag",
-    title: `${site.employees} anställda`,
-    text: "Fem bolag med kontor i Järfälla och uppdrag i hela Storstockholm.",
-  },
-];

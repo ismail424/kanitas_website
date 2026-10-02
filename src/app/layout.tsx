@@ -88,7 +88,6 @@ const organizationJsonLd = {
   logo: `${site.url}/icon.svg`,
   image: `${site.url}/og.jpg`,
   foundingDate: String(site.founded),
-  numberOfEmployees: { "@type": "QuantitativeValue", value: site.employees },
   taxID: site.orgnr,
   telephone: site.phoneIntl,
   email: site.email,

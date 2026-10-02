@@ -27,10 +27,9 @@ export const metadata: Metadata = {
   ...ogMeta(pageTitle, pageDescription, "/"),
 };
 
-/** The group in four figures, for the band under the story. */
+/** The group in three figures, for the band under the story. */
 const figures = [
   { value: site.founded, label: `Grundat i ${site.address.city}` },
-  { value: site.employees, label: "Anställda" },
   { value: groupCompanies.length, label: "Bolag i koncernen" },
   { value: site.creditRating, label: `Kreditvärdighet för ${site.legalName}` },
 ];
@@ -145,7 +144,7 @@ export default function HomePage() {
               <ArrowRight aria-hidden="true" />
             </Link>
           </Reveal>
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-12 self-center lg:col-span-6 lg:col-start-7">
+          <dl className="grid grid-cols-1 gap-x-8 gap-y-10 self-center sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
             {figures.map((figure) => (
               <Reveal
                 key={figure.label}

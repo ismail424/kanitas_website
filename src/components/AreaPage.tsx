@@ -17,9 +17,18 @@ import {
 } from "@/lib/site";
 
 /** How a job runs, step by step beside a photograph of it. */
-function Process({ process }: { process: NonNullable<Area["process"]> }) {
+function Process({
+  process,
+  divided,
+}: {
+  process: NonNullable<Area["process"]>;
+  /** A rule above, when nothing else separates it from the services. */
+  divided: boolean;
+}) {
   return (
-    <section className="py-24 sm:py-32">
+    <section
+      className={`py-24 sm:py-32 ${divided ? "border-t border-line" : ""}`}
+    >
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
         <Reveal className="lg:col-span-7">
           <div className="relative aspect-[3/2] overflow-hidden bg-paper-2">
@@ -138,11 +147,11 @@ function Section({ section }: { section: AreaSection }) {
 
 export default function AreaPage({ area }: { area: Area }) {
   const pageUrl = `${site.url}/${area.slug}`;
-  const businessId = `${pageUrl}#business`;
 
   // The company that runs this verksamhet, as declared in the layout's
   // organisation data; the parent company when it runs it itself.
-  const entity = businesses.find((b) => b.slug === area.slug)?.entities[0];
+  const entity = businesses.find((b) => b.page === `/${area.slug}`)
+    ?.entities[0];
   const company = groupCompanies.find((c) => c.name === entity);
   const providerId =
     company && company.orgnr !== site.orgnr
@@ -156,9 +165,7 @@ export default function AreaPage({ area }: { area: Area }) {
       name: area.name,
       serviceType: area.serviceType,
       description: area.seo.description,
-      provider: area.businessType
-        ? { "@id": businessId }
-        : { "@id": providerId },
+      provider: { "@id": providerId },
       areaServed: "Storstockholm",
       url: pageUrl,
     },
@@ -170,22 +177,6 @@ export default function AreaPage({ area }: { area: Area }) {
       ],
     },
   ];
-
-  if (area.businessType) {
-    graph.push({
-      "@type": area.businessType,
-      "@id": businessId,
-      name: area.name,
-      url: pageUrl,
-      telephone: site.phoneIntl,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: site.address.city,
-        addressCountry: site.address.country,
-      },
-      parentOrganization: { "@id": `${site.url}/#organization` },
-    });
-  }
 
   if (area.faq) {
     graph.push({
@@ -299,34 +290,38 @@ export default function AreaPage({ area }: { area: Area }) {
 
       {/* A phone shows one photo here; three in a row is a scroll of
           pictures with nothing to read. */}
-      <div
-        className={`mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 sm:px-6 lg:gap-6 lg:px-8 ${
-          area.photos.length > 1 ? "sm:grid-cols-2" : ""
-        } ${listSections.length ? "pt-24 sm:pt-32" : ""}`}
-      >
-        {area.photos.map((photo, index) => (
-          <Reveal key={photo} className={index > 0 ? "max-sm:hidden" : ""}>
-            <div
-              className={`relative overflow-hidden bg-paper-2 ${
-                area.photos.length > 1
-                  ? "aspect-[4/3]"
-                  : "aspect-[3/2] sm:aspect-[21/9]"
-              }`}
-            >
-              <Photo
-                name={photo}
-                sizes={
+      {area.photos.length ? (
+        <div
+          className={`mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 sm:px-6 lg:gap-6 lg:px-8 ${
+            area.photos.length > 1 ? "sm:grid-cols-2" : ""
+          } ${listSections.length ? "pt-24 sm:pt-32" : ""}`}
+        >
+          {area.photos.map((photo, index) => (
+            <Reveal key={photo} className={index > 0 ? "max-sm:hidden" : ""}>
+              <div
+                className={`relative overflow-hidden bg-paper-2 ${
                   area.photos.length > 1
-                    ? "(min-width: 1280px) 600px, (min-width: 640px) 50vw, 100vw"
-                    : "(min-width: 1280px) 1216px, 100vw"
-                }
-              />
-            </div>
-          </Reveal>
-        ))}
-      </div>
+                    ? "aspect-[4/3]"
+                    : "aspect-[3/2] sm:aspect-[21/9]"
+                }`}
+              >
+                <Photo
+                  name={photo}
+                  sizes={
+                    area.photos.length > 1
+                      ? "(min-width: 1280px) 600px, (min-width: 640px) 50vw, 100vw"
+                      : "(min-width: 1280px) 1216px, 100vw"
+                  }
+                />
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      ) : null}
 
-      {area.process ? <Process process={area.process} /> : null}
+      {area.process ? (
+        <Process process={area.process} divided={!area.photos.length} />
+      ) : null}
 
       {area.checklist ? (
         <section className="border-t border-line py-24 sm:py-32">
@@ -377,7 +372,7 @@ export default function AreaPage({ area }: { area: Area }) {
         </section>
       ) : null}
 
-      <TrustSection className="bg-paper-2" />
+      {area.trust !== false ? <TrustSection className="bg-paper-2" /> : null}
 
       {area.faq ? (
         <section className="border-t border-line py-24 sm:py-32">
@@ -393,7 +388,8 @@ export default function AreaPage({ area }: { area: Area }) {
       ) : null}
 
       <ContactSection
-        title={`Begär offert från ${area.name}`}
+        title={area.contactTitle ?? `Begär offert från ${area.name}`}
+        lead={area.contactLead}
         topic={area.contactTopic}
       />
     </>

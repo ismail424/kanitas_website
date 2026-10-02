@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Careers from "@/components/Careers";
 import ContactSection from "@/components/ContactSection";
 import GroupTree from "@/components/GroupTree";
-import History from "@/components/History";
 import LogoWall from "@/components/LogoWall";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
@@ -43,7 +42,7 @@ export default function OmOssPage() {
 
       <PageHero
         title="Om Kanitas"
-        lead={`Koncernen har ${groupCompanies.length} bolag och ${site.employees} anställda inom bygg, bemanning, maskiner och lokaler. Kontoret ligger i ${site.address.city}.`}
+        lead={`Koncernen har ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och lokaler. Kontoret ligger i ${site.address.city}.`}
         photo="jobbstart"
       />
 
@@ -51,11 +50,13 @@ export default function OmOssPage() {
       <section className="py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
           <Reveal className="lg:col-span-5">
-            <SectionHeading title="Så arbetar vi" />
+            <SectionHeading title="Kort om Kanitas" />
             <div className="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-ink-soft">
               <p>
-                Bygg är den största verksamheten. Vi arbetar med egen personal
-                och anlitar fasta samarbetspartner för el, VVS och ventilation.
+                Kanitas startade {site.founded} i {site.address.city} med bygg,
+                byggservice och städ. Bygg är fortfarande den största
+                verksamheten. Vi arbetar med egen personal och anlitar fasta
+                samarbetspartner för el, VVS och ventilation.
               </p>
               <p>
                 Bemanning, maskiner och lokaler drivs i egna bolag, men du når
@@ -78,17 +79,8 @@ export default function OmOssPage() {
         </div>
       </section>
 
-      <section className="bg-paper-2 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <SectionHeading title="Vår historia" />
-          </Reveal>
-          <History />
-        </div>
-      </section>
-
       {/* The legal entities, drawn as the group they form. */}
-      <section id="bolagen" className="py-24 sm:py-32">
+      <section id="bolagen" className="border-t border-line py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading
