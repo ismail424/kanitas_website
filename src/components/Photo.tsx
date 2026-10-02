@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
-import { photos, type PhotoName } from "@/lib/site";
+import { photos, type PhotoName, type PhotoSlot } from "@/lib/site";
 
 /**
  * A photography slot. Until the real photograph is in place the slot renders a
@@ -26,7 +26,7 @@ export default function Photo({
   /** Extra classes for the placeholder only, e.g. to clear an overlapping card. */
   placeholderClassName?: string;
 }) {
-  const photo = photos[name];
+  const photo: PhotoSlot = photos[name];
 
   if (!photo.ready) {
     return (
@@ -52,6 +52,7 @@ export default function Photo({
       priority={priority}
       sizes={sizes}
       className={`object-cover ${className}`}
+      style={photo.focus ? { objectPosition: photo.focus } : undefined}
     />
   );
 }

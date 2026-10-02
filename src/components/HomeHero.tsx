@@ -10,23 +10,23 @@ const trust = [
 ];
 
 /**
- * The home hero: two of our own people at a job, with the headline beside
- * them. From desktop the photograph fills the hero and darkens towards the
- * text on the left; on a phone it sits on top and fades into the text below.
+ * The home hero: one of our building sites at dusk, with the headline beside
+ * it. From desktop the photograph fills the hero and darkens towards the text
+ * on the left; on a phone it sits on top and fades into the text below.
  */
 export default function HomeHero() {
   return (
     <section className="hero-home relative isolate overflow-hidden bg-petrol-darker text-white lg:flex lg:items-center">
       <div className="relative h-[46svh] min-h-64 max-h-[26rem] sm:max-h-[30rem] lg:absolute lg:inset-0 lg:h-auto lg:max-h-none">
         <Photo
-          name="jobbstart"
+          name="nybygge"
           priority
           sizes="100vw"
-          className="object-[88%_center] lg:object-[70%_center]"
+          className="object-[70%_center] lg:object-[50%_30%]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-petrol-darker via-petrol-darker/10 via-35% to-transparent lg:bg-gradient-to-r lg:from-petrol-darker/95 lg:via-petrol-darker/60 lg:via-45% lg:to-petrol-darker/0"
+          className="absolute inset-0 bg-gradient-to-t from-petrol-darker via-petrol-darker/10 via-35% to-transparent lg:bg-gradient-to-r lg:from-petrol-darker/95 lg:via-petrol-darker/80 lg:via-45% lg:to-petrol-darker/0 lg:to-80%"
         />
       </div>
 

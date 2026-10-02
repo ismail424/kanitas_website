@@ -464,15 +464,25 @@ export type PhotoSlot = {
   brief: string;
   /** Roughly the shape the slot renders at. */
   shape: string;
+  /** Where the subject sits (CSS object-position), so a tight crop keeps it. */
+  focus?: string;
   ready: boolean;
 };
 
 export const photos = {
+  nybygge: {
+    src: "/images/photos/nybygge.avif",
+    alt: "Flerbostadshus under byggnation i skymningen, med byggkran och upplysta våningsplan",
+    brief: "Ett av våra byggen, för startsidans toppbild",
+    shape: "16:9 liggande, byggnaden i högra halvan",
+    ready: true,
+  },
   jobbstart: {
     src: "/images/photos/jobbstart.avif",
     alt: "Två hantverkare går igenom ritningen vid servicebilen utanför ett flerbostadshus",
-    brief: "Vårt eget lag vid ett jobb, för startsidans toppbild",
+    brief: "Vårt eget lag vid ett jobb",
     shape: "16:9 liggande, personerna i högra tredjedelen",
+    focus: "85% 50%",
     ready: true,
   },
   bygglag: {

@@ -44,7 +44,7 @@ export default function OmOssPage() {
       <PageHero
         title="Om Kanitas"
         lead={`Koncernen har ${groupCompanies.length} bolag och ${site.employees} anställda inom bygg, bemanning, maskiner och lokaler. Kontoret ligger i ${site.address.city}.`}
-        photo="team"
+        photo="jobbstart"
       />
 
       {/* The story, and beside it the facts a procurement function checks. */}
