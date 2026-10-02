@@ -1,19 +1,12 @@
 import Link from "next/link";
-import {
-  MARK_CORE_D,
-  MARK_WINGS_D,
-  NAME_CENTRE_DY,
-  TAGLINE_D,
-  VIEWBOX,
-  WORD_D,
-} from "@/components/logo-paths";
+import { TAGLINE_D, VIEWBOX, WORD_D } from "@/components/logo-paths";
 
 type Variant = keyof typeof VIEWBOX;
 type Surface = "light" | "dark";
 
 /**
- * The Kanitas lockup: the Kvarteret mark, the name and, in the full lockup,
- * the service line. Every variant draws from one coordinate space, so a
+ * The Kanitas logo: the name, in one colour, and in the full lockup the
+ * service line under it. Every variant draws from one coordinate space, so a
  * nav-sized logo and a full lockup are the same artwork, never redrawn.
  */
 function Lockup({
@@ -27,8 +20,7 @@ function Lockup({
   className: string;
   label: string;
 }) {
-  const dark = on === "dark";
-  const ink = dark ? "fill-white" : "fill-petrol";
+  const ink = on === "dark" ? "fill-white" : "fill-petrol";
 
   return (
     <svg
@@ -37,32 +29,13 @@ function Lockup({
       role="img"
       aria-label={label}
     >
-      <path className={ink} d={MARK_WINGS_D} />
-      <path
-        className={dark ? "fill-copper-soft" : "fill-copper"}
-        d={MARK_CORE_D}
-      />
-      {variant === "compact" ? (
-        <path
-          className={ink}
-          d={WORD_D}
-          transform={`translate(0 ${NAME_CENTRE_DY})`}
-        />
-      ) : null}
-      {variant === "lockup" ? (
-        <>
-          <path className={ink} d={WORD_D} />
-          <path
-            className={dark ? "fill-white/75" : "fill-petrol"}
-            d={TAGLINE_D}
-          />
-        </>
-      ) : null}
+      <path className={ink} d={WORD_D} />
+      {variant === "lockup" ? <path className={ink} d={TAGLINE_D} /> : null}
     </svg>
   );
 }
 
-/** Mark plus name, linked home. Used in the header and footer. */
+/** The name, linked home. Used in the header and footer. */
 export default function Logo({ on = "light" }: { on?: Surface }) {
   return (
     <Link
@@ -73,7 +46,7 @@ export default function Logo({ on = "light" }: { on?: Surface }) {
       <Lockup
         variant="compact"
         on={on}
-        className="h-8 w-auto xl:h-9"
+        className="h-6 w-auto xl:h-7"
         label="Kanitas"
       />
     </Link>
@@ -83,7 +56,7 @@ export default function Logo({ on = "light" }: { on?: Surface }) {
 /** The complete lockup including the service line. */
 export function LogoLockup({
   on = "light",
-  className = "h-14 w-auto",
+  className = "h-12 w-auto",
 }: {
   on?: Surface;
   className?: string;

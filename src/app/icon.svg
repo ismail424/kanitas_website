@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <rect width="100" height="100" rx="16" fill="#134b58"/>
-  <path fill="#ffffff" d="M16 16H58.16V37.76H16Z"/><path fill="#ffffff" d="M84 16V58.16H62.24V16Z"/><path fill="#ffffff" d="M84 84H41.84V62.24H84Z"/><path fill="#ffffff" d="M16 84V41.84H37.76V84Z"/><path fill="#e08e6d" d="M41.84 41.84H58.16V58.16H41.84Z"/>
+  <style>
+    .tile { fill: #134b58; }
+    .k { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #ffffff; }
+      .k { fill: #134b58; }
+    }
+  </style>
+  <rect class="tile" width="100" height="100" rx="16"/>
+  <path class="k" d="M26.12 78V22H37.95V48.96L61.46 22H73.86L37.95 59.2V78ZM62.12 78 47.58 55.67 55.76 47.2 76.28 78Z"/>
 </svg>
