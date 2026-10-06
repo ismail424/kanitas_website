@@ -27,7 +27,7 @@ function Process({
 }) {
   return (
     <section
-      className={`py-24 sm:py-32 ${divided ? "border-t border-line" : ""}`}
+      className={`py-16 sm:py-20 ${divided ? "border-t border-line" : ""}`}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
         <Reveal className="lg:col-span-7">
@@ -104,7 +104,7 @@ function Section({ section }: { section: AreaSection }) {
   const tinted = section.layout === "list";
   return (
     <section
-      className={`py-24 sm:py-32 ${tinted ? "bg-paper-2" : "border-t border-line"}`}
+      className={`py-16 sm:py-20 ${tinted ? "bg-paper-2" : "border-t border-line"}`}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {tinted ? (
@@ -128,14 +128,14 @@ function Section({ section }: { section: AreaSection }) {
               <Items
                 items={section.items}
                 numbered={section.layout === "steps"}
-                className="mt-14 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4"
+                className="mt-8 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4"
               />
             </Reveal>
           </>
         )}
 
         {section.references ? (
-          <Reveal className="mt-20 border-t border-line pt-12 sm:mt-24">
+          <Reveal className="mt-10 border-t border-line pt-8">
             <h3 className="label text-muted">Några av våra uppdragsgivare</h3>
             <LogoWall className="mt-10" />
           </Reveal>
@@ -208,8 +208,8 @@ export default function AreaPage({ area }: { area: Area }) {
       />
 
       <PageHero
-        title={area.h1}
-        lead={area.intro}
+        title={area.name}
+        lead={`${area.h1}. ${area.intro}`}
         photo={area.heroPhoto}
         actions={
           <>
@@ -227,7 +227,7 @@ export default function AreaPage({ area }: { area: Area }) {
         }
       />
 
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading title={area.servicesH2} />
@@ -235,7 +235,7 @@ export default function AreaPage({ area }: { area: Area }) {
           <Reveal>
             <Items
               items={area.services}
-              className={`mt-14 gap-x-10 gap-y-12 sm:grid-cols-2 ${serviceColumns}`}
+              className={`mt-8 gap-x-10 gap-y-8 sm:grid-cols-2 ${serviceColumns}`}
             />
           </Reveal>
           {area.related ? (
@@ -258,7 +258,7 @@ export default function AreaPage({ area }: { area: Area }) {
       </section>
 
       {area.tags ? (
-        <section className="pb-24 sm:pb-32">
+        <section className="pb-12 sm:pb-16">
           <Reveal className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-8 border-t border-line pt-14 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-5">
@@ -294,7 +294,7 @@ export default function AreaPage({ area }: { area: Area }) {
         <div
           className={`mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 sm:px-6 lg:gap-6 lg:px-8 ${
             area.photos.length > 1 ? "sm:grid-cols-2" : ""
-          } ${listSections.length ? "pt-24 sm:pt-32" : ""}`}
+          } ${listSections.length ? "pt-12 sm:pt-16" : ""}`}
         >
           {area.photos.map((photo, index) => (
             <Reveal key={photo} className={index > 0 ? "max-sm:hidden" : ""}>
@@ -324,7 +324,7 @@ export default function AreaPage({ area }: { area: Area }) {
       ) : null}
 
       {area.checklist ? (
-        <section className="border-t border-line py-24 sm:py-32">
+        <section className="border-t border-line py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <Reveal>
               <SectionHeading title={area.checklist.title} />
@@ -354,9 +354,9 @@ export default function AreaPage({ area }: { area: Area }) {
       ))}
 
       {area.callout ? (
-        <section className="pb-24 sm:pb-32">
+        <section className="pb-12 sm:pb-16">
           <Reveal className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-5 border-l-4 border-petrol bg-petrol-pale px-6 py-8 sm:flex-row sm:gap-6 sm:px-10 sm:py-10">
+            <div className="flex flex-col gap-5 bg-petrol-pale px-6 py-8 sm:flex-row sm:gap-6 sm:px-10 sm:py-10">
               <Info
                 className="h-7 w-7 shrink-0 text-petrol"
                 aria-hidden="true"
@@ -375,7 +375,7 @@ export default function AreaPage({ area }: { area: Area }) {
       {area.trust !== false ? <TrustSection className="bg-paper-2" /> : null}
 
       {area.faq ? (
-        <section className="border-t border-line py-24 sm:py-32">
+        <section className="border-t border-line py-16 sm:py-20">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <Reveal className="lg:col-span-4">
               <SectionHeading title="Vanliga frågor" />

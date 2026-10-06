@@ -13,12 +13,12 @@ export default function TrustSection({
   className?: string;
 }) {
   return (
-    <section className={`py-24 sm:py-32 ${className}`}>
+    <section className={`py-16 sm:py-20 ${className}`}>
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal>
           <h2 className="display-2 max-w-2xl text-ink">{title}</h2>
         </Reveal>
-        <ul className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {trustPoints.map((point, index) => {
             const Icon = icons[index % icons.length];
             return (

@@ -9,7 +9,8 @@ export const site = {
   legalName: "Kanitas AB",
   orgnr: "556841-1010",
   founded: 2011,
-  url: "https://kanitas.se",
+  /** Apex 308-redirects to www, so canonicals, JSON-LD and the sitemap use www. */
+  url: "https://www.kanitas.se",
   phone: "070-665 32 48",
   phoneIntl: "+46706653248",
   phoneHref: "tel:+46706653248",
@@ -114,6 +115,11 @@ export type Area = {
   faq?: { q: string; a: string }[];
   seo: { title: string; description: string };
 };
+
+/** Browser tab and search result: company name, then the phrase people search. */
+export function areaTabTitle(area: Pick<Area, "name" | "h1">) {
+  return `${area.name} | ${area.h1}`;
+}
 
 export const areas: Area[] = [
   {
@@ -391,7 +397,7 @@ export const areas: Area[] = [
     slug: "maskiner",
     active: true,
     name: "Kanitas Trading",
-    h1: "Maskiner och fordon att hyra i Järfälla",
+    h1: "Hyra maskiner och fordon i Järfälla",
     intro:
       "Vi hyr ut, köper och säljer maskiner, verktyg, transportbilar och arbetsfordon. Det är samma maskiner som vi använder på våra egna byggen.",
     heroPhoto: "maskin",
@@ -822,7 +828,20 @@ export const groupFacts = [
     label: "Certifiering och medlemskap",
     value: "SafeTrade, Svenskt Näringsliv",
   },
+  {
+    label: "Kvalitet och miljö",
+    value: "Eftersträvar ISO-standarder, till exempel ISO 9001",
+  },
 ];
+
+/** Stated as an ambition. Not a claim of certification. */
+export const qualityAndEnvironment = {
+  title: "Hållbarhet och miljö",
+  paragraphs: [
+    "Hållbarhet och miljöarbete ingår i hur vi planerar och utför uppdragen. Vi vill att det vi bygger och renoverar ska hålla, och att material används med omsorg.",
+    "Vi tar hänsyn till avfall och till hur jobbet påverkar platsen. Vi eftersträvar att följa ISO-standarder, till exempel ISO 9001.",
+  ],
+};
 
 /** Client logos, trimmed to their ink. `h` evens out optical weight: a wide
  *  wordmark sits lower than a stacked emblem so neither dominates the row. */

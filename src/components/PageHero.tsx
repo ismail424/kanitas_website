@@ -19,8 +19,8 @@ export default function PageHero({
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-petrol-darker">
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:flex lg:min-h-[34rem] lg:items-center lg:px-8">
-        <div className="py-20 sm:py-24 lg:w-7/12 lg:pr-16">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:flex lg:min-h-[26rem] lg:items-center lg:px-8">
+        <div className="py-14 sm:py-16 lg:w-7/12 lg:pr-16">
           <h1 className="display-page text-white">{title}</h1>
           {lead ? (
             <p className="mt-6 max-w-xl lead text-white/75">{lead}</p>

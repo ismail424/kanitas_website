@@ -14,6 +14,7 @@ import {
   contactHref,
   groupCompanies,
   ogMeta,
+  qualityAndEnvironment,
   site,
 } from "@/lib/site";
 
@@ -74,16 +75,16 @@ export default function HomePage() {
 
       {/* The four verksamheter, equal weight. Trading and Fastigheter have no
           page of their own, so their tile leads to the form instead. */}
-      <section id="verksamheter" className="py-24 sm:py-32">
+      <section id="verksamheter" className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading
               title="Det här gör vi"
-              lead="Du når alla fyra verksamheter på samma telefonnummer."
+              lead="Bygg är den största verksamheten. Vi arbetar åt byggbolag, fastighetsägare, BRF:er och privatpersoner, och du når bemanning, maskiner och lokaler på samma telefonnummer."
             />
           </Reveal>
 
-          <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:mt-16 md:grid-cols-2 lg:gap-x-12 lg:gap-y-20">
+          <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-10 sm:mt-10 md:grid-cols-2 lg:gap-x-12 lg:gap-y-12">
             {businesses.map((business) => (
               <Reveal key={business.slug} className="h-full">
                 <article
@@ -99,10 +100,13 @@ export default function HomePage() {
                   </div>
                   <h3
                     id={`${business.slug}-rubrik`}
-                    className="mt-7 display-3 text-ink"
+                    className="mt-5 display-3 text-ink"
                   >
-                    {business.heading}
+                    {business.name}
                   </h3>
+                  <p className="mt-2 text-sm font-semibold text-petrol">
+                    {business.heading}
+                  </p>
                   <p className="mt-3 max-w-lg leading-relaxed text-ink-soft">
                     {business.blurb}
                   </p>
@@ -126,7 +130,7 @@ export default function HomePage() {
 
       {/* The story in a paragraph and four figures. */}
       <section className="bg-petrol-darker text-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 py-24 sm:px-6 sm:py-32 lg:grid-cols-12 lg:gap-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-12 lg:gap-16 lg:px-8">
           <Reveal className="lg:col-span-5">
             <h2 className="display-2 text-white">
               Från byggfirma till koncern
@@ -157,10 +161,22 @@ export default function HomePage() {
               </Reveal>
             ))}
           </dl>
+          <div className="grid grid-cols-1 gap-6 border-t border-line-deep pt-8 lg:col-span-12 lg:grid-cols-12 lg:gap-16">
+            <h3 className="display-3 text-white lg:col-span-4">
+              {qualityAndEnvironment.title}
+            </h3>
+            <div className="max-w-3xl space-y-3 lg:col-span-8">
+              {qualityAndEnvironment.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="lead text-white/75">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <ProcessSteps />
+      <ProcessSteps lead="Egen personal och en kontaktperson, från första samtalet till överlämningen." />
 
       <Careers />
 

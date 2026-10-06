@@ -8,18 +8,23 @@ const icons = [Phone, Ruler, FileText, HardHat];
 /** How a job starts, in four steps. A page can give the steps its own heading. */
 export default function ProcessSteps({
   title = "Så går det till",
+  lead,
   className = "",
 }: {
   title?: string;
+  lead?: string;
   className?: string;
 }) {
   return (
-    <section className={`py-24 sm:py-32 ${className}`}>
+    <section className={`py-16 sm:py-20 ${className}`}>
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal>
           <h2 className="display-2 max-w-2xl text-ink">{title}</h2>
+          {lead ? (
+            <p className="mt-5 max-w-2xl lead text-muted">{lead}</p>
+          ) : null}
         </Reveal>
-        <div className="relative mt-16">
+        <div className="relative mt-10">
           {/* The thread that joins the steps on a wide screen. */}
           <div
             aria-hidden="true"

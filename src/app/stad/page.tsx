@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import AreaPage from "@/components/AreaPage";
-import { areas, ogMeta } from "@/lib/site";
+import { areaTabTitle, areas, ogMeta } from "@/lib/site";
 
 const area = areas.find((a) => a.slug === "stad")!;
+const title = areaTabTitle(area);
 
 export const metadata: Metadata = {
-  title: area.seo.title,
+  title: { absolute: title },
   description: area.seo.description,
   alternates: { canonical: "/stad" },
-  ...ogMeta(area.seo.title, area.seo.description, "/stad", "/og-stad.jpg"),
+  ...ogMeta(title, area.seo.description, "/stad", "/og-stad.jpg"),
 };
 
 export default function StadPage() {

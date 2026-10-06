@@ -8,7 +8,7 @@ export default function ContactSection({
   lead = "Lämna ditt nummer så ringer vi upp. Offerten är kostnadsfri.",
   topic,
   as = "h2",
-  className = "py-24 sm:py-32",
+  className = "py-16 sm:py-20",
 }: {
   title?: string;
   lead?: string;

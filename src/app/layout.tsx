@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/Header";
 import Logo from "@/components/Logo";
 import Footer from "@/components/Footer";
-import { groupCompanies, site } from "@/lib/site";
+import { businesses, groupCompanies, site } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": ["GeneralContractor", "Organization"],
+  "@type": "Organization",
   "@id": `${site.url}/#organization`,
   name: site.legalName,
   url: site.url,
@@ -103,13 +103,22 @@ const organizationJsonLd = {
   // than letting one legal entity stand in for five.
   subOrganization: groupCompanies
     .filter((company) => company.orgnr !== site.orgnr)
-    .map((company) => ({
-      "@type": "Organization",
-      "@id": `${site.url}/#org-${company.orgnr}`,
-      name: company.name,
-      taxID: company.orgnr,
-      description: company.role,
-    })),
+    .map((company) => {
+      const page = businesses.find((business) =>
+        business.entities.includes(company.name),
+      )?.page;
+      return {
+        "@type":
+          company.name === "Kanitas Bygg AB"
+            ? ["GeneralContractor", "Organization"]
+            : "Organization",
+        "@id": `${site.url}/#org-${company.orgnr}`,
+        name: company.name,
+        ...(page ? { url: `${site.url}${page}` } : {}),
+        taxID: company.orgnr,
+        description: company.role,
+      };
+    }),
 };
 
 export default function RootLayout({

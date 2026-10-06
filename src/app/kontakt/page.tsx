@@ -3,11 +3,11 @@ import ContactSection from "@/components/ContactSection";
 import ProcessSteps from "@/components/ProcessSteps";
 import { ogMeta, site } from "@/lib/site";
 
-const pageTitle = "Kontakta oss";
+const pageTitle = `Kontakt | Kanitas i ${site.address.city}`;
 const pageDescription = `Kontakta Kanitas i ${site.address.city}: ring ${site.phone}, mejla ${site.email} eller lämna ditt nummer så ringer vi upp.`;
 
 export const metadata: Metadata = {
-  title: pageTitle,
+  title: { absolute: pageTitle },
   description: pageDescription,
   alternates: { canonical: "/kontakt" },
   ...ogMeta(pageTitle, pageDescription, "/kontakt"),
@@ -38,7 +38,7 @@ export default function KontaktPage() {
         as="h1"
         title="Kontakta oss"
         lead="Lämna ditt nummer så ringer vi upp. Samma telefonnummer och e‑postadress gäller alla bolag i koncernen."
-        className="pb-16 pt-24 sm:pb-20 sm:pt-32"
+        className="pb-16 pt-16 sm:pb-20 sm:pt-20"
       />
 
       <ProcessSteps className="border-t border-line" />

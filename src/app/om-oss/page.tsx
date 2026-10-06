@@ -6,13 +6,19 @@ import LogoWall from "@/components/LogoWall";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { groupCompanies, groupFacts, ogMeta, site } from "@/lib/site";
+import {
+  groupCompanies,
+  groupFacts,
+  ogMeta,
+  qualityAndEnvironment,
+  site,
+} from "@/lib/site";
 
-const pageTitle = `Om oss: koncernen i ${site.address.city} sedan ${site.founded}`;
+const pageTitle = `Om Kanitas | Koncernen i ${site.address.city} sedan ${site.founded}`;
 const pageDescription = `Kanitas grundades ${site.founded} i ${site.address.city} och är i dag ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och lokaler. Kollektivavtal och ${site.creditRating} i kreditvärdighet.`;
 
 export const metadata: Metadata = {
-  title: pageTitle,
+  title: { absolute: pageTitle },
   description: pageDescription,
   alternates: { canonical: "/om-oss" },
   ...ogMeta(pageTitle, pageDescription, "/om-oss"),
@@ -47,7 +53,7 @@ export default function OmOssPage() {
       />
 
       {/* The story, and beside it the facts a procurement function checks. */}
-      <section className="py-24 sm:py-32">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
           <Reveal className="lg:col-span-5">
             <SectionHeading title="Kort om Kanitas" />
@@ -62,6 +68,14 @@ export default function OmOssPage() {
                 Bemanning, maskiner och lokaler drivs i egna bolag, men du når
                 alla på samma telefonnummer.
               </p>
+              <div className="space-y-3">
+                <p className="font-semibold text-ink">
+                  {qualityAndEnvironment.title}
+                </p>
+                {qualityAndEnvironment.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
             </div>
           </Reveal>
 
@@ -80,7 +94,7 @@ export default function OmOssPage() {
       </section>
 
       {/* The legal entities, drawn as the group they form. */}
-      <section id="bolagen" className="border-t border-line py-24 sm:py-32">
+      <section id="bolagen" className="border-t border-line py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading
@@ -88,19 +102,19 @@ export default function OmOssPage() {
               lead="Kanitas AB är moderbolag och har ett dotterbolag för varje verksamhet."
             />
           </Reveal>
-          <div className="mt-14">
+          <div className="mt-8">
             <GroupTree />
           </div>
         </div>
       </section>
 
-      <section id="referenser" className="bg-paper-2 py-24 sm:py-32">
+      <section id="referenser" className="bg-paper-2 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading title="Några av våra uppdragsgivare" />
           </Reveal>
           <Reveal>
-            <LogoWall className="mt-14" />
+            <LogoWall className="mt-8" />
           </Reveal>
         </div>
       </section>

@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
 import AreaPage from "@/components/AreaPage";
-import { areas, ogMeta } from "@/lib/site";
+import { areaTabTitle, areas, ogMeta } from "@/lib/site";
 
 const area = areas.find((a) => a.slug === "lokaler")!;
+const title = areaTabTitle(area);
 
 export const metadata: Metadata = {
-  title: area.seo.title,
+  title: { absolute: title },
   description: area.seo.description,
   alternates: { canonical: "/lokaler" },
-  ...ogMeta(
-    area.seo.title,
-    area.seo.description,
-    "/lokaler",
-    "/og-lokaler.jpg",
-  ),
+  ...ogMeta(title, area.seo.description, "/lokaler", "/og-lokaler.jpg"),
 };
 
 export default function LokalerPage() {
