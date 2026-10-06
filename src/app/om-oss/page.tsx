@@ -14,11 +14,11 @@ import {
   site,
 } from "@/lib/site";
 
-const pageTitle = `Om oss: koncernen i ${site.address.city} sedan ${site.founded}`;
+const pageTitle = `Om Kanitas | Koncernen i ${site.address.city} sedan ${site.founded}`;
 const pageDescription = `Kanitas grundades ${site.founded} i ${site.address.city} och är i dag ${groupCompanies.length} bolag inom bygg, bemanning, maskiner och lokaler. Kollektivavtal och ${site.creditRating} i kreditvärdighet.`;
 
 export const metadata: Metadata = {
-  title: pageTitle,
+  title: { absolute: pageTitle },
   description: pageDescription,
   alternates: { canonical: "/om-oss" },
   ...ogMeta(pageTitle, pageDescription, "/om-oss"),

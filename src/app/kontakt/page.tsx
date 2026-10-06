@@ -3,11 +3,11 @@ import ContactSection from "@/components/ContactSection";
 import ProcessSteps from "@/components/ProcessSteps";
 import { ogMeta, site } from "@/lib/site";
 
-const pageTitle = "Kontakta oss";
+const pageTitle = `Kontakt | Kanitas i ${site.address.city}`;
 const pageDescription = `Kontakta Kanitas i ${site.address.city}: ring ${site.phone}, mejla ${site.email} eller lämna ditt nummer så ringer vi upp.`;
 
 export const metadata: Metadata = {
-  title: pageTitle,
+  title: { absolute: pageTitle },
   description: pageDescription,
   alternates: { canonical: "/kontakt" },
   ...ogMeta(pageTitle, pageDescription, "/kontakt"),

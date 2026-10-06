@@ -9,7 +9,8 @@ export const site = {
   legalName: "Kanitas AB",
   orgnr: "556841-1010",
   founded: 2011,
-  url: "https://kanitas.se",
+  /** Apex 308-redirects to www, so canonicals, JSON-LD and the sitemap use www. */
+  url: "https://www.kanitas.se",
   phone: "070-665 32 48",
   phoneIntl: "+46706653248",
   phoneHref: "tel:+46706653248",
@@ -114,6 +115,11 @@ export type Area = {
   faq?: { q: string; a: string }[];
   seo: { title: string; description: string };
 };
+
+/** Browser tab and search result: company name, then the phrase people search. */
+export function areaTabTitle(area: Pick<Area, "name" | "h1">) {
+  return `${area.name} | ${area.h1}`;
+}
 
 export const areas: Area[] = [
   {
@@ -391,7 +397,7 @@ export const areas: Area[] = [
     slug: "maskiner",
     active: true,
     name: "Kanitas Trading",
-    h1: "Maskiner och fordon att hyra i Järfälla",
+    h1: "Hyra maskiner och fordon i Järfälla",
     intro:
       "Vi hyr ut, köper och säljer maskiner, verktyg, transportbilar och arbetsfordon. Det är samma maskiner som vi använder på våra egna byggen.",
     heroPhoto: "maskin",
