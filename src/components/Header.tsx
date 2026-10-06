@@ -19,7 +19,8 @@ export default function Header({ logo }: { logo: React.ReactNode }) {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const panelButtonRef = useRef<HTMLButtonElement>(null);
 
-  const inVerksamheter = businesses.some((b) => b.page === pathname);
+  const currentBusiness = businesses.find((b) => b.page === pathname);
+  const inVerksamheter = currentBusiness !== undefined;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -108,6 +109,11 @@ export default function Header({ logo }: { logo: React.ReactNode }) {
               type="button"
               aria-expanded={panelOpen}
               aria-controls="verksamheter-meny"
+              aria-label={
+                currentBusiness
+                  ? `Verksamheter, ${currentBusiness.name}`
+                  : "Verksamheter"
+              }
               onClick={() => setPanelOpen((v) => !v)}
               className={`inline-flex items-center gap-1.5 rounded-xs px-4 py-2 text-base font-medium transition-colors ${
                 panelOpen || inVerksamheter
@@ -115,7 +121,7 @@ export default function Header({ logo }: { logo: React.ReactNode }) {
                   : "text-ink-soft hover:bg-paper-2 hover:text-ink"
               }`}
             >
-              Verksamheter
+              {currentBusiness ? currentBusiness.name : "Verksamheter"}
               <ChevronDown
                 className={`h-4 w-4 transition-transform duration-200 ${
                   panelOpen ? "rotate-180" : ""
@@ -139,10 +145,10 @@ export default function Header({ logo }: { logo: React.ReactNode }) {
                         className="group -m-4 flex flex-col rounded-xs p-4 transition-colors hover:bg-paper-2"
                       >
                         <span className="title text-ink group-hover:text-petrol">
-                          {business.heading}
+                          {business.name}
                         </span>
                         <span className="mt-1 text-sm text-muted">
-                          {business.name}
+                          {business.heading}
                         </span>
                         <span className="mt-3 leading-relaxed text-ink-soft">
                           {business.summary}
@@ -247,13 +253,13 @@ export default function Header({ logo }: { logo: React.ReactNode }) {
                   href={businessHref(business)}
                   onClick={closeAll}
                   aria-current={business.page === pathname ? "page" : undefined}
-                  className="block py-4 aria-[current=page]:border-l-4 aria-[current=page]:border-copper aria-[current=page]:pl-4"
+                  className="block py-4 aria-[current=page]:bg-paper-2 aria-[current=page]:px-4"
                 >
                   <span className="block title text-ink">
-                    {business.heading}
+                    {business.name}
                   </span>
                   <span className="mt-0.5 block text-sm text-muted">
-                    {business.name}
+                    {business.heading}
                   </span>
                 </Link>
               </li>

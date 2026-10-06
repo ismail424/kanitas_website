@@ -822,7 +822,20 @@ export const groupFacts = [
     label: "Certifiering och medlemskap",
     value: "SafeTrade, Svenskt Näringsliv",
   },
+  {
+    label: "Kvalitet och miljö",
+    value: "Eftersträvar ISO-standarder, till exempel ISO 9001",
+  },
 ];
+
+/** Stated as an ambition. Not a claim of certification. */
+export const qualityAndEnvironment = {
+  title: "Hållbarhet och miljö",
+  paragraphs: [
+    "Hållbarhet och miljöarbete ingår i hur vi planerar och utför uppdragen. Vi vill att det vi bygger och renoverar ska hålla, och att material används med omsorg.",
+    "Vi tar hänsyn till avfall och till hur jobbet påverkar platsen. Vi eftersträvar att följa ISO-standarder, till exempel ISO 9001.",
+  ],
+};
 
 /** Client logos, trimmed to their ink. `h` evens out optical weight: a wide
  *  wordmark sits lower than a stacked emblem so neither dominates the row. */

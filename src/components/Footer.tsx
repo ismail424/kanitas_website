@@ -56,7 +56,7 @@ export default function Footer() {
                       href={businessHref(business)}
                       className="text-white/70 transition-colors hover:text-white"
                     >
-                      {business.heading}
+                      {business.name}
                     </Link>
                   </li>
                 ))}

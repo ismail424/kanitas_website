@@ -38,7 +38,7 @@ export default function KontaktPage() {
         as="h1"
         title="Kontakta oss"
         lead="Lämna ditt nummer så ringer vi upp. Samma telefonnummer och e‑postadress gäller alla bolag i koncernen."
-        className="pb-16 pt-24 sm:pb-20 sm:pt-32"
+        className="pb-16 pt-16 sm:pb-20 sm:pt-20"
       />
 
       <ProcessSteps className="border-t border-line" />
