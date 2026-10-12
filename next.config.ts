@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/", destination: "/sv" },
       {
-        source: `/:path((?!(?:${prefixed.join("|")}|api|_next|_vercel)(?:/|$)).+)`,
+        source: `/:path((?!(?:${prefixed.join("|")}|api|og|_next|_vercel)(?:/|$)).+)`,
         destination: "/sv/:path",
       },
     ];

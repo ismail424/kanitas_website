@@ -60,8 +60,15 @@ export default function ContactSection({
             </div>
             <div>
               <dt className="text-sm text-muted">{t.common.office}</dt>
-              <dd className="mt-1 text-lg font-semibold text-ink">
-                {site.address.city}, {site.address.region}
+              <dd className="mt-1">
+                <a
+                  href={site.mapsHref}
+                  className="text-lg font-semibold text-ink transition-colors hover:text-petrol"
+                >
+                  {site.address.street}
+                  <br />
+                  {site.address.postalCode} {site.address.city}
+                </a>
               </dd>
             </div>
           </dl>

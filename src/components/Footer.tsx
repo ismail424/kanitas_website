@@ -106,7 +106,13 @@ export default function Footer({ locale }: { locale: Locale }) {
                   </a>
                 </li>
                 <li>
-                  {site.address.city}, {site.address.region}
+                  <a
+                    href={site.mapsHref}
+                    className="transition-colors hover:text-white"
+                  >
+                    {site.address.street}, {site.address.postalCode}{" "}
+                    {site.address.city}
+                  </a>
                 </li>
               </ul>
             </div>

@@ -169,13 +169,12 @@ function Section({
  *  then the phrase people search for. */
 export function areaMetadata(locale: Locale, slug: AreaSlug): Metadata {
   const copy = dictionaries[locale].areas[slug];
-  const { name, ogImage } = areaPages[slug];
+  const { name } = areaPages[slug];
   return pageMetadata({
     locale,
     path: `/${slug}`,
     title: `${name} | ${copy.h1}`,
     description: copy.description,
-    image: ogImage,
   });
 }
 
