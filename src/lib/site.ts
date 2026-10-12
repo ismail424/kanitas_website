@@ -29,10 +29,15 @@ export const site = {
   phoneHref: "tel:+46706653248",
   email: "info@kanitas.se",
   address: {
+    street: "Almarevägen 13",
+    postalCode: "176 76",
     city: "Järfälla",
     region: "Stockholm",
     country: "SE",
   },
+  /** The office on Google Maps, for directions. */
+  mapsHref:
+    "https://www.google.com/maps/search/?api=1&query=Almarev%C3%A4gen+13%2C+176+76+J%C3%A4rf%C3%A4lla",
   /** Credit rating of Kanitas AB, the parent company. */
   creditRating: "AAA",
 } as const;
@@ -47,6 +52,11 @@ export function absoluteUrl(locale: Locale, path: string) {
   return href === "/" ? site.url : `${site.url}${href}`;
 }
 
+/** The social card of a page in a language, drawn by src/app/og. */
+export function ogImagePath(locale: Locale, path: string) {
+  return `/og/${locale}/${path === "/" ? "home" : path.slice(1)}`;
+}
+
 /**
  * Complete metadata for a page in one language: title, description, the
  * canonical URL, hreflang links to every other language, and OpenGraph and
@@ -58,16 +68,15 @@ export function pageMetadata({
   path,
   title,
   description,
-  image = "/og.jpg",
 }: {
   locale: Locale;
   /** The page's path without language prefix, e.g. "/bygg" */
   path: string;
   title: string;
   description: string;
-  image?: string;
 }): Metadata {
   const url = localeHref(locale, path);
+  const image = ogImagePath(locale, path);
   return {
     title: { absolute: title },
     description,
@@ -113,99 +122,99 @@ export type PhotoSlot = {
 
 export const photos = {
   nybygge: {
-    src: "/images/photos/nybygge.avif",
+    src: "/images/photos/nybygge.jpg",
     brief: "Ett av våra byggen, för startsidans toppbild",
     shape: "16:9 liggande, byggnaden i högra halvan",
     ready: true,
   },
   jobbstart: {
-    src: "/images/photos/jobbstart.avif",
+    src: "/images/photos/jobbstart.jpg",
     brief: "Vårt eget lag vid ett jobb",
     shape: "16:9 liggande, personerna i högra tredjedelen",
     focus: "85% 50%",
     ready: true,
   },
   bygglag: {
-    src: "/images/photos/bygglag.avif",
+    src: "/images/photos/bygglag.jpg",
     brief: "Vårt eget lag på väg in till ett jobb, med firmabilen",
     shape: "16:9 liggande",
     ready: true,
   },
   armering: {
-    src: "/images/photos/armering.avif",
+    src: "/images/photos/armering.jpg",
     brief: "Vår egen personal i arbete på en byggarbetsplats",
     shape: "3:2 liggande",
     ready: true,
   },
   badrum: {
-    src: "/images/photos/badrum.avif",
+    src: "/images/photos/badrum.jpg",
     brief: "En badrumsrenovering som pågår, gärna vårt eget jobb",
     shape: "4:3 liggande",
     ready: true,
   },
   renovering: {
-    src: "/images/photos/renovering.avif",
+    src: "/images/photos/renovering.jpg",
     brief: "Färdig renovering, interiör",
     shape: "4:3 liggande",
     ready: true,
   },
   platsbesok: {
-    src: "/images/photos/platsbesok.avif",
+    src: "/images/photos/platsbesok.jpg",
     brief: "Platsbesök hos en kund inför en renovering",
     shape: "3:2 liggande",
     ready: true,
   },
   snickare: {
-    src: "/images/photos/snickare.avif",
+    src: "/images/photos/snickare.jpg",
     brief: "Hantverkare i arbete inomhus",
     shape: "16:9 liggande",
     focus: "30% 50%",
     ready: true,
   },
   byggstadning: {
-    src: "/images/photos/byggstadning.avif",
+    src: "/images/photos/byggstadning.jpg",
     brief: "Vår städpersonal vid en byggstädning",
     shape: "3:2 liggande",
     ready: true,
   },
   slutstadning: {
-    src: "/images/photos/slutstadning.avif",
+    src: "/images/photos/slutstadning.jpg",
     brief: "Slutstädning inför besiktning",
     shape: "3:2 liggande",
     ready: true,
   },
   trapphus: {
-    src: "/images/photos/trapphus.avif",
+    src: "/images/photos/trapphus.jpg",
     brief: "Trapphusstädning hos en av våra avtalskunder",
     shape: "4:3 liggande",
     ready: true,
   },
   team: {
-    src: "/images/photos/team.avif",
+    src: "/images/photos/team.jpg",
     brief: "Hela laget vid våra bilar i Järfälla",
     shape: "16:9 liggande",
     ready: true,
   },
   maskin: {
-    src: "/images/photos/maskin.avif",
+    src: "/images/photos/maskin.jpg",
     brief: "Maskiner och fordon på vår gård",
     shape: "3:2 liggande",
     ready: true,
   },
   fordon: {
-    src: "/images/photos/fordon.avif",
+    src: "/images/photos/fordon.jpg",
     brief: "Uthyrning av en transportbil",
     shape: "3:2 liggande",
     ready: true,
   },
   lokalvisning: {
-    src: "/images/photos/lokalvisning.avif",
+    src: "/images/photos/lokalvisning.jpg",
     brief: "Visning av en ledig lokal",
     shape: "3:2 liggande",
     ready: true,
   },
   fastighet: {
-    src: "/images/photos/fastighet.avif",
+    src: "/images/photos/fastighet.jpg",
     brief: "Egen lokal i beståndet, exteriör",
     shape: "3:2 liggande",
     ready: true,
@@ -248,8 +257,6 @@ export type AreaPage = {
   contactTopic: ContactTopic;
   /** Show the "Trygg att anlita" points */
   trust: boolean;
-  /** Social card image */
-  ogImage: string;
 };
 
 export const areaSlugs = ["bygg", "stad", "maskiner", "lokaler"] as const;
@@ -264,7 +271,6 @@ export const areaPages: Record<AreaSlug, AreaPage> = {
     processPhoto: "platsbesok",
     contactTopic: "Bygg",
     trust: true,
-    ogImage: "/og-bygg.jpg",
   },
   stad: {
     name: "Kanitas ENT",
@@ -273,7 +279,6 @@ export const areaPages: Record<AreaSlug, AreaPage> = {
     processPhoto: "slutstadning",
     contactTopic: "Bemanning",
     trust: true,
-    ogImage: "/og-stad.jpg",
   },
   maskiner: {
     name: "Kanitas Trading",
@@ -282,7 +287,6 @@ export const areaPages: Record<AreaSlug, AreaPage> = {
     processPhoto: "fordon",
     contactTopic: "Trading",
     trust: false,
-    ogImage: "/og-maskiner.jpg",
   },
   lokaler: {
     name: "Kanitas Fastigheter",
@@ -291,7 +295,6 @@ export const areaPages: Record<AreaSlug, AreaPage> = {
     processPhoto: "lokalvisning",
     contactTopic: "Fastigheter",
     trust: false,
-    ogImage: "/og-lokaler.jpg",
   },
 };
 

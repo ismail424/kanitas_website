@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from "@/components/Header";
 import LanguageHint from "@/components/LanguageHint";
 import Logo from "@/components/Logo";
@@ -14,6 +15,7 @@ import {
   businessSlugs,
   businesses,
   groupCompanies,
+  ogImagePath,
   site,
 } from "@/lib/site";
 import "../globals.css";
@@ -65,13 +67,20 @@ export async function generateMetadata({
       siteName: site.legalName,
       title: t.meta.title,
       description: t.meta.description,
-      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Kanitas" }],
+      images: [
+        {
+          url: ogImagePath(locale, "/"),
+          width: 1200,
+          height: 630,
+          alt: "Kanitas",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: t.meta.title,
       description: t.meta.description,
-      images: ["/og.jpg"],
+      images: [ogImagePath(locale, "/")],
     },
     robots: {
       index: true,
@@ -97,14 +106,16 @@ export default async function RootLayout({
 }>) {
   const { locale, t } = await getContent(params);
 
+  // A local business, so Google can tie the site to the office on the map:
+  // GeneralContractor is the LocalBusiness type for a builder.
   const organizationJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "GeneralContractor",
     "@id": `${site.url}/#organization`,
     name: site.legalName,
     url: absoluteUrl(locale, "/"),
-    logo: `${site.url}/icon.svg`,
-    image: `${site.url}/og.jpg`,
+    logo: `${site.url}/icon-512.png`,
+    image: `${site.url}${ogImagePath(locale, "/")}`,
     description: t.meta.description,
     foundingDate: String(site.founded),
     taxID: site.orgnr,
@@ -113,10 +124,13 @@ export default async function RootLayout({
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      postalCode: site.address.postalCode,
       addressLocality: site.address.city,
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
+    hasMap: site.mapsHref,
     areaServed: t.meta.areaServed,
     // The parent site is a switchboard, so state the group explicitly rather
     // than letting one legal entity stand in for five.
@@ -186,6 +200,7 @@ export default async function RootLayout({
           }
         />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
