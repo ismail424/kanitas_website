@@ -298,6 +298,62 @@ export const areaPages: Record<AreaSlug, AreaPage> = {
   },
 };
 
+/** One construction service each, under /bygg/{slug}: the searches people
+ *  make ("badrumsrenovering järfälla") land on a page about exactly that.
+ *  The words are in the dictionaries under `services`. */
+export const serviceSlugs = [
+  "badrumsrenovering",
+  "renovering",
+  "byggservice",
+  "brf",
+  "underentreprenor",
+] as const;
+
+export type ServiceSlug = (typeof serviceSlugs)[number];
+
+export const servicePages: Record<ServiceSlug, AreaPage> = {
+  badrumsrenovering: {
+    name: "Kanitas Bygg",
+    heroPhoto: "badrum",
+    photos: [],
+    processPhoto: "platsbesok",
+    contactTopic: "Bygg",
+    trust: true,
+  },
+  renovering: {
+    name: "Kanitas Bygg",
+    heroPhoto: "renovering",
+    photos: [],
+    processPhoto: "jobbstart",
+    contactTopic: "Bygg",
+    trust: true,
+  },
+  byggservice: {
+    name: "Kanitas Bygg",
+    heroPhoto: "bygglag",
+    photos: [],
+    processPhoto: "platsbesok",
+    contactTopic: "Bygg",
+    trust: true,
+  },
+  brf: {
+    name: "Kanitas Bygg",
+    heroPhoto: "jobbstart",
+    photos: [],
+    processPhoto: "platsbesok",
+    contactTopic: "Bygg",
+    trust: true,
+  },
+  underentreprenor: {
+    name: "Kanitas Bygg",
+    heroPhoto: "armering",
+    photos: [],
+    processPhoto: "platsbesok",
+    contactTopic: "Bygg",
+    trust: false,
+  },
+};
+
 /** Legal entities in the group, shown on the About page. Each links to the
  *  verksamhet that lists it under `entities`. */
 export const groupCompanies = [

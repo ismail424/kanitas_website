@@ -344,9 +344,9 @@ const sv: Dictionary = {
 
   areas: {
     bygg: {
-      h1: "Byggföretag i Stockholm",
+      h1: "Byggföretag i Järfälla och Stockholm",
       intro:
-        "Nybyggnation, renovering och byggservice åt byggbolag, fastighetsägare, BRF:er och privatpersoner i hela Storstockholm.",
+        "Nybyggnation, renovering och byggservice åt byggbolag, fastighetsägare, BRF:er och privatpersoner i Järfälla och hela Storstockholm.",
       servicesH2: "Byggtjänster",
       serviceType: "Byggentreprenad och byggservice",
       ctaLabel: "Begär offert",
@@ -358,14 +358,17 @@ const sv: Dictionary = {
         {
           title: "Renovering och ombyggnation",
           text: "Bostäder, kontor och andra lokaler.",
+          href: "/bygg/renovering",
         },
         {
           title: "Byggservice",
           text: "Underhåll, reparationer och anpassningar på löpande avtal.",
+          href: "/bygg/byggservice",
         },
         {
           title: "Badrum och våtrum",
           text: "Totalrenovering, med fasta samarbetspartner för VVS.",
+          href: "/bygg/badrumsrenovering",
         },
         {
           title: "Stomkomplettering och snickerier",
@@ -421,18 +424,22 @@ const sv: Dictionary = {
             {
               title: "Byggbolag",
               text: "Som underentreprenör åt bland andra NCC, Implenia och ByggPartner, med egen arbetsledning på plats.",
+              href: "/bygg/underentreprenor",
             },
             {
               title: "Fastighetsägare",
               text: "Byggservice på ramavtal: felavhjälpning, hyresgästanpassningar och planerat underhåll.",
+              href: "/bygg/byggservice",
             },
             {
               title: "BRF:er",
               text: "Stambyten, fasad- och balkongarbeten samt renovering av gemensamma utrymmen. De boende får information under hela arbetet.",
+              href: "/bygg/brf",
             },
             {
               title: "Privatpersoner",
               text: "Badrum, tillbyggnader och renovering av villor och lägenheter.",
+              href: "/bygg/renovering",
             },
           ],
           references: true,
@@ -461,11 +468,11 @@ const sv: Dictionary = {
         },
       ],
       description:
-        "Kanitas Bygg utför nybyggnation, renovering, byggservice och rivning i Stockholm. Egen personal på kollektivavtal. Begär en kostnadsfri offert.",
+        "Kanitas Bygg utför nybyggnation, renovering, byggservice och rivning i Järfälla och Stockholm. Egen personal på kollektivavtal. Kostnadsfri offert.",
     },
 
     stad: {
-      h1: "Bemanning och byggstädning i Stockholm",
+      h1: "Bemanning och byggstädning i Järfälla och Stockholm",
       intro:
         "Vi hyr ut yrkesarbetare och byggstädare till entreprenörer och gör byggstädning inför besiktning. All personal är anställd hos oss på kollektivavtal.",
       servicesH2: "Bemanning och städtjänster",
@@ -593,7 +600,7 @@ const sv: Dictionary = {
         },
       ],
       description:
-        "Kanitas ENT hyr ut yrkesarbetare till byggföretag och utför byggstädning, slutstädning och kontorsstädning i Stockholm. Egen personal på kollektivavtal.",
+        "Kanitas ENT hyr ut yrkesarbetare till byggföretag och gör byggstädning, slutstädning och kontorsstädning i Järfälla och Stockholm. Kollektivavtal.",
     },
 
     maskiner: {
@@ -727,6 +734,424 @@ const sv: Dictionary = {
       ],
       description:
         "Kanitas Fastigheter hyr ut verkstads-, lager- och kontorslokaler i Järfälla. Vi anpassar lokalen efter din verksamhet. Hör av dig om lediga lokaler.",
+    },
+  },
+
+  services: {
+    badrumsrenovering: {
+      label: "Badrumsrenovering",
+      h1: "Badrumsrenovering i Järfälla och Stockholm",
+      intro:
+        "Vi totalrenoverar badrum och våtrum i villor, lägenheter och BRF:er, från rivning till färdigt rum. VVS och el sköts av våra fasta samarbetspartner, och du har en kontaktperson för hela jobbet.",
+      servicesH2: "Det här ingår i en badrumsrenovering",
+      serviceType: "Badrumsrenovering",
+      ctaLabel: "Begär offert",
+      contactTitle: "Begär offert på badrumsrenovering",
+      services: [
+        {
+          title: "Rivning",
+          text: "Gammalt kakel, golv och inredning rivs och forslas bort.",
+        },
+        {
+          title: "Tätskikt",
+          text: "Nytt tätskikt i golv och väggar, som skyddar mot fukt.",
+        },
+        {
+          title: "Kakel och klinker",
+          text: "Plattsättning på golv och väggar.",
+        },
+        {
+          title: "VVS",
+          text: "Rör, golvbrunn, dusch, wc och handfat, av vår fasta VVS-partner.",
+        },
+        {
+          title: "El och belysning",
+          text: "Elarbeten av vår fasta samarbetspartner.",
+        },
+        {
+          title: "Inredning",
+          text: "Montering av skåp, kommod och tillbehör.",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Renovering av hela bostaden: Renovering och ombyggnad",
+      },
+      process: {
+        title: "Så går en badrumsrenovering till",
+        steps: [
+          {
+            title: "Platsbesök",
+            text: "Vi tittar på badrummet och går igenom vad du vill ha gjort.",
+          },
+          {
+            title: "Offert",
+            text: "Fast pris eller löpande räkning, med omfattning och tidplan. Tilläggsarbeten godkänns skriftligt innan de utförs.",
+          },
+          {
+            title: "Renoveringen",
+            text: "Egen personal och arbetsledning, med egenkontroller under arbetet.",
+          },
+          {
+            title: "Slutgenomgång",
+            text: "Vi går igenom badrummet tillsammans och lämnar över egenkontrollerna.",
+          },
+        ],
+      },
+      callout: {
+        title: "Rotavdrag på badrumsrenovering",
+        text: "Som privatperson kan du få rotavdrag för arbetskostnaden, men inte för material. Vi drar avdraget direkt på fakturan, så att du bara betalar din del.",
+      },
+      faq: [
+        {
+          q: "Vad kostar en badrumsrenovering?",
+          a: "Det beror på badrummets storlek och vad som ska göras. Vi kommer gärna ut och tittar, och offerten är kostnadsfri.",
+        },
+        {
+          q: "Hur lång tid tar det?",
+          a: "Det beror på omfattningen. Du får en tidplan i offerten, innan arbetet börjar.",
+        },
+        {
+          q: "Renoverar ni badrum i bostadsrätter?",
+          a: "Ja, åt både bostadsrättsinnehavare och BRF:er.",
+        },
+        {
+          q: "Vem gör VVS och el?",
+          a: "Våra fasta samarbetspartner. Du har ändå en kontaktperson hos oss för hela jobbet.",
+        },
+      ],
+      description:
+        "Kanitas Bygg totalrenoverar badrum och våtrum i Järfälla och Stockholm: rivning, tätskikt, kakel, VVS och el. Rotavdrag direkt på fakturan. Kostnadsfri offert.",
+    },
+
+    renovering: {
+      label: "Renovering och ombyggnad",
+      h1: "Renovering och ombyggnad i Järfälla och Stockholm",
+      intro:
+        "Vi renoverar och bygger om lägenheter, villor, kontor och andra lokaler, med egen personal och egen arbetsledning. Du får en kontaktperson som följer jobbet hela vägen.",
+      servicesH2: "Det här gör vi",
+      serviceType: "Renovering och ombyggnad",
+      ctaLabel: "Begär offert",
+      contactTitle: "Begär offert på renovering",
+      services: [
+        {
+          title: "Lägenheter och villor",
+          text: "Renovering av hela bostaden eller delar av den.",
+        },
+        {
+          title: "Tillbyggnader",
+          text: "Tillbyggnader av villor.",
+        },
+        {
+          title: "Kontor och lokaler",
+          text: "Ombyggnad och anpassning av kontor och andra lokaler.",
+        },
+        {
+          title: "Hyresgästanpassningar",
+          text: "Lokaler som anpassas efter en ny hyresgäst, åt fastighetsägare.",
+        },
+        {
+          title: "Innerväggar och snickerier",
+          text: "Innerväggar, undertak, dörrar och platsbyggd inredning.",
+        },
+        {
+          title: "Rivning",
+          text: "Selektiv rivning inför ombyggnaden.",
+        },
+      ],
+      related: {
+        href: "/bygg/badrumsrenovering",
+        label: "Bara badrummet: Badrumsrenovering",
+      },
+      process: {
+        title: "Så går en renovering till",
+        steps: [
+          {
+            title: "Förfrågan och platsbesök",
+            text: "Vi går igenom vad som ska göras och tittar på platsen.",
+          },
+          {
+            title: "Offert",
+            text: "Fast pris eller löpande räkning, med omfattning och tidplan. Tilläggsarbeten godkänns skriftligt innan de utförs.",
+          },
+          {
+            title: "Planering",
+            text: "Material, tider och bemanning bokas. Du får en kontaktperson som följer jobbet hela vägen.",
+          },
+          {
+            title: "Renoveringen",
+            text: "Egen personal och arbetsledning på plats, med egenkontroller under arbetet.",
+          },
+          {
+            title: "Slutgenomgång och överlämning",
+            text: "Vi går igenom jobbet tillsammans och lämnar över egenkontroller och, vid större jobb, relationshandlingar.",
+          },
+        ],
+      },
+      callout: {
+        title: "Rotavdrag för privatpersoner",
+        text: "Renoverar du din bostad kan du få rotavdrag för arbetskostnaden, men inte för material. Vi drar avdraget direkt på fakturan, så att du bara betalar din del.",
+      },
+      faq: [
+        {
+          q: "Tar ni även mindre jobb?",
+          a: "Ja, även enstaka reparationer och mindre renoveringar.",
+        },
+        {
+          q: "Kan ni ta hand om hela renoveringen?",
+          a: "Ja. Vi samordnar alla moment, och el, VVS och ventilation görs av våra fasta samarbetspartner.",
+        },
+        {
+          q: "Fast pris eller löpande räkning?",
+          a: "Båda går. Det står i offerten, och tilläggsarbeten godkänns skriftligt innan de utförs.",
+        },
+        {
+          q: "Vad kostar en offert?",
+          a: "Ingenting.",
+        },
+      ],
+      description:
+        "Kanitas Bygg renoverar och bygger om lägenheter, villor, kontor och lokaler i Järfälla och Stockholm. Egen personal på kollektivavtal. Kostnadsfri offert.",
+    },
+
+    byggservice: {
+      label: "Byggservice",
+      h1: "Byggservice för fastighetsägare i Stockholm",
+      intro:
+        "Underhåll, reparationer och hyresgästanpassningar på ramavtal eller löpande avtal, i Järfälla och hela Storstockholm. Byggservice kan vi normalt börja med inom några dagar.",
+      servicesH2: "Det här ingår i byggservicen",
+      serviceType: "Byggservice och fastighetsunderhåll",
+      ctaLabel: "Fråga om byggservice",
+      contactTitle: "Fråga om byggservice",
+      services: [
+        {
+          title: "Felavhjälpning",
+          text: "Reparationer när något har gått sönder.",
+        },
+        {
+          title: "Planerat underhåll",
+          text: "Underhåll enligt fastighetens underhållsplan.",
+        },
+        {
+          title: "Hyresgästanpassningar",
+          text: "Lokaler och lägenheter som anpassas efter nya hyresgäster.",
+        },
+        {
+          title: "Ramavtal",
+          text: "Ett avtal för återkommande jobb, eller enstaka uppdrag när det behövs.",
+        },
+        {
+          title: "Snöröjning",
+          text: "Snöröjning och halkbekämpning för avtalskunder.",
+        },
+        {
+          title: "Städning efter jobbet",
+          text: "Byggstädning och fastighetsstädning via Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Större ombyggnader: Renovering och ombyggnad",
+      },
+      process: {
+        title: "Så fungerar byggservice",
+        steps: [
+          {
+            title: "Du hör av dig",
+            text: "Ring, mejla eller lämna ditt nummer här på sidan.",
+          },
+          {
+            title: "Vi tittar på jobbet",
+            text: "Vid behov kommer vi ut och ser på platsen innan vi lämnar pris.",
+          },
+          {
+            title: "Jobbet utförs",
+            text: "Egen personal, med egenkontroller under arbetet.",
+          },
+          {
+            title: "Överlämning",
+            text: "Vi går igenom jobbet med dig när det är klart.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Hur snabbt kan ni börja?",
+          a: "Byggservice kan vi normalt börja med inom några dagar.",
+        },
+        {
+          q: "Måste vi teckna ramavtal?",
+          a: "Nej. Vi tar också enstaka uppdrag.",
+        },
+        {
+          q: "Har ni egen personal?",
+          a: "Ja, vid behov förstärkt med yrkesarbetare från Kanitas ENT. För el, VVS och ventilation anlitar vi fasta samarbetspartner.",
+        },
+      ],
+      description:
+        "Kanitas Bygg utför byggservice åt fastighetsägare i Järfälla och Stockholm: felavhjälpning, underhåll och hyresgästanpassningar på ramavtal. Kollektivavtal.",
+    },
+
+    brf: {
+      label: "Stambyte och BRF",
+      h1: "Stambyte och renovering för BRF i Stockholm",
+      intro:
+        "Vi utför stambyten, fasad- och balkongarbeten och renovering av gemensamma utrymmen åt bostadsrättsföreningar i Järfälla och Stockholm. De boende får information under hela arbetet.",
+      servicesH2: "Det här gör vi åt BRF:er",
+      serviceType: "Stambyte och renovering för bostadsrättsföreningar",
+      ctaLabel: "Begär offert",
+      contactTitle: "Begär offert för er BRF",
+      services: [
+        {
+          title: "Stambyte",
+          text: "Byte av vatten- och avloppsledningar.",
+        },
+        {
+          title: "Badrum",
+          text: "Badrumsrenovering i lägenheterna, i samma projekt eller för sig.",
+          href: "/bygg/badrumsrenovering",
+        },
+        {
+          title: "Fasad",
+          text: "Renovering och reparation av fasader.",
+        },
+        {
+          title: "Balkonger",
+          text: "Renovering av balkonger.",
+        },
+        {
+          title: "Gemensamma utrymmen",
+          text: "Trapphus, tvättstugor och andra gemensamma utrymmen.",
+        },
+        {
+          title: "Städning",
+          text: "Byggstädning och trapphusstädning via Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      process: {
+        title: "Så går ett BRF-projekt till",
+        steps: [
+          {
+            title: "Förfrågan och platsbesök",
+            text: "Vi går igenom vad föreningen vill göra och tittar på fastigheten.",
+          },
+          {
+            title: "Offert",
+            text: "Fast pris eller löpande räkning, med omfattning och tidplan. Tilläggsarbeten godkänns skriftligt innan de utförs.",
+          },
+          {
+            title: "Planering och information",
+            text: "Material, tider och bemanning bokas, och de boende får veta vad som händer och när.",
+          },
+          {
+            title: "Arbetet",
+            text: "Egen personal och arbetsledning på plats, med egenkontroller under arbetet.",
+          },
+          {
+            title: "Slutgenomgång och överlämning",
+            text: "Vi går igenom jobbet med styrelsen och lämnar över egenkontroller och relationshandlingar.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Hur får de boende veta vad som händer?",
+          a: "Vi informerar de boende före och under arbetet, så att alla vet vad som händer och när.",
+        },
+        {
+          q: "Har ni egen personal?",
+          a: "Ja, med egen arbetsledning på plats. För el, VVS och ventilation anlitar vi fasta samarbetspartner.",
+        },
+        {
+          q: "Vad kostar en offert?",
+          a: "Ingenting.",
+        },
+      ],
+      description:
+        "Kanitas Bygg gör stambyten, fasad- och balkongarbeten och renoverar gemensamma utrymmen åt BRF:er i Järfälla och Stockholm. Egen personal, kostnadsfri offert.",
+    },
+
+    underentreprenor: {
+      label: "Underentreprenad",
+      h1: "Underentreprenör inom bygg i Stockholm",
+      intro:
+        "Vi arbetar som underentreprenör åt byggbolag, bland andra NCC, Implenia och ByggPartner, med egen personal och egen arbetsledning på plats.",
+      servicesH2: "Det här tar vi på oss",
+      serviceType: "Underentreprenad inom bygg",
+      ctaLabel: "Kontakta oss",
+      contactTitle: "Förfrågan om underentreprenad",
+      contactLead: "Berätta om projektet, så ringer vi upp.",
+      services: [
+        {
+          title: "Stomkomplettering",
+          text: "Innerväggar, undertak och dörrar.",
+        },
+        {
+          title: "Snickerier",
+          text: "Platsbyggd inredning och snickeriarbeten.",
+        },
+        {
+          title: "Mark och anläggning",
+          text: "Markarbeten, grundläggning, dränering och finplanering.",
+        },
+        {
+          title: "Rivning och sanering",
+          text: "Selektiv rivning samt bygg-, brand- och fuktsanering.",
+        },
+        {
+          title: "Extra yrkesarbetare",
+          text: "Snickare, betongarbetare och murare från Kanitas ENT när ni behöver förstärka.",
+          href: "/stad",
+        },
+        {
+          title: "Byggstädning",
+          text: "Byggstädning och slutstädning inför besiktning via Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      sections: [
+        {
+          title: "Därför anlitar byggbolag oss",
+          layout: "columns",
+          items: [
+            {
+              title: "Egen arbetsledning",
+              text: "Vi leder vårt eget arbete på plats.",
+            },
+            {
+              title: "Kollektivavtal",
+              text: "Våra yrkesarbetare är anställda på kollektivavtal med Byggnads.",
+            },
+            {
+              title: "Ordning på arbetsplatsen",
+              text: "Skyddsutrustning och egenkontroller på varje jobb.",
+            },
+            {
+              title: "Stabil ekonomi",
+              text: "Kanitas AB har AAA, den högsta kreditvärdigheten. Vi har ansvarsförsäkring och F‑skatt.",
+            },
+          ],
+          references: true,
+        },
+      ],
+      faq: [
+        {
+          q: "Vilka byggbolag har ni arbetat åt?",
+          a: "Bland andra NCC, Implenia och ByggPartner.",
+        },
+        {
+          q: "Kan ni förstärka med extra personal?",
+          a: "Ja, med yrkesarbetare från Kanitas ENT, ofta med kort varsel.",
+        },
+        {
+          q: "Har ni F‑skatt och försäkring?",
+          a: "Ja. Vi har ansvarsförsäkring, är godkända för F‑skatt och registrerade för moms och som arbetsgivare.",
+        },
+      ],
+      description:
+        "Kanitas Bygg är underentreprenör åt byggbolag i Stockholm, bland andra NCC och Implenia: stomkomplettering, mark, rivning. Egen arbetsledning, kollektivavtal.",
     },
   },
 

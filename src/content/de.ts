@@ -352,9 +352,9 @@ const de: Dictionary = {
 
   areas: {
     bygg: {
-      h1: "Bauunternehmen in Stockholm",
+      h1: "Bauunternehmen in Järfälla und Stockholm",
       intro:
-        "Neubau, Renovierung und Bauservice für Bauunternehmen, Immobilieneigentümer, Wohnungsgenossenschaften (BRF) und Privatpersonen im gesamten Großraum Stockholm.",
+        "Neubau, Renovierung und Bauservice für Bauunternehmen, Immobilieneigentümer, Wohnungsgenossenschaften (BRF) und Privatpersonen in Järfälla und im gesamten Großraum Stockholm.",
       servicesH2: "Bauleistungen",
       serviceType: "Bauleistungen und Bauservice",
       ctaLabel: "Angebot anfordern",
@@ -366,14 +366,17 @@ const de: Dictionary = {
         {
           title: "Renovierung und Umbau",
           text: "Wohnungen, Büros und andere Gewerberäume.",
+          href: "/bygg/renovering",
         },
         {
           title: "Bauservice",
           text: "Instandhaltung, Reparaturen und Anpassungen im Rahmen eines Servicevertrags.",
+          href: "/bygg/byggservice",
         },
         {
           title: "Bäder und Nassräume",
           text: "Komplettsanierung, mit festen Partnerbetrieben für Sanitär und Heizung.",
+          href: "/bygg/badrumsrenovering",
         },
         {
           title: "Innenausbau und Tischlerarbeiten",
@@ -429,18 +432,22 @@ const de: Dictionary = {
             {
               title: "Bauunternehmen",
               text: "Als Subunternehmer unter anderem für NCC, Implenia und ByggPartner, mit eigener Bauleitung vor Ort.",
+              href: "/bygg/underentreprenor",
             },
             {
               title: "Immobilieneigentümer",
               text: "Bauservice im Rahmenvertrag: Störungsbehebung, Mieterausbauten und planmäßige Instandhaltung.",
+              href: "/bygg/byggservice",
             },
             {
               title: "Wohnungsgenossenschaften",
               text: "Strangsanierung, Fassaden- und Balkonarbeiten sowie Renovierung von Gemeinschaftsräumen. Die Bewohner werden während der gesamten Bauzeit informiert.",
+              href: "/bygg/brf",
             },
             {
               title: "Privatpersonen",
               text: "Bäder, Anbauten und Renovierung von Einfamilienhäusern und Wohnungen.",
+              href: "/bygg/renovering",
             },
           ],
           references: true,
@@ -469,11 +476,11 @@ const de: Dictionary = {
         },
       ],
       description:
-        "Kanitas Bygg: Bauunternehmen in Stockholm für Neubau, Renovierung, Bauservice und Abbruch. Eigenes Personal mit Tarifvertrag. Kostenloses Angebot anfordern.",
+        "Kanitas Bygg: Neubau, Renovierung, Bauservice und Abbruch in Järfälla und Stockholm. Eigenes Personal mit Tarifvertrag. Kostenloses Angebot anfordern.",
     },
 
     stad: {
-      h1: "Personalüberlassung und Baureinigung in Stockholm",
+      h1: "Personal und Baureinigung in Järfälla und Stockholm",
       intro:
         "Wir stellen Bauunternehmen Fachkräfte und Baureiniger zur Verfügung und übernehmen die Baureinigung vor der Abnahme. Das gesamte Personal ist bei uns nach Tarifvertrag angestellt.",
       servicesH2: "Personalüberlassung und Reinigungsleistungen",
@@ -601,7 +608,7 @@ const de: Dictionary = {
         },
       ],
       description:
-        "Kanitas ENT: Personalüberlassung für Bauunternehmen sowie Baureinigung, Endreinigung und Büroreinigung in Stockholm. Eigenes Personal mit Tarifvertrag.",
+        "Kanitas ENT: Personalüberlassung für Bauunternehmen sowie Baureinigung, Endreinigung und Büroreinigung in Järfälla und Stockholm. Tarifvertrag.",
     },
 
     maskiner: {
@@ -736,6 +743,425 @@ const de: Dictionary = {
       ],
       description:
         "Kanitas Fastigheter vermietet Werkstatt-, Lager- und Büroflächen in Järfälla. Wir passen die Fläche an Ihren Betrieb an. Fragen Sie nach freien Flächen.",
+    },
+  },
+
+  services: {
+    badrumsrenovering: {
+      label: "Badsanierung",
+      h1: "Badsanierung in Järfälla und Stockholm",
+      intro:
+        "Wir sanieren Bäder und Nassräume in Einfamilienhäusern, Wohnungen und Wohnungsgenossenschaften (BRF) komplett, vom Rückbau bis zum fertigen Raum. Sanitär und Elektro übernehmen unsere festen Partnerbetriebe, und Sie haben einen Ansprechpartner für den gesamten Auftrag.",
+      servicesH2: "Das gehört zu einer Badsanierung",
+      serviceType: "Badsanierung",
+      ctaLabel: "Angebot anfordern",
+      contactTitle: "Angebot für eine Badsanierung anfordern",
+      services: [
+        {
+          title: "Rückbau",
+          text: "Alte Fliesen, Bodenbeläge und Einrichtung werden entfernt und abtransportiert.",
+        },
+        {
+          title: "Abdichtung",
+          text: "Neue Abdichtung an Boden und Wänden, die vor Feuchtigkeit schützt.",
+        },
+        {
+          title: "Fliesen",
+          text: "Verlegung von Wand- und Bodenfliesen.",
+        },
+        {
+          title: "Sanitär",
+          text: "Rohre, Bodenablauf, Dusche, WC und Waschbecken, von unserem festen Partnerbetrieb für Sanitär und Heizung.",
+        },
+        {
+          title: "Elektro und Beleuchtung",
+          text: "Elektroarbeiten durch unseren festen Partnerbetrieb.",
+        },
+        {
+          title: "Einrichtung",
+          text: "Montage von Schränken, Waschtischunterschrank und Zubehör.",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Renovierung der ganzen Wohnung: Renovierung und Umbau",
+      },
+      process: {
+        title: "So läuft eine Badsanierung ab",
+        steps: [
+          {
+            title: "Ortstermin",
+            text: "Wir sehen uns das Bad an und besprechen, was Sie machen lassen möchten.",
+          },
+          {
+            title: "Angebot",
+            text: "Festpreis oder Abrechnung nach Aufwand, mit Umfang und Zeitplan. Zusatzarbeiten werden vor der Ausführung schriftlich freigegeben.",
+          },
+          {
+            title: "Sanierung",
+            text: "Eigenes Personal und eigene Bauleitung, mit Eigenkontrollen während der Arbeit.",
+          },
+          {
+            title: "Schlussbegehung",
+            text: "Wir gehen das Bad gemeinsam durch und übergeben die Protokolle der Eigenkontrollen.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT-Abzug bei der Badsanierung",
+        text: "Als Privatperson können Sie für die Arbeitskosten den ROT-Abzug erhalten, den schwedischen Steuerabzug für Handwerkerleistungen, für das Material jedoch nicht. Wir ziehen den Abzug direkt von der Rechnung ab, sodass Sie nur Ihren Anteil bezahlen.",
+      },
+      faq: [
+        {
+          q: "Was kostet eine Badsanierung?",
+          a: "Das hängt von der Größe des Bades ab und davon, was gemacht werden soll. Wir kommen gerne vorbei und sehen es uns an, das Angebot ist kostenlos.",
+        },
+        {
+          q: "Wie lange dauert es?",
+          a: "Das hängt vom Umfang ab. Den Zeitplan erhalten Sie mit dem Angebot, bevor die Arbeiten beginnen.",
+        },
+        {
+          q: "Sanieren Sie auch Bäder in Genossenschaftswohnungen?",
+          a: "Ja, sowohl für Wohnungsinhaber als auch für Wohnungsgenossenschaften (BRF).",
+        },
+        {
+          q: "Wer übernimmt Sanitär und Elektro?",
+          a: "Unsere festen Partnerbetriebe. Trotzdem haben Sie bei uns einen Ansprechpartner für den gesamten Auftrag.",
+        },
+      ],
+      description:
+        "Kanitas Bygg saniert Bäder in Järfälla und Stockholm: Rückbau, Abdichtung, Fliesen, Sanitär und Elektro. ROT-Abzug direkt auf der Rechnung. Kostenloses Angebot.",
+    },
+
+    renovering: {
+      label: "Renovierung und Umbau",
+      h1: "Renovierung und Umbau in Järfälla und Stockholm",
+      intro:
+        "Wir renovieren Wohnungen, Einfamilienhäuser, Büros und andere Gewerberäume und bauen sie um, mit eigenem Personal und eigener Bauleitung. Sie erhalten einen festen Ansprechpartner, der den Auftrag von Anfang bis Ende begleitet.",
+      servicesH2: "Das machen wir",
+      serviceType: "Renovierung und Umbau",
+      ctaLabel: "Angebot anfordern",
+      contactTitle: "Angebot für eine Renovierung anfordern",
+      services: [
+        {
+          title: "Wohnungen und Einfamilienhäuser",
+          text: "Renovierung im Ganzen oder in Teilen.",
+        },
+        {
+          title: "Anbauten",
+          text: "Anbauten an Einfamilienhäuser.",
+        },
+        {
+          title: "Büros und Gewerberäume",
+          text: "Umbau und Anpassung von Büros und anderen Gewerberäumen.",
+        },
+        {
+          title: "Mieterausbauten",
+          text: "Anpassung von Gewerberäumen an einen neuen Mieter, im Auftrag von Immobilieneigentümern.",
+        },
+        {
+          title: "Innenwände und Tischlerarbeiten",
+          text: "Innenwände, abgehängte Decken, Türen und maßgefertigte Einbauten.",
+        },
+        {
+          title: "Rückbau",
+          text: "Selektiver Rückbau vor dem Umbau.",
+        },
+      ],
+      related: {
+        href: "/bygg/badrumsrenovering",
+        label: "Nur das Bad: Badsanierung",
+      },
+      process: {
+        title: "So läuft eine Renovierung ab",
+        steps: [
+          {
+            title: "Anfrage und Ortstermin",
+            text: "Wir besprechen, was gemacht werden soll, und sehen uns alles vor Ort an.",
+          },
+          {
+            title: "Angebot",
+            text: "Festpreis oder Abrechnung nach Aufwand, mit Umfang und Zeitplan. Zusatzarbeiten werden vor der Ausführung schriftlich freigegeben.",
+          },
+          {
+            title: "Planung",
+            text: "Material, Termine und Personal werden eingeplant. Sie erhalten einen festen Ansprechpartner, der den Auftrag von Anfang bis Ende begleitet.",
+          },
+          {
+            title: "Renovierung",
+            text: "Eigenes Personal und eigene Bauleitung vor Ort, mit Eigenkontrollen während der Arbeit.",
+          },
+          {
+            title: "Schlussbegehung und Übergabe",
+            text: "Wir gehen die Arbeiten gemeinsam durch und übergeben die Protokolle der Eigenkontrollen sowie bei größeren Aufträgen die Revisionsunterlagen.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT-Abzug für Privatpersonen",
+        text: "Wenn Sie Ihre Wohnung oder Ihr Haus renovieren, können Sie für die Arbeitskosten den ROT-Abzug erhalten, den schwedischen Steuerabzug für Handwerkerleistungen, für das Material jedoch nicht. Wir ziehen den Abzug direkt von der Rechnung ab, sodass Sie nur Ihren Anteil bezahlen.",
+      },
+      faq: [
+        {
+          q: "Übernehmen Sie auch kleinere Aufträge?",
+          a: "Ja, auch einzelne Reparaturen und kleinere Renovierungen.",
+        },
+        {
+          q: "Können Sie die gesamte Renovierung übernehmen?",
+          a: "Ja. Wir koordinieren alle Gewerke, und Elektro, Sanitär, Heizung und Lüftung übernehmen unsere festen Partnerbetriebe.",
+        },
+        {
+          q: "Festpreis oder Abrechnung nach Aufwand?",
+          a: "Beides ist möglich. Das steht im Angebot, und Zusatzarbeiten werden vor der Ausführung schriftlich freigegeben.",
+        },
+        {
+          q: "Was kostet ein Angebot?",
+          a: "Nichts.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: Renovierung und Umbau von Wohnungen, Häusern, Büros und Gewerberäumen in Järfälla und Stockholm. Personal mit Tarifvertrag, kostenloses Angebot.",
+    },
+
+    byggservice: {
+      label: "Bauservice",
+      h1: "Bauservice für Immobilieneigentümer in Stockholm",
+      intro:
+        "Instandhaltung, Reparaturen und Mieterausbauten auf Basis eines Rahmen- oder Servicevertrags, in Järfälla und im gesamten Großraum Stockholm. Mit Bauservice-Aufträgen können wir in der Regel innerhalb weniger Tage beginnen.",
+      servicesH2: "Das gehört zum Bauservice",
+      serviceType: "Bauservice und Gebäudeinstandhaltung",
+      ctaLabel: "Bauservice anfragen",
+      contactTitle: "Bauservice anfragen",
+      services: [
+        {
+          title: "Störungsbehebung",
+          text: "Reparaturen, wenn etwas kaputtgegangen ist.",
+        },
+        {
+          title: "Planmäßige Instandhaltung",
+          text: "Instandhaltung nach dem Instandhaltungsplan der Immobilie.",
+        },
+        {
+          title: "Mieterausbauten",
+          text: "Anpassung von Gewerberäumen und Wohnungen an neue Mieter.",
+        },
+        {
+          title: "Rahmenvertrag",
+          text: "Ein Vertrag für wiederkehrende Arbeiten, oder Einzelaufträge nach Bedarf.",
+        },
+        {
+          title: "Winterdienst",
+          text: "Schneeräumung und Streudienst für Vertragskunden.",
+        },
+        {
+          title: "Reinigung nach den Arbeiten",
+          text: "Baureinigung und Gebäudereinigung durch Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Größere Umbauten: Renovierung und Umbau",
+      },
+      process: {
+        title: "So funktioniert der Bauservice",
+        steps: [
+          {
+            title: "Sie melden sich",
+            text: "Rufen Sie an, schreiben Sie eine E‑Mail oder hinterlassen Sie hier Ihre Nummer.",
+          },
+          {
+            title: "Wir sehen uns den Auftrag an",
+            text: "Bei Bedarf kommen wir vorbei und sehen uns alles vor Ort an, bevor wir Ihnen einen Preis nennen.",
+          },
+          {
+            title: "Ausführung",
+            text: "Eigenes Personal, mit Eigenkontrollen während der Arbeit.",
+          },
+          {
+            title: "Übergabe",
+            text: "Wir gehen die Arbeiten mit Ihnen durch, sobald sie abgeschlossen sind.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Wie schnell können Sie beginnen?",
+          a: "Mit Bauservice-Aufträgen können wir in der Regel innerhalb weniger Tage beginnen.",
+        },
+        {
+          q: "Müssen wir einen Rahmenvertrag abschließen?",
+          a: "Nein. Wir übernehmen auch Einzelaufträge.",
+        },
+        {
+          q: "Haben Sie eigenes Personal?",
+          a: "Ja, bei Bedarf verstärkt durch Fachkräfte von Kanitas ENT. Für Elektro, Sanitär, Heizung und Lüftung beauftragen wir feste Partnerbetriebe.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: Bauservice für Immobilieneigentümer in Järfälla und Stockholm. Reparaturen, Instandhaltung und Mieterausbauten im Rahmenvertrag. Tarifvertrag.",
+    },
+
+    brf: {
+      label: "Strangsanierung und BRF",
+      h1: "Strangsanierung und BRF-Renovierung in Stockholm",
+      intro:
+        "Wir übernehmen Strangsanierungen, Fassaden- und Balkonarbeiten sowie die Renovierung von Gemeinschaftsräumen für Wohnungsgenossenschaften (BRF) in Järfälla und Stockholm. Die Bewohner werden während der gesamten Bauzeit informiert.",
+      servicesH2: "Das machen wir für Wohnungsgenossenschaften",
+      serviceType:
+        "Strangsanierung und Renovierung für Wohnungsgenossenschaften",
+      ctaLabel: "Angebot anfordern",
+      contactTitle: "Angebot für Ihre Wohnungsgenossenschaft anfordern",
+      services: [
+        {
+          title: "Strangsanierung",
+          text: "Austausch der Wasser- und Abwasserleitungen.",
+        },
+        {
+          title: "Bäder",
+          text: "Badsanierung in den Wohnungen, im selben Projekt oder separat.",
+          href: "/bygg/badrumsrenovering",
+        },
+        {
+          title: "Fassaden",
+          text: "Renovierung und Reparatur von Fassaden.",
+        },
+        {
+          title: "Balkone",
+          text: "Renovierung von Balkonen.",
+        },
+        {
+          title: "Gemeinschaftsräume",
+          text: "Treppenhäuser, Waschküchen und andere Gemeinschaftsräume.",
+        },
+        {
+          title: "Reinigung",
+          text: "Baureinigung und Treppenhausreinigung durch Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      process: {
+        title: "So läuft ein BRF-Projekt ab",
+        steps: [
+          {
+            title: "Anfrage und Ortstermin",
+            text: "Wir besprechen, was die Genossenschaft vorhat, und sehen uns das Gebäude an.",
+          },
+          {
+            title: "Angebot",
+            text: "Festpreis oder Abrechnung nach Aufwand, mit Umfang und Zeitplan. Zusatzarbeiten werden vor der Ausführung schriftlich freigegeben.",
+          },
+          {
+            title: "Planung und Information",
+            text: "Material, Termine und Personal werden eingeplant, und die Bewohner erfahren, was wann passiert.",
+          },
+          {
+            title: "Ausführung",
+            text: "Eigenes Personal und eigene Bauleitung vor Ort, mit Eigenkontrollen während der Arbeit.",
+          },
+          {
+            title: "Schlussbegehung und Übergabe",
+            text: "Wir gehen die Arbeiten mit dem Vorstand durch und übergeben die Protokolle der Eigenkontrollen sowie die Revisionsunterlagen.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Wie erfahren die Bewohner, was passiert?",
+          a: "Wir informieren die Bewohner vor und während der Arbeiten, damit alle wissen, was wann passiert.",
+        },
+        {
+          q: "Haben Sie eigenes Personal?",
+          a: "Ja, mit eigener Bauleitung vor Ort. Für Elektro, Sanitär, Heizung und Lüftung beauftragen wir feste Partnerbetriebe.",
+        },
+        {
+          q: "Was kostet ein Angebot?",
+          a: "Nichts.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: Strangsanierung, Fassaden- und Balkonarbeiten und Renovierung von Gemeinschaftsräumen für BRF in Järfälla und Stockholm. Kostenloses Angebot.",
+    },
+
+    underentreprenor: {
+      label: "Subunternehmer",
+      h1: "Subunternehmer für Bauunternehmen in Stockholm",
+      intro:
+        "Wir arbeiten als Subunternehmer für Bauunternehmen, unter anderem für NCC, Implenia und ByggPartner, mit eigenem Personal und eigener Bauleitung vor Ort.",
+      servicesH2: "Das übernehmen wir",
+      serviceType: "Subunternehmerleistungen im Bauwesen",
+      ctaLabel: "Kontaktieren Sie uns",
+      contactTitle: "Anfrage für einen Subunternehmerauftrag",
+      contactLead: "Erzählen Sie uns vom Projekt, dann rufen wir Sie zurück.",
+      services: [
+        {
+          title: "Innenausbau",
+          text: "Innenwände, abgehängte Decken und Türen.",
+        },
+        {
+          title: "Tischlerarbeiten",
+          text: "Maßgefertigte Einbauten und Tischlerarbeiten.",
+        },
+        {
+          title: "Erd- und Tiefbau",
+          text: "Erdarbeiten, Gründungen, Drainage und Feinplanum.",
+        },
+        {
+          title: "Abbruch und Sanierung",
+          text: "Selektiver Rückbau sowie Schadstoff-, Brand- und Feuchtesanierung.",
+        },
+        {
+          title: "Zusätzliche Fachkräfte",
+          text: "Zimmerer, Betonbauer und Maurer von Kanitas ENT, wenn Sie Verstärkung brauchen.",
+          href: "/stad",
+        },
+        {
+          title: "Baureinigung",
+          text: "Baureinigung und Endreinigung vor der Abnahme durch Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      sections: [
+        {
+          title: "Darum beauftragen uns Bauunternehmen",
+          layout: "columns",
+          items: [
+            {
+              title: "Eigene Bauleitung",
+              text: "Wir leiten unsere eigenen Arbeiten vor Ort.",
+            },
+            {
+              title: "Tarifvertrag",
+              text: "Unsere Fachkräfte sind nach Tarifvertrag mit der schwedischen Gewerkschaft Byggnads angestellt.",
+            },
+            {
+              title: "Ordnung auf der Baustelle",
+              text: "Schutzausrüstung und Eigenkontrollen bei jedem Auftrag.",
+            },
+            {
+              title: "Solide Finanzen",
+              text: "Die Kanitas AB hat mit AAA die höchste Bonität. Wir sind haftpflichtversichert und in Schweden für F‑skatt zugelassen.",
+            },
+          ],
+          references: true,
+        },
+      ],
+      faq: [
+        {
+          q: "Für welche Bauunternehmen haben Sie gearbeitet?",
+          a: "Unter anderem für NCC, Implenia und ByggPartner.",
+        },
+        {
+          q: "Können Sie zusätzliches Personal stellen?",
+          a: "Ja, Fachkräfte von Kanitas ENT, oft kurzfristig.",
+        },
+        {
+          q: "Haben Sie F‑skatt und eine Versicherung?",
+          a: "Ja. Wir sind haftpflichtversichert, in Schweden für F‑skatt zugelassen und für die Mehrwertsteuer sowie als Arbeitgeber registriert.",
+        },
+      ],
+      description:
+        "Kanitas Bygg ist in Stockholm Subunternehmer für Bauunternehmen wie NCC und Implenia: Innenausbau, Erdbau und Abbruch. Eigene Bauleitung, Tarifvertrag.",
     },
   },
 

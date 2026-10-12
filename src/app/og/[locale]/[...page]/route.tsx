@@ -12,9 +12,12 @@ import {
   businesses,
   phoneFor,
   photos,
+  servicePages,
+  serviceSlugs,
   site,
   type AreaSlug,
   type PhotoName,
+  type ServiceSlug,
 } from "@/lib/site";
 
 // Drawn once at build, one card per page and language, as a JPEG small
@@ -25,23 +28,37 @@ export const dynamicParams = false;
 const pages = [
   "home",
   ...areaSlugs,
+  ...serviceSlugs.map((service) => `bygg/${service}` as const),
   "om-oss",
   "kontakt",
   "integritetspolicy",
 ] as const;
 
 type Page = (typeof pages)[number];
+type ServicePage = `bygg/${ServiceSlug}`;
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) => pages.map((page) => ({ locale, page })));
+  return locales.flatMap((locale) =>
+    pages.map((page) => ({ locale, page: page.split("/") })),
+  );
 }
 
 const isArea = (page: Page): page is AreaSlug =>
   areaSlugs.includes(page as AreaSlug);
 
+const isService = (page: Page): page is ServicePage => page.startsWith("bygg/");
+
 /** What a card says and shows: the page's own headline over its photo. */
 function card(locale: (typeof locales)[number], page: Page) {
   const t = dictionaries[locale];
+  if (isService(page)) {
+    const service = page.slice("bygg/".length) as ServiceSlug;
+    return {
+      title: t.services[service].h1,
+      line: `${servicePages[service].name} · ${t.businesses.bygg.summary}`,
+      photo: servicePages[service].heroPhoto,
+    };
+  }
   if (isArea(page)) {
     const slug = businessSlugs.find((b) => businesses[b].page === `/${page}`)!;
     return {
@@ -51,7 +68,7 @@ function card(locale: (typeof locales)[number], page: Page) {
     };
   }
   const cards: Record<
-    Exclude<Page, AreaSlug>,
+    Exclude<Page, AreaSlug | ServicePage>,
     { title: string; line: string; photo: PhotoName }
   > = {
     home: { title: t.hero.title, line: t.footer.tagline, photo: "nybygge" },
@@ -78,9 +95,10 @@ const file = (path: string) => readFile(join(process.cwd(), path));
 
 export async function GET(
   _request: Request,
-  { params }: { params: Promise<{ locale: string; page: string }> },
+  { params }: { params: Promise<{ locale: string; page: string[] }> },
 ) {
-  const { locale, page } = await params;
+  const { locale, page: segments } = await params;
+  const page = segments.join("/");
   if (!isLocale(locale) || !pages.includes(page as Page)) {
     return new Response("Not found", { status: 404 });
   }

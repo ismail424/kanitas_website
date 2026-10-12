@@ -5,12 +5,15 @@ import type {
   CompanyName,
   ContactTopic,
   PhotoName,
+  ServiceSlug,
 } from "@/lib/site";
 
 /** A short title and one sentence: a service, a step, a point. */
 export interface TextItem {
   title: string;
   text: string;
+  /** A page that tells more, without language prefix ("/bygg/brf") */
+  href?: string;
 }
 
 /** A link inside the site, written without language prefix ("/om-oss"). */
@@ -64,6 +67,13 @@ export interface AreaCopy {
   faq?: { q: string; a: string }[];
   /** Meta description */
   description: string;
+}
+
+/** A page for one construction service, under /bygg. Its h1 is the page
+ *  heading itself; photos and topic live in `servicePages`. */
+export interface ServiceCopy extends AreaCopy {
+  /** Short name for links between the service pages, e.g. "Badrum" */
+  label: string;
 }
 
 export interface BusinessCopy {
@@ -220,6 +230,7 @@ export interface Dictionary {
   companyRoles: Record<CompanyName, string>;
   businesses: Record<BusinessSlug, BusinessCopy>;
   areas: Record<AreaSlug, AreaCopy>;
+  services: Record<ServiceSlug, ServiceCopy>;
   areaContactTitle: (name: string) => string;
   topics: Record<ContactTopic, string>;
   certifications: Record<CertificationId, string>;

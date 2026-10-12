@@ -347,9 +347,9 @@ const bs: Dictionary = {
 
   areas: {
     bygg: {
-      h1: "Građevinska firma u Stockholmu",
+      h1: "Građevinska firma u Järfälli i Stockholmu",
       intro:
-        "Novogradnja, renoviranje i građevinski servis za građevinske firme, vlasnike nekretnina, stambene zadruge i privatna lica u cijelom Stockholmu i okolini.",
+        "Novogradnja, renoviranje i građevinski servis za građevinske firme, vlasnike nekretnina, stambene zadruge i privatna lica u Järfälli i na cijelom širem području Stockholma.",
       servicesH2: "Građevinske usluge",
       serviceType: "Izvođenje građevinskih radova i građevinski servis",
       ctaLabel: "Zatražite ponudu",
@@ -361,14 +361,17 @@ const bs: Dictionary = {
         {
           title: "Renoviranje i preuređenje",
           text: "Stanovi i kuće, kancelarije i drugi poslovni prostori.",
+          href: "/bygg/renovering",
         },
         {
           title: "Građevinski servis",
           text: "Održavanje, popravke i prilagođavanja po stalnom ugovoru.",
+          href: "/bygg/byggservice",
         },
         {
           title: "Kupatila i mokri čvorovi",
           text: "Kompletno renoviranje, uz stalne partnere za vodoinstalacije.",
+          href: "/bygg/badrumsrenovering",
         },
         {
           title: "Suha gradnja i stolarski radovi",
@@ -424,18 +427,22 @@ const bs: Dictionary = {
             {
               title: "Građevinske firme",
               text: "Kao podizvođač radimo za firme NCC, Implenia, ByggPartner i druge, s vlastitim vođenjem radova na licu mjesta.",
+              href: "/bygg/underentreprenor",
             },
             {
               title: "Vlasnici nekretnina",
               text: "Građevinski servis po okvirnim ugovorima: otklanjanje kvarova, prilagođavanje prostora za zakupce i planirano održavanje.",
+              href: "/bygg/byggservice",
             },
             {
               title: "Stambene zadruge (BRF)",
               text: "Zamjena vertikala, radovi na fasadama i balkonima te renoviranje zajedničkih prostorija. Stanare redovno obavještavamo tokom radova.",
+              href: "/bygg/brf",
             },
             {
               title: "Privatna lica",
               text: "Kupatila, dogradnje i renoviranje kuća i stanova.",
+              href: "/bygg/renovering",
             },
           ],
           references: true,
@@ -464,11 +471,11 @@ const bs: Dictionary = {
         },
       ],
       description:
-        "Kanitas Bygg: novogradnja, renoviranje, građevinski servis i rušenje u Stockholmu. Vlastiti radnici po kolektivnom ugovoru. Zatražite besplatnu ponudu.",
+        "Kanitas Bygg: novogradnja, renoviranje, građevinski servis i rušenje u Järfälli i Stockholmu. Vlastiti radnici po kolektivnom ugovoru. Besplatna ponuda.",
     },
 
     stad: {
-      h1: "Radna snaga i građevinsko čišćenje u Stockholmu",
+      h1: "Radna snaga i čišćenje u Järfälli i Stockholmu",
       intro:
         "Ustupamo kvalifikovane radnike i čistače izvođačima radova i radimo građevinsko čišćenje prije tehničkog prijema. Svi radnici su zaposleni kod nas po kolektivnom ugovoru.",
       servicesH2: "Ustupanje radnika i usluge čišćenja",
@@ -596,7 +603,7 @@ const bs: Dictionary = {
         },
       ],
       description:
-        "Kanitas ENT: ustupanje radnika građevinskim firmama, građevinsko i završno čišćenje te čišćenje kancelarija u Stockholmu. Radnici po kolektivnom ugovoru.",
+        "Kanitas ENT: ustupanje radnika građevinskim firmama, građevinsko i završno čišćenje te čišćenje kancelarija u Järfälli i Stockholmu. Kolektivni ugovor.",
     },
 
     maskiner: {
@@ -730,6 +737,424 @@ const bs: Dictionary = {
       ],
       description:
         "Kanitas Fastigheter iznajmljuje radioničke, skladišne i kancelarijske prostore u Järfälli i prilagođava ih vašem poslovanju. Pitajte za slobodne prostore.",
+    },
+  },
+
+  services: {
+    badrumsrenovering: {
+      label: "Renoviranje kupatila",
+      h1: "Renoviranje kupatila u Järfälli i Stockholmu",
+      intro:
+        "Kompletno renoviramo kupatila i mokre čvorove u kućama, stanovima i stambenim zadrugama (BRF), od rušenja do gotove prostorije. Vodoinstalacije i elektroinstalacije rade naši stalni partneri, a vi imate jednu osobu za kontakt za cijeli posao.",
+      servicesH2: "Šta obuhvata renoviranje kupatila",
+      serviceType: "Renoviranje kupatila",
+      ctaLabel: "Zatražite ponudu",
+      contactTitle: "Zatražite ponudu za renoviranje kupatila",
+      services: [
+        {
+          title: "Rušenje",
+          text: "Stare pločice, pod i oprema se uklanjaju i odvoze.",
+        },
+        {
+          title: "Hidroizolacija",
+          text: "Nova hidroizolacija poda i zidova, koja štiti od vlage.",
+        },
+        {
+          title: "Zidne i podne pločice",
+          text: "Polaganje pločica na podove i zidove.",
+        },
+        {
+          title: "Vodoinstalacije",
+          text: "Cijevi, podni slivnik, tuš, WC i umivaonik postavlja naš stalni partner za vodoinstalacije.",
+        },
+        {
+          title: "Struja i rasvjeta",
+          text: "Elektroinstalaterske radove izvodi naš stalni partner.",
+        },
+        {
+          title: "Namještaj i oprema",
+          text: "Montaža ormarića, elementa s umivaonikom i dodatne opreme.",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Cijeli stan ili kuća: Renoviranje i preuređenje",
+      },
+      process: {
+        title: "Kako teče renoviranje kupatila",
+        steps: [
+          {
+            title: "Obilazak lokacije",
+            text: "Pogledamo kupatilo i razgovaramo o tome šta želite da se uradi.",
+          },
+          {
+            title: "Ponuda",
+            text: "Fiksna cijena ili obračun po utrošenom radu i materijalu, s obimom posla i vremenskim planom. Dodatni radovi se pismeno odobravaju prije izvođenja.",
+          },
+          {
+            title: "Renoviranje",
+            text: "Vlastiti radnici i vođenje radova, uz interne kontrole tokom rada.",
+          },
+          {
+            title: "Završni pregled",
+            text: "Zajedno pregledamo kupatilo i predajemo vam zapisnike internih kontrola.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT odbitak za renoviranje kupatila",
+        text: "Kao privatno lice možete dobiti ROT odbitak (švedski porezni odbitak) za troškove rada, ali ne i za materijal. Odbitak obračunavamo direktno na fakturi, tako da plaćate samo svoj dio.",
+      },
+      faq: [
+        {
+          q: "Koliko košta renoviranje kupatila?",
+          a: "Zavisi od veličine kupatila i od toga šta treba uraditi. Rado ćemo doći i pogledati, a ponuda je besplatna.",
+        },
+        {
+          q: "Koliko traje?",
+          a: "Zavisi od obima posla. Vremenski plan dobijate u ponudi, prije početka radova.",
+        },
+        {
+          q: "Renovirate li kupatila u zadružnim stanovima?",
+          a: "Da, i za vlasnike stanova i za stambene zadruge (BRF).",
+        },
+        {
+          q: "Ko radi vodoinstalacije i struju?",
+          a: "Naši stalni partneri. Ipak, za cijeli posao imate jednu osobu za kontakt kod nas.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: renoviranje kupatila u Järfälli i Stockholmu, od rušenja i hidroizolacije do pločica, vode i struje. ROT odbitak na fakturi. Besplatna ponuda.",
+    },
+
+    renovering: {
+      label: "Renoviranje i preuređenje",
+      h1: "Renoviranje i preuređenje u Järfälli i Stockholmu",
+      intro:
+        "Renoviramo i preuređujemo stanove, kuće, kancelarije i druge poslovne prostore, s vlastitim radnicima i vlastitim vođenjem radova. Dobijate osobu za kontakt koja prati posao od početka do kraja.",
+      servicesH2: "Šta radimo",
+      serviceType: "Renoviranje i preuređenje",
+      ctaLabel: "Zatražite ponudu",
+      contactTitle: "Zatražite ponudu za renoviranje",
+      services: [
+        {
+          title: "Stanovi i kuće",
+          text: "Renoviranje cijelog doma ili samo jednog njegovog dijela.",
+        },
+        {
+          title: "Dogradnje",
+          text: "Dogradnje kuća.",
+        },
+        {
+          title: "Kancelarije i poslovni prostori",
+          text: "Preuređenje i prilagođavanje kancelarija i drugih poslovnih prostora.",
+        },
+        {
+          title: "Prilagođavanje za zakupce",
+          text: "Prilagođavanje prostora novom zakupcu, za vlasnike nekretnina.",
+        },
+        {
+          title: "Unutrašnji zidovi i stolarski radovi",
+          text: "Unutrašnji zidovi, spušteni plafoni, vrata i ugradni namještaj po mjeri.",
+        },
+        {
+          title: "Rušenje",
+          text: "Selektivno rušenje prije preuređenja.",
+        },
+      ],
+      related: {
+        href: "/bygg/badrumsrenovering",
+        label: "Samo kupatilo: Renoviranje kupatila",
+      },
+      process: {
+        title: "Kako teče renoviranje",
+        steps: [
+          {
+            title: "Upit i obilazak lokacije",
+            text: "Razgovaramo o tome šta treba uraditi i pogledamo lokaciju.",
+          },
+          {
+            title: "Ponuda",
+            text: "Fiksna cijena ili obračun po utrošenom radu i materijalu, s obimom posla i vremenskim planom. Dodatni radovi se pismeno odobravaju prije izvođenja.",
+          },
+          {
+            title: "Planiranje",
+            text: "Naručujemo materijal, dogovaramo termine i raspoređujemo radnike. Dobijate osobu za kontakt koja prati posao od početka do kraja.",
+          },
+          {
+            title: "Renoviranje",
+            text: "Vlastiti radnici i vođenje radova na licu mjesta, uz interne kontrole tokom rada.",
+          },
+          {
+            title: "Završni pregled i primopredaja",
+            text: "Zajedno pregledamo urađeno i predajemo vam zapisnike internih kontrola, a kod većih poslova i projekat izvedenog stanja.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT odbitak za privatna lica",
+        text: "Ako renovirate svoj dom, možete dobiti ROT odbitak (švedski porezni odbitak) za troškove rada, ali ne i za materijal. Odbitak obračunavamo direktno na fakturi, tako da plaćate samo svoj dio.",
+      },
+      faq: [
+        {
+          q: "Preuzimate li i manje poslove?",
+          a: "Da, i pojedinačne popravke i manja renoviranja.",
+        },
+        {
+          q: "Možete li preuzeti cijelo renoviranje?",
+          a: "Da. Koordiniramo sve faze, a elektroinstalacije, vodoinstalacije, grijanje i ventilaciju rade naši stalni partneri.",
+        },
+        {
+          q: "Fiksna cijena ili obračun po utrošenom radu?",
+          a: "Može i jedno i drugo. To piše u ponudi, a dodatni radovi se pismeno odobravaju prije izvođenja.",
+        },
+        {
+          q: "Koliko košta ponuda?",
+          a: "Ništa.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: renoviranje i preuređenje stanova, kuća, kancelarija i lokala u Järfälli i Stockholmu. Vlastiti radnici po kolektivnom ugovoru. Besplatna ponuda.",
+    },
+
+    byggservice: {
+      label: "Građevinski servis",
+      h1: "Građevinski servis za nekretnine u Stockholmu",
+      intro:
+        "Održavanje, popravke i prilagođavanje prostora za zakupce po okvirnom ili stalnom ugovoru, u Järfälli i na cijelom širem području Stockholma. S građevinskim servisom obično možemo početi u roku od nekoliko dana.",
+      servicesH2: "Šta obuhvata građevinski servis",
+      serviceType: "Građevinski servis i održavanje nekretnina",
+      ctaLabel: "Pitajte za građevinski servis",
+      contactTitle: "Pitajte za građevinski servis",
+      services: [
+        {
+          title: "Otklanjanje kvarova",
+          text: "Popravke kada se nešto pokvari.",
+        },
+        {
+          title: "Planirano održavanje",
+          text: "Održavanje prema planu održavanja zgrade.",
+        },
+        {
+          title: "Prilagođavanje za zakupce",
+          text: "Poslovni prostori i stanovi koji se prilagođavaju novim zakupcima.",
+        },
+        {
+          title: "Okvirni ugovor",
+          text: "Jedan ugovor za poslove koji se ponavljaju, ili pojedinačni poslovi po potrebi.",
+        },
+        {
+          title: "Čišćenje snijega",
+          text: "Čišćenje snijega i posipanje protiv poledice za ugovorne klijente.",
+        },
+        {
+          title: "Čišćenje nakon radova",
+          text: "Građevinsko čišćenje i čišćenje zgrada, koje radi Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Veća preuređenja: Renoviranje i preuređenje",
+      },
+      process: {
+        title: "Kako funkcioniše građevinski servis",
+        steps: [
+          {
+            title: "Javite nam se",
+            text: "Nazovite, pošaljite e-mail ili ostavite svoj broj ovdje na stranici.",
+          },
+          {
+            title: "Pogledamo posao",
+            text: "Po potrebi dođemo na lice mjesta prije nego što izračunamo cijenu.",
+          },
+          {
+            title: "Uradimo posao",
+            text: "Vlastiti radnici, uz interne kontrole tokom rada.",
+          },
+          {
+            title: "Primopredaja",
+            text: "Kada je posao gotov, zajedno ga pregledamo.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Koliko brzo možete početi?",
+          a: "S građevinskim servisom obično možemo početi u roku od nekoliko dana.",
+        },
+        {
+          q: "Moramo li potpisati okvirni ugovor?",
+          a: "Ne. Preuzimamo i pojedinačne poslove.",
+        },
+        {
+          q: "Imate li vlastite radnike?",
+          a: "Da, a po potrebi ekipu pojačamo kvalifikovanim radnicima iz firme Kanitas ENT. Za elektroinstalacije, vodoinstalacije, grijanje i ventilaciju angažujemo stalne partnere.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: građevinski servis za vlasnike nekretnina u Järfälli i Stockholmu. Popravke, održavanje i prilagođavanje za zakupce po okvirnom ugovoru.",
+    },
+
+    brf: {
+      label: "Vertikale i BRF",
+      h1: "Zamjena vertikala i renoviranje BRF-a u Stockholmu",
+      intro:
+        "Za stambene zadruge (BRF) u Järfälli i Stockholmu radimo zamjenu vertikala, radove na fasadama i balkonima te renoviranje zajedničkih prostorija. Stanare redovno obavještavamo tokom radova.",
+      servicesH2: "Šta radimo za stambene zadruge",
+      serviceType: "Zamjena vertikala i renoviranje za stambene zadruge",
+      ctaLabel: "Zatražite ponudu",
+      contactTitle: "Zatražite ponudu za vašu stambenu zadrugu",
+      services: [
+        {
+          title: "Zamjena vertikala",
+          text: "Zamjena vodovodnih i kanalizacionih cijevi.",
+        },
+        {
+          title: "Kupatila",
+          text: "Renoviranje kupatila u stanovima, u sklopu istog projekta ili zasebno.",
+          href: "/bygg/badrumsrenovering",
+        },
+        {
+          title: "Fasade",
+          text: "Renoviranje i popravke fasada.",
+        },
+        {
+          title: "Balkoni",
+          text: "Renoviranje balkona.",
+        },
+        {
+          title: "Zajedničke prostorije",
+          text: "Stubišta, perionice i druge zajedničke prostorije.",
+        },
+        {
+          title: "Čišćenje",
+          text: "Građevinsko čišćenje i čišćenje stubišta, koje radi Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      process: {
+        title: "Kako teče projekat za stambenu zadrugu",
+        steps: [
+          {
+            title: "Upit i obilazak lokacije",
+            text: "Razgovaramo o tome šta zadruga želi uraditi i pogledamo zgradu.",
+          },
+          {
+            title: "Ponuda",
+            text: "Fiksna cijena ili obračun po utrošenom radu i materijalu, s obimom posla i vremenskim planom. Dodatni radovi se pismeno odobravaju prije izvođenja.",
+          },
+          {
+            title: "Planiranje i informisanje",
+            text: "Naručujemo materijal, dogovaramo termine i raspoređujemo radnike, a stanari saznaju šta se dešava i kada.",
+          },
+          {
+            title: "Radovi",
+            text: "Vlastiti radnici i vođenje radova na licu mjesta, uz interne kontrole tokom rada.",
+          },
+          {
+            title: "Završni pregled i primopredaja",
+            text: "Urađeno pregledamo s upravnim odborom i predajemo zapisnike internih kontrola i projekat izvedenog stanja.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Kako stanari saznaju šta se dešava?",
+          a: "Stanare obavještavamo prije i tokom radova, kako bi svi znali šta se dešava i kada.",
+        },
+        {
+          q: "Imate li vlastite radnike?",
+          a: "Da, s vlastitim vođenjem radova na licu mjesta. Za elektroinstalacije, vodoinstalacije, grijanje i ventilaciju angažujemo stalne partnere.",
+        },
+        {
+          q: "Koliko košta ponuda?",
+          a: "Ništa.",
+        },
+      ],
+      description:
+        "Kanitas Bygg: zamjena vertikala, radovi na fasadama i balkonima te renoviranje zajedničkih prostorija za BRF u Järfälli i Stockholmu. Besplatna ponuda.",
+    },
+
+    underentreprenor: {
+      label: "Podizvođački radovi",
+      h1: "Građevinski podizvođač u Stockholmu",
+      intro:
+        "Kao podizvođač radimo za građevinske firme, između ostalih za NCC, Implenia i ByggPartner, s vlastitim radnicima i vlastitim vođenjem radova na licu mjesta.",
+      servicesH2: "Šta preuzimamo",
+      serviceType: "Podizvođački građevinski radovi",
+      ctaLabel: "Kontaktirajte nas",
+      contactTitle: "Upit za podizvođačke radove",
+      contactLead: "Recite nam nešto o projektu i nazvat ćemo vas.",
+      services: [
+        {
+          title: "Suha gradnja",
+          text: "Unutrašnji zidovi, spušteni plafoni i vrata.",
+        },
+        {
+          title: "Stolarski radovi",
+          text: "Ugradni namještaj po mjeri i drugi stolarski radovi.",
+        },
+        {
+          title: "Zemljani radovi i niskogradnja",
+          text: "Iskopi, temeljenje, drenaža i fino planiranje terena.",
+        },
+        {
+          title: "Rušenje i sanacija",
+          text: "Selektivno rušenje te sanacija objekata i štete od požara i vlage.",
+        },
+        {
+          title: "Dodatni kvalifikovani radnici",
+          text: "Tesari, betonirci i zidari iz firme Kanitas ENT kada vam treba pojačanje.",
+          href: "/stad",
+        },
+        {
+          title: "Građevinsko čišćenje",
+          text: "Građevinsko i završno čišćenje prije tehničkog prijema, koje radi Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      sections: [
+        {
+          title: "Zašto nas građevinske firme angažuju",
+          layout: "columns",
+          items: [
+            {
+              title: "Vlastito vođenje radova",
+              text: "Sami vodimo svoje radove na licu mjesta.",
+            },
+            {
+              title: "Kolektivni ugovor",
+              text: "Naši kvalifikovani radnici zaposleni su po kolektivnom ugovoru sa švedskim sindikatom Byggnads.",
+            },
+            {
+              title: "Red na gradilištu",
+              text: "Zaštitna oprema i interne kontrole na svakom poslu.",
+            },
+            {
+              title: "Stabilne finansije",
+              text: "Kanitas AB ima AAA, najviši kreditni rejting. Imamo osiguranje od odgovornosti i odobren F‑skatt.",
+            },
+          ],
+          references: true,
+        },
+      ],
+      faq: [
+        {
+          q: "Za koje građevinske firme ste radili?",
+          a: "Između ostalih za firme NCC, Implenia i ByggPartner.",
+        },
+        {
+          q: "Možete li ekipu pojačati dodatnim radnicima?",
+          a: "Da, kvalifikovanim radnicima iz firme Kanitas ENT, često u kratkom roku.",
+        },
+        {
+          q: "Imate li F‑skatt i osiguranje?",
+          a: "Da. Imamo osiguranje od odgovornosti i odobren F‑skatt, a registrovani smo i za PDV i kao poslodavac.",
+        },
+      ],
+      description:
+        "Kanitas Bygg radi kao podizvođač za građevinske firme u Stockholmu, među njima NCC i Implenia: suha gradnja, zemljani radovi i rušenje. Kolektivni ugovor.",
     },
   },
 

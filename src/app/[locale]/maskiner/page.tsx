@@ -8,7 +8,7 @@ export async function generateMetadata({
   params: LocaleParams;
 }): Promise<Metadata> {
   const { locale } = await getContent(params);
-  return areaMetadata(locale, "maskiner");
+  return areaMetadata(locale, { slug: "maskiner" });
 }
 
 export default async function MaskinerPage({
@@ -17,5 +17,5 @@ export default async function MaskinerPage({
   params: LocaleParams;
 }) {
   const { locale } = await getContent(params);
-  return <AreaPage locale={locale} slug="maskiner" />;
+  return <AreaPage locale={locale} page={{ slug: "maskiner" }} />;
 }

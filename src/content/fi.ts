@@ -346,9 +346,9 @@ const fi: Dictionary = {
 
   areas: {
     bygg: {
-      h1: "Rakennusyritys Tukholmassa",
+      h1: "Rakennusyritys Järfällassa ja Tukholmassa",
       intro:
-        "Uudisrakentamista, remontteja sekä korjaus- ja huoltotöitä rakennusyhtiöille, kiinteistönomistajille, taloyhtiöille ja yksityishenkilöille koko Suur-Tukholman alueella.",
+        "Uudisrakentamista, remontteja sekä korjaus- ja huoltotöitä rakennusyhtiöille, kiinteistönomistajille, taloyhtiöille ja yksityishenkilöille Järfällassa ja koko Suur-Tukholman alueella.",
       servicesH2: "Rakennuspalvelut",
       serviceType: "Rakennusurakointi sekä korjaus- ja huoltotyöt",
       ctaLabel: "Pyydä tarjous",
@@ -360,14 +360,17 @@ const fi: Dictionary = {
         {
           title: "Remontit ja muutostyöt",
           text: "Asunnot, toimistot ja muut tilat.",
+          href: "/bygg/renovering",
         },
         {
           title: "Korjaus- ja huoltotyöt",
           text: "Kunnossapito, korjaukset ja muutostyöt jatkuvalla sopimuksella.",
+          href: "/bygg/byggservice",
         },
         {
           title: "Kylpyhuoneet ja märkätilat",
           text: "Kokonaisremontit, putkityöt vakituisten yhteistyökumppaneiden kanssa.",
+          href: "/bygg/badrumsrenovering",
         },
         {
           title: "Sisärakentaminen ja puusepäntyöt",
@@ -423,18 +426,22 @@ const fi: Dictionary = {
             {
               title: "Rakennusyhtiöt",
               text: "Aliurakoitsijana muun muassa NCC:lle, Implenialle ja ByggPartnerille, omalla työnjohdolla.",
+              href: "/bygg/underentreprenor",
             },
             {
               title: "Kiinteistönomistajat",
               text: "Korjaus- ja huoltotöitä puitesopimuksella: vikakorjaukset, vuokralaismuutostyöt ja suunnitelmallinen kunnossapito.",
+              href: "/bygg/byggservice",
             },
             {
               title: "Taloyhtiöt (BRF)",
               text: "Putkiremontit, julkisivu- ja parvekeremontit sekä yhteisten tilojen remontit. Asukkaille tiedotetaan koko työn ajan.",
+              href: "/bygg/brf",
             },
             {
               title: "Yksityishenkilöt",
               text: "Kylpyhuoneet, laajennukset sekä omakotitalojen ja asuntojen remontit.",
+              href: "/bygg/renovering",
             },
           ],
           references: true,
@@ -463,7 +470,7 @@ const fi: Dictionary = {
         },
       ],
       description:
-        "Kanitas Bygg tekee uudisrakentamista, remontteja sekä huolto- ja purkutöitä Tukholmassa. Oma henkilöstö työehtosopimuksella. Pyydä maksuton tarjous.",
+        "Kanitas Bygg tekee uudisrakentamista, remontteja sekä huolto- ja purkutöitä Järfällassa ja Tukholmassa. Oma henkilöstö työehtosopimuksella. Maksuton tarjous.",
     },
 
     stad: {
@@ -595,7 +602,7 @@ const fi: Dictionary = {
         },
       ],
       description:
-        "Kanitas ENT: henkilöstövuokraus rakennusyrityksille sekä rakennus-, loppu- ja toimistosiivous Tukholmassa. Oma henkilöstö työehtosopimuksella.",
+        "Kanitas ENT: henkilöstövuokraus rakennusyrityksille sekä rakennus-, loppu- ja toimistosiivous Järfällassa ja Tukholmassa. Työehtosopimus.",
     },
 
     maskiner: {
@@ -729,6 +736,424 @@ const fi: Dictionary = {
       ],
       description:
         "Kanitas Fastigheter vuokraa verstas-, varasto- ja toimistotiloja Järfällassa. Muokkaamme tilan toimintasi tarpeisiin. Kysy vapaita tiloja.",
+    },
+  },
+
+  services: {
+    badrumsrenovering: {
+      label: "Kylpyhuoneremontti",
+      h1: "Kylpyhuoneremontti Järfällassa ja Tukholmassa",
+      intro:
+        "Teemme kylpyhuoneiden ja märkätilojen kokonaisremontteja omakotitaloihin, asuntoihin ja taloyhtiöihin purkutöistä valmiiseen kylpyhuoneeseen. Putki- ja sähkötyöt hoitavat vakituiset yhteistyökumppanimme, ja sinulla on yksi yhteyshenkilö koko työn ajan.",
+      servicesH2: "Kylpyhuoneremonttiin sisältyy",
+      serviceType: "Kylpyhuoneremontti",
+      ctaLabel: "Pyydä tarjous",
+      contactTitle: "Pyydä tarjous kylpyhuoneremontista",
+      services: [
+        {
+          title: "Purku",
+          text: "Vanhat laatat, lattiat ja kalusteet puretaan ja viedään pois.",
+        },
+        {
+          title: "Vedeneristys",
+          text: "Uusi vedeneristys lattiaan ja seiniin suojaamaan kosteudelta.",
+        },
+        {
+          title: "Laatoitus",
+          text: "Lattioiden ja seinien laatoitus.",
+        },
+        {
+          title: "Putkityöt",
+          text: "Putket, lattiakaivo, suihku, WC ja pesuallas. Työt tekee vakituinen putkialan kumppanimme.",
+        },
+        {
+          title: "Sähkö ja valaistus",
+          text: "Sähkötyöt tekee vakituinen yhteistyökumppanimme.",
+        },
+        {
+          title: "Kalusteet",
+          text: "Kaappien, allaskaapin ja varusteiden asennus.",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Koko asunnon remontti: Remontit ja muutostyöt",
+      },
+      process: {
+        title: "Näin kylpyhuoneremontti etenee",
+        steps: [
+          {
+            title: "Kohdekäynti",
+            text: "Katsomme kylpyhuoneen ja käymme läpi, mitä haluat teettää.",
+          },
+          {
+            title: "Tarjous",
+            text: "Kiinteä hinta tai laskutyö sekä työn laajuus ja aikataulu. Lisätyöt hyväksytään kirjallisesti ennen niiden aloittamista.",
+          },
+          {
+            title: "Remontti",
+            text: "Oma henkilöstö ja työnjohto, omavalvonta koko työn ajan.",
+          },
+          {
+            title: "Läpikäynti",
+            text: "Käymme kylpyhuoneen läpi yhdessä ja luovutamme omavalvonta-asiakirjat.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT-vähennys kylpyhuoneremontista",
+        text: "Yksityishenkilönä voit saada työn osuudesta ROT-vähennyksen (Ruotsin vastine kotitalousvähennykselle), mutta et materiaaleista. Vähennämme sen suoraan laskusta, joten maksat vain oman osuutesi.",
+      },
+      faq: [
+        {
+          q: "Paljonko kylpyhuoneremontti maksaa?",
+          a: "Se riippuu kylpyhuoneen koosta ja siitä, mitä siinä tehdään. Tulemme mielellämme katsomaan, ja tarjous on maksuton.",
+        },
+        {
+          q: "Kauanko remontti kestää?",
+          a: "Se riippuu työn laajuudesta. Saat aikataulun tarjouksessa ennen töiden alkua.",
+        },
+        {
+          q: "Remontoitteko kylpyhuoneita osakeasunnoissa?",
+          a: "Kyllä, sekä asuntojen omistajille että taloyhtiöille.",
+        },
+        {
+          q: "Kuka tekee putki- ja sähkötyöt?",
+          a: "Vakituiset yhteistyökumppanimme. Sinulla on silti meillä yksi yhteyshenkilö koko työn ajan.",
+        },
+      ],
+      description:
+        "Kanitas Bygg tekee kylpyhuoneremontteja Järfällassa ja Tukholmassa: purku, vedeneristys, laatoitus, putki- ja sähkötyöt. ROT-vähennys suoraan laskusta.",
+    },
+
+    renovering: {
+      label: "Remontit ja muutostyöt",
+      h1: "Remontit ja muutostyöt Järfällassa ja Tukholmassa",
+      intro:
+        "Remontoimme asuntoja, omakotitaloja, toimistoja ja muita tiloja ja teemme niihin muutostöitä omalla henkilöstöllämme ja työnjohdollamme. Saat yhteyshenkilön, joka seuraa työtä alusta loppuun.",
+      servicesH2: "Tätä teemme",
+      serviceType: "Remontit ja muutostyöt",
+      ctaLabel: "Pyydä tarjous",
+      contactTitle: "Pyydä tarjous remontista",
+      services: [
+        {
+          title: "Asunnot ja omakotitalot",
+          text: "Koko asunnon tai sen osan remontti.",
+        },
+        {
+          title: "Laajennukset",
+          text: "Omakotitalojen laajennukset.",
+        },
+        {
+          title: "Toimistot ja toimitilat",
+          text: "Toimistojen ja muiden toimitilojen muutostyöt ja muokkaus.",
+        },
+        {
+          title: "Vuokralaismuutostyöt",
+          text: "Tilat muokataan uuden vuokralaisen tarpeisiin kiinteistönomistajien toimeksiannosta.",
+        },
+        {
+          title: "Väliseinät ja puusepäntyöt",
+          text: "Väliseinät, alakatot, ovet ja paikalla rakennetut kalusteet.",
+        },
+        {
+          title: "Purku",
+          text: "Valikoiva purku ennen muutostöitä.",
+        },
+      ],
+      related: {
+        href: "/bygg/badrumsrenovering",
+        label: "Vain kylpyhuone: Kylpyhuoneremontti",
+      },
+      process: {
+        title: "Näin remontti etenee",
+        steps: [
+          {
+            title: "Yhteydenotto ja kohdekäynti",
+            text: "Käymme läpi, mitä pitää tehdä, ja katsomme kohteen.",
+          },
+          {
+            title: "Tarjous",
+            text: "Kiinteä hinta tai laskutyö sekä työn laajuus ja aikataulu. Lisätyöt hyväksytään kirjallisesti ennen niiden aloittamista.",
+          },
+          {
+            title: "Suunnittelu",
+            text: "Varaamme materiaalit ja henkilöstön ja sovimme aikataulut. Saat yhteyshenkilön, joka seuraa työtä alusta loppuun.",
+          },
+          {
+            title: "Remontti",
+            text: "Oma henkilöstö ja työnjohto paikalla, omavalvonta koko työn ajan.",
+          },
+          {
+            title: "Läpikäynti ja luovutus",
+            text: "Käymme työn läpi yhdessä ja luovutamme omavalvonta-asiakirjat sekä suuremmissa töissä toteumapiirustukset.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT-vähennys yksityishenkilöille",
+        text: "Jos remontoit kotiasi, voit saada työn osuudesta ROT-vähennyksen (Ruotsin vastine kotitalousvähennykselle), mutta et materiaaleista. Vähennämme sen suoraan laskusta, joten maksat vain oman osuutesi.",
+      },
+      faq: [
+        {
+          q: "Teettekö myös pienempiä töitä?",
+          a: "Kyllä, myös yksittäisiä korjauksia ja pienempiä remontteja.",
+        },
+        {
+          q: "Voitteko hoitaa koko remontin?",
+          a: "Kyllä. Koordinoimme kaikki työvaiheet, ja sähkö-, putki- ja ilmanvaihtotyöt tekevät vakituiset yhteistyökumppanimme.",
+        },
+        {
+          q: "Kiinteä hinta vai laskutyö?",
+          a: "Kumpi tahansa käy. Se kirjataan tarjoukseen, ja lisätyöt hyväksytään kirjallisesti ennen niiden aloittamista.",
+        },
+        {
+          q: "Mitä tarjous maksaa?",
+          a: "Ei mitään.",
+        },
+      ],
+      description:
+        "Kanitas Bygg remontoi asuntoja, omakotitaloja, toimistoja ja toimitiloja ja tekee muutostöitä Järfällassa ja Tukholmassa. Oma henkilöstö työehtosopimuksella.",
+    },
+
+    byggservice: {
+      label: "Korjaus- ja huoltotyöt",
+      h1: "Kiinteistöjen korjaus- ja huoltotyöt Tukholmassa",
+      intro:
+        "Kunnossapitoa, korjauksia ja vuokralaismuutostöitä puitesopimuksella tai jatkuvalla sopimuksella Järfällassa ja koko Suur-Tukholman alueella. Korjaus- ja huoltotöissä pääsemme yleensä aloittamaan muutaman päivän kuluessa.",
+      servicesH2: "Korjaus- ja huoltotöihin sisältyy",
+      serviceType: "Korjaus- ja huoltotyöt sekä kiinteistöjen kunnossapito",
+      ctaLabel: "Kysy korjaus- ja huoltotöistä",
+      contactTitle: "Kysy korjaus- ja huoltotöistä",
+      services: [
+        {
+          title: "Vikakorjaukset",
+          text: "Korjaukset, kun jokin on mennyt rikki.",
+        },
+        {
+          title: "Suunnitelmallinen kunnossapito",
+          text: "Kunnossapito kiinteistön kunnossapitosuunnitelman mukaan.",
+        },
+        {
+          title: "Vuokralaismuutostyöt",
+          text: "Toimitilat ja asunnot muokataan uusien vuokralaisten tarpeisiin.",
+        },
+        {
+          title: "Puitesopimus",
+          text: "Yksi sopimus toistuville töille tai yksittäisiä toimeksiantoja tarpeen mukaan.",
+        },
+        {
+          title: "Lumityöt",
+          text: "Lumenauraus ja liukkaudentorjunta sopimusasiakkaille.",
+        },
+        {
+          title: "Siivous työn jälkeen",
+          text: "Rakennus- ja kiinteistösiivous Kanitas ENT:n kautta.",
+          href: "/stad",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Suuremmat muutostyöt: Remontit ja muutostyöt",
+      },
+      process: {
+        title: "Näin korjaus- ja huoltotyöt toimivat",
+        steps: [
+          {
+            title: "Otat yhteyttä",
+            text: "Soita, lähetä sähköpostia tai jätä numerosi tällä sivulla.",
+          },
+          {
+            title: "Katsomme kohteen",
+            text: "Tarvittaessa käymme paikan päällä ennen kuin laskemme hinnan.",
+          },
+          {
+            title: "Teemme työn",
+            text: "Oma henkilöstö, omavalvonta koko työn ajan.",
+          },
+          {
+            title: "Luovutus",
+            text: "Käymme työn läpi kanssasi, kun se on valmis.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Kuinka nopeasti voitte aloittaa?",
+          a: "Korjaus- ja huoltotöissä pääsemme yleensä aloittamaan muutaman päivän kuluessa.",
+        },
+        {
+          q: "Pitääkö meidän tehdä puitesopimus?",
+          a: "Ei. Teemme myös yksittäisiä toimeksiantoja.",
+        },
+        {
+          q: "Onko teillä omaa henkilöstöä?",
+          a: "Kyllä, tarvittaessa vahvistettuna Kanitas ENT:n ammattilaisilla. Sähkö-, putki- ja ilmanvaihtotöissä käytämme vakituisia yhteistyökumppaneita.",
+        },
+      ],
+      description:
+        "Kanitas Bygg tekee korjaus- ja huoltotöitä kiinteistönomistajille Järfällassa ja Tukholmassa: vikakorjaukset, kunnossapito ja vuokralaismuutostyöt.",
+    },
+
+    brf: {
+      label: "Putkiremontti ja taloyhtiöt",
+      h1: "Taloyhtiön putkiremontti ja remontit Tukholmassa",
+      intro:
+        "Teemme putkiremontteja, julkisivu- ja parvekeremontteja sekä yhteisten tilojen remontteja asunto-osakeyhtiöille Järfällassa ja Tukholmassa. Asukkaille tiedotetaan koko työn ajan.",
+      servicesH2: "Tätä teemme taloyhtiöille",
+      serviceType: "Putkiremontit ja remontit asunto-osakeyhtiöille",
+      ctaLabel: "Pyydä tarjous",
+      contactTitle: "Pyydä tarjous taloyhtiölle",
+      services: [
+        {
+          title: "Putkiremontti",
+          text: "Vesi- ja viemäriputkien uusiminen.",
+        },
+        {
+          title: "Kylpyhuoneet",
+          text: "Asuntojen kylpyhuoneremontit samassa hankkeessa tai erikseen.",
+          href: "/bygg/badrumsrenovering",
+        },
+        {
+          title: "Julkisivut",
+          text: "Julkisivujen remontit ja korjaukset.",
+        },
+        {
+          title: "Parvekkeet",
+          text: "Parvekkeiden remontit.",
+        },
+        {
+          title: "Yhteiset tilat",
+          text: "Porraskäytävät, pesutuvat ja muut yhteiset tilat.",
+        },
+        {
+          title: "Siivous",
+          text: "Rakennussiivous ja porraskäytävien siivous Kanitas ENT:n kautta.",
+          href: "/stad",
+        },
+      ],
+      process: {
+        title: "Näin taloyhtiön hanke etenee",
+        steps: [
+          {
+            title: "Yhteydenotto ja kohdekäynti",
+            text: "Käymme läpi, mitä taloyhtiö haluaa tehdä, ja katsomme kiinteistön.",
+          },
+          {
+            title: "Tarjous",
+            text: "Kiinteä hinta tai laskutyö sekä työn laajuus ja aikataulu. Lisätyöt hyväksytään kirjallisesti ennen niiden aloittamista.",
+          },
+          {
+            title: "Suunnittelu ja tiedottaminen",
+            text: "Varaamme materiaalit ja henkilöstön ja sovimme aikataulut, ja asukkaat saavat tietää, mitä tapahtuu ja milloin.",
+          },
+          {
+            title: "Työ",
+            text: "Oma henkilöstö ja työnjohto paikalla, omavalvonta koko työn ajan.",
+          },
+          {
+            title: "Läpikäynti ja luovutus",
+            text: "Käymme työn läpi hallituksen kanssa ja luovutamme omavalvonta-asiakirjat ja toteumapiirustukset.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "Miten asukkaat saavat tietää, mitä tapahtuu?",
+          a: "Tiedotamme asukkaille ennen työtä ja sen aikana, jotta kaikki tietävät, mitä tapahtuu ja milloin.",
+        },
+        {
+          q: "Onko teillä omaa henkilöstöä?",
+          a: "Kyllä, ja oma työnjohto paikalla. Sähkö-, putki- ja ilmanvaihtotöissä käytämme vakituisia yhteistyökumppaneita.",
+        },
+        {
+          q: "Mitä tarjous maksaa?",
+          a: "Ei mitään.",
+        },
+      ],
+      description:
+        "Kanitas Bygg tekee taloyhtiöille putkiremontit, julkisivu- ja parvekeremontit sekä yhteisten tilojen remontit Järfällassa ja Tukholmassa. Maksuton tarjous.",
+    },
+
+    underentreprenor: {
+      label: "Aliurakointi",
+      h1: "Rakennusalan aliurakoitsija Tukholmassa",
+      intro:
+        "Toimimme aliurakoitsijana rakennusyhtiöille, muun muassa NCC:lle, Implenialle ja ByggPartnerille, omalla henkilöstöllämme ja omalla työnjohdollamme paikan päällä.",
+      servicesH2: "Tätä teemme aliurakoitsijana",
+      serviceType: "Rakennusalan aliurakointi",
+      ctaLabel: "Ota yhteyttä",
+      contactTitle: "Tiedustelu aliurakoinnista",
+      contactLead: "Kerro projektista, niin soitamme sinulle.",
+      services: [
+        {
+          title: "Sisärakentaminen",
+          text: "Väliseinät, alakatot ja ovet.",
+        },
+        {
+          title: "Puusepäntyöt",
+          text: "Paikalla rakennetut kalusteet ja puusepäntyöt.",
+        },
+        {
+          title: "Maarakennus",
+          text: "Maatyöt, perustustyöt, salaojitus ja hienotasaus.",
+        },
+        {
+          title: "Purku ja sanerointi",
+          text: "Valikoiva purku sekä rakennus-, palo- ja kosteusvauriosanerointi.",
+        },
+        {
+          title: "Lisää ammattilaisia",
+          text: "Kirvesmiehiä, betonityöntekijöitä ja muurareita Kanitas ENT:ltä, kun tarvitset lisävoimia.",
+          href: "/stad",
+        },
+        {
+          title: "Rakennussiivous",
+          text: "Rakennussiivous ja loppusiivous ennen vastaanottotarkastusta Kanitas ENT:n kautta.",
+          href: "/stad",
+        },
+      ],
+      sections: [
+        {
+          title: "Miksi rakennusyhtiöt valitsevat meidät",
+          layout: "columns",
+          items: [
+            {
+              title: "Oma työnjohto",
+              text: "Johdamme omaa työtämme paikan päällä.",
+            },
+            {
+              title: "Työehtosopimus",
+              text: "Ammattilaisemme ovat työsuhteessa Byggnads-liiton työehtosopimuksen mukaisesti.",
+            },
+            {
+              title: "Järjestys työmaalla",
+              text: "Suojavarusteet ja omavalvonta jokaisessa työssä.",
+            },
+            {
+              title: "Vakaa talous",
+              text: "Kanitas AB:llä on korkein mahdollinen luottoluokitus, AAA. Meillä on vastuuvakuutus ja F‑skatt-hyväksyntä.",
+            },
+          ],
+          references: true,
+        },
+      ],
+      faq: [
+        {
+          q: "Keille rakennusyhtiöille olette tehneet töitä?",
+          a: "Muun muassa NCC:lle, Implenialle ja ByggPartnerille.",
+        },
+        {
+          q: "Voitteko vahvistaa työmaata lisähenkilöstöllä?",
+          a: "Kyllä, Kanitas ENT:n ammattilaisilla, usein lyhyellä varoitusajalla.",
+        },
+        {
+          q: "Onko teillä F‑skatt-hyväksyntä ja vakuutus?",
+          a: "Kyllä. Meillä on vastuuvakuutus ja F‑skatt-hyväksyntä, ja meidät on merkitty arvonlisäverorekisteriin ja työnantajarekisteriin.",
+        },
+      ],
+      description:
+        "Kanitas Bygg on rakennusyhtiöiden, kuten NCC:n ja Implenian, aliurakoitsija Tukholmassa: sisärakentaminen, maarakennus ja purku. Oma työnjohto, työehtosopimus.",
     },
   },
 
