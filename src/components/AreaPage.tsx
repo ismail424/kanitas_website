@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, Info } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
@@ -8,20 +9,32 @@ import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import TrustSection from "@/components/TrustSection";
+import { dictionaries } from "@/content";
+import type { AreaCopy, AreaSection } from "@/content/types";
+import { localeHref, type Locale } from "@/lib/i18n";
 import {
+  absoluteUrl,
+  areaPages,
   businesses,
+  businessSlugs,
   groupCompanies,
+  pageMetadata,
+  phoneFor,
   site,
-  type Area,
-  type AreaSection,
+  type AreaSlug,
+  type PhotoName,
 } from "@/lib/site";
 
 /** How a job runs, step by step beside a photograph of it. */
 function Process({
   process,
+  photo,
+  photoAlt,
   divided,
 }: {
-  process: NonNullable<Area["process"]>;
+  process: NonNullable<AreaCopy["process"]>;
+  photo: PhotoName;
+  photoAlt: string;
   /** A rule above, when nothing else separates it from the services. */
   divided: boolean;
 }) {
@@ -33,7 +46,8 @@ function Process({
         <Reveal className="lg:col-span-7">
           <div className="relative aspect-[3/2] overflow-hidden bg-paper-2">
             <Photo
-              name={process.photo}
+              name={photo}
+              alt={photoAlt}
               sizes="(min-width: 1280px) 690px, (min-width: 1024px) 58vw, 100vw"
             />
           </div>
@@ -100,7 +114,13 @@ function Items({
   );
 }
 
-function Section({ section }: { section: AreaSection }) {
+function Section({
+  section,
+  referencesTitle,
+}: {
+  section: AreaSection;
+  referencesTitle: string;
+}) {
   const tinted = section.layout === "list";
   return (
     <section
@@ -136,7 +156,7 @@ function Section({ section }: { section: AreaSection }) {
 
         {section.references ? (
           <Reveal className="mt-10 border-t border-line pt-8">
-            <h3 className="label text-muted">Några av våra uppdragsgivare</h3>
+            <h3 className="label text-muted">{referencesTitle}</h3>
             <LogoWall className="mt-10" />
           </Reveal>
         ) : null}
@@ -145,13 +165,36 @@ function Section({ section }: { section: AreaSection }) {
   );
 }
 
-export default function AreaPage({ area }: { area: Area }) {
-  const pageUrl = `${site.url}/${area.slug}`;
+/** Tab title "Kanitas Bygg | Byggföretag i Stockholm": the company name,
+ *  then the phrase people search for. */
+export function areaMetadata(locale: Locale, slug: AreaSlug): Metadata {
+  const copy = dictionaries[locale].areas[slug];
+  const { name, ogImage } = areaPages[slug];
+  return pageMetadata({
+    locale,
+    path: `/${slug}`,
+    title: `${name} | ${copy.h1}`,
+    description: copy.description,
+    image: ogImage,
+  });
+}
+
+export default function AreaPage({
+  locale,
+  slug,
+}: {
+  locale: Locale;
+  slug: AreaSlug;
+}) {
+  const t = dictionaries[locale];
+  const area = { ...areaPages[slug], ...t.areas[slug] };
+  const pageUrl = absoluteUrl(locale, `/${slug}`);
 
   // The company that runs this verksamhet, as declared in the layout's
   // organisation data; the parent company when it runs it itself.
-  const entity = businesses.find((b) => b.page === `/${area.slug}`)
-    ?.entities[0];
+  const entity = businessSlugs
+    .map((business) => businesses[business])
+    .find((b) => b.page === `/${slug}`)?.entities[0];
   const company = groupCompanies.find((c) => c.name === entity);
   const providerId =
     company && company.orgnr !== site.orgnr
@@ -164,15 +207,21 @@ export default function AreaPage({ area }: { area: Area }) {
       "@id": `${pageUrl}#service`,
       name: area.name,
       serviceType: area.serviceType,
-      description: area.seo.description,
+      description: area.description,
       provider: { "@id": providerId },
-      areaServed: "Storstockholm",
+      areaServed: t.meta.areaServed,
       url: pageUrl,
+      inLanguage: locale,
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Hem", item: site.url },
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t.common.home,
+          item: absoluteUrl(locale, "/"),
+        },
         { "@type": "ListItem", position: 2, name: area.name, item: pageUrl },
       ],
     },
@@ -211,6 +260,7 @@ export default function AreaPage({ area }: { area: Area }) {
         title={area.name}
         lead={`${area.h1}. ${area.intro}`}
         photo={area.heroPhoto}
+        photoAlt={t.photoAlt[area.heroPhoto]}
         actions={
           <>
             <Link href="#kontakt" className="btn btn-light">
@@ -221,7 +271,7 @@ export default function AreaPage({ area }: { area: Area }) {
               href={site.phoneHref}
               className="font-semibold text-white underline-offset-4 hover:underline"
             >
-              Ring {site.phone}
+              {t.common.call} {phoneFor(locale)}
             </a>
           </>
         }
@@ -243,7 +293,7 @@ export default function AreaPage({ area }: { area: Area }) {
               {/* Inline arrow, so it follows the last word when the label
                   wraps on a phone. */}
               <Link
-                href={area.related.href}
+                href={localeHref(locale, area.related.href)}
                 className="font-semibold text-petrol underline-offset-4 hover:text-ink hover:underline"
               >
                 {area.related.label}
@@ -285,7 +335,11 @@ export default function AreaPage({ area }: { area: Area }) {
       {/* Staffing first: on a page with a "how staffing works" list, it
           follows the trades directly, before the cleaning half of the page. */}
       {listSections.map((section) => (
-        <Section key={section.title} section={section} />
+        <Section
+          key={section.title}
+          section={section}
+          referencesTitle={t.common.ourClients}
+        />
       ))}
 
       {/* A phone shows one photo here; three in a row is a scroll of
@@ -307,6 +361,7 @@ export default function AreaPage({ area }: { area: Area }) {
               >
                 <Photo
                   name={photo}
+                  alt={t.photoAlt[photo]}
                   sizes={
                     area.photos.length > 1
                       ? "(min-width: 1280px) 600px, (min-width: 640px) 50vw, 100vw"
@@ -320,7 +375,12 @@ export default function AreaPage({ area }: { area: Area }) {
       ) : null}
 
       {area.process ? (
-        <Process process={area.process} divided={!area.photos.length} />
+        <Process
+          process={area.process}
+          photo={area.processPhoto}
+          photoAlt={t.photoAlt[area.processPhoto]}
+          divided={!area.photos.length}
+        />
       ) : null}
 
       {area.checklist ? (
@@ -350,7 +410,11 @@ export default function AreaPage({ area }: { area: Area }) {
       ) : null}
 
       {otherSections.map((section) => (
-        <Section key={section.title} section={section} />
+        <Section
+          key={section.title}
+          section={section}
+          referencesTitle={t.common.ourClients}
+        />
       ))}
 
       {area.callout ? (
@@ -372,13 +436,15 @@ export default function AreaPage({ area }: { area: Area }) {
         </section>
       ) : null}
 
-      {area.trust !== false ? <TrustSection className="bg-paper-2" /> : null}
+      {area.trust ? (
+        <TrustSection locale={locale} className="bg-paper-2" />
+      ) : null}
 
       {area.faq ? (
         <section className="border-t border-line py-16 sm:py-20">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <Reveal className="lg:col-span-4">
-              <SectionHeading title="Vanliga frågor" />
+              <SectionHeading title={t.common.faq} />
             </Reveal>
             <Reveal className="lg:col-span-8">
               <FaqList items={area.faq} />
@@ -388,7 +454,8 @@ export default function AreaPage({ area }: { area: Area }) {
       ) : null}
 
       <ContactSection
-        title={area.contactTitle ?? `Begär offert från ${area.name}`}
+        locale={locale}
+        title={area.contactTitle ?? t.areaContactTitle(area.name)}
         lead={area.contactLead}
         topic={area.contactTopic}
       />

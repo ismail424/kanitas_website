@@ -1,20 +1,22 @@
 import { FileText, HardHat, Phone, Ruler } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { processSteps } from "@/lib/site";
+import { dictionaries } from "@/content";
+import type { Locale } from "@/lib/i18n";
 
-/** One icon per step, in the order of `processSteps`. */
+/** One icon per step, in the order of the dictionary's `process.steps`. */
 const icons = [Phone, Ruler, FileText, HardHat];
 
 /** How a job starts, in four steps. A page can give the steps its own heading. */
 export default function ProcessSteps({
-  title = "Så går det till",
+  locale,
   lead,
   className = "",
 }: {
-  title?: string;
+  locale: Locale;
   lead?: string;
   className?: string;
 }) {
+  const { title, steps } = dictionaries[locale].process;
   return (
     <section className={`py-16 sm:py-20 ${className}`}>
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
@@ -31,7 +33,7 @@ export default function ProcessSteps({
             className="absolute left-8 right-[18%] top-8 hidden h-px bg-line lg:block"
           />
           <ol className="relative grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-            {processSteps.map((step, index) => {
+            {steps.map((step, index) => {
               const Icon = icons[index % icons.length];
               return (
                 <Reveal key={step.title} as="li" className="relative">

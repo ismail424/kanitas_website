@@ -1,27 +1,33 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { businesses, groupCompanies, site } from "@/lib/site";
+import { dictionaries } from "@/content";
+import { localeHref, type Locale } from "@/lib/i18n";
+import {
+  businessHref,
+  businessSlugs,
+  businesses,
+  groupCompanies,
+  site,
+  type CompanyName,
+} from "@/lib/site";
 
-/** The verksamhet a legal entity carries, so each box can link to it. */
-const businessFor = (companyName: string) =>
-  businesses.find(
-    (business) =>
-      business.entities.includes(companyName) &&
-      business.entities[0] === companyName,
-  );
+/** The verksamhet a legal entity carries first, so each box can link to it. */
+const businessFor = (companyName: CompanyName) =>
+  businessSlugs.find((slug) => businesses[slug].entities[0] === companyName);
 
 /**
  * The group as a family tree: the parent company above, the four operating
  * companies below, joined by connecting lines. Org.nr and what
  * each company does sit in its box, the way a supplier register lists them.
  */
-export default function GroupTree() {
+export default function GroupTree({ locale }: { locale: Locale }) {
+  const t = dictionaries[locale];
   const parent = groupCompanies.find((c) => c.orgnr === site.orgnr)!;
   // The operating companies in the same order as the verksamheter.
-  const children = businesses
-    .map((business) =>
-      groupCompanies.find((c) => c.name === business.entities[0]),
+  const children = businessSlugs
+    .map((slug) =>
+      groupCompanies.find((c) => c.name === businesses[slug].entities[0]),
     )
     .filter(
       (c): c is (typeof groupCompanies)[number] =>
@@ -31,10 +37,16 @@ export default function GroupTree() {
   return (
     <div>
       <Reveal className="mx-auto max-w-sm border-t-4 border-petrol bg-paper p-6 text-center shadow-card">
-        <p className="text-sm font-medium text-copper-ink">Moderbolag</p>
+        <p className="text-sm font-medium text-copper-ink">
+          {t.about.parentCompany}
+        </p>
         <p className="mt-1 title text-ink">{parent.name}</p>
-        <p className="index mt-1 text-sm text-muted">Org.nr {parent.orgnr}</p>
-        <p className="mt-2 text-sm text-ink-soft">{parent.role}</p>
+        <p className="index mt-1 text-sm text-muted">
+          {t.common.orgNr} {parent.orgnr}
+        </p>
+        <p className="mt-2 text-sm text-ink-soft">
+          {t.companyRoles[parent.name]}
+        </p>
       </Reveal>
 
       {/* Connectors, wide screens only: down from the parent, across, and
@@ -61,17 +73,17 @@ export default function GroupTree() {
             >
               <p className="title text-ink">{company.name}</p>
               <p className="index mt-1 text-sm text-muted">
-                Org.nr {company.orgnr}
+                {t.common.orgNr} {company.orgnr}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-                {company.role}
+                {t.companyRoles[company.name]}
               </p>
               {business ? (
                 <Link
-                  href={business.page ?? `/#${business.slug}`}
+                  href={localeHref(locale, businessHref(business))}
                   className="link-arrow mt-auto pt-5 text-sm text-petrol hover:text-ink"
                 >
-                  {business.heading}
+                  {t.businesses[business].heading}
                   <ArrowRight aria-hidden="true" />
                 </Link>
               ) : null}
