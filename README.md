@@ -11,6 +11,13 @@ bygg, bemanning och byggstädning, maskiner och fordon samt lokaler.
 - [lucide-react](https://lucide.dev/) – ikoner
 - [nodemailer](https://nodemailer.com/) + [zod](https://zod.dev/) – kontaktformulärets API
 
+## Språk
+
+Svenska ligger på roten (`/bygg`). Engelska, bosniska, tyska och finska ligger
+under `/en`, `/bs`, `/de` och `/fi` (`/en/bygg`). All text finns i
+`src/content/<språk>.ts`; `sv.ts` är källan och `types.ts` håller ordlistorna i
+samma form.
+
 ## Kom igång
 
 ```bash

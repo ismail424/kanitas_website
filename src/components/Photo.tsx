@@ -11,11 +11,14 @@ import { photos, type PhotoName, type PhotoSlot } from "@/lib/site";
  */
 export default function Photo({
   name,
+  alt,
   sizes,
   priority = false,
   className = "",
 }: {
   name: PhotoName;
+  /** In the page's language: `photoAlt` in the dictionary */
+  alt: string;
   sizes: string;
   /** The page's largest image: preloaded and fetched ahead of the rest. */
   priority?: boolean;
@@ -42,7 +45,7 @@ export default function Photo({
   return (
     <Image
       src={photo.src}
-      alt={photo.alt}
+      alt={alt}
       fill
       priority={priority}
       fetchPriority={priority ? "high" : undefined}

@@ -1,17 +1,19 @@
 import { BadgeCheck, Handshake, HardHat, ShieldCheck } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { trustPoints } from "@/lib/site";
+import { dictionaries } from "@/content";
+import type { Locale } from "@/lib/i18n";
 
 const icons = [Handshake, ShieldCheck, BadgeCheck, HardHat];
 
 /** What a buyer can count on, whichever verksamhet does the job. */
 export default function TrustSection({
-  title = "Trygg att anlita",
+  locale,
   className = "",
 }: {
-  title?: string;
+  locale: Locale;
   className?: string;
 }) {
+  const { title, points } = dictionaries[locale].trust;
   return (
     <section className={`py-16 sm:py-20 ${className}`}>
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
@@ -19,7 +21,7 @@ export default function TrustSection({
           <h2 className="display-2 max-w-2xl text-ink">{title}</h2>
         </Reveal>
         <ul className="mt-8 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-          {trustPoints.map((point, index) => {
+          {points.map((point, index) => {
             const Icon = icons[index % icons.length];
             return (
               <Reveal key={point.title} as="li">

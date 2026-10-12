@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import { defaultLocale, localeNames, locales } from "@/lib/i18n";
 import { contactTopics } from "@/lib/site";
 
 // Run the form handler in Stockholm, next to the mail server and the people
@@ -31,6 +32,7 @@ const ContactSchema = z.object({
   email: z.string().trim().max(200).optional().catch(undefined),
   topic: z.enum(contactTopics).optional().catch(undefined),
   message: z.string().trim().max(5000).optional().catch(undefined),
+  locale: z.enum(locales).optional().catch(undefined),
 });
 
 const isEmail = (value: string) => z.string().email().safeParse(value).success;
@@ -133,7 +135,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
-    const { name, email, phone, topic, message } = result.data;
+    const { name, email, phone, topic, message, locale } = result.data;
+    // Only worth a line when the visitor wrote in another language.
+    const language =
+      locale && locale !== defaultLocale ? localeNames[locale] : undefined;
 
     if (!process.env.EMAIL_PASSWORD) {
       console.error("EMAIL_PASSWORD environment variable is not set");
@@ -176,7 +181,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       from: `"Kanitas webbplats" <${SMTP_USER}>`,
       to: RECIPIENT,
       replyTo,
-      subject: `Ring upp ${phone}${topic ? ` [${topic}]` : ""}${subjectName}`,
+      subject: `Ring upp ${phone}${topic ? ` [${topic}]` : ""}${language ? ` (${language})` : ""}${subjectName}`,
       text: [
         `Ny förfrågan via kanitas.se (${timestamp})`,
         "",
@@ -184,6 +189,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         `Namn: ${name || missing}`,
         `E-post: ${email || missing}`,
         `Ärende: ${topic || missing}`,
+        ...(language ? [`Språk: ${language}`] : []),
         "",
         "Meddelande:",
         message || "Inget meddelande, ring upp.",
@@ -197,6 +203,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             <p><strong>Namn:</strong> ${safe.name}</p>
             <p><strong>E-post:</strong> ${safe.email}</p>
             <p><strong>Ärende:</strong> ${safe.topic}</p>
+            ${language ? `<p><strong>Språk:</strong> ${language}</p>` : ""}
           </div>
           <div style="background-color: #f1f4f4; padding: 16px; border-radius: 8px; margin: 16px 0;">
             <p style="white-space: pre-wrap;">${safe.message}</p>

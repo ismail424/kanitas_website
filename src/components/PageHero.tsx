@@ -10,11 +10,13 @@ export default function PageHero({
   title,
   lead,
   photo,
+  photoAlt,
   actions,
 }: {
   title: string;
   lead?: string;
   photo: PhotoName;
+  photoAlt: string;
   actions?: React.ReactNode;
 }) {
   return (
@@ -34,7 +36,12 @@ export default function PageHero({
       </div>
 
       <div className="hero-photo relative aspect-[16/10] sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto">
-        <Photo name={photo} priority sizes="(min-width: 1024px) 45vw, 100vw" />
+        <Photo
+          name={photo}
+          alt={photoAlt}
+          priority
+          sizes="(min-width: 1024px) 45vw, 100vw"
+        />
       </div>
     </section>
   );

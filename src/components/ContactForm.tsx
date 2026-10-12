@@ -3,12 +3,9 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Loader2 } from "lucide-react";
-import {
-  contactTopicLabels,
-  contactTopics,
-  site,
-  type ContactTopic,
-} from "@/lib/site";
+import type { FormCopy } from "@/content/types";
+import { localeHref, type Locale } from "@/lib/i18n";
+import { contactTopics, phoneFor, site, type ContactTopic } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error" | "limited";
 
@@ -31,8 +28,15 @@ const isPhone = (value: string) => value.replace(/\D/g, "").length >= 7;
  * the optional details unfold below it, and the same button sends either.
  */
 export default function ContactForm({
+  locale,
+  t,
+  topics,
   defaultTopic,
 }: {
+  locale: Locale;
+  t: FormCopy;
+  /** Label of each ärende in the page's language */
+  topics: Record<ContactTopic, string>;
   defaultTopic?: ContactTopic;
 }) {
   const id = useId();
@@ -75,7 +79,11 @@ export default function ContactForm({
     }
 
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    // The language goes along, so whoever calls back knows which to speak.
+    const data = {
+      ...Object.fromEntries(new FormData(form).entries()),
+      locale,
+    };
 
     setStatus("sending");
     try {
@@ -108,14 +116,14 @@ export default function ContactForm({
         className="border-l-4 border-ok py-2 pl-6 outline-none"
         role="status"
       >
-        <p className="display-3 text-ink">Tack, vi ringer upp!</p>
+        <p className="display-3 text-ink">{t.thanks}</p>
         <p className="mt-3 text-ink-soft">
-          Vi hör av oss normalt inom en arbetsdag. Brådskande? Ring{" "}
+          {t.thanksText}{" "}
           <a
             href={site.phoneHref}
             className="whitespace-nowrap font-semibold text-petrol underline underline-offset-4"
           >
-            {site.phone}
+            {phoneFor(locale)}
           </a>
           .
         </p>
@@ -129,14 +137,12 @@ export default function ContactForm({
           chosen; say so until the choices themselves are visible. */}
       {topic && !revealed ? (
         <p className="mb-5 text-sm text-muted">
-          Ärende:{" "}
-          <span className="font-semibold text-ink">
-            {contactTopicLabels[topic]}
-          </span>
+          {t.topicPrefix}{" "}
+          <span className="font-semibold text-ink">{topics[topic]}</span>
         </p>
       ) : null}
       <label htmlFor={`${id}-phone`} className={labelClasses}>
-        Ditt telefonnummer
+        {t.phone}
       </label>
       <input
         ref={phoneRef}
@@ -152,16 +158,14 @@ export default function ContactForm({
         aria-invalid={phoneError}
         aria-describedby={`${id}-phone-hint`}
         className={`${inputClasses} text-lg aria-[invalid=true]:border-error aria-[invalid=true]:focus:border-error aria-[invalid=true]:focus:ring-error/20`}
-        placeholder="070-123 45 67"
+        placeholder={t.phonePlaceholder}
       />
       <p
         id={`${id}-phone-hint`}
         aria-live="polite"
         className={`mt-2 text-sm ${phoneError ? "font-medium text-error" : "text-muted"}`}
       >
-        {phoneError
-          ? "Skriv ditt telefonnummer så ringer vi upp."
-          : "Vi ringer upp, normalt inom en arbetsdag."}
+        {phoneError ? t.phoneError : t.phoneHint}
       </p>
 
       {/* The optional details. Hidden and inert until a number is typed, then
@@ -176,8 +180,8 @@ export default function ContactForm({
           <div className="space-y-6 pb-2 pt-8">
             <fieldset>
               <legend className={labelClasses}>
-                Vad gäller det?{" "}
-                <span className="font-normal text-muted">(valfritt)</span>
+                {t.topicLegend}{" "}
+                <span className="font-normal text-muted">{t.optional}</span>
               </legend>
               <div className="flex flex-wrap gap-2">
                 {contactTopics.map((value) => (
@@ -191,7 +195,7 @@ export default function ContactForm({
                       className="peer sr-only"
                     />
                     <span className="flex min-h-11 items-center rounded-xs border border-muted/75 bg-paper px-4 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-petrol/50 peer-checked:border-petrol peer-checked:bg-petrol peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
-                      {contactTopicLabels[value]}
+                      {topics[value]}
                     </span>
                   </label>
                 ))}
@@ -201,8 +205,8 @@ export default function ContactForm({
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
                 <label htmlFor={`${id}-name`} className={labelClasses}>
-                  Namn{" "}
-                  <span className="font-normal text-muted">(valfritt)</span>
+                  {t.name}{" "}
+                  <span className="font-normal text-muted">{t.optional}</span>
                 </label>
                 <input
                   id={`${id}-name`}
@@ -214,8 +218,8 @@ export default function ContactForm({
               </div>
               <div>
                 <label htmlFor={`${id}-email`} className={labelClasses}>
-                  E-post{" "}
-                  <span className="font-normal text-muted">(valfritt)</span>
+                  {t.email}{" "}
+                  <span className="font-normal text-muted">{t.optional}</span>
                 </label>
                 <input
                   id={`${id}-email`}
@@ -230,8 +234,8 @@ export default function ContactForm({
 
             <div>
               <label htmlFor={`${id}-message`} className={labelClasses}>
-                Vad behöver du hjälp med?{" "}
-                <span className="font-normal text-muted">(valfritt)</span>
+                {t.message}{" "}
+                <span className="font-normal text-muted">{t.optional}</span>
               </label>
               <textarea
                 id={`${id}-message`}
@@ -239,7 +243,7 @@ export default function ContactForm({
                 maxLength={5000}
                 rows={3}
                 className={inputClasses}
-                placeholder="Vad ska göras, var och när?"
+                placeholder={t.messagePlaceholder}
               />
             </div>
           </div>
@@ -249,7 +253,7 @@ export default function ContactForm({
       {/* Honeypot: hidden from people, tempting for bots. The name means
           nothing to autofill, so a password manager never fills it in. */}
       <div className="hidden" aria-hidden="true">
-        <label htmlFor={`${id}-hp`}>Lämna tomt</label>
+        <label htmlFor={`${id}-hp`}>{t.honeypot}</label>
         <input
           id={`${id}-hp`}
           name="hp_kanitas"
@@ -269,39 +273,39 @@ export default function ContactForm({
           {status === "sending" ? (
             <>
               <Loader2 className="animate-spin" aria-hidden="true" />
-              Skickar…
+              {t.sending}
             </>
           ) : (
             <>
-              Ring upp mig
+              {t.submit}
               <ArrowRight aria-hidden="true" />
             </>
           )}
         </button>
         <p className="text-sm text-muted sm:max-w-xs sm:text-right">
-          Vi använder uppgifterna bara för ditt ärende.{" "}
+          {t.privacyNote}{" "}
           <Link
-            href="/integritetspolicy"
+            href={localeHref(locale, "/integritetspolicy")}
             className="underline underline-offset-4 hover:text-ink"
           >
-            Integritetspolicy
+            {t.privacyLink}
           </Link>
         </p>
       </div>
       {status === "error" ? (
         <p className="mt-4 text-sm font-medium text-error" role="alert">
-          Något gick fel. Försök igen eller ring oss på{" "}
+          {t.error}{" "}
           <a href={site.phoneHref} className="whitespace-nowrap underline">
-            {site.phone}
+            {phoneFor(locale)}
           </a>
           .
         </p>
       ) : null}
       {status === "limited" ? (
         <p className="mt-4 text-sm font-medium text-error" role="alert">
-          Du har skickat flera förfrågningar på kort tid. Ring oss på{" "}
+          {t.limited}{" "}
           <a href={site.phoneHref} className="whitespace-nowrap underline">
-            {site.phone}
+            {phoneFor(locale)}
           </a>
           .
         </p>

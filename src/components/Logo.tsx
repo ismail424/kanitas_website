@@ -36,13 +36,19 @@ function Lockup({
 }
 
 /** The name, linked home. Used in the header and footer. */
-export default function Logo({ on = "light" }: { on?: Surface }) {
+export default function Logo({
+  href,
+  label,
+  on = "light",
+}: {
+  /** The home page in the visitor's language */
+  href: string;
+  /** Accessible name, e.g. "Kanitas, till startsidan" */
+  label: string;
+  on?: Surface;
+}) {
   return (
-    <Link
-      href="/"
-      className="inline-flex items-center"
-      aria-label="Kanitas, till startsidan"
-    >
+    <Link href={href} className="inline-flex items-center" aria-label={label}>
       <Lockup
         variant="compact"
         on={on}
@@ -55,18 +61,16 @@ export default function Logo({ on = "light" }: { on?: Surface }) {
 
 /** The complete lockup including the service line. */
 export function LogoLockup({
+  label,
   on = "light",
   className = "h-12 w-auto",
 }: {
+  /** The name and service line in words */
+  label: string;
   on?: Surface;
   className?: string;
 }) {
   return (
-    <Lockup
-      variant="lockup"
-      on={on}
-      className={className}
-      label="Kanitas: bygg, bemanning, maskiner, lokaler"
-    />
+    <Lockup variant="lockup" on={on} className={className} label={label} />
   );
 }
