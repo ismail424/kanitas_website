@@ -7,6 +7,8 @@ import {
   businessSlugs,
   businesses,
   photos,
+  servicePages,
+  serviceSlugs,
   site,
   type PhotoName,
 } from "@/lib/site";
@@ -40,6 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...areaPages[slug].photos,
         areaPages[slug].processPhoto,
       ],
+    })),
+    ...serviceSlugs.map((service) => ({
+      path: `/bygg/${service}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      shows: [servicePages[service].heroPhoto],
     })),
     {
       path: "/om-oss",

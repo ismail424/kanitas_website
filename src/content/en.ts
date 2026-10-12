@@ -350,9 +350,9 @@ const en: Dictionary = {
 
   areas: {
     bygg: {
-      h1: "Construction company in Stockholm",
+      h1: "Construction company in Järfälla and Stockholm",
       intro:
-        "New builds, renovation and building maintenance for construction companies, property owners, housing cooperatives (BRFs) and private clients across Greater Stockholm.",
+        "New builds, renovation and building maintenance for construction companies, property owners, housing cooperatives (BRFs) and private clients in Järfälla and across Greater Stockholm.",
       servicesH2: "Construction services",
       serviceType: "Construction contracting and building maintenance",
       ctaLabel: "Request a quote",
@@ -364,14 +364,17 @@ const en: Dictionary = {
         {
           title: "Renovation and conversion",
           text: "Homes, offices and other premises.",
+          href: "/bygg/renovering",
         },
         {
           title: "Building maintenance",
           text: "Upkeep, repairs and alterations under an ongoing agreement.",
+          href: "/bygg/byggservice",
         },
         {
           title: "Bathrooms and wet rooms",
           text: "Full renovations, with regular partners for plumbing.",
+          href: "/bygg/badrumsrenovering",
         },
         {
           title: "Fit-out and joinery",
@@ -427,18 +430,22 @@ const en: Dictionary = {
             {
               title: "Construction companies",
               text: "As a subcontractor to NCC, Implenia and ByggPartner, among others, with our own site management.",
+              href: "/bygg/underentreprenor",
             },
             {
               title: "Property owners",
               text: "Building maintenance under framework agreements: reactive repairs, tenant fit-outs and planned maintenance.",
+              href: "/bygg/byggservice",
             },
             {
               title: "Housing cooperatives",
               text: "Pipe replacement (stambyte), façade and balcony work, and renovation of communal areas. Residents are kept informed throughout.",
+              href: "/bygg/brf",
             },
             {
               title: "Private clients",
               text: "Bathrooms, extensions and renovation of houses and flats.",
+              href: "/bygg/renovering",
             },
           ],
           references: true,
@@ -467,11 +474,11 @@ const en: Dictionary = {
         },
       ],
       description:
-        "Kanitas Bygg is a construction company in Stockholm: new builds, renovation, maintenance and demolition. Own staff on collective agreements. Free quotes.",
+        "Kanitas Bygg does new builds, renovation, building maintenance and demolition in Järfälla and Stockholm. Own staff on collective agreements. Free quotes.",
     },
 
     stad: {
-      h1: "Staffing and construction cleaning in Stockholm",
+      h1: "Staffing and construction cleaning in Järfälla",
       intro:
         "We supply tradespeople and construction cleaners to contractors and do construction cleaning before inspection. All our staff are employed by us under collective agreements.",
       servicesH2: "Staffing and cleaning services",
@@ -599,7 +606,7 @@ const en: Dictionary = {
         },
       ],
       description:
-        "Kanitas ENT supplies tradespeople to construction companies and does construction, final and office cleaning in Stockholm. Own staff on collective agreements.",
+        "Kanitas ENT supplies tradespeople to construction companies and does construction, final and office cleaning in Järfälla and Stockholm. Collective agreements.",
     },
 
     maskiner: {
@@ -734,6 +741,424 @@ const en: Dictionary = {
       ],
       description:
         "Kanitas Fastigheter rents out workshop, warehouse and office space in Järfälla. We adapt the premises to your business. Ask us what is available.",
+    },
+  },
+
+  services: {
+    badrumsrenovering: {
+      label: "Bathroom renovation",
+      h1: "Bathroom renovation in Järfälla and Stockholm",
+      intro:
+        "We fully renovate bathrooms and wet rooms in houses, flats and housing cooperatives (BRFs), from strip-out to the finished room. Plumbing and electrical work is done by our regular partners, and you have one contact person for the whole job.",
+      servicesH2: "What a bathroom renovation includes",
+      serviceType: "Bathroom renovation",
+      ctaLabel: "Request a quote",
+      contactTitle: "Request a quote for a bathroom renovation",
+      services: [
+        {
+          title: "Strip-out",
+          text: "Old tiles, flooring and fittings are removed and taken away.",
+        },
+        {
+          title: "Waterproofing",
+          text: "A new waterproof membrane on the floor and walls, protecting against moisture.",
+        },
+        {
+          title: "Wall and floor tiles",
+          text: "Tiling on floors and walls.",
+        },
+        {
+          title: "Plumbing",
+          text: "Pipes, floor drain, shower, toilet and washbasin, by our regular plumbing partner.",
+        },
+        {
+          title: "Electrics and lighting",
+          text: "Electrical work by our regular partner.",
+        },
+        {
+          title: "Fittings",
+          text: "Cabinets, vanity unit and accessories fitted.",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Renovating the whole home: Renovation and conversion",
+      },
+      process: {
+        title: "How a bathroom renovation works",
+        steps: [
+          {
+            title: "Site visit",
+            text: "We look at the bathroom and go through what you want done.",
+          },
+          {
+            title: "Quote",
+            text: "Fixed price or time and materials, with scope and schedule. Any additional work is approved in writing before it is carried out.",
+          },
+          {
+            title: "The renovation",
+            text: "Our own staff and site management, with quality checks as the work progresses.",
+          },
+          {
+            title: "Final walkthrough",
+            text: "We go through the bathroom together and hand over the quality check records.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT deduction on bathroom renovation",
+        text: "As a private client, you can claim the ROT tax deduction on labour costs, but not on materials. We take the deduction straight off the invoice, so you only pay your share.",
+      },
+      faq: [
+        {
+          q: "How much does a bathroom renovation cost?",
+          a: "It depends on the size of the bathroom and what needs doing. We are happy to come and take a look, and the quote is free.",
+        },
+        {
+          q: "How long does it take?",
+          a: "It depends on the scope. You get a schedule in the quote, before the work starts.",
+        },
+        {
+          q: "Do you renovate bathrooms in cooperative flats?",
+          a: "Yes, for both flat owners and housing cooperatives (BRFs).",
+        },
+        {
+          q: "Who does the plumbing and electrical work?",
+          a: "Our regular partners. You still have one contact person with us for the whole job.",
+        },
+      ],
+      description:
+        "Kanitas Bygg renovates bathrooms in Järfälla and Stockholm: strip-out, waterproofing, tiling, plumbing and electrics. ROT deducted on the invoice. Free quotes.",
+    },
+
+    renovering: {
+      label: "Renovation and conversion",
+      h1: "Renovation and conversion in Järfälla & Stockholm",
+      intro:
+        "We renovate and convert flats, houses, offices and other premises, with our own staff and our own site management. You get one contact person who follows the job from start to finish.",
+      servicesH2: "What we do",
+      serviceType: "Renovation and conversion",
+      ctaLabel: "Request a quote",
+      contactTitle: "Request a quote for a renovation",
+      services: [
+        {
+          title: "Flats and houses",
+          text: "Renovation of the whole home or parts of it.",
+        },
+        {
+          title: "Extensions",
+          text: "Extensions to houses.",
+        },
+        {
+          title: "Offices and premises",
+          text: "Conversion and adaptation of offices and other premises.",
+        },
+        {
+          title: "Tenant fit-outs",
+          text: "Premises adapted for a new tenant, for property owners.",
+        },
+        {
+          title: "Internal walls and joinery",
+          text: "Internal walls, suspended ceilings, doors and built-in fittings.",
+        },
+        {
+          title: "Demolition",
+          text: "Selective demolition ahead of the conversion.",
+        },
+      ],
+      related: {
+        href: "/bygg/badrumsrenovering",
+        label: "Just the bathroom: Bathroom renovation",
+      },
+      process: {
+        title: "How a renovation works",
+        steps: [
+          {
+            title: "Enquiry and site visit",
+            text: "We go through what needs doing and look at the site.",
+          },
+          {
+            title: "Quote",
+            text: "Fixed price or time and materials, with scope and schedule. Any additional work is approved in writing before it is carried out.",
+          },
+          {
+            title: "Planning",
+            text: "Materials, dates and staffing are booked. You get one contact person who follows the job from start to finish.",
+          },
+          {
+            title: "The renovation",
+            text: "Our own staff and site management, with quality checks as the work progresses.",
+          },
+          {
+            title: "Final walkthrough and handover",
+            text: "We go through the job together and hand over the quality check records and, on larger jobs, as-built drawings.",
+          },
+        ],
+      },
+      callout: {
+        title: "ROT deduction for private clients",
+        text: "If you renovate your home, you can claim the ROT tax deduction on labour costs, but not on materials. We take the deduction straight off the invoice, so you only pay your share.",
+      },
+      faq: [
+        {
+          q: "Do you take on smaller jobs too?",
+          a: "Yes, even one-off repairs and smaller renovations.",
+        },
+        {
+          q: "Can you take care of the whole renovation?",
+          a: "Yes. We coordinate every stage, and electrical, plumbing and ventilation work is done by our regular partners.",
+        },
+        {
+          q: "Fixed price or time and materials?",
+          a: "Either. It is set out in the quote, and any additional work is approved in writing before it is carried out.",
+        },
+        {
+          q: "How much does a quote cost?",
+          a: "Nothing.",
+        },
+      ],
+      description:
+        "Kanitas Bygg renovates and converts flats, houses, offices and other premises in Järfälla and Stockholm. Own staff on collective agreements. Free quotes.",
+    },
+
+    byggservice: {
+      label: "Building maintenance",
+      h1: "Building maintenance for landlords in Stockholm",
+      intro:
+        "Maintenance, repairs and tenant fit-outs under a framework or ongoing agreement, in Järfälla and across Greater Stockholm. We can normally start building maintenance work within a few days.",
+      servicesH2: "What building maintenance includes",
+      serviceType: "Building and property maintenance",
+      ctaLabel: "Ask about building maintenance",
+      contactTitle: "Ask about building maintenance",
+      services: [
+        {
+          title: "Reactive repairs",
+          text: "Repairs when something has broken.",
+        },
+        {
+          title: "Planned maintenance",
+          text: "Maintenance in line with the property's maintenance plan.",
+        },
+        {
+          title: "Tenant fit-outs",
+          text: "Premises and flats adapted for new tenants.",
+        },
+        {
+          title: "Framework agreements",
+          text: "One agreement for recurring work, or one-off jobs when needed.",
+        },
+        {
+          title: "Snow clearance",
+          text: "Snow clearance and gritting for contract customers.",
+        },
+        {
+          title: "Cleaning after the job",
+          text: "Construction cleaning and property cleaning from Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      related: {
+        href: "/bygg/renovering",
+        label: "Larger conversions: Renovation and conversion",
+      },
+      process: {
+        title: "How building maintenance works",
+        steps: [
+          {
+            title: "You get in touch",
+            text: "Call, email or leave your number here on the website.",
+          },
+          {
+            title: "We look at the job",
+            text: "If needed, we visit the site before we price the job.",
+          },
+          {
+            title: "We do the job",
+            text: "With our own staff and quality checks as the work progresses.",
+          },
+          {
+            title: "Handover",
+            text: "We go through the job with you once it is finished.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "How soon can you start?",
+          a: "We can normally start building maintenance work within a few days.",
+        },
+        {
+          q: "Do we have to sign a framework agreement?",
+          a: "No. We also take on one-off jobs.",
+        },
+        {
+          q: "Do you have your own staff?",
+          a: "Yes, supplemented when needed by tradespeople from Kanitas ENT. For electrical, plumbing and ventilation work we bring in regular partners.",
+        },
+      ],
+      description:
+        "Building maintenance for property owners in Järfälla and Stockholm: repairs, upkeep and tenant fit-outs under framework agreements. Collective agreements.",
+    },
+
+    brf: {
+      label: "Housing cooperatives",
+      h1: "Pipe replacement and BRF renovation in Stockholm",
+      intro:
+        "We carry out pipe replacement (stambyte), façade and balcony work and renovation of communal areas for housing cooperatives (BRFs) in Järfälla and Stockholm. Residents are kept informed throughout.",
+      servicesH2: "What we do for BRFs",
+      serviceType: "Pipe replacement and renovation for housing cooperatives",
+      ctaLabel: "Request a quote",
+      contactTitle: "Request a quote for your BRF",
+      services: [
+        {
+          title: "Pipe replacement",
+          text: "Replacement of water and waste pipes.",
+        },
+        {
+          title: "Bathrooms",
+          text: "Bathroom renovation in the flats, as part of the same project or separately.",
+          href: "/bygg/badrumsrenovering",
+        },
+        {
+          title: "Façades",
+          text: "Renovation and repair of façades.",
+        },
+        {
+          title: "Balconies",
+          text: "Renovation of balconies.",
+        },
+        {
+          title: "Communal areas",
+          text: "Stairwells, laundry rooms and other communal areas.",
+        },
+        {
+          title: "Cleaning",
+          text: "Construction cleaning and stairwell cleaning from Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      process: {
+        title: "How a BRF project works",
+        steps: [
+          {
+            title: "Enquiry and site visit",
+            text: "We go through what the cooperative wants to do and look at the property.",
+          },
+          {
+            title: "Quote",
+            text: "Fixed price or time and materials, with scope and schedule. Any additional work is approved in writing before it is carried out.",
+          },
+          {
+            title: "Planning and information",
+            text: "Materials, dates and staffing are booked, and residents are told what is happening and when.",
+          },
+          {
+            title: "The work",
+            text: "Our own staff and site management, with quality checks as the work progresses.",
+          },
+          {
+            title: "Final walkthrough and handover",
+            text: "We go through the job with the board and hand over the quality check records and as-built drawings.",
+          },
+        ],
+      },
+      faq: [
+        {
+          q: "How are residents kept informed?",
+          a: "We inform residents before and during the work, so everyone knows what is happening and when.",
+        },
+        {
+          q: "Do you have your own staff?",
+          a: "Yes, with our own site management. For electrical, plumbing and ventilation work we bring in regular partners.",
+        },
+        {
+          q: "How much does a quote cost?",
+          a: "Nothing.",
+        },
+      ],
+      description:
+        "Kanitas Bygg does pipe replacement, façade and balcony work and renovation of communal areas for BRFs in Järfälla and Stockholm. Own staff, free quotes.",
+    },
+
+    underentreprenor: {
+      label: "Subcontracting",
+      h1: "Construction subcontractor in Stockholm",
+      intro:
+        "We work as a subcontractor to construction companies, including NCC, Implenia and ByggPartner, with our own staff and our own site management.",
+      servicesH2: "What we take on",
+      serviceType: "Construction subcontracting",
+      ctaLabel: "Contact us",
+      contactTitle: "Subcontracting enquiry",
+      contactLead: "Tell us about the project and we'll call you back.",
+      services: [
+        {
+          title: "Fit-out",
+          text: "Internal walls, suspended ceilings and doors.",
+        },
+        {
+          title: "Joinery",
+          text: "Built-in fittings and joinery work.",
+        },
+        {
+          title: "Groundworks",
+          text: "Excavation, foundations, drainage and fine grading.",
+        },
+        {
+          title: "Demolition and remediation",
+          text: "Selective demolition, plus building, fire and damp remediation.",
+        },
+        {
+          title: "Extra tradespeople",
+          text: "Carpenters, concrete workers and bricklayers from Kanitas ENT when you need more hands.",
+          href: "/stad",
+        },
+        {
+          title: "Construction cleaning",
+          text: "Construction cleaning and a final clean before inspection, from Kanitas ENT.",
+          href: "/stad",
+        },
+      ],
+      sections: [
+        {
+          title: "Why construction companies hire us",
+          layout: "columns",
+          items: [
+            {
+              title: "Our own site management",
+              text: "We manage our own work on site.",
+            },
+            {
+              title: "Collective agreements",
+              text: "Our tradespeople are employed under collective agreements with Byggnads.",
+            },
+            {
+              title: "A well-run site",
+              text: "Protective equipment and quality checks on every job.",
+            },
+            {
+              title: "Sound finances",
+              text: "Kanitas AB has AAA, the highest credit rating. We have liability insurance and F‑tax approval.",
+            },
+          ],
+          references: true,
+        },
+      ],
+      faq: [
+        {
+          q: "Which construction companies have you worked for?",
+          a: "NCC, Implenia and ByggPartner, among others.",
+        },
+        {
+          q: "Can you supply extra staff?",
+          a: "Yes, tradespeople from Kanitas ENT, often at short notice.",
+        },
+        {
+          q: "Do you have F‑tax and insurance?",
+          a: "Yes. We have liability insurance, are approved for F‑tax and are registered for VAT and as an employer.",
+        },
+      ],
+      description:
+        "Construction subcontractor in Stockholm for NCC and Implenia, among others: fit-out, groundworks and demolition. Own site management, collective agreements.",
     },
   },
 

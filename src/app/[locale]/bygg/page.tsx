@@ -8,10 +8,10 @@ export async function generateMetadata({
   params: LocaleParams;
 }): Promise<Metadata> {
   const { locale } = await getContent(params);
-  return areaMetadata(locale, "bygg");
+  return areaMetadata(locale, { slug: "bygg" });
 }
 
 export default async function ByggPage({ params }: { params: LocaleParams }) {
   const { locale } = await getContent(params);
-  return <AreaPage locale={locale} slug="bygg" />;
+  return <AreaPage locale={locale} page={{ slug: "bygg" }} />;
 }

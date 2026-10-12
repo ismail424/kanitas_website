@@ -51,7 +51,9 @@ export default function Header({
   const panelButtonRef = useRef<HTMLButtonElement>(null);
   const langButtonRef = useRef<HTMLButtonElement>(null);
 
-  const currentBusiness = businesses.find((b) => b.href === path);
+  // A business is current on its page and on the pages under it.
+  const within = (href: string) => path === href || path.startsWith(`${href}/`);
+  const currentBusiness = businesses.find((b) => within(b.href));
   const inVerksamheter = currentBusiness !== undefined;
 
   useEffect(() => {
@@ -330,7 +332,7 @@ export default function Header({
                 <Link
                   href={href(business.href)}
                   onClick={closeAll}
-                  aria-current={business.href === path ? "page" : undefined}
+                  aria-current={within(business.href) ? "page" : undefined}
                   className="block py-4 aria-[current=page]:bg-paper-2 aria-[current=page]:px-4"
                 >
                   <span className="block title text-ink">{business.name}</span>

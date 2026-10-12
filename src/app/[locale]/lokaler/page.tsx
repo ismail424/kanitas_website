@@ -8,7 +8,7 @@ export async function generateMetadata({
   params: LocaleParams;
 }): Promise<Metadata> {
   const { locale } = await getContent(params);
-  return areaMetadata(locale, "lokaler");
+  return areaMetadata(locale, { slug: "lokaler" });
 }
 
 export default async function LokalerPage({
@@ -17,5 +17,5 @@ export default async function LokalerPage({
   params: LocaleParams;
 }) {
   const { locale } = await getContent(params);
-  return <AreaPage locale={locale} slug="lokaler" />;
+  return <AreaPage locale={locale} page={{ slug: "lokaler" }} />;
 }

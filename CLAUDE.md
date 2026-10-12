@@ -17,6 +17,7 @@
 - Språk: Engelska för kod och kommentarer. Ingen synlig text hårdkodas i komponenter, den ligger i ordlistorna under `src/content`
 - Filstruktur:
   - `/src/app/[locale]`: Sidor och layout, en gång för alla språk
+  - `/src/app/[locale]/bygg/[service]`: En sida per byggtjänst (badrumsrenovering, renovering, byggservice, brf, underentreprenor), så att sökningar som "badrumsrenovering järfälla" landar på rätt sida. Uppbyggnad i `servicePages` i `site.ts`, text under `services` i ordlistorna
   - `/src/app`: API-routes, sitemap/robots, ikoner
   - `/src/components`: Återanvändbara komponenter (får `locale` som prop)
   - `/src/content`: All text per språk: `sv.ts` är källan, `en.ts`, `bs.ts`, `de.ts`, `fi.ts` översättningar, `types.ts` formen alla måste följa
